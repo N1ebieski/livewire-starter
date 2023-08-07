@@ -1,0 +1,76 @@
+.tox {
+    &.tox-tinymce {
+        border: var(--bs-border-width) solid var(--bs-border-color) !important;
+    }
+
+    .tox-dialog {
+        border: $modal-content-border-width solid $modal-content-border-color !important;
+    }
+
+    .tox-dialog-wrap__backdrop {
+        background-color: $modal-backdrop-bg !important;
+        opacity: $modal-backdrop-opacity !important;
+    }
+}
+
+@include color-mode(dark) {
+    .tox {
+        .tox-editor-header {
+            background-color: $body-bg-dark !important;
+        }
+
+        .tox-promotion {
+            background-color: $body-bg-dark !important;
+        }
+
+        .tox-menubar {
+            background-color: $body-bg-dark !important;            
+        }
+
+        .tox-toolbar-overlord {
+            background-color: $body-bg-dark !important;                
+        }
+
+        .tox-toolbar__primary {
+            background-color: $body-bg-dark !important;                
+        }
+
+        .tox-statusbar {
+            background-color: $body-bg-dark !important;    
+        }
+
+        .tox-menu {
+            background-color: $body-bg-dark !important;                
+        }
+
+        .tox-textfield {
+            background-color: $body-bg-dark !important; 
+            border-color: $input-border-color !important;                 
+        }
+
+        .tox-textarea {
+            background-color: $body-bg-dark !important; 
+            border: $input-border-width solid $input-border-color !important;              
+        }
+
+        .tox-toolbar {
+            background-color: $body-bg-dark !important;               
+        }
+
+        .tox-toolbar__overflow {
+            background-color: $body-bg-dark !important;             
+        }
+
+        .tox-dialog {
+            background-color: $body-bg-dark !important;
+
+            .tox-dialog__header {
+                background-color: $body-bg-dark !important;                
+            }
+
+            .tox-dialog__footer {
+                background-color: $body-bg-dark !important;                           
+            }
+        }
+    }
+}

@@ -1,0 +1,44 @@
+{
+    "name": "Laradock Livewire Starter",
+    "dockerComposeFile": "../../laradock-livewire-starter/docker-compose.yml",
+    "remoteUser": "laradock",
+    "runServices": [
+        "mysql",
+        "redis",
+        "nginx",
+	    "php-fpm",
+        "docker-in-docker"
+    ],
+    "service": "workspace",
+    "workspaceFolder": "/var/www/livewire-starter.test",
+    "shutdownAction": "stopCompose",
+    "postCreateCommand": "uname -a",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "amiralizadeh9480.laravel-extra-intellisense",
+                "austenc.laravel-blade-spacer",
+                "bmewburn.vscode-intelephense-client",
+                "calebporzio.better-phpunit",
+                "codingyu.laravel-goto-view",
+                "stef-k.laravel-goto-controller",
+                "dbaeumer.vscode-eslint",
+                "eamodio.gitlens",
+                "GitHub.vscode-pull-request-github",
+                "kotfire.php-add-property",
+                "MehediDracula.php-namespace-resolver",
+                "cvergne.vscode-php-getters-setters-cv",
+                "recca0120.vscode-phpunit",
+                "redhat.vscode-yaml",
+                "Tyriar.lorem-ipsum",
+                "valeryanm.vscode-phpsab",
+                "xdebug.php-debug",
+                "onecentlin.laravel-blade",
+                "sanderronde.phpstan-vscode",
+                "pcbowers.alpine-intellisense",
+                "cierra.livewire-vscode",
+                "lennardv.livewire-goto-updated"
+            ]
+        }
+    }  
+}

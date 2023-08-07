@@ -1,0 +1,24 @@
+.data-table {
+    .columns {
+        height: add(3.5rem, $input-height-border);
+        color: var(--bs-body-color);
+    }
+    
+    .paginate {
+        height: add(3.5rem, $input-height-border);
+    }
+
+    .label {
+        color: var(--bs-body-color);
+    
+        &.highlight {
+            @extend .btn-link;
+            color: var(--bs-btn-active-color) !important;
+            border: none !important;
+        }
+    }
+    
+    .transition {
+        transition: all 0.9s ease-out 0s;
+    }
+}

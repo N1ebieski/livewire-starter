@@ -1,0 +1,35 @@
+@mixin mixinModalShow($number) {
+    + div {
+        > .modal.show {
+            z-index: $zindex-modal + $number;
+        }        
+
+        @if $number != $multi-modal-limit {
+            @include mixinModalShow($number + 1);
+        }
+    }  
+}
+
+@mixin mixinBackdropShow($number) {
+    + .modal-backdrop.show {
+        z-index: $zindex-modal + $number;
+
+        @if $number != $multi-modal-limit {
+            @include mixinBackdropShow($number + 1);
+        }
+    }
+}
+
+div {
+    > .modal.show {
+        z-index: $zindex-modal + 1;
+    }   
+    
+    @include mixinModalShow(2);       
+}
+
+.modal-backdrop.show {
+    z-index: $zindex-modal;
+
+    @include mixinBackdropShow(1);  
+}

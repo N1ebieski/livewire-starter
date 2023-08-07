@@ -1,0 +1,44 @@
+.scroll-to-top {
+    z-index: 100;
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    min-width: 50px;
+    min-height: 50px;
+    text-align: center;
+    line-height: 40px;
+
+    a {
+        color: $white;
+        background: fade-out($gray-800, .5);
+        display: block;
+        padding: 5px;
+
+        &:focus,
+        &:hover {
+            color: white;
+        }
+    
+        &:hover {
+            background: $gray-800;
+        }
+    }
+}
+
+@include color-mode(dark) {
+    .scroll-to-top {
+        a {
+            color: $black;
+            background: fade-out($gray-100, .5);
+
+            &:focus,
+            &:hover {
+                color: white;
+            }
+
+            &:hover {
+                background: $gray-800;
+            }                
+        }
+    }
+}

@@ -1,0 +1,22 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Livewire\Forms\Admin\DataTable\User;
+
+use Livewire\Attributes\Url;
+use App\Livewire\Forms\DataTable\DataTableForm;
+
+final class UserDataTableForm extends DataTableForm
+{
+    #[Url(as: 'columns')]
+    public array $columns = ['id', 'name', 'email', 'created_at', 'updated_at'];
+
+    #[Url(as: 'status_email')]
+    public ?string $status_email = null;
+
+    public function getColumns(): array
+    {
+        return $this->columns;
+    }
+}

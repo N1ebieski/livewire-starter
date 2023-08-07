@@ -1,0 +1,18 @@
+<li
+    class="nav-item my-1 {{ $active ? 'active' : '' }}"
+>
+    <a 
+        {{ $attributes->class([
+            'nav-link', 'disabled' => $disabled
+        ])->filter(fn ($value) => is_string($value)) }}    
+        @if($active)
+        aria-current="page"
+        @endif
+        x-on:click="navigate()"
+    >
+        @if($icon)
+        <span class="me-1">{{ $icon }}</span>
+        @endif
+        <span>{{ $attributes->get('title') }}</span>
+    </a>
+</li>

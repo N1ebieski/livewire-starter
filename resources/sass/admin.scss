@@ -1,0 +1,27 @@
+@import 'variables';
+@import 'admin/variables';
+
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+@import 'modal';
+
+@import 'tom-select/dist/css/tom-select.css';
+@import 'tom-select/dist/css/tom-select.bootstrap5.css';
+@import 'tom-select';
+
+@import 'tinymce';
+
+@import 'flag-icons/css/flag-icons.min.css';
+@import 'flag-icons';
+
+@import 'alpine';
+
+@import 'scrolltotop';
+@import 'data-table';
+@import 'icons';
+@import 'highlight';
+
+@import 'admin/layout';
+@import 'admin/navbar';
+@import 'admin/sidebar';

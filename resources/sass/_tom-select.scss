@@ -1,0 +1,45 @@
+.ts-dropdown {
+    z-index: calc($zindex-modal + 1) !important;
+}
+
+.form-floating {
+    .ts-wrapper {
+        .ts-control {
+            padding-top: 23px !important;
+            flex-wrap: nowrap !important;
+
+            input {
+                min-width: 0px !important;
+            }
+        }     
+    }
+}
+
+@include color-mode(dark) {
+    .ts-dropdown {
+        background-color: var(--bs-body-bg) !important;
+
+        .ts-dropdown-content {
+            .option {
+                color: var(--bs-body-color) !important;
+
+                &:hover, &.active {
+                    color: var(--bs-body-color) !important;
+                    background-color: var(--bs-tertiary-bg) !important;
+                }
+            }
+        }
+    }
+
+    .ts-wrapper {
+        .ts-control {
+            input {
+                color: var(--bs-body-color) !important;
+            }
+
+            .item {
+                color: var(--bs-body-color) !important;
+            }
+        }
+    }
+}

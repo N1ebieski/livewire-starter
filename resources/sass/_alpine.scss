@@ -1,0 +1,13 @@
+[x-cloak] { 
+    display: none !important;
+}
+
+#nprogress {
+    .bar {
+        z-index: 2000 !important;
+    }
+
+    .spinner {
+        z-index: 2000 !important;        
+    }
+}

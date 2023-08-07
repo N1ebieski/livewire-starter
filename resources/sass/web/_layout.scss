@@ -1,0 +1,27 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: $sticky-footer-height;
+}
+
+.content-wrapper {
+    min-height: 100vh;
+
+    .background {
+        background: url('/resources/images/background.jpg') no-repeat center center;
+        background-size: cover;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+}

@@ -1,0 +1,26 @@
+.navbar-height {
+    margin-bottom: $navbar-base-height;
+}
+
+.navbar {
+    height: $navbar-base-height;
+    z-index: calc(#{$zindex-offcanvas} + 1);
+}
+
+.navbar-brand {
+    padding: 0;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+
+    .logo {
+        width: 2.5rem;
+    }    
+}
+
+@include color-mode(dark) {
+    .navbar-brand {
+        .logo {
+            filter: invert(100%) sepia(0%) saturate(7464%) hue-rotate(80deg) brightness(117%) contrast(101%);
+        }
+    }
+}   

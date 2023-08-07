@@ -1,0 +1,44 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Listen for XDebug",
+            "type": "php",
+            "request": "launch",
+            "ignore": [
+                "**/vendor/**/*.php"
+            ],
+            "hostname": "localhost",
+            "port": 49206,
+            "pathMappings": {
+                "/var/www/livewire-starter.test": "${workspaceFolder}"
+            },
+            "xdebugSettings": {
+                "max_children": 200,
+                "max_data": 512,
+                "max_depth": 4,
+                "show_hidden": 1
+            },             
+        },
+        {
+            "name": "Listen for Firefox",
+            "type": "firefox",
+            "request": "attach",
+            "url": "https://livewire-starter.test:49205",
+            "webRoot": "${workspaceFolder}",
+            "skipFiles": [
+                "**/node_modules/**"
+            ],
+            "pathMappings": [
+                { 
+                    "url": "http://localhost:49205/", 
+                    "path": "${webRoot}/"
+                }
+            ],
+            "tabFilter": "https://cmsapichat.pl.test/*",                  
+        },
+    ]
+}

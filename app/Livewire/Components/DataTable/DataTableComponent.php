@@ -1,0 +1,233 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Livewire\Components\DataTable;
+
+use Illuminate\Http\Request;
+use Livewire\Attributes\Url;
+use Livewire\WithPagination;
+use Livewire\Attributes\Locked;
+use Livewire\Attributes\Computed;
+use Illuminate\Support\Collection;
+use Illuminate\Validation\Validator;
+use App\Livewire\Components\HasDirty;
+use App\Livewire\Components\Component;
+use App\Livewire\Forms\DataTable\DataTableForm;
+use Illuminate\Contracts\Translation\Translator;
+
+abstract class DataTableComponent extends Component
+{
+    use WithPagination {
+        WithPagination::gotoPage as baseGotoPage;
+        WithPagination::previousPage as basePreviousPage;
+        WithPagination::nextPage as baseNextPage;
+    }
+    use HasDirty;
+
+    protected Translator $trans;
+
+    public bool $lazy = true;
+
+    /**
+     * All available columns' names to sort
+     */
+    #[Locked]
+    public array $sorts = [];
+
+    /**
+     * All available number of entries
+     */
+    #[Locked]
+    public array $availablePaginates = [25, 50, 100];
+
+    /**
+     * All available columns to show/hide
+     */
+    #[Locked]
+    public array $availableColumns = [];
+
+    /**
+     * Show always specific columns
+     */
+    #[Locked]
+    public array $showingColumns = [];
+
+    /**
+     * Hide specific columns on small devices
+     */
+    #[Locked]
+    public array $hidingColumns = [
+        'sm' => [],
+        'md' => [],
+        'lg' => []
+    ];
+
+    /**
+     * @var string[]
+     */
+    protected $listeners = ['refresh' => '$refresh'];
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        // //Fix for livewire navigate with lazy mode. @see https://github.com/livewire/livewire/discussions/5958
+        $this->paginators['page'] = request()->query('page', 1);
+
+        $this->trans = $this->container->make(Translator::class);
+    }
+
+    public function mount(
+        ?array $columns = null,
+        ?array $sorts = null,
+        ?array $availableColumns = null,
+        ?array $showingColumns = null,
+        ?array $hidingColumns = null
+    ): void {
+        $this->form->columns = $columns ?? $this->form->getColumns();
+
+        $this->sorts = $sorts ?? $this->getSorts();
+
+        $this->availableColumns = $availableColumns ?? $this->getAvailableColumns();
+
+        $this->showingColumns = $showingColumns ?? $this->getShowingColumns();
+
+        $this->hidingColumns = $hidingColumns ?? $this->getHidingColumns();
+    }
+
+    public function booted(): void
+    {
+        $this->dirty();
+
+        // $this->validateWithReset();
+    }
+
+    public function setOrderBy(?string $orderby): self
+    {
+        $this->form->orderby = $orderby;
+
+        return $this;
+    }
+
+    abstract protected function getSorts();
+
+    abstract protected function getAvailableColumns();
+
+    abstract protected function getShowingColumns();
+
+    abstract protected function getHidingColumns();
+
+    protected function arePropertiesDirty(): bool
+    {
+        return $this->isDirty(['form.orderby', 'form.search']);
+    }
+
+    public function updatedPage(): void
+    {
+        $this->resetSelects();
+    }
+
+    /**
+     *
+     * @param mixed $name
+     * @param mixed $value
+     * @return void
+     */
+    public function updated($name, $value): void
+    {
+        parent::updated($name, $value);
+
+        $this->dirty();
+
+        // $this->validateWithReset();
+
+        $props = (new Collection($this->form->toArray()))
+            ->keys()
+            ->map(fn ($prop) => "form.{$prop}")
+            ->toArray();
+
+        if (in_array($name, $props)) {
+            $this->resetPage();
+            $this->resetSelects();
+        }
+    }
+
+    // private function validateWithReset(): void
+    // {
+    //     $this->withValidator(function (Validator $validator) {
+    //         $validator->after(function (Validator $validator) {
+    //             if ($validator->errors()->isNotEmpty()) {
+    //                 $this->clear();
+    //             }
+    //         });
+    //     })->validate();
+    // }
+
+    public function clear(): void
+    {
+        $this->resetExcept(['form.columns', 'form.paginate']);
+    }
+
+    public function resetFormSearch(): void
+    {
+        $this->reset('form.search');
+
+        $this->dirty();
+    }
+
+    private function resetSelects(): void
+    {
+        $this->dispatch('reset-selects');
+    }
+
+    public function finishLazy(): void
+    {
+        $this->lazy = false;
+    }
+
+    /**
+     *
+     * @param mixed $page
+     * @param string $pageName
+     * @return void
+     */
+    public function gotoPage($page, $pageName = 'page'): void
+    {
+        $this->baseGotoPage($page, $pageName);
+
+        $this->dispatch('gototop');
+    }
+
+    /**
+     *
+     * @param string $pageName
+     * @return void
+     */
+    public function previousPage($pageName = 'page'): void
+    {
+        $this->basePreviousPage($pageName);
+
+        $this->dispatch('gototop');
+    }
+
+    /**
+     * @param string $pageName
+     * @return void
+     */
+    public function nextPage($pageName = 'page'): void
+    {
+        $this->baseNextPage($pageName);
+
+        $this->dispatch('gototop');
+    }
+
+    /**
+     * Hide specific columns on specific devices. Component is re-render by Alpine
+     * during initialization. Use with defer loading queries
+     */
+    public function hideColumns(string $size): void
+    {
+        $this->form->columns = array_diff($this->form->columns, $this->hidingColumns[$size]);
+    }
+}
