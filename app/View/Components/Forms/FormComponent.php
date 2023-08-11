@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\View\Components\Form;
+namespace App\View\Components\Forms;
 
 use Illuminate\Support\Str;
 use App\View\Components\Component;

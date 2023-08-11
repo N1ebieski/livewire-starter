@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\View\Components\Form\Tinymce;
+namespace App\View\Components\Forms\Tinymce;
 
 use Illuminate\Contracts\View\View;
 use App\View\Components\Form\FormComponent;
@@ -21,7 +21,7 @@ class TinymceComponent extends FormComponent
     public function withAttributes(array $attributes): self
     {
         return parent::withAttributes(array_merge([
-            'rows' => 10,             
+            'rows' => 10,
         ], $attributes));
     }
 
@@ -30,6 +30,6 @@ class TinymceComponent extends FormComponent
      */
     public function render(): View
     {
-        return $this->viewFactory->make('components.form.tinymce-component');
+        return $this->viewFactory->make('components.forms.tinymce-component');
     }
 }

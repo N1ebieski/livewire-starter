@@ -41,4 +41,15 @@ abstract class Form extends BaseForm
 
         $this->component->addMessagesFromOutside($messagesWithPrefixedKeys);
     }
+
+    public function resetExcept(...$properties): void
+    {
+        if (count($properties) && is_array($properties[0])) {
+            $properties = $properties[0];
+        }
+
+        $keysToReset = array_diff(array_keys($this->all()), $properties);
+
+        $this->reset($keysToReset);
+    }
 }

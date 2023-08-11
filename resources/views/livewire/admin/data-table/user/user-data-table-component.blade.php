@@ -4,7 +4,7 @@
             class="flex-fill"
             style="min-width:300px;"
         >
-            <x-form.search-component 
+            <x-forms.search-component 
                 wire:model.live.debounce.750ms="form.search"
                 :highlight="!is_null($form->search)"
                 :labelFloating="true"
@@ -12,10 +12,10 @@
                 <x-slot:label>
                     {{ trans('filter.filter') }} "{{ trans('filter.search') }}":
                 </x-slot:label> 
-            </x-form.search-component>
+            </x-forms.search-component>
         </div>
         <div style="min-width:200px;">
-            <x-form.select-component
+            <x-forms.select-component
                 wire:model.live="form.status_email"
                 :highlight="!is_null($form->status_email)"
                 :labelFloating="true"
@@ -30,15 +30,41 @@
                     {{ trans('user.status_email.' . $enum->value) }}
                 </option>
                 @endforeach
-            </x-form.select-component>
+            </x-forms.select-component>
         </div>
         <div>
             <x-data-table.columns-component 
                 :availableColumns="$availableColumns" 
                 :value="$form->columns"
             />  
-        </div>      
+        </div>
+        <div>
+            <x-data-table.paginate-component
+                :availablePaginates="$availablePaginates"
+                :value="$form->paginate"
+            />
+        </div>
     </x-slot:filter>
+    <x-slot:action>
+        <x-slot:selected>
+            <x-data-table.selected-component 
+                :lazy="$lazy"
+                :collection="$this->users"
+            />
+        </x-slot:selected>
+        @if($isDirty)
+        <x-data-table.action.button-component
+            :lazy="$lazy"
+            :action="\App\View\Components\Action::SECONDARY"
+            :label="trans('default.clear')"
+            wire:click="clear"
+        >
+            <x-slot:icon>
+                <i class="bi bi-x-square"></i>
+            </x-slot:icon>
+        </x-data-table.action.button-component>
+        @endif
+    </x-slot:action>
     <x-slot:table>
         <x-slot:thead>
             <x-data-table.label.select-all-component 

@@ -33,13 +33,13 @@ class AdminMetaFactory
         return new Meta(
             title: $this->collect->make([
                 $title,
-                !is_null($page) ? $this->trans->get('pagination.page', ['page' => $page]) : '',
+                $page > 1 ? $this->trans->get('pagination.page', ['page' => $page]) : '',
                 $this->trans->get('admin.title'),
                 $this->trans->get('app.title')
             ])->filter()->implode(' - '),
             description: $this->collect->make([
                 $description,
-                !is_null($page) ? $this->trans->get('pagination.page', ['page' => $page]) : '',
+                $page > 1 ? $this->trans->get('pagination.page', ['page' => $page]) : '',
                 $this->trans->get('admin.title'),
                 $this->trans->get('app.description')
             ])->filter()->implode('. '),

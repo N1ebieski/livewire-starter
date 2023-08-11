@@ -21,7 +21,7 @@ class ButtonComponent extends Component
         public readonly string $label,
         public readonly Action $action = Action::PRIMARY,
         public readonly bool $lazy = true,
-        public readonly array $targets = []
+        public array $targets = []
     ) {
     }
 
@@ -30,7 +30,7 @@ class ButtonComponent extends Component
         $wire = (new Collection($attributes))
             ->first(fn ($value, string $key) => Str::startsWith($key, 'wire:click'));
 
-        $this->targets = array_merge($wire, $this->targets);
+        $this->targets = array_merge([$wire], $this->targets);
 
         return parent::withAttributes($attributes);
     }

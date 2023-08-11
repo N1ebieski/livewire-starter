@@ -4,18 +4,20 @@ declare(strict_types=1);
 
 namespace App\Livewire\Components\DataTable;
 
-use Illuminate\Http\Request;
-use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use Livewire\Attributes\Locked;
-use Livewire\Attributes\Computed;
+use App\Http\Requests\PageRequest;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\Validator;
 use App\Livewire\Components\HasDirty;
 use App\Livewire\Components\Component;
 use App\Livewire\Forms\DataTable\DataTableForm;
 use Illuminate\Contracts\Translation\Translator;
+use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 
+/**
+ * @property-read DataTableForm $form
+ */
 abstract class DataTableComponent extends Component
 {
     use WithPagination {
@@ -26,6 +28,8 @@ abstract class DataTableComponent extends Component
     use HasDirty;
 
     protected Translator $trans;
+
+    private ValidationFactory $validationFactory;
 
     public bool $lazy = true;
 
@@ -72,10 +76,11 @@ abstract class DataTableComponent extends Component
     {
         parent::__construct();
 
-        // //Fix for livewire navigate with lazy mode. @see https://github.com/livewire/livewire/discussions/5958
-        $this->paginators['page'] = request()->query('page', 1);
+        //Fix for livewire navigate with lazy mode. @see https://github.com/livewire/livewire/discussions/5958
+        $this->paginators['page'] = $this->container->make(PageRequest::class)->query('page', 1);
 
         $this->trans = $this->container->make(Translator::class);
+        $this->validationFactory = $this->container->make(ValidationFactory::class);
     }
 
     public function mount(
@@ -100,7 +105,7 @@ abstract class DataTableComponent extends Component
     {
         $this->dirty();
 
-        // $this->validateWithReset();
+        $this->validateWithReset();
     }
 
     public function setOrderBy(?string $orderby): self
@@ -110,13 +115,13 @@ abstract class DataTableComponent extends Component
         return $this;
     }
 
-    abstract protected function getSorts();
+    abstract protected function getSorts(): array;
 
-    abstract protected function getAvailableColumns();
+    abstract protected function getAvailableColumns(): array;
 
-    abstract protected function getShowingColumns();
+    abstract protected function getShowingColumns(): array;
 
-    abstract protected function getHidingColumns();
+    abstract protected function getHidingColumns(): array;
 
     protected function arePropertiesDirty(): bool
     {
@@ -127,6 +132,11 @@ abstract class DataTableComponent extends Component
     {
         $this->resetSelects();
     }
+
+    // public function rendered()
+    // {
+    //     $this->dispatch('updated-page', page: $this->getPage());
+    // }
 
     /**
      *
@@ -140,7 +150,7 @@ abstract class DataTableComponent extends Component
 
         $this->dirty();
 
-        // $this->validateWithReset();
+        $this->validateWithReset();
 
         $props = (new Collection($this->form->toArray()))
             ->keys()
@@ -153,20 +163,22 @@ abstract class DataTableComponent extends Component
         }
     }
 
-    // private function validateWithReset(): void
-    // {
-    //     $this->withValidator(function (Validator $validator) {
-    //         $validator->after(function (Validator $validator) {
-    //             if ($validator->errors()->isNotEmpty()) {
-    //                 $this->clear();
-    //             }
-    //         });
-    //     })->validate();
-    // }
+    public function validateWithReset(): void
+    {
+        $this->validationFactory->make($this->form->all(), $this->form->rules())
+            ->after(function (Validator $validator) {
+                if ($validator->errors()->isNotEmpty()) {
+                    $this->clear();
+                }
+            })
+            ->validate();
+    }
 
     public function clear(): void
     {
-        $this->resetExcept(['form.columns', 'form.paginate']);
+        $this->form->resetExcept(['columns', 'paginate']);
+
+        $this->dirty();
     }
 
     public function resetFormSearch(): void

@@ -4,17 +4,45 @@ declare(strict_types=1);
 
 namespace App\Livewire\Components\Admin\User;
 
+use Livewire\Attributes\On;
+use Livewire\WithPagination;
+use App\Http\Requests\PageRequest;
 use Illuminate\Contracts\View\View;
 use App\Livewire\Components\FullPageComponent;
 use App\View\Metas\Admin\User\IndexMetaFactory;
 
 class IndexComponent extends FullPageComponent
 {
-    public function render(IndexMetaFactory $indexMetaFactory): View
+    use WithPagination;
+
+    private IndexMetaFactory $indexMetaFactory;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        //Fix for livewire navigate with lazy mode. @see https://github.com/livewire/livewire/discussions/5958
+        // $this->paginators['page'] = $this->container->make(PageRequest::class)->query('page', 1);
+    }
+
+    public function boot(IndexMetaFactory $indexMetaFactory): void
+    {
+        $this->indexMetaFactory = $indexMetaFactory;
+    }
+
+    #[On('updated-page')]
+    public function updateTitle(?int $page): void
+    {
+        $meta = $this->indexMetaFactory->make($page);
+
+        $this->dispatch('update-title', meta: $meta);
+    }
+
+    public function render(): View
     {
         //$this->gate->authorize('admin.user.view');
 
-        $meta = $indexMetaFactory->make($this->page);
+        $meta = $this->indexMetaFactory->make($this->getPage());
 
         return $this->viewFactory->make('livewire.admin.user.index-component')
             ->layout('components.admin.layouts.app.app-component', compact('meta'));

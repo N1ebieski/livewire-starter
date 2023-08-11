@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Utils\DataTable\Sorts;
+namespace App\Utils\Query\Sorts;
 
 class SortsHelper
 {
-    public function getAttributesWithOrder(array $sorts): array
+    public static function getAttributesWithOrder(array $sorts): array
     {
         $attributesWithOrder = [];
 

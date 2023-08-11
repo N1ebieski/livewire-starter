@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\View\Components\Form\Tomselect;
+namespace App\View\Components\Forms\Tomselect;
 
 use Illuminate\Contracts\View\View;
 use App\View\Components\Form\FormComponent;
@@ -19,7 +19,7 @@ class TomselectComponent extends FormComponent
         public readonly ?string $endpoint = null,
         public readonly ?array $exceptIds = null,
         public readonly bool $validation = true,
-        public readonly bool $highlight = false, 
+        public readonly bool $highlight = false,
         public readonly Type $type = new Type(Type::SELECT),
         public readonly Tomselect $tomselect = new Tomselect()
     ) {
@@ -30,7 +30,7 @@ class TomselectComponent extends FormComponent
      */
     public function render(): View
     {
-        return $this->viewFactory->make('components.form.tomselect-component', [
+        return $this->viewFactory->make('components.forms.tomselect-component', [
             'except' => $this->exceptIds
         ]);
     }

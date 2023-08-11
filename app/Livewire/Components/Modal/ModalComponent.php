@@ -54,8 +54,8 @@ class ModalComponent extends Component
         }
     }
 
-    public function render(ViewFactory $view): View
+    public function render(): View
     {
-        return $view->make('livewire.modal.modal-component');
+        return $this->viewFactory->make('livewire.modal.modal-component');
     }
 }

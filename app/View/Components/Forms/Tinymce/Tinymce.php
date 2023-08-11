@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\View\Components\Form\Tinymce;
+namespace App\View\Components\Forms\Tinymce;
 
 final class Tinymce
 {
@@ -13,7 +13,7 @@ final class Tinymce
         public readonly string $entity_encoding = 'raw',
         public readonly string $plugins = 'fullscreen image link table lists code autoresize',
         public readonly string $toolbar = 'code | undo redo | styles | bold italic | numlist bullist | link image hr | fullscreen',
-        public readonly Mobile $mobile = new Mobile()   
+        public readonly Mobile $mobile = new Mobile()
     ) {
     }
 }

@@ -5,13 +5,22 @@
         class="btn btn-{{ $action->value }}"
         wire:loading.attr="disabled"
         {{ $attributes->class([
-            'btn', "btn-{{ $action->value }}"
+            'btn', "btn-{$action->value}"
         ])->filter(fn ($value) => is_string($value)) }}
     >
-        <span wire:loading.remove wire:target="{{ $targetsAsString }}">
-            <i class="bi bi-plus-square"></i>
+        @if($icon)
+        <span 
+            wire:loading.remove 
+            wire:target="{{ $targetsAsString }}"
+        >
+            {{ $icon }}
         </span>
-        <span wire:loading wire:target="{{ $targetsAsString }}">
+        <span 
+            class="d-none"
+            wire:loading 
+            wire:target="{{ $targetsAsString }}"
+            wire:loading.class.remove="d-none" 
+        >
             <span 
                 class="spinner-border spinner-border-sm" 
                 role="status" 
@@ -19,6 +28,7 @@
             ></span>
             <span class="visually-hidden">{{ trans('default.loading') }}...</span>
         </span>
+        @endif
         <span class="d-none d-md-inline">{{ $label }}</span>        
     </button>
     @if(isset($options))

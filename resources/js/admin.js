@@ -7,6 +7,7 @@ import sidebar from "./admin/sidebar/sidebar";
 import bulkAction from "./data-table/bulk-action";
 import dataTable from "./data-table/data-table";
 import "./gototop/gototop";
+import "./meta/meta";
 import modal from "./modal/modal";
 import navbar from "./navbar/navbar";
 

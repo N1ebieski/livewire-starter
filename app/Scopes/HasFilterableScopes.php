@@ -9,7 +9,7 @@ use App\Queries\OrderBy;
 use App\Queries\Paginate;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
-use App\Utils\DataTable\Columns\ColumnsHelper;
+use App\Utils\Query\Columns\ColumnsHelper;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 

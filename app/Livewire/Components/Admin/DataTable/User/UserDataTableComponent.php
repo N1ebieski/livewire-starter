@@ -131,12 +131,8 @@ final class UserDataTableComponent extends DataTableComponent
         return $this->isDirty([
             'form.orderby',
             'form.search',
+            'form.status_email'
         ]);
-    }
-
-    public function clear(): void
-    {
-        $this->resetExcept(['form.columns', 'form.paginate']);
     }
 
     public function render(): View
