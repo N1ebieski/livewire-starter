@@ -11,7 +11,7 @@ use Illuminate\Contracts\View\View;
 use App\Livewire\Components\FullPageComponent;
 use App\View\Metas\Admin\User\IndexMetaFactory;
 
-class IndexComponent extends FullPageComponent
+final class IndexComponent extends FullPageComponent
 {
     use WithPagination;
 
@@ -22,7 +22,7 @@ class IndexComponent extends FullPageComponent
         parent::__construct();
 
         //Fix for livewire navigate with lazy mode. @see https://github.com/livewire/livewire/discussions/5958
-        // $this->paginators['page'] = $this->container->make(PageRequest::class)->query('page', 1);
+        $this->paginators['page'] = $this->container->make(PageRequest::class)->query('page', 1);
     }
 
     public function boot(IndexMetaFactory $indexMetaFactory): void

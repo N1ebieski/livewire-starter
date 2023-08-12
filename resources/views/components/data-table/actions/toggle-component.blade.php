@@ -1,5 +1,4 @@
  <div>
-    @if(!$lazy)
     <div 
         class="form-check form-switch" 
         wire:loading.remove
@@ -25,9 +24,6 @@
             aria-hidden="true"
         ></span>
         <span class="visually-hidden">{{ trans('default.loading') }}...</span>
-    </span>    
-    @else
-    <x-data-table.placeholder-component />
-    @endif    
+    </span>     
 </div>
 

@@ -1,21 +1,28 @@
+import { Enum } from "../utils/enum/enum";
+
+class Action extends Enum {
+    static SUCCESS = new Action("success");
+    static WARNING = new Action("warning");
+    static ALERT = new Action("alert");
+
+    getClass() {
+        const classes = {
+            active: ["table-success"],
+            inactive: ["table-warning"],
+            confirm: ["table-primary"],
+        };
+
+        return classes[this.value];
+    }
+}
+
 export default function dataTable() {
     return {
         selects: [],
         selectAll: false,
-        actions: {
-            active: ["alert", "alert-success"],
-            inactive: ["alert", "alert-warning"],
-            confirm: ["alert", "alert-primary"],
-        },
 
-        async init() {
-            if (!this.$wire.$get("lazy")) {
-                return;
-            }
-
+        init() {
             if (window.innerWidth >= 1200) {
-                this.$wire.$call("finishLazy");
-
                 return;
             }
 
@@ -29,9 +36,7 @@ export default function dataTable() {
                 size = "lg";
             }
 
-            await this.$wire.hideColumns(size);
-
-            this.$wire.$call("finishLazy");
+            this.$wire.hideColumns(size);
         },
 
         toggleSelectAll() {
@@ -67,8 +72,6 @@ export default function dataTable() {
         },
 
         highlight(event) {
-            const el = this;
-
             event.ids.forEach(function (id) {
                 const row = document.querySelector(`#row-${id}`);
 
@@ -76,10 +79,12 @@ export default function dataTable() {
                     return;
                 }
 
-                row.classList.add(...el.actions[event.detail.action]);
+                const action = new Action(event.action);
+
+                row.classList.add(...action.getClass());
 
                 setTimeout(function () {
-                    row.classList.remove(...el.actions[event.detail.action]);
+                    row.classList.remove(...action.getClass());
                 }, 5000);
             });
         },

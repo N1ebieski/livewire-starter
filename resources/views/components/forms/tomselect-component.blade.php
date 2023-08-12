@@ -47,9 +47,10 @@
                     highlight: @js($highlight),                      
                     config: @js($tomselect)
                 })"
+                x-on:livewire:navigating.window="destroy()"
                 wire:ignore
             >
-                @if($type->isSelect())
+                @if($type->isEquals(\App\View\Components\Forms\Tomselect\Type::SELECT))
                 <select 
                     x-ref="tomselect"
                     {{ $attributes->class(['form-select'])
@@ -57,7 +58,7 @@
                 >
                     {{ $slot ?? '' }}
                 </select>
-                @elseif($type->isInput())
+                @elseif($type->isEquals(\App\View\Components\Forms\Tomselect\Type::INPUT))
                 <input 
                     type="text"
                     x-ref="tomselect" 

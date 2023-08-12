@@ -18,11 +18,9 @@ class ColumnComponent extends Component
      */
     public function __construct(
         protected ViewFactory $viewFactory,
-        public readonly ?string $name,
-        public readonly ?string $value = null,
+        public readonly ?string $name = null,
         public readonly ?array $columns = null,
-        public readonly array $hidingColumns = [],
-        public readonly bool $lazy = true
+        public readonly array $hidingColumns = []
     ) {
     }
 

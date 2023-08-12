@@ -4,7 +4,6 @@
         'style' => 'min-width:40px;'
     ])->filter(fn ($value) => is_string($value)) }}    
 >
-    @if(!$lazy)
     <div class="form-check">
         <input 
             class="form-check-input"
@@ -13,8 +12,5 @@
             x-on:click="toggleSelectAll"
             x-model="selectAll"
         >
-    </div>   
-    @else
-    <x-data-table.placeholder-component />
-    @endif                               
+    </div>                                
 </th>

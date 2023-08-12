@@ -31,7 +31,7 @@
             <span class="d-none d-md-inline">{{ config('app.name_short') }}</span>
         </a>
         <ul class="navbar-nav ms-auto">
-            {{-- <x-multi-theme.multi-theme-component /> --}}
+            <x-multi-theme.multi-theme-component />
             {{-- <li class="nav-item dropdown">
                 <a 
                     href="#"

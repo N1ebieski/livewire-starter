@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\View\Components\Forms\Tomselect;
 
 use Illuminate\Contracts\View\View;
-use App\View\Components\Form\FormComponent;
+use App\View\Components\Forms\FormComponent;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
 class TomselectComponent extends FormComponent
@@ -20,7 +20,7 @@ class TomselectComponent extends FormComponent
         public readonly ?array $exceptIds = null,
         public readonly bool $validation = true,
         public readonly bool $highlight = false,
-        public readonly Type $type = new Type(Type::SELECT),
+        public readonly Type $type = Type::SELECT,
         public readonly Tomselect $tomselect = new Tomselect()
     ) {
     }

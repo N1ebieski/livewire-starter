@@ -6,7 +6,6 @@ namespace App\Livewire\Forms\DataTable;
 
 use App\Livewire\Forms\Form;
 use Livewire\Attributes\Url;
-use Illuminate\Validation\Rule;
 use App\Utils\Query\Sorts\SortsHelper;
 use App\Livewire\Components\DataTable\DataTableComponent;
 
@@ -42,7 +41,7 @@ abstract class DataTableForm extends Form
                 'bail',
                 'string',
                 'nullable',
-                Rule::in(SortsHelper::getAttributesWithOrder($this->component->sorts))
+                $this->rule->in(SortsHelper::getAttributesWithOrder($this->component->sorts))
             ],
             'columns' => [
                 'bail',
@@ -53,13 +52,16 @@ abstract class DataTableForm extends Form
                 'bail',
                 'string',
                 'nullable',
-                Rule::in(array_keys($this->component->availableColumns))
+                $this->rule->in([
+                    ...array_keys($this->component->availableColumns),
+                    ...['__rm__'] //Temporary fix. Livewire add __rm__ to the array if removing element
+                ])
             ],
             'paginate' => [
                 'bail',
                 'nullable',
                 'integer',
-                Rule::in($this->component->availablePaginates)
+                $this->rule->in($this->component->availablePaginates)
             ]
         ];
     }

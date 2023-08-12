@@ -9,13 +9,19 @@ import dataTable from "./data-table/data-table";
 import "./gototop/gototop";
 import "./meta/meta";
 import modal from "./modal/modal";
+import multiTheme from "./multi-theme/multi-theme";
 import navbar from "./navbar/navbar";
+import toast from "./toast/toast";
+import tomSelect from "./tomselect/tomselect";
 
 Alpine.data("modal", modal);
 Alpine.data("navbar", navbar);
 Alpine.data("sidebar", sidebar);
 Alpine.data("dataTable", dataTable);
 Alpine.data("bulkAction", bulkAction);
+Alpine.data("tomSelect", tomSelect);
+Alpine.data("toast", toast);
+Alpine.data("multiTheme", multiTheme);
 
 window.bootstrap = bootstrap;
 window.Popper = Popper;

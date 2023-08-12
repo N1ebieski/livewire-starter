@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\View\Components\Forms\Tinymce;
 
 use Illuminate\Contracts\View\View;
-use App\View\Components\Form\FormComponent;
+use App\View\Components\Forms\FormComponent;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
 class TinymceComponent extends FormComponent

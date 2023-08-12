@@ -31,8 +31,6 @@ abstract class DataTableComponent extends Component
 
     private ValidationFactory $validationFactory;
 
-    public bool $lazy = true;
-
     /**
      * All available columns' names to sort
      */
@@ -112,6 +110,8 @@ abstract class DataTableComponent extends Component
     {
         $this->form->orderby = $orderby;
 
+        $this->resetPage();
+
         return $this;
     }
 
@@ -131,12 +131,9 @@ abstract class DataTableComponent extends Component
     public function updatedPage(): void
     {
         $this->resetSelects();
-    }
 
-    // public function rendered()
-    // {
-    //     $this->dispatch('updated-page', page: $this->getPage());
-    // }
+        $this->dispatch('updated-page', page: $this->getPage());
+    }
 
     /**
      *
@@ -191,11 +188,6 @@ abstract class DataTableComponent extends Component
     private function resetSelects(): void
     {
         $this->dispatch('reset-selects');
-    }
-
-    public function finishLazy(): void
-    {
-        $this->lazy = false;
     }
 
     /**

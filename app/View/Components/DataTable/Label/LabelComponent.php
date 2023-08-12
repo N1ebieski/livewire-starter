@@ -22,8 +22,7 @@ class LabelComponent extends Component
         public readonly ?string $value = null,
         public readonly ?array $columns = null,
         public readonly array $hidingColumns = [],
-        public readonly array $sorts = [],
-        public readonly bool $lazy = true
+        public readonly array $sorts = []
     ) {
     }
 

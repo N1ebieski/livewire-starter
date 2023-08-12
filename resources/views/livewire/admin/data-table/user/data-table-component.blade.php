@@ -14,7 +14,10 @@
                 </x-slot:label> 
             </x-forms.search-component>
         </div>
-        <div style="min-width:200px;">
+        <div 
+            class="flex-fill"        
+            style="min-width:200px;"
+        >
             <x-forms.select-component
                 wire:model.live="form.status_email"
                 :highlight="!is_null($form->status_email)"
@@ -47,14 +50,10 @@
     </x-slot:filter>
     <x-slot:action>
         <x-slot:selected>
-            <x-data-table.selected-component 
-                :lazy="$lazy"
-                :collection="$this->users"
-            />
+            <x-data-table.selected-component :collection="$this->users" />
         </x-slot:selected>
         @if($isDirty)
-        <x-data-table.action.button-component
-            :lazy="$lazy"
+        <x-data-table.actions.button-component
             :action="\App\View\Components\Action::SECONDARY"
             :label="trans('default.clear')"
             wire:click="clear"
@@ -62,21 +61,27 @@
             <x-slot:icon>
                 <i class="bi bi-x-square"></i>
             </x-slot:icon>
-        </x-data-table.action.button-component>
+        </x-data-table.actions.button-component>
         @endif
+        <x-data-table.actions.button-component
+            :action="\App\View\Components\Action::PRIMARY"
+            :label="trans('default.create')"
+            wire:click="create"
+        >        
+            <x-slot:icon>
+                <i class="bi bi-plus-square"></i>
+            </x-slot:icon>        
+        </x-data-table.actions.button-component>
     </x-slot:action>
     <x-slot:table>
         <x-slot:thead>
-            <x-data-table.label.select-all-component 
-                :lazy="$lazy"                     
-            />
+            <x-data-table.label.select-all-component />
             <x-data-table.label.label-component 
                 name="id"
                 :value="$form->orderby"
                 :columns="$form->columns"
                 :hidingColumns="$hidingColumns"                        
                 :sorts="$sorts"
-                :lazy="$lazy"
                 style="min-width:60px"                        
             >
                 ID
@@ -87,7 +92,6 @@
                 :columns="$form->columns"
                 :hidingColumns="$hidingColumns"                        
                 :sorts="$sorts"
-                :lazy="$lazy"    
                 class="w-100"                    
             >
                 {{ trans('user.name.label') }}
@@ -98,7 +102,6 @@
                 :columns="$form->columns"
                 :hidingColumns="$hidingColumns"                        
                 :sorts="$sorts"
-                :lazy="$lazy"  
                 style="min-width:200px"
             >
                 {{ trans('user.email.label') }}
@@ -109,7 +112,6 @@
                 :columns="$form->columns"
                 :hidingColumns="$hidingColumns"
                 :sorts="$sorts"
-                :lazy="$lazy"
                 style="min-width:150px;"
             >
                 {{ trans('user.email_verified_at') }}
@@ -120,7 +122,6 @@
                 :columns="$form->columns"
                 :hidingColumns="$hidingColumns"
                 :sorts="$sorts"
-                :lazy="$lazy"
                 style="min-width:100px;"
             >
                 {{ trans('default.created_at') }}
@@ -131,72 +132,26 @@
                 :columns="$form->columns"
                 :hidingColumns="$hidingColumns"
                 :sorts="$sorts"
-                :lazy="$lazy"
                 style="min-width:130px;"
             >
                 {{ trans('default.updated_at') }}
             </x-data-table.label-component>
+            <th></th>
         </x-slot:thead>
-        <x-slot:tbody>
-            @foreach($this->users as $user)                                                                  
-            <x-data-table.row-component 
-                :value="$user?->id"
-                :lazy="$lazy"
-            >
-                <x-data-table.column.select-component 
-                    :value="$user?->id" 
-                    :lazy="$lazy"
+        <x-slot:tbodies>
+            @foreach($this->users as $index => $user)        
+            <x-data-table.row-component :value="$user?->id">      
+                <livewire:admin.data-table.user.row-component
+                    :user="$user"
+                    :hidingColumns="$hidingColumns"
+                    :columns="$form->columns"
+                    wire:key="user-row-{{ $index }}"
                 />
-                <x-data-table.column.column-component
-                    :value="$user?->id"
-                    name="id"
-                    :columns="$form->columns"
-                    :hidingColumns="$hidingColumns"
-                    :lazy="$lazy"
-                />
-                <x-data-table.column.column-component
-                    name="name"
-                    :columns="$form->columns"
-                    :hidingColumns="$hidingColumns"
-                    :lazy="$lazy"
-                    :value="$user?->name"
-                />
-                <x-data-table.column.column-component
-                    name="email"
-                    :columns="$form->columns"
-                    :hidingColumns="$hidingColumns"
-                    :lazy="$lazy"
-                    :value="$user?->email"
-                />
-                <x-data-table.column.column-component
-                    name="email_verified_at"
-                    :value="$user?->email_verified_at"
-                    :columns="$form->columns"
-                    :hidingColumns="$hidingColumns"
-                    :lazy="$lazy"
-                />                 
-                <x-data-table.column.column-component
-                    name="created_at"
-                    :value="$user?->created_at"
-                    :columns="$form->columns"
-                    :hidingColumns="$hidingColumns"
-                    :lazy="$lazy"
-                /> 
-                <x-data-table.column.column-component
-                    :value="$user?->updated_at"
-                    name="updated_at"
-                    :columns="$form->columns"
-                    :hidingColumns="$hidingColumns"
-                    :lazy="$lazy"
-                />                                                                 
             </x-data-table.row-component>
             @endforeach
-        </x-slot:tbody>
+        </x-slot:tbodies>
     </x-slot:table>
     <x-slot:pagination>
-        <x-data-table.pagination-component 
-            :lazy="$lazy"
-            :collection="$this->users"
-        />
+        <x-data-table.pagination-component :collection="$this->users" />
     </x-slot:pagination>  
 </x-data-table.layout.data-table-component>

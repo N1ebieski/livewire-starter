@@ -1,5 +1,4 @@
 <div class="btn-group"> 
-    @if(!$lazy)
     <button
         type="button" 
         class="btn btn-{{ $action->value }}"
@@ -29,7 +28,9 @@
             <span class="visually-hidden">{{ trans('default.loading') }}...</span>
         </span>
         @endif
-        <span class="d-none d-md-inline">{{ $label }}</span>        
+        <span class="{{ $responsive ? 'd-none d-md-inline' : '' }}">
+            {{ $label }}
+        </span>        
     </button>
     @if(isset($options))
     <button 
@@ -44,8 +45,5 @@
     <ul class="dropdown-menu">
         {{ $options }}
     </ul>
-    @endif
-    @else
-    <x-data-table.placeholder-component style="width:100px;" />
-    @endif    
+    @endif   
 </div>

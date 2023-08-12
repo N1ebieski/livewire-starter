@@ -1,4 +1,10 @@
 .data-table {
+    .table {
+        tbody {
+            background-color: var(--bs-table-bg);
+        }
+    }
+
     .columns {
         height: add(3.5rem, $input-height-border);
         color: var(--bs-body-color);
@@ -17,7 +23,7 @@
             border: none !important;
         }
     }
-    
+
     .transition {
         transition: all 0.9s ease-out 0s;
     }

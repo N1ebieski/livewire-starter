@@ -15,13 +15,14 @@ use App\Filters\User\UserFilter;
 use App\Filters\User\StatusEmail;
 use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Collection;
-use App\Livewire\Components\DataTable\DataTableComponent;
+use App\Livewire\Components\Modal\ModalComponent;
+use App\View\Components\Modal\Modal as BootstrapModal;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use App\Livewire\Forms\Admin\DataTable\User\DataTableForm;
 use App\Queries\User\PaginateByFilter\PaginateByFilterQuery;
-use App\Livewire\Forms\Admin\DataTable\User\UserDataTableForm;
+use App\Livewire\Components\DataTable\DataTableComponent as BaseDataTableComponent;
 
-final class UserDataTableComponent extends DataTableComponent
+final class DataTableComponent extends BaseDataTableComponent
 {
     private User $user;
 
@@ -29,7 +30,7 @@ final class UserDataTableComponent extends DataTableComponent
 
     private SearchFactory $searchFactory;
 
-    public UserDataTableForm $form;
+    public DataTableForm $form;
 
     public function boot(
         User $user,
@@ -42,12 +43,8 @@ final class UserDataTableComponent extends DataTableComponent
     }
 
     #[Computed]
-    public function users(): Collection|LengthAwarePaginator
+    public function users(): LengthAwarePaginator
     {
-        if ($this->lazy) {
-            return new Collection(array_fill(0, 25, $this->user));
-        }
-
         $filters = new UserFilter(
             status_email: $this->getFilterStatusEmail(),
             search: $this->getFilterSearch()
@@ -135,10 +132,22 @@ final class UserDataTableComponent extends DataTableComponent
         ]);
     }
 
+    public function create(): void
+    {
+        $this->dispatch(
+            'create-modal',
+            alias: 'admin.user.create-component',
+            modal: new BootstrapModal(
+                static: true,
+                scrollable: true
+            )
+        )->to(ModalComponent::class);
+    }
+
     public function render(): View
     {
         // $this->gate->authorize("admin.user.view");
 
-        return $this->viewFactory->make('livewire.admin.data-table.user.user-data-table-component');
+        return $this->viewFactory->make('livewire.admin.data-table.user.data-table-component');
     }
 }

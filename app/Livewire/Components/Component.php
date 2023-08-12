@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Livewire\Components;
 
+use App\Livewire\Forms\Form;
 use App\Livewire\Converts\Property;
 use Illuminate\Support\Facades\App;
 use Illuminate\Contracts\Auth\Guard;
@@ -13,6 +14,9 @@ use Illuminate\Contracts\Pipeline\Pipeline;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
+/**
+ * @property-read Form $form
+ */
 abstract class Component extends BaseComponent
 {
     protected Container $container;
@@ -29,6 +33,17 @@ abstract class Component extends BaseComponent
         $this->viewFactory = App::make(ViewFactory::class);
         $this->gate = App::make(Gate::class);
         $this->guard = App::make(Guard::class);
+    }
+
+    /**
+     * Fix. Livewire doesn't have access to the component's mount properties,
+     * so we have to inject the rules manually in the component
+     */
+    public function booted(): void
+    {
+        if (property_exists($this, 'form')) {
+            $this->form->addValidationRulesToComponent();
+        }
     }
 
     /**

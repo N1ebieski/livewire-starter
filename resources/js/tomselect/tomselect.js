@@ -4,7 +4,7 @@ import TomSelect from "tom-select";
 /**
  * Fix for wire:navigate. @see: https://github.com/livewire/livewire/discussions/5894
  */
-document.addEventListener('livewire:before-cache', () => {
+document.addEventListener("livewire:before-cache", () => {
     const tomSelects = document.querySelectorAll('[x-ref="tomselect"]');
 
     tomSelects.forEach((tomselect) => tomselect.tomselect.destroy());
@@ -21,18 +21,19 @@ export default function tomSelect(data) {
 
     return {
         value: data.value,
+        tomselect: null,
 
-        addItem(item) {
-            if (!this.$refs.tomselect) {
-                return;
-            }
+        // addItem(item) {
+        //     if (!this.$refs.tomselect) {
+        //         return;
+        //     }
 
-            this.$refs.tomselect.tomselect.addOption({
-                id: item[config.valueField],
-                name: item[config.labelField],
-            });
-            this.$refs.tomselect.tomselect.addItem(item[config.valueField]);
-        },
+        //     this.$refs.tomselect.tomselect.addOption({
+        //         id: item[data.config.valueField],
+        //         name: item[data.config.labelField],
+        //     });
+        //     this.$refs.tomselect.tomselect.addItem(item[config.valueField]);
+        // },
 
         highlight(value) {
             if (!data.highlight) {
@@ -59,26 +60,42 @@ export default function tomSelect(data) {
         },
 
         default() {
-            this.$refs.tomselect.nextElementSibling.classList.remove("is-invalid");
-            this.$refs.tomselect.nextElementSibling.classList.remove("is-valid");
+            this.$refs.tomselect.nextElementSibling.classList.remove(
+                "is-invalid"
+            );
+            this.$refs.tomselect.nextElementSibling.classList.remove(
+                "is-valid"
+            );
         },
 
         valid() {
-            this.$refs.tomselect.nextElementSibling.classList.add("form-select");
-            this.$refs.tomselect.nextElementSibling.classList.remove("is-invalid");
+            this.$refs.tomselect.nextElementSibling.classList.add(
+                "form-select"
+            );
+            this.$refs.tomselect.nextElementSibling.classList.remove(
+                "is-invalid"
+            );
             this.$refs.tomselect.nextElementSibling.classList.add("is-valid");
         },
 
         invalid() {
-            this.$refs.tomselect.nextElementSibling.classList.add("form-select");
-            this.$refs.tomselect.nextElementSibling.classList.remove("is-valid");
+            this.$refs.tomselect.nextElementSibling.classList.add(
+                "form-select"
+            );
+            this.$refs.tomselect.nextElementSibling.classList.remove(
+                "is-valid"
+            );
             this.$refs.tomselect.nextElementSibling.classList.add("is-invalid");
+        },
+
+        destroy() {
+            this.tomselect.destroy();
         },
 
         init() {
             const el = this;
 
-            const tomselect = new TomSelect(el.$refs.tomselect, {
+            this.tomselect = new TomSelect(el.$refs.tomselect, {
                 ...data.config,
 
                 ...(data.endpoint !== null && {
@@ -103,7 +120,11 @@ export default function tomSelect(data) {
                 }),
                 render: {
                     ...(data.config.render.option && {
-                        option: new Function('data', 'escape', data.config.render.option)
+                        option: new Function(
+                            "data",
+                            "escape",
+                            data.config.render.option
+                        ),
                     }),
                     ...(data.lang === "pl" && {
                         no_results: function () {
@@ -120,15 +141,15 @@ export default function tomSelect(data) {
                 },
             });
 
-            tomselect.setValue(
-                typeof el.value === 'string' ?
-                    el.value.split(',').map(item => item.trim())
+            this.tomselect.setValue(
+                typeof el.value === "string"
+                    ? el.value.split(",").map((item) => item.trim())
                     : el.value
             );
 
             el.highlight(el.value);
 
-            tomselect.on("change", (newValue) => {
+            this.tomselect.on("change", (newValue) => {
                 el.value = newValue;
 
                 el.highlight(newValue);

@@ -1,21 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\User;
 
 use Laravel\Sanctum\HasApiTokens;
 use App\Scopes\User\HasUserScopes;
+use Spatie\Permission\Traits\HasRoles;
 use Database\Factories\User\UserFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\Access\Authorizable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, Authorizable
 {
+    use HasRoles;
     use HasUserScopes;
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
+
+    /**
+     * @var string
+     */
+    protected $guard_name = 'web';
 
     /**
      * The attributes that are mass assignable.
@@ -36,6 +46,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
+        'email'
     ];
 
     /**
@@ -44,6 +55,10 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<string, string>
      */
     protected $casts = [
+        'id' => 'integer',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];

@@ -30,6 +30,6 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes(
             [base_path('vendor/livewire/livewire/dist/livewire.esm.js') => base_path('resources/js/livewire/livewire.js')],
             ['livewire', 'livewire:assets']
-        );
+        );        
     }
 }

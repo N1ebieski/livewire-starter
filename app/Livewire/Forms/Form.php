@@ -6,17 +6,32 @@ namespace App\Livewire\Forms;
 
 use Livewire\Component;
 use Livewire\Form as BaseForm;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\App;
+use Illuminate\Contracts\Container\Container;
 
 abstract class Form extends BaseForm
 {
     protected array $messages = [];
 
+    protected Container $container;
+
+    protected Rule $rule;
+
     public function __construct(
         protected Component $component,
         protected $propertyName
     ) {
-        $this->addValidationRulesToComponent();
-        //Fix. Livewire doesn't have possibility to set validation messages from method
+        $this->container = App::make(Container::class);
+        $this->rule = App::make(Rule::class);
+
+        /**
+         * Fix. Livewire doesn't have access to the component's mount properties,
+         * so we have to inject the rules manually in the component
+         */
+        //$this->addValidationRulesToComponent();
+
+        /** Fix. Livewire doesn't have possibility to set validation messages from method */
         $this->addValidationMessagesToComponent();
     }
 

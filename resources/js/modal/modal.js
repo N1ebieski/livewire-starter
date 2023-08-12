@@ -28,8 +28,6 @@ export default function modal(data) {
             }
 
             this.modal.hide();
-
-            this.$dispatch("delete-modal", { alias: data.alias });
         },
     };
 }
