@@ -38,7 +38,11 @@
             }
 
             .item {
-                color: var(--bs-body-color) !important;
+                color: var(--bs-body-bg) !important;
+            }
+
+            .remove {
+                color: var(--bs-body-bg) !important;
             }
         }
     }

@@ -30,7 +30,6 @@ final class EditForm extends Form
             'name' => [
                 'required',
                 'string',
-                'alpha_dash',
                 'max:255',
                 $this->rule->unique($this->component->user->getTable(), 'name')->ignore($this->component->user->id)
             ],

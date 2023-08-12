@@ -140,7 +140,10 @@
         </x-slot:thead>
         <x-slot:tbodies>
             @foreach($this->users as $index => $user)        
-            <x-data-table.row-component :value="$user?->id">      
+            <x-data-table.row-component 
+                :value="$user?->id"
+                wire:key="row-{{ $index }}"
+            >      
                 <livewire:admin.data-table.user.row-component
                     :user="$user"
                     :hidingColumns="$hidingColumns"

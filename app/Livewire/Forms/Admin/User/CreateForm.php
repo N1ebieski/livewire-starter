@@ -30,7 +30,6 @@ final class CreateForm extends Form
             'name' => [
                 'required',
                 'string',
-                'alpha_dash',
                 'max:255',
                 $this->rule->unique($this->component->user->getTable(), 'name')
             ],
