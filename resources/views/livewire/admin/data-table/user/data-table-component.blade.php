@@ -138,21 +138,16 @@
             </x-data-table.label-component>
             <th></th>
         </x-slot:thead>
-        <x-slot:tbodies>
+        <x-slot:tbody>
             @foreach($this->users as $index => $user)        
-            <x-data-table.row-component 
-                :value="$user?->id"
-                wire:key="row-{{ $index }}"
-            >      
-                <livewire:admin.data-table.user.row-component
-                    :user="$user"
-                    :hidingColumns="$hidingColumns"
-                    :columns="$form->columns"
-                    wire:key="user-row-{{ $index }}"
-                />
-            </x-data-table.row-component>
+            <livewire:admin.data-table.user.row-component
+                :user="$user"
+                :hidingColumns="$hidingColumns"
+                :columns="$form->columns"
+                wire:key="user-row-{{ $index }}"
+            />
             @endforeach
-        </x-slot:tbodies>
+        </x-slot:tbody>
     </x-slot:table>
     <x-slot:pagination>
         <x-data-table.pagination-component :collection="$this->users" />

@@ -33,7 +33,7 @@
                     :active="$isCurrentRoute('admin.home.index')"
                     href="{{ route('admin.home.index') }}"
                     title="Dashboard"
-                    wire:navigate="true"
+                    wire:navigate.hover="true"
                 >
                     <x-slot:icon>
                         <i class="bi bi-speedometer2"></i>
@@ -53,7 +53,7 @@
                         :active="$isCurrentRoute('admin.user.index')"
                         href="{{ route('admin.user.index') }}"
                         title="{{ trans('user.page.index.title') }}"
-                        wire:navigate="true"
+                        wire:navigate.hover="true"
                     />
                     {{-- @endcan --}}
                 </x-admin.sidebar.dropdown.dropdown-component>

@@ -1,4 +1,4 @@
-<tr>             
+<x-data-table.row-component :value="$user?->id">
     <x-data-table.column.select-component :value="$user?->id" />
     <x-data-table.column.column-component
         name="id"
@@ -53,4 +53,4 @@
             </x-slot:icon>        
         </x-data-table.actions.button-component>    
     </x-data-table.column.column-component>
-</tr>
+</x-data-table.row-component>

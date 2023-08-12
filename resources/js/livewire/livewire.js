@@ -6587,7 +6587,7 @@ var require_module_cjs6 = __commonJS({
             el.addEventListener("mouseenter", (e) => {
                 let timeout = setTimeout(() => {}, ms);
                 let handler = () => {
-                    clear;
+                    // clear;
                     el.removeEventListener("mouseleave", handler);
                 };
                 el.addEventListener("mouseleave", handler);

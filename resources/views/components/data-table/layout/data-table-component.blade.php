@@ -48,7 +48,9 @@
                 </tr>
             </thead>
 
-            {{ $tbodies }}
+            <tbody>
+                {{ $tbody }}
+            </tbody>
         </table>
     </div>
 

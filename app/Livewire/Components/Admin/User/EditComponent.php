@@ -14,7 +14,6 @@ use App\Livewire\Components\Component;
 use App\Commands\User\Edit\EditCommand;
 use App\Livewire\Forms\Admin\User\EditForm;
 use Illuminate\Contracts\Translation\Translator;
-use App\Livewire\Components\Admin\DataTable\User\RowComponent;
 
 final class EditComponent extends Component
 {
@@ -62,14 +61,14 @@ final class EditComponent extends Component
             )
         );
 
+        $this->dispatch("refresh.{$this->user->id}");
+
         $this->dispatch('hide-modal', alias: 'admin.user.edit-component');
 
         $this->dispatch(
             'create-toast',
             body: $translator->get('user.action.edit', ['name' => $this->user->name])
         );
-
-        $this->dispatch("refresh.{$this->user->id}");
 
         $this->dispatch('highlight', ids: [$this->user->id], action: 'confirm');
     }
