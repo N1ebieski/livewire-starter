@@ -21,13 +21,19 @@ return [
     'action' => [
         'delete' => [
             'single' => 'Pomyślnie usunięto użytkownika :name',
-            'multi' => '{1} Pomyślnie usunięto :number użytkownika|{2,4} Pomyślnie usunięto :number użytkowników|{4,*} Pomyślnie usunięto :number użytkowników'
+            'multi' => '{1} Pomyślnie usunięto :number użytkownika|{2,*} Pomyślnie usunięto :number użytkowników'
         ],
         'create' => 'Pomyślnie dodano użytkownika :name',
         'edit' => 'Pomyślnie edytowano użytkownika :name',
         'toggle_status_email' => [
             StatusEmail::VERIFIED->value => 'Pomyślnie zweryfikowano adres email :email użytkownika :name'
         ],
+    ],
+    'confirm' => [
+        'delete' => [
+            'single' => 'Czy na pewno chcesz usunąć użytkownika :name?',
+            'multi' => '{1} Czy na pewno chcesz usunąć :number użytkownika?|{2,*} Czy na pewno chcesz usunąć :number użytkowników?'
+        ]
     ],
     'email_verified_at' => 'Data weryfikacji adresu email',
     'email' => [

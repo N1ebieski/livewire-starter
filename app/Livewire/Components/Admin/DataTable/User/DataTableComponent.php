@@ -152,7 +152,8 @@ final class DataTableComponent extends BaseDataTableComponent
         return $this->isDirty([
             'form.orderby',
             'form.search',
-            'form.status_email'
+            'form.status_email',
+            'form.role'
         ]);
     }
 
@@ -177,6 +178,16 @@ final class DataTableComponent extends BaseDataTableComponent
                 static: true,
                 scrollable: true
             ),
+            user: $user->id
+        )->to(ModalComponent::class);
+    }
+
+    public function delete(User $user): void
+    {
+        $this->dispatch(
+            'create-modal',
+            alias: 'admin.user.delete-component',
+            modal: new BootstrapModal(),
             user: $user->id
         )->to(ModalComponent::class);
     }
