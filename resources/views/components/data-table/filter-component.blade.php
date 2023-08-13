@@ -20,7 +20,7 @@
             x-on:click="show = !show"
         >
             <i class="bi bi-funnel"></i>
-            <span>Filtry</span>
+            <span>{{ trans_choice('filter.filters', 2) }}</span>
             <span x-show="!show" x-cloak>
                 <i class="bi bi-caret-down-fill"></i>
             </span>
