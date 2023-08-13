@@ -52,10 +52,7 @@ abstract class DataTableForm extends Form
                 'bail',
                 'string',
                 'nullable',
-                $this->rule->in([
-                    ...array_keys($this->component->availableColumns),
-                    ...['__rm__'] //Temporary fix. Livewire add __rm__ to the array if removing element
-                ])
+                $this->rule->in(array_keys($this->component->availableColumns))
             ],
             'paginate' => [
                 'bail',

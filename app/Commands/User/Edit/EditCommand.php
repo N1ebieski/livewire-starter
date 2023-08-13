@@ -6,6 +6,7 @@ namespace App\Commands\User\Edit;
 
 use App\Commands\Command;
 use App\Models\User\User;
+use Illuminate\Database\Eloquent\Collection;
 
 final class EditCommand extends Command
 {
@@ -14,7 +15,7 @@ final class EditCommand extends Command
         public readonly string $name,
         public readonly string $email,
         public readonly string $password,
-        public readonly array $roles
+        public readonly Collection $roles
     ) {
     }
 }

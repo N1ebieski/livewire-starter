@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Scopes\User;
 
+use App\Models\Role\Role;
 use App\Models\User\User;
 use App\Scopes\HasFilterableScopes;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -24,5 +25,20 @@ trait HasUserScopes
                 return $builder->whereNull('email_verified_at');
             });
         });
+    }
+
+    public function scopeFilterRole(Builder $builder, ?Role $role = null): Builder
+    {
+        return $builder->when(!is_null($role), function (Builder $builder) use ($role) {
+            return $builder->whereHas('roles', function (Builder $builder) use ($role) {
+                //@phpstan-ignore-next-line
+                return $builder->where('id', $role->id);
+            });
+        });
+    }
+
+    public function scopeWithAllRelations(Builder $builder): Builder
+    {
+        return $builder->with('roles');
     }
 }

@@ -22,6 +22,7 @@ class PaginateByFilterHandler extends Handler
             })
             ->filterStatusEmail($query->filters->status_email)
             ->filterExcept($query->filters->except)
+            ->filterRole($query->filters->role)
             ->when(is_null($query->orderby), function (Builder|User $builder) use ($query) {
                 return $builder->filterOrderBySearch($query->filters->search);
             }, function (Builder|User $builder) use ($query) {
@@ -29,6 +30,7 @@ class PaginateByFilterHandler extends Handler
             })
             ->orderBy("{$query->user->getTable()}.created_at", 'desc')
             ->orderBy("{$query->user->getTable()}.id", 'desc')
+            ->withAllRelations()
             ->filterPaginate($query->paginate);
 
         return $users;

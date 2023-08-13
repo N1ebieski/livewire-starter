@@ -47,6 +47,27 @@ abstract class Component extends BaseComponent
     }
 
     /**
+     * Temporary fix. Livewire add __rm__ to the array if removing element
+     *
+     * @param array $attributes
+     * @return array
+     */
+    protected function prepareForValidation($attributes): array
+    {
+        if (property_exists($this, 'form')) {
+            foreach (get_object_vars($attributes['form']) as $key => $value) {
+                if (is_array($value)) {
+                    $attributes['form']->{$key} = array_filter($value, function (mixed $value) {
+                        return $value !== "__rm__";
+                    });
+                }
+            }
+        }
+
+        return $attributes;
+    }
+
+    /**
      *
      * @param mixed $name
      * @param mixed $value

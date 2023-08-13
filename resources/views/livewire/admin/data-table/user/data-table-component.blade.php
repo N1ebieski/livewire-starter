@@ -35,6 +35,24 @@
                 @endforeach
             </x-forms.select-component>
         </div>
+        <div class="flex-fill">
+            <x-forms.select-component
+                wire:model.live="form.role"
+                :highlight="!is_null($form->role)"
+                :labelFloating="true"
+            >
+                <x-slot:label>
+                    {{ trans('filter.filter') }} "{{ trans('user.roles.label') }}":
+                </x-slot:label>
+
+                <option value="">{{ trans('filter.default') }}</option>
+                @foreach($this->roles as $role)
+                <option value="{{ $role->id }}">
+                    {{ $role->name }}
+                </option>
+                @endforeach
+            </x-forms.select-component>
+        </div>        
         <div>
             <x-data-table.columns-component 
                 :availableColumns="$availableColumns" 
@@ -105,7 +123,17 @@
                 style="min-width:200px"
             >
                 {{ trans('user.email.label') }}
-            </x-data-table.label-component> 
+            </x-data-table.label-component>
+            <x-data-table.label.label-component 
+                name="roles"
+                :value="$form->orderby"
+                :columns="$form->columns"
+                :hidingColumns="$hidingColumns"                        
+                :sorts="$sorts"
+                style="min-width:100px"
+            >
+                {{ trans('user.roles.label') }}
+            </x-data-table.label-component>
             <x-data-table.label.label-component 
                 name="email_verified_at"
                 :value="$form->orderby"
@@ -139,13 +167,70 @@
             <th></th>
         </x-slot:thead>
         <x-slot:tbody>
-            @foreach($this->users as $index => $user)        
-            <livewire:admin.data-table.user.row-component
-                :user="$user"
-                :hidingColumns="$hidingColumns"
-                :columns="$form->columns"
-                wire:key="user-row-{{ $index }}"
-            />
+            @foreach($this->users as $user)       
+            <x-data-table.row-component :value="$user->id">
+                <x-data-table.column.select-component :value="$user->id" />
+                <x-data-table.column.column-component
+                    name="id"
+                    :columns="$form->columns"
+                    :hidingColumns="$hidingColumns"
+                >
+                    {{ $user->id }}
+                </x-data-table.column.column-component>
+                <x-data-table.column.column-component
+                    name="name"
+                    :columns="$form->columns"
+                    :hidingColumns="$hidingColumns"
+                >
+                    {{ $user->name }}
+                </x-data-table.column.column-component>
+                <x-data-table.column.column-component
+                    name="email"
+                    :columns="$form->columns"
+                    :hidingColumns="$hidingColumns"
+                >
+                    {{ $user->email }}
+                </x-data-table.column.column-component>
+                <x-data-table.column.column-component
+                    name="roles"
+                    :columns="$form->columns"
+                    :hidingColumns="$hidingColumns"
+                >
+                    {{ $user->roles->pluck('name')->implode(', ') }}
+                </x-data-table.column.column-component>    
+                <x-data-table.column.column-component
+                    name="email_verified_at"
+                    :columns="$form->columns"
+                    :hidingColumns="$hidingColumns"
+                >      
+                    {{ $user->email_verified_at }}           
+                </x-data-table.column.column-component>
+                <x-data-table.column.column-component
+                    name="created_at"
+                    :columns="$form->columns"
+                    :hidingColumns="$hidingColumns"
+                > 
+                    {{ $user->created_at }}
+                </x-data-table.column.column-component>
+                <x-data-table.column.column-component
+                    name="updated_at"
+                    :columns="$form->columns"
+                    :hidingColumns="$hidingColumns"
+                >
+                    {{ $user->updated_at }}
+                </x-data-table.column.column-component>
+                <x-data-table.column.column-component class="text-nowrap">
+                    <x-data-table.actions.button-component
+                        :action="\App\View\Components\Action::PRIMARY"
+                        :label="trans('default.edit')"
+                        wire:click.stop="edit('{{ $user->id }}')"
+                    >        
+                        <x-slot:icon>
+                            <i class="bi bi-pencil-square"></i>
+                        </x-slot:icon>        
+                    </x-data-table.actions.button-component>    
+                </x-data-table.column.column-component>
+            </x-data-table.row-component>
             @endforeach
         </x-slot:tbody>
     </x-slot:table>

@@ -34,13 +34,13 @@
                     wire:model="form.roles"
                     :label="trans('user.roles.label')"
                     :tomselect="new \App\View\Components\Forms\Tomselect\Tomselect(
-                        options: array_map(function ($enum) {
+                        options: $this->roles->map(function ($role) {
                             return [
-                                'value' => $enum->value,
-                                'text' => $enum->value
+                                'value' => $role->id,
+                                'text' => $role->name
                             ];
-                        }, \App\ValueObjects\Role\Name::cases()),
-                        maxItems: count(\App\ValueObjects\Role\Name::cases()),
+                        })->toArray(),
+                        maxItems: $this->roles->count(),
                         allowEmptyOption: false
                     )"
                     multiple="true"

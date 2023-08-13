@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Commands\User\Edit;
 
 use App\Commands\Handler;
+use App\Models\Role\Role;
 use App\Models\User\User;
 use App\Commands\CommandBus;
 use App\ValueObjects\Role\Name;
@@ -34,9 +35,9 @@ class EditHandler extends Handler
 
             $user->save();
 
-            $user->assignRole([
+            $user->syncRoles([
                 Name::USER->value,
-                ...array_map(fn (Name $role) => $role->value, $command->roles)
+                ...$command->roles->map(fn (Role $role) => $role->name)->toArray()
             ]);
         } catch (\Exception $e) {
             $this->db->rollBack();

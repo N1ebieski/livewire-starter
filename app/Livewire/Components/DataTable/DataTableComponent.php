@@ -162,6 +162,10 @@ abstract class DataTableComponent extends Component
 
     public function validateWithReset(): void
     {
+        $this->prepareForValidation(
+            $this->getDataForValidation($this->form->rules())
+        );
+
         $this->validationFactory->make($this->form->all(), $this->form->rules())
             ->after(function (Validator $validator) {
                 if ($validator->errors()->isNotEmpty()) {
@@ -173,7 +177,7 @@ abstract class DataTableComponent extends Component
 
     public function clear(): void
     {
-        $this->form->resetExcept(['columns', 'paginate']);
+        $this->form->reset();
 
         $this->dirty();
     }

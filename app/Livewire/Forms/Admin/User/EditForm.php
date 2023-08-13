@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Livewire\Forms\Admin\User;
 
+use App\Models\Role\Role;
 use App\Models\User\User;
 use App\Livewire\Forms\Form;
-use App\ValueObjects\Role\Name;
 use App\Livewire\Components\Admin\User\EditComponent;
 
 /**
@@ -26,19 +26,25 @@ final class EditForm extends Form
 
     public function rules(): array
     {
+        /** @var Role */
+        $role = $this->container->make(Role::class);
+
+        /** @var User */
+        $user = $this->container->make(User::class);
+
         return [
             'name' => [
                 'required',
                 'string',
                 'max:255',
-                $this->rule->unique($this->component->user->getTable(), 'name')->ignore($this->component->user->id)
+                $this->rule->unique($user->getTable(), 'name')->ignore($this->component->user->id)
             ],
             'email' => [
                 'required',
                 'string',
                 'email',
                 'max:255',
-                $this->rule->unique($this->component->user->getTable(), 'email')->ignore($this->component->user->id)
+                $this->rule->unique($user->getTable(), 'email')->ignore($this->component->user->id)
             ],
             'password' => [
                 'nullable',
@@ -49,7 +55,7 @@ final class EditForm extends Form
             'roles' => [
                 'required',
                 'array',
-                $this->rule->in(array_map(fn ($enum) => $enum->value, Name::cases()))
+                $this->rule->exists($role->getTable(), 'id')
             ]
         ];
     }
