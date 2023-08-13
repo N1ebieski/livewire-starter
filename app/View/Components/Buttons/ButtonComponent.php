@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\View\Components\Buttons;
 
-use App\View\Components\Action;
 use App\View\Components\Component;
 use App\View\Components\HasTargets;
 use Illuminate\Contracts\View\View;
+use App\View\Components\Buttons\Action;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
 class ButtonComponent extends Component

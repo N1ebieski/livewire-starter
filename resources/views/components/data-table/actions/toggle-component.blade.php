@@ -2,7 +2,7 @@
     <div 
         class="form-check form-switch" 
         wire:loading.remove
-        wire:target="{{ $targetsAsString }}"
+        wire:target="{{ $getTargetsAsString }}"
     >
         <input 
             class="form-check-input" 
@@ -16,7 +16,7 @@
     </div>
     <span 
         wire:loading 
-        wire:target="{{ $targetsAsString }}"
+        wire:target="{{ $getTargetsAsString }}"
     >
         <span 
             class="spinner-border text-primary" 

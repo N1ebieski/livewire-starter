@@ -1,8 +1,8 @@
 <div class="btn-group"> 
     <button
         type="button" 
-        class="btn btn-{{ $action->value }}"
         wire:loading.attr="disabled"
+        wire:target="{{ $getTargetsAsString }}"
         {{ $attributes->class([
             'btn', "btn-{$action->value}"
         ])->filter(fn ($value) => is_string($value)) }}
@@ -10,14 +10,14 @@
         @if($icon)
         <span 
             wire:loading.remove 
-            wire:target="{{ $targetsAsString }}"
+            wire:target="{{ $getTargetsAsString }}"
         >
             {{ $icon }}
         </span>
         <span 
             class="d-none"
             wire:loading 
-            wire:target="{{ $targetsAsString }}"
+            wire:target="{{ $getTargetsAsString }}"
             wire:loading.class.remove="d-none" 
         >
             <span 
@@ -28,7 +28,9 @@
             <span class="visually-hidden">{{ trans('default.loading') }}...</span>
         </span>
         @endif
-        <span class="d-none d-md-inline">{{ $label }}</span>        
+        <span class="{{ $responsive ? 'd-none d-md-inline' : '' }}">
+            {{ $label }}
+        </span>        
     </button>
     @if(isset($options))
     <button 

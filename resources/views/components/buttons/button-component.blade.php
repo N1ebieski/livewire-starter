@@ -1,22 +1,28 @@
 <div class="btn-group"> 
     <button
         type="button" 
+        @if($attributes->has('wire:click'))
         wire:loading.attr="disabled"
+        wire:target="{{ $getTargetsAsString }}"
+        @endif
         {{ $attributes->class([
             'btn', "btn-{$action->value}"
         ])->filter(fn ($value) => is_string($value)) }}
     >
         @if($icon)
         <span 
+            @if($attributes->has('wire:click'))
             wire:loading.remove 
-            wire:target="{{ $targetsAsString }}"
+            wire:target="{{ $getTargetsAsString }}"
+            @endif
         >
             {{ $icon }}
         </span>
+        @if($attributes->has('wire:click'))
         <span 
             class="d-none"
             wire:loading 
-            wire:target="{{ $targetsAsString }}"
+            wire:target="{{ $getTargetsAsString }}"
             wire:loading.class.remove="d-none" 
         >
             <span 
@@ -27,6 +33,7 @@
             <span class="visually-hidden">{{ trans('default.loading') }}...</span>
         </span>
         @endif
+        @endif
         <span class="{{ $responsive ? 'd-none d-md-inline' : '' }}">
             {{ $label }}
         </span>        
@@ -35,9 +42,12 @@
     <button 
         type="button" 
         class="btn btn-{{ $action->value }} dropdown-toggle dropdown-toggle-split" 
-        wire:loading.attr="disabled"
         data-bs-toggle="dropdown" 
         aria-expanded="false"
+        @if($attributes->has('wire:click'))
+        wire:loading.attr="disabled"
+        wire:target="{{ $getTargetsAsString }}"
+        @endif
     >
         <span class="visually-hidden">{{ trans('default.toggle') }}</span>
     </button>

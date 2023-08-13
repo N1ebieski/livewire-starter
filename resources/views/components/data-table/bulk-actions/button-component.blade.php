@@ -3,9 +3,10 @@
     class="text-nowrap btn-group"
 > 
     <button
-        {{ $attributes->filter(fn ($value) => is_string($value)) }}     
+        {{ $attributes->class([
+            'btn', "btn-{$action->value}"
+        ])->filter(fn ($value) => is_string($value)) }}  
         type="button" 
-        class="btn btn-{{ $action->value }}"   
         x-bind:disabled="loading"
         x-show="show"
         x-cloak
@@ -24,7 +25,9 @@
             <span class="visually-hidden">{{ trans('default.loading') }}...</span>
         </span>
         @endif
-        <span class="d-none d-md-inline">{{ $label }}</span>        
+        <span class="{{ $responsive ? 'd-none d-md-inline' : '' }}">
+            {{ $label }}
+        </span>        
     </button> 
     @if(isset($options))
     <button 

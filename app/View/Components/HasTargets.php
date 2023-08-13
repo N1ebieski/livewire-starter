@@ -21,7 +21,7 @@ trait HasTargets
         return parent::withAttributes($attributes);
     }
 
-    public function targetsAsString(): string
+    public function getTargetsAsString(): string
     {
         return implode(',', $this->targets);
     }

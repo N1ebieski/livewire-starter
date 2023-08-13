@@ -192,6 +192,16 @@ final class DataTableComponent extends BaseDataTableComponent
         )->to(ModalComponent::class);
     }
 
+    public function deleteMulti(array $ids): void
+    {
+        $this->dispatch(
+            'create-modal',
+            alias: 'admin.user.delete-multi-component',
+            modal: new BootstrapModal(),
+            ids: $ids
+        )->to(ModalComponent::class);
+    }
+
     #[On('refresh-row')]
     public function refreshRow(User $user): void
     {

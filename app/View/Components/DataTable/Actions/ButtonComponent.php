@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\View\Components\DataTable\Actions;
 
-use App\View\Components\Action;
 use App\View\Components\Component;
 use App\View\Components\HasTargets;
 use Illuminate\Contracts\View\View;
+use App\View\Components\Buttons\Action;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
 class ButtonComponent extends Component
@@ -21,6 +21,7 @@ class ButtonComponent extends Component
         protected ViewFactory $viewFactory,
         public readonly string $label,
         public readonly Action $action = Action::PRIMARY,
+        public readonly bool $responsive = true,
         public array $targets = []
     ) {
     }

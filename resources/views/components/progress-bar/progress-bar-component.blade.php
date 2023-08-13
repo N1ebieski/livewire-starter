@@ -1,7 +1,7 @@
 <div 
     {{ $attributes->class(['progress-stacked'])->filter(fn ($value) => is_string($value)) }}    
     style="height: 20px"
-    >
+>
     @foreach($segments as $segment)
     <div 
         class="progress" 

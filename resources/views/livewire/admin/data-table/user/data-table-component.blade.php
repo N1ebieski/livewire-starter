@@ -69,20 +69,18 @@
     <x-slot:action>
         <x-slot:selected>
             <x-data-table.selected-component :collection="$this->users" />
+            <x-data-table.bulk-actions.button-component
+                :action="\App\View\Components\Buttons\Action::DANGER"
+                :label="trans('default.delete')"
+                x-on:click="bulkAction('deleteMulti')"              
+            >        
+                <x-slot:icon>
+                    <i class="bi bi-trash3"></i>
+                </x-slot:icon>
+            </x-data-table.actions.button-component>                    
         </x-slot:selected>
-        @if($isDirty)
         <x-data-table.actions.button-component
-            :action="\App\View\Components\Action::SECONDARY"
-            :label="trans('default.clear')"
-            wire:click="clear"
-        >
-            <x-slot:icon>
-                <i class="bi bi-x-square"></i>
-            </x-slot:icon>
-        </x-data-table.actions.button-component>
-        @endif
-        <x-data-table.actions.button-component
-            :action="\App\View\Components\Action::PRIMARY"
+            :action="\App\View\Components\Buttons\Action::PRIMARY"
             :label="trans('default.create')"
             wire:click="create"
         >        
@@ -222,7 +220,7 @@
                 </x-data-table.column.column-component>
                 <x-data-table.column.column-component class="text-nowrap">
                     <x-data-table.actions.button-component
-                        :action="\App\View\Components\Action::PRIMARY"
+                        :action="\App\View\Components\Buttons\Action::PRIMARY"
                         :label="trans('default.edit')"
                         wire:click.stop="edit('{{ $user->id }}')"
                     >        
@@ -233,7 +231,7 @@
                 </x-data-table.column.column-component>
                 <x-data-table.column.column-component class="text-nowrap">
                     <x-data-table.actions.button-component
-                        :action="\App\View\Components\Action::DANGER"
+                        :action="\App\View\Components\Buttons\Action::DANGER"
                         :label="trans('default.delete')"
                         wire:click.stop="delete('{{ $user->id }}')"
                     >        

@@ -13,21 +13,40 @@
         display = true;
     "
 >
-    <div class="d-flex justify-content-end mb-2">
-        <button
-            type="button" 
-            class="btn btn-outline-dark btn-sm {{ $isDirty ? 'highlight' : '' }}"
+    <div class="d-flex justify-content-end mb-2 gap-2">
+        @if($isDirty)
+        <x-buttons.button-component
+            :action="\App\View\Components\Buttons\Action::OUTLINE_DARK"
+            :label="trans('default.clear')"
+            :responsive="false"
+            class="btn-sm highlight"
+            wire:click="clear"
+        >
+            <x-slot:icon>
+                <i class="bi bi-x-square"></i>
+            </x-slot:icon>
+        </x-buttons.button-component>
+        @endif
+        <x-buttons.button-component
+            :action="\App\View\Components\Buttons\Action::OUTLINE_DARK"
+            :label="trans_choice('filter.filters', 2)"
+            :responsive="false"
+            class="btn-sm"
             x-on:click="show = !show"
         >
-            <i class="bi bi-funnel"></i>
-            <span>{{ trans_choice('filter.filters', 2) }}</span>
-            <span x-show="!show" x-cloak>
-                <i class="bi bi-caret-down-fill"></i>
-            </span>
-            <span x-show="show" x-cloak>
-                <i class="bi bi-caret-up-fill"></i>
-            </span>
-        </button>
+            <x-slot:icon>
+                <i class="bi bi-funnel"></i>
+            </x-slot:icon>
+            <x-slot:label>
+                <span>{{ trans_choice('filter.filters', 2) }}</span>
+                <span x-show="!show" x-cloak>
+                    <i class="bi bi-chevron-down"></i>
+                </span>
+                <span x-show="show" x-cloak>
+                    <i class="bi bi-chevron-up"></i>
+                </span>                
+            </x-slot:label>
+        </x-buttons.button-component>
     </div>
     <div 
         class="d-none d-lg-block"

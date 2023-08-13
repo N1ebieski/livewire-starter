@@ -51,7 +51,7 @@
 
     <x-slot:footer>
         <x-buttons.button-component
-            :action="\App\View\Components\Action::SECONDARY"
+            :action="\App\View\Components\Buttons\Action::SECONDARY"
             :label="trans('default.cancel')"
             :responsive="false"
             data-bs-dismiss="modal"
@@ -62,7 +62,7 @@
             </x-slot:icon>
         </x-buttons.button-component>
         <x-buttons.button-component
-            :action="\App\View\Components\Action::PRIMARY"
+            :action="\App\View\Components\Buttons\Action::PRIMARY"
             :label="trans('default.submit')"
             :responsive="false"
             wire:click="submit"
