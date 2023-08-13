@@ -22,18 +22,20 @@ export default function dataTable() {
         selectAll: false,
 
         init() {
-            if (window.innerWidth >= 1200) {
-                return;
-            }
-
             let size;
 
             if (window.innerWidth < 768) {
+                this.showFilters = false;
                 size = "sm";
             } else if (window.innerWidth < 992) {
+                this.showFilters = false;
                 size = "md";
             } else if (window.innerWidth < 1200) {
                 size = "lg";
+            }
+
+            if (window.innerWidth >= 1200) {
+                return;
             }
 
             this.$wire.hideColumns(size);

@@ -1,7 +1,6 @@
 <div class="btn-group"> 
     <button
         type="button" 
-        class="btn btn-{{ $action->value }}"
         wire:loading.attr="disabled"
         {{ $attributes->class([
             'btn', "btn-{$action->value}"

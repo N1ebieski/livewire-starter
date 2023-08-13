@@ -1,4 +1,4 @@
-<x-data-table.layout.data-table-component>
+<x-data-table.layout.data-table-component :isDirty="$isDirty">
     <x-slot:filter>
         <div
             class="flex-fill"

@@ -1,0 +1,5 @@
+@include color-mode(dark) {
+    .btn-outline-dark {
+        @extend .btn-outline-light;
+    }
+}
