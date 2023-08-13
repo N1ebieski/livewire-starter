@@ -10,7 +10,7 @@
                 :labelFloating="true"
             >
                 <x-slot:label>
-                    {{ trans('filter.filter') }} "{{ trans('filter.search') }}":
+                    {{ trans_choice('filter.filters', 1) }} "{{ trans('filter.search') }}":
                 </x-slot:label> 
             </x-forms.search-component>
         </div>
@@ -24,7 +24,7 @@
                 :labelFloating="true"
             >
                 <x-slot:label>
-                    {{ trans('filter.filter') }} "{{ trans('user.status_email.label') }}":
+                    {{ trans_choice('filter.filters', 1) }} "{{ trans('user.status_email.label') }}":
                 </x-slot:label>
 
                 <option value="">{{ trans('filter.default') }}</option>
@@ -42,7 +42,7 @@
                 :labelFloating="true"
             >
                 <x-slot:label>
-                    {{ trans('filter.filter') }} "{{ trans('user.roles.label') }}":
+                    {{ trans_choice('filter.filters', 1) }} "{{ trans('user.roles.label') }}":
                 </x-slot:label>
 
                 <option value="">{{ trans('filter.default') }}</option>
@@ -165,6 +165,7 @@
                 {{ trans('default.updated_at') }}
             </x-data-table.label-component>
             <th></th>
+            <th></th>
         </x-slot:thead>
         <x-slot:tbody>
             @foreach($this->users as $user)       
@@ -230,6 +231,17 @@
                         </x-slot:icon>        
                     </x-data-table.actions.button-component>    
                 </x-data-table.column.column-component>
+                <x-data-table.column.column-component class="text-nowrap">
+                    <x-data-table.actions.button-component
+                        :action="\App\View\Components\Action::DANGER"
+                        :label="trans('default.delete')"
+                        wire:click.stop="delete('{{ $user->id }}')"
+                    >        
+                        <x-slot:icon>
+                            <i class="bi bi-trash3"></i>
+                        </x-slot:icon>        
+                    </x-data-table.actions.button-component>    
+                </x-data-table.column.column-component>                
             </x-data-table.row-component>
             @endforeach
         </x-slot:tbody>
