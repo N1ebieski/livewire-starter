@@ -7,6 +7,7 @@ namespace App\Livewire\Components\Admin\User;
 use App\Models\Role\Role;
 use App\Models\User\User;
 use App\Commands\CommandBus;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Validator;
@@ -19,8 +20,8 @@ use App\Livewire\Components\Admin\DataTable\User\DataTableComponent;
 
 final class EditComponent extends Component
 {
-    //phpcs:ignore
-    private User $_user;
+    #[Locked]
+    public User $user;
 
     private Role $role;
 
@@ -28,7 +29,7 @@ final class EditComponent extends Component
 
     public function mount(User $user): void
     {
-        $this->_user = $user;
+        $this->user = $user;
 
         $this->form->name = $user->name;
         $this->form->email = $user->email;
@@ -49,18 +50,12 @@ final class EditComponent extends Component
     }
 
     #[Computed(persist: true)]
-    public function user(): User
-    {
-        return $this->_user;
-    }
-
-    #[Computed(persist: true)]
     public function roles(): Collection
     {
         return $this->role->all();
     }
 
-    private function getRolesAsCollection(): Collection
+    private function getFormRolesAsCollection(): Collection
     {
         return $this->role->findMany($this->form->roles);
     }
@@ -80,7 +75,7 @@ final class EditComponent extends Component
                 name: $this->form->name,
                 email: $this->form->email,
                 password: $this->form->password ?? $this->user->password,
-                roles: $this->getRolesAsCollection()
+                roles: $this->getFormRolesAsCollection()
             )
         );
 
@@ -93,7 +88,7 @@ final class EditComponent extends Component
             body: $translator->get('user.action.edit', ['name' => $user->name])
         );
 
-        $this->dispatch('highlight', ids: [$user->id], action: 'confirm');
+        $this->dispatch('highlight', ids: [$user->id], action: 'primary');
     }
 
     public function render(): View

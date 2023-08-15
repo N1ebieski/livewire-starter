@@ -6,7 +6,7 @@ namespace App\Livewire\Forms\Admin\DataTable\User;
 
 use App\Models\Role\Role;
 use Livewire\Attributes\Url;
-use App\Filters\User\StatusEmail;
+use App\ValueObjects\User\StatusEmail;
 use App\Livewire\Forms\DataTable\DataTableForm as BaseDataTableForm;
 
 final class DataTableForm extends BaseDataTableForm

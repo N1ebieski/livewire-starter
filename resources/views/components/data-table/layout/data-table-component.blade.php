@@ -37,7 +37,6 @@
 
     <div class="table-responsive">
         <table 
-            x-on:highlight.window="highlight(event.detail)"
             {{ $table->attributes->class([
                 'table', 'table-striped', 'table-hover', 'align-middle'
             ])->filter(fn ($value) => is_string($value)) }}             

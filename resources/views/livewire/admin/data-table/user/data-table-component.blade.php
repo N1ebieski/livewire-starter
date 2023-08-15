@@ -28,7 +28,7 @@
                 </x-slot:label>
 
                 <option value="">{{ trans('filter.default') }}</option>
-                @foreach(\App\Filters\User\StatusEmail::cases() as $enum)
+                @foreach(\App\ValueObjects\User\StatusEmail::cases() as $enum)
                 <option value="{{ $enum->value }}">
                     {{ trans('user.status_email.' . $enum->value) }}
                 </option>
@@ -164,10 +164,14 @@
             </x-data-table.label-component>
             <th></th>
             <th></th>
+            <th></th>
         </x-slot:thead>
         <x-slot:tbody>
             @foreach($this->users as $user)       
-            <x-data-table.row-component :value="$user->id">
+            <x-data-table.row-component 
+                :value="$user->id"
+                wire:key="user-row-{{ $user->id }}"
+            >
                 <x-data-table.column.select-component :value="$user->id" />
                 <x-data-table.column.column-component
                     name="id"
@@ -218,6 +222,12 @@
                 >
                     {{ $user->updated_at }}
                 </x-data-table.column.column-component>
+                <x-data-table.column.column-component>
+                    <x-data-table.actions.toggle-component
+                        wire:click.stop="toggleStatusEmail('{{ $user->id }}')"
+                        :checked="!is_null($user->email_verified_at)"
+                    />
+                </x-data-table.column.column-component>                
                 <x-data-table.column.column-component class="text-nowrap">
                     <x-data-table.actions.button-component
                         :action="\App\View\Components\Buttons\Action::PRIMARY"

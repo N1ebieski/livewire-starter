@@ -1,21 +1,3 @@
-import { Enum } from "../utils/enum/enum";
-
-class Action extends Enum {
-    static SUCCESS = new Action("success");
-    static WARNING = new Action("warning");
-    static ALERT = new Action("alert");
-
-    getClass() {
-        const classes = {
-            active: ["table-success"],
-            inactive: ["table-warning"],
-            confirm: ["table-primary"],
-        };
-
-        return classes[this.value];
-    }
-}
-
 export default function dataTable() {
     return {
         selects: [],
@@ -25,10 +7,8 @@ export default function dataTable() {
             let size;
 
             if (window.innerWidth < 768) {
-                this.showFilters = false;
                 size = "sm";
             } else if (window.innerWidth < 992) {
-                this.showFilters = false;
                 size = "md";
             } else if (window.innerWidth < 1200) {
                 size = "lg";
@@ -49,7 +29,7 @@ export default function dataTable() {
             if (this.selectAll === true) {
                 const selects = document.querySelectorAll('[id^="select"]');
 
-                selects.forEach((el) => this.selects.push(el.value));
+                selects.forEach((el) => this.selects.push(parseInt(el.value)));
             }
         },
 
@@ -71,24 +51,6 @@ export default function dataTable() {
             this.selectAll = false;
 
             this.resetSelects();
-        },
-
-        highlight(event) {
-            event.ids.forEach(function (id) {
-                const row = document.querySelector(`#row-${id}`);
-
-                if (!row) {
-                    return;
-                }
-
-                const action = new Action(event.action);
-
-                row.classList.add(...action.getClass());
-
-                setTimeout(function () {
-                    row.classList.remove(...action.getClass());
-                }, 5000);
-            });
         },
     };
 }

@@ -74,9 +74,6 @@ abstract class DataTableComponent extends Component
     {
         parent::__construct();
 
-        //Fix for livewire navigate with lazy mode. @see https://github.com/livewire/livewire/discussions/5958
-        $this->paginators['page'] = $this->container->make(PageRequest::class)->query('page', 1);
-
         $this->trans = $this->container->make(Translator::class);
         $this->validationFactory = $this->container->make(ValidationFactory::class);
     }

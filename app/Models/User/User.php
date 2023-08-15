@@ -6,10 +6,12 @@ namespace App\Models\User;
 
 use Laravel\Sanctum\HasApiTokens;
 use App\Scopes\User\HasUserScopes;
+use App\ValueObjects\User\StatusEmail;
 use Spatie\Permission\Traits\HasRoles;
 use Database\Factories\User\UserFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Contracts\Auth\Access\Authorizable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -36,6 +38,7 @@ class User extends Authenticatable implements MustVerifyEmail, Authorizable
         'name',
         'email',
         'password',
+        'email_verified_at'
     ];
 
     /**
@@ -78,5 +81,13 @@ class User extends Authenticatable implements MustVerifyEmail, Authorizable
     protected static function newFactory(): UserFactory
     {
         return UserFactory::new();
+    }
+
+    // Attributes
+
+    public function statusEmail(): Attribute
+    {
+        return new Attribute(fn (): StatusEmail => !is_null($this->email_verified_at) ?
+            StatusEmail::VERIFIED : StatusEmail::UNVERIFIED);
     }
 }

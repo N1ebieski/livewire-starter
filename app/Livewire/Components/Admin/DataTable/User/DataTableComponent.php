@@ -11,18 +11,18 @@ use App\Models\Role\Role;
 use App\Models\User\User;
 use App\Queries\Paginate;
 use App\Queries\QueryBus;
-use Livewire\Attributes\On;
+use App\Commands\CommandBus;
 use App\Queries\SearchFactory;
 use App\Filters\User\UserFilter;
-use App\Filters\User\StatusEmail;
 use Livewire\Attributes\Computed;
-use Illuminate\Contracts\View\View;
+use App\ValueObjects\User\StatusEmail;
 use Illuminate\Database\Eloquent\Collection;
 use App\Livewire\Components\Modal\ModalComponent;
 use App\View\Components\Modal\Modal as BootstrapModal;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Livewire\Forms\Admin\DataTable\User\DataTableForm;
 use App\Queries\User\PaginateByFilter\PaginateByFilterQuery;
+use App\Commands\User\EditStatusEmail\EditStatusEmailCommand;
 use App\Livewire\Components\DataTable\DataTableComponent as BaseDataTableComponent;
 
 /**
@@ -157,6 +157,29 @@ final class DataTableComponent extends BaseDataTableComponent
         ]);
     }
 
+    public function toggleStatusEmail(
+        CommandBus $commandBus,
+        User $user
+    ): void {
+        // $this->gate->authorize('admin.user.edit');
+
+        /** @var StatusEmail */
+        $status = $user->status_email->toggle();
+
+        $commandBus->execute(
+            new EditStatusEmailCommand(
+                user: $user,
+                status: $status
+            )
+        );
+
+        $this->dispatch(
+            'highlight',
+            ids: [$user->id],
+            action: $status->getAction()
+        );
+    }
+
     public function create(): void
     {
         $this->dispatch(
@@ -202,13 +225,7 @@ final class DataTableComponent extends BaseDataTableComponent
         )->to(ModalComponent::class);
     }
 
-    #[On('refresh-row')]
-    public function refreshRow(User $user): void
-    {
-        $this->users->replace($this->users->search('id', $user->id), $user);
-    }
-
-    public function render(): View
+    public function render()
     {
         // $this->gate->authorize("admin.user.view");
 

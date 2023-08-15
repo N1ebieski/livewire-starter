@@ -9,14 +9,17 @@
             type="checkbox" 
             role="switch" 
             aria-label="{{ trans('default.toggle') }}"
-            {{ $attributes->class([
-                'btn', 'btn-'
-            ])->filter(fn ($value) => is_string($value)) }}          
+            {{ $attributes->filter(fn ($value) => is_string($value)) }}
+            @if($attributes->get('checked'))
+            checked
+            @endif
         >
     </div>
     <span 
+        class="d-none"
         wire:loading 
         wire:target="{{ $getTargetsAsString }}"
+        wire:loading.class.remove="d-none" 
     >
         <span 
             class="spinner-border text-primary" 
@@ -26,4 +29,3 @@
         <span class="visually-hidden">{{ trans('default.loading') }}...</span>
     </span>     
 </div>
-

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Filters\User\StatusEmail;
+use App\ValueObjects\User\StatusEmail;
 
 return [
     'page' => [

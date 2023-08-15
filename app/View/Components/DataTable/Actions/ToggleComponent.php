@@ -18,7 +18,7 @@ class ToggleComponent extends Component
      */
     public function __construct(
         protected ViewFactory $viewFactory,
-        public readonly array $targets = []
+        public array $targets = []
     ) {
     }
 

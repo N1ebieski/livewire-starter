@@ -6,7 +6,7 @@ namespace App\Livewire\Components\Admin\User;
 
 use App\Models\User\User;
 use App\Commands\CommandBus;
-use Livewire\Attributes\Computed;
+use Livewire\Attributes\Locked;
 use Illuminate\Contracts\View\View;
 use App\Livewire\Components\Component;
 use App\Commands\User\Delete\DeleteCommand;
@@ -15,18 +15,12 @@ use App\Livewire\Components\Admin\DataTable\User\DataTableComponent;
 
 class DeleteComponent extends Component
 {
-    //phpcs:ignore
-    private User $_user;
+    #[Locked]
+    public User $user;
 
     public function mount(User $user): void
     {
-        $this->_user = $user;
-    }
-
-    #[Computed(persist: true)]
-    public function user(): User
-    {
-        return $this->_user;
+        $this->user = $user;
     }
 
     public function submit(
