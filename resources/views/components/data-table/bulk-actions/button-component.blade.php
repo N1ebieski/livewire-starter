@@ -33,7 +33,7 @@
     <button 
         type="button" 
         class="btn btn-{{ $action->value }} dropdown-toggle dropdown-toggle-split" 
-        wire:loading.attr="disabled"
+        x-bind:disabled="loading"
         data-bs-toggle="dropdown" 
         aria-expanded="false"
     >

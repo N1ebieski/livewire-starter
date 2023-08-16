@@ -6,7 +6,6 @@ namespace App\Livewire\Components\DataTable;
 
 use Livewire\WithPagination;
 use Livewire\Attributes\Locked;
-use App\Http\Requests\PageRequest;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\Validator;
 use App\Livewire\Components\HasDirty;

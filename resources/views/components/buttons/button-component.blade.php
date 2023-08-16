@@ -1,9 +1,20 @@
-<div class="btn-group"> 
+<div 
+    class="btn-group"
+    x-data="{ loading: false }"
+    x-init="
+        loading=false;
+        Livewire.hook('commit', ({ respond }) => {
+            respond(() => {
+                loading = false;
+            })            
+        })
+    "       
+> 
     <button
         type="button" 
         @if($attributes->has('wire:click'))
-        wire:loading.attr="disabled"
-        wire:target="{{ $getTargetsAsString }}"
+        x-bind:disabled="loading"
+        x-on:click.stop="loading=true"
         @endif
         {{ $attributes->class([
             'btn', "btn-{$action->value}"
@@ -12,19 +23,13 @@
         @if($icon)
         <span 
             @if($attributes->has('wire:click'))
-            wire:loading.remove 
-            wire:target="{{ $getTargetsAsString }}"
+            x-show="!loading"
             @endif
         >
             {{ $icon }}
         </span>
         @if($attributes->has('wire:click'))
-        <span 
-            class="d-none"
-            wire:loading 
-            wire:target="{{ $getTargetsAsString }}"
-            wire:loading.class.remove="d-none" 
-        >
+        <span x-show="loading">
             <span 
                 class="spinner-border spinner-border-sm" 
                 role="status" 
@@ -45,8 +50,7 @@
         data-bs-toggle="dropdown" 
         aria-expanded="false"
         @if($attributes->has('wire:click'))
-        wire:loading.attr="disabled"
-        wire:target="{{ $getTargetsAsString }}"
+        x-bind:disabled="loading"
         @endif
     >
         <span class="visually-hidden">{{ trans('default.toggle') }}</span>

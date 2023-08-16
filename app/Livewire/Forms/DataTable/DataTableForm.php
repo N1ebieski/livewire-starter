@@ -52,7 +52,7 @@ abstract class DataTableForm extends Form
                 'bail',
                 'string',
                 'nullable',
-                $this->rule->in(array_keys($this->component->availableColumns))
+                $this->rule->in($this->component->showingColumns)
             ],
             'paginate' => [
                 'bail',

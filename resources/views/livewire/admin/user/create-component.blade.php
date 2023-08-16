@@ -55,7 +55,6 @@
             :label="trans('default.cancel')"
             :responsive="false"
             data-bs-dismiss="modal"
-            :targets="['cancel']"
         >
             <x-slot:icon>
                 <i class="bi bi-x-circle"></i>

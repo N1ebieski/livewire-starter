@@ -1,15 +1,6 @@
 import axios from "axios";
 import TomSelect from "tom-select";
 
-/**
- * Fix for wire:navigate. @see: https://github.com/livewire/livewire/discussions/5894
- */
-document.addEventListener("livewire:before-cache", () => {
-    const tomSelects = document.querySelectorAll('[x-ref="tomselect"]');
-
-    tomSelects.forEach((tomselect) => tomselect.tomselect.destroy());
-});
-
 export default function tomSelect(data) {
     if (!data.config.options.length) {
         delete data.config.options;

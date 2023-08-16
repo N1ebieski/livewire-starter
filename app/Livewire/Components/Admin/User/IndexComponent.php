@@ -17,10 +17,13 @@ final class IndexComponent extends FullPageComponent
 
     private IndexMetaFactory $indexMetaFactory;
 
-    public function mount(): void
+    public function mount(PageRequest $request): void
     {
-        //Fix for livewire navigate with lazy mode. @see https://github.com/livewire/livewire/discussions/5958
-        $this->setPage($this->container->make(PageRequest::class)->query('page', 1));
+        /**
+         * Fix for livewire navigate with lazy mode.
+         * @see https://github.com/livewire/livewire/discussions/5958
+         */
+        $this->setPage($request->query('page', 1));
     }
 
     public function boot(IndexMetaFactory $indexMetaFactory): void

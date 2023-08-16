@@ -126,7 +126,6 @@ final class DataTableComponent extends BaseDataTableComponent
     {
         return [
             'id' => 'ID',
-            'name' => $this->trans->get('user.name.label'),
             'email' => $this->trans->get('user.email.label'),
             'roles' => $this->trans->get('user.roles.label'),
             'email_verified_at' => $this->trans->get('user.email_verified_at'),
@@ -137,7 +136,7 @@ final class DataTableComponent extends BaseDataTableComponent
 
     protected function getShowingColumns(): array
     {
-        return array_keys($this->availableColumns);
+        return array_merge(['name'], array_keys($this->availableColumns));
     }
 
     protected function getHidingColumns(): array

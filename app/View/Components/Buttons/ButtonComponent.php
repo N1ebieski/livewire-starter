@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace App\View\Components\Buttons;
 
 use App\View\Components\Component;
-use App\View\Components\HasTargets;
 use Illuminate\Contracts\View\View;
 use App\View\Components\Buttons\Action;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
 class ButtonComponent extends Component
 {
-    use HasTargets;
-
     /**
      * Create a new component instance.
      */
@@ -21,8 +18,7 @@ class ButtonComponent extends Component
         protected ViewFactory $viewFactory,
         public readonly string $label,
         public readonly Action $action = Action::PRIMARY,
-        public readonly bool $responsive = true,
-        public array $targets = []
+        public readonly bool $responsive = true
     ) {
     }
 
