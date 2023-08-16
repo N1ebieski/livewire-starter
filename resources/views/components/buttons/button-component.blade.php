@@ -1,14 +1,7 @@
 <div 
     class="btn-group"
     x-data="{ loading: false }"
-    x-init="
-        loading=false;
-        Livewire.hook('commit', ({ respond }) => {
-            respond(() => {
-                loading = false;
-            })            
-        })
-    "       
+    x-on:livewire:commit:respond.window="loading=false"      
 > 
     <button
         type="button" 

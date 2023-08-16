@@ -8,6 +8,7 @@ import bulkAction from "./data-table/bulk-action";
 import dataTable from "./data-table/data-table";
 import row from "./data-table/row";
 import "./gototop/gototop";
+import "./livewire/hooks";
 import "./meta/meta";
 import modal from "./modal/modal";
 import multiTheme from "./multi-theme/multi-theme";
