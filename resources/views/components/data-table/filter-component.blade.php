@@ -53,6 +53,7 @@
         x-bind:class="{ 'd-none': !display, 'd-lg-block': !display }"
         x-show="show"
         x-collapse
+        x-on:focusin="show ? $el.style.overflow = null : ''"
     >
         {{ $slot }}
     </div>
