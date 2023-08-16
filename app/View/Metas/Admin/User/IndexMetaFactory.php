@@ -12,10 +12,10 @@ class IndexMetaFactory extends MetaFactory
     public function make(?int $page = null): MetaInterface
     {
         return $this->adminMetaFactory->make(
-            title: $this->trans->get('user.page.index.title'),
+            title: $this->trans->get('user.pages.index.title'),
             page: $page,
-            description: $this->trans->get('user.page.index.description'),
-            keywords: $this->trans->get('user.page.index.keywords'),
+            description: $this->trans->get('user.pages.index.description'),
+            keywords: $this->trans->get('user.pages.index.keywords'),
         );
     }
 }

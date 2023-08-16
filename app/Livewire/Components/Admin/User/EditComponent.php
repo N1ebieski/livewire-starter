@@ -85,7 +85,7 @@ final class EditComponent extends Component
 
         $this->dispatch(
             'create-toast',
-            body: $translator->get('user.action.edit', ['name' => $user->name])
+            body: $translator->get('user.actions.edit', ['name' => $user->name])
         );
 
         $this->dispatch('highlight', ids: [$user->id], action: 'primary');

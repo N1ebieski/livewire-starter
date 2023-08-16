@@ -1,6 +1,6 @@
 <x-modal.content-component>
     <x-slot:title>
-        {{ trans('user.page.edit.title', ['name' => $this->user->name]) }}
+        {{ trans('user.pages.edit.title', ['name' => $this->user->name]) }}
     </x-slot:title>
 
     <x-slot:body>

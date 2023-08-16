@@ -1,7 +1,7 @@
 <x-admin.layouts.app.slot-component>
     <x-slot:breadcrumb>
         <x-breadcrumb.item-component :active="true">
-            {{ trans('user.page.index.title') }}
+            {{ trans('user.pages.index.title') }}
         </x-breadcrumb.item-component>
     </x-slot:breadcrumb>
 

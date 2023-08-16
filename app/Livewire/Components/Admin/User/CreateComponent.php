@@ -84,7 +84,7 @@ final class CreateComponent extends Component
 
         $this->dispatch(
             'create-toast',
-            body: $translator->get('user.action.create', ['name' => $user->name])
+            body: $translator->get('user.actions.create', ['name' => $user->name])
         );
 
         $this->redirect($urlGenerator->route('admin.user.index', [

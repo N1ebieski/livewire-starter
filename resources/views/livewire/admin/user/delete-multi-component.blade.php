@@ -1,6 +1,6 @@
 <x-modal.content-component>
     <x-slot:title>
-        {{ trans_choice('user.confirm.delete.multi', count($this->users), [
+        {{ trans_choice('user.confirms.delete.multi', count($this->users), [
             'number' => count($this->users)
         ]) }}
     </x-slot:title>

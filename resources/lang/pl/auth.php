@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'page' => [
+    'pages' => [
         'login' => [
             'title' => 'Zaloguj się',
             'description' => 'Zaloguj się',
@@ -20,7 +20,7 @@ return [
             'title' => 'Potwierdź adres e-mail'
         ]
     ],
-    'action' => [
+    'actions' => [
         'verify' => 'Nowy link weryfikacyjny twojego konta został wysłany na twój adres e-mail.',
         'socialite' => [
             'no_email' => 'Nie mogliśmy zarejestrować Cię używając danych od :provider. Upewnij się, że zezwalasz na udostępnianie nam swojego adresu e-mail w ustawieniach swojego konta w :provider (zakładka Aplikacje) lub wykonaj pełną rejestrację w formularzu poniżej.',

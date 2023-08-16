@@ -17,6 +17,7 @@ use App\Filters\User\UserFilter;
 use Livewire\Attributes\Computed;
 use App\ValueObjects\User\StatusEmail;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Translation\Translator;
 use App\Livewire\Components\Modal\ModalComponent;
 use App\View\Components\Modal\Modal as BootstrapModal;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -158,6 +159,7 @@ final class DataTableComponent extends BaseDataTableComponent
 
     public function toggleStatusEmail(
         CommandBus $commandBus,
+        Translator $translator,
         User $user
     ): void {
         // $this->gate->authorize('admin.user.edit');
@@ -171,6 +173,16 @@ final class DataTableComponent extends BaseDataTableComponent
                 status: $status
             )
         );
+
+        if ($status->isEquals(StatusEmail::VERIFIED)) {
+            $this->dispatch(
+                'create-toast',
+                body: $translator->get('user.actions.toggle_status_email', [
+                    'email' => $user->email,
+                    'name' => $user->name
+                ])
+            );
+        }
 
         $this->dispatch(
             'highlight',

@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\ValueObjects\User\StatusEmail;
 
 return [
-    'page' => [
+    'pages' => [
         'index' => [
             'title' => 'Użytkownicy',
             'description' => 'Użytkownicy',
@@ -18,7 +18,7 @@ return [
             'title' => 'Edycja użytkownika: :name'
         ]
     ],
-    'action' => [
+    'actions' => [
         'delete' => [
             'single' => 'Pomyślnie usunięto użytkownika :name',
             'multi' => '{1} Pomyślnie usunięto :number użytkownika|{2,*} Pomyślnie usunięto :number użytkowników'
@@ -29,7 +29,7 @@ return [
             StatusEmail::VERIFIED->value => 'Pomyślnie zweryfikowano adres email :email użytkownika :name'
         ],
     ],
-    'confirm' => [
+    'confirms' => [
         'delete' => [
             'single' => 'Czy na pewno chcesz usunąć użytkownika :name?',
             'multi' => '{1} Czy na pewno chcesz usunąć :number użytkownika?|{2,*} Czy na pewno chcesz usunąć :number użytkowników?'

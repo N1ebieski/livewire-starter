@@ -1,6 +1,6 @@
 <x-modal.content-component>
     <x-slot:title>
-        {{ trans('user.confirm.delete.single', ['name' => $this->user->name]) }}
+        {{ trans('user.confirms.delete.single', ['name' => $this->user->name]) }}
     </x-slot:title>
 
     <x-slot:footer>

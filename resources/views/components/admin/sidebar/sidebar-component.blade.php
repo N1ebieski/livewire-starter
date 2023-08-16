@@ -43,7 +43,7 @@
                 {{-- @can('admin.user.view') --}}
                 <x-admin.sidebar.dropdown.dropdown-component
                     :active="$isCurrentRoute('admin.user.index')"
-                    title="{{ trans('user.page.index.title') }}"
+                    title="{{ trans('user.pages.index.title') }}"
                 >
                     <x-slot:icon>
                         <i class="bi bi-people-fill"></i>
@@ -52,7 +52,7 @@
                     <x-admin.sidebar.dropdown.item-component
                         :active="$isCurrentRoute('admin.user.index')"
                         href="{{ route('admin.user.index') }}"
-                        title="{{ trans('user.page.index.title') }}"
+                        title="{{ trans('user.pages.index.title') }}"
                         wire:navigate.hover="true"
                     />
                     {{-- @endcan --}}

@@ -1,6 +1,6 @@
 <x-modal.content-component>
     <x-slot:title>
-        {{ trans('user.page.create.title') }}
+        {{ trans('user.pages.create.title') }}
     </x-slot:title>
 
     <x-slot:body>
