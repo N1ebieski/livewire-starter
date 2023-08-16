@@ -9,12 +9,12 @@
         wire:key="{{ $modal->alias }}"
         wire:ignore
     >
-        <x-modal.modal-component 
+        <x-modal.layout.modal-component 
             :modal="$modal->modal"
             x-ref="modal"
         >
             @livewire($modal->alias, $modal->params, key($modal->alias))
-        </x-modal.modal-component>
+        </x-modal.layout.modal-component>
     </div>
     @endforeach
 </div>

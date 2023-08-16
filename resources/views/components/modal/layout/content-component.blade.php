@@ -2,8 +2,8 @@
     <div class="modal-header d-block">
         <div class="d-flex justify-content-between w-100">
             <h1 
-                {{ $title->attributes->merge([
-                    'class' => 'modal-title, fs-5'
+                {{ $title->attributes->class([
+                    'modal-title', 'fs-5'
                 ])->filter(fn ($attr) => is_string($attr)) }}
             >
                 {{ $title }}
@@ -21,8 +21,8 @@
     </div>
     @if(isset($body))
     <div 
-        {{ $body->attributes->merge([
-            'class' => 'modal-body'
+        {{ $body->attributes->class([
+            'modal-body'
         ])->filter(fn ($attr) => is_string($attr)) }}
     >
         {{ $body }}
@@ -30,8 +30,8 @@
     @endif
     @if(isset($footer))
     <div 
-        {{ $footer->attributes->merge([
-            'class' => 'modal-footer'
+        {{ $footer->attributes->class([
+            'modal-footer'
         ])->filter(fn ($attr) => is_string($attr)) }}
     >
         {{ $footer }}

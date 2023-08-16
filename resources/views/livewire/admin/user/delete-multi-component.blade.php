@@ -1,4 +1,4 @@
-<x-modal.content-component>
+<x-modal.layout.content-component>
     <x-slot:title>
         {{ trans_choice('user.confirms.delete.multi', count($this->users), [
             'number' => count($this->users)
@@ -27,4 +27,4 @@
             </x-slot:icon>
         </x-buttons.button-component>
     </x-slot:footer>
-</x-modal.content-component>
+</x-modal.layout.content-component>

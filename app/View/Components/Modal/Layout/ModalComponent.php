@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\View\Components\Modal;
+namespace App\View\Components\Modal\Layout;
 
 use App\View\Components\Component;
 use Illuminate\Contracts\View\View;
+use App\View\Components\Modal\Modal;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
 class ModalComponent extends Component
@@ -24,6 +25,6 @@ class ModalComponent extends Component
      */
     public function render(): View
     {
-        return $this->viewFactory->make('components.modal.modal-component');
+        return $this->viewFactory->make('components.modal.layout.modal-component');
     }
 }

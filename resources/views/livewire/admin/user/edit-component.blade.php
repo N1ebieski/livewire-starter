@@ -1,4 +1,4 @@
-<x-modal.content-component>
+<x-modal.layout.content-component>
     <x-slot:title>
         {{ trans('user.pages.edit.title', ['name' => $this->user->name]) }}
     </x-slot:title>
@@ -71,4 +71,4 @@
             </x-slot:icon>
         </x-buttons.button-component>
     </x-slot:footer>    
-</x-modal.content-component>
+</x-modal.layout.content-component>
