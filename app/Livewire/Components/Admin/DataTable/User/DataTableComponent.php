@@ -177,7 +177,7 @@ final class DataTableComponent extends BaseDataTableComponent
         if ($status->isEquals(StatusEmail::VERIFIED)) {
             $this->dispatch(
                 'create-toast',
-                body: $translator->get('user.actions.toggle_status_email', [
+                body: $translator->get('user.actions.toggle_status_email.' . $status->value, [
                     'email' => $user->email,
                     'name' => $user->name
                 ])
