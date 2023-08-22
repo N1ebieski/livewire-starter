@@ -8,11 +8,13 @@ use Livewire\Attributes\On;
 use Livewire\WithPagination;
 use App\Http\Requests\PageRequest;
 use Illuminate\Contracts\View\View;
+use App\Livewire\Components\HasComponent;
 use App\Livewire\Components\FullPageComponent;
 use App\View\Metas\Admin\User\IndexMetaFactory;
 
 final class IndexComponent extends FullPageComponent
 {
+    use HasComponent;
     use WithPagination;
 
     private IndexMetaFactory $indexMetaFactory;

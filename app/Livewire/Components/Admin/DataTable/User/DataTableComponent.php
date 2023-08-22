@@ -15,22 +15,27 @@ use App\Commands\CommandBus;
 use App\Queries\SearchFactory;
 use App\Filters\User\UserFilter;
 use Livewire\Attributes\Computed;
+use App\Livewire\Components\Component;
 use App\ValueObjects\User\StatusEmail;
+use App\Livewire\Components\HasComponent;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Translation\Translator;
 use App\Livewire\Components\Modal\ModalComponent;
+use App\Livewire\Components\DataTable\HasDataTable;
 use App\View\Components\Modal\Modal as BootstrapModal;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Livewire\Forms\Admin\DataTable\User\DataTableForm;
 use App\Queries\User\PaginateByFilter\PaginateByFilterQuery;
 use App\Commands\User\EditStatusEmail\EditStatusEmailCommand;
-use App\Livewire\Components\DataTable\DataTableComponent as BaseDataTableComponent;
 
 /**
  * @property Collection $users
  */
-final class DataTableComponent extends BaseDataTableComponent
+final class DataTableComponent extends Component
 {
+    use HasComponent;
+    use HasDataTable;
+
     private User $user;
 
     private Role $role;
@@ -127,11 +132,11 @@ final class DataTableComponent extends BaseDataTableComponent
     {
         return [
             'id' => 'ID',
-            'email' => $this->trans->get('user.email.label'),
-            'roles' => $this->trans->get('user.roles.label'),
-            'email_verified_at' => $this->trans->get('user.email_verified_at'),
-            'created_at' => $this->trans->get('default.created_at'),
-            'updated_at' => $this->trans->get('default.updated_at'),
+            'email' => $this->translator->get('user.email.label'),
+            'roles' => $this->translator->get('user.roles.label'),
+            'email_verified_at' => $this->translator->get('user.email_verified_at'),
+            'created_at' => $this->translator->get('default.created_at'),
+            'updated_at' => $this->translator->get('default.updated_at'),
         ];
     }
 

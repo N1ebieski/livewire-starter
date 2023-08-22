@@ -10,6 +10,7 @@ use Livewire\Attributes\Locked;
 use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
 use App\Livewire\Components\Component;
+use App\Livewire\Components\HasComponent;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Translation\Translator;
 use App\Commands\User\DeleteMulti\DeleteMultiCommand;
@@ -17,6 +18,8 @@ use App\Livewire\Components\Admin\DataTable\User\DataTableComponent;
 
 class DeleteMultiComponent extends Component
 {
+    use HasComponent;
+
     #[Locked]
     public array $ids;
 

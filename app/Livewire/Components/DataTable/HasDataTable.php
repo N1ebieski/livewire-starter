@@ -9,7 +9,6 @@ use Livewire\Attributes\Locked;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\Validator;
 use App\Livewire\Components\HasDirty;
-use App\Livewire\Components\Component;
 use App\Livewire\Forms\DataTable\DataTableForm;
 use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
@@ -17,7 +16,7 @@ use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 /**
  * @property-read DataTableForm $form
  */
-abstract class DataTableComponent extends Component
+trait HasDataTable
 {
     use WithPagination {
         WithPagination::gotoPage as baseGotoPage;
@@ -26,7 +25,7 @@ abstract class DataTableComponent extends Component
     }
     use HasDirty;
 
-    protected Translator $trans;
+    private Translator $translator;
 
     private ValidationFactory $validationFactory;
 
@@ -64,25 +63,12 @@ abstract class DataTableComponent extends Component
         'lg' => []
     ];
 
-    /**
-     * @var string[]
-     */
-    protected $listeners = ['refresh' => '$refresh'];
-
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->trans = $this->container->make(Translator::class);
-        $this->validationFactory = $this->container->make(ValidationFactory::class);
-    }
-
-    public function mount(
+    public function mountHasDataTable(
         ?array $columns = null,
         ?array $sorts = null,
         ?array $availableColumns = null,
         ?array $showingColumns = null,
-        ?array $hidingColumns = null
+        ?array $hidingColumns = null,
     ): void {
         $this->form->columns = $columns ?? $this->form->getColumns();
 
@@ -95,7 +81,17 @@ abstract class DataTableComponent extends Component
         $this->hidingColumns = $hidingColumns ?? $this->getHidingColumns();
     }
 
-    public function booted(): void
+    public function bootHasDataTable(
+        Translator $translator,
+        ValidationFactory $validationFactory,
+    ): void {
+        $this->translator = $translator;
+        $this->validationFactory = $validationFactory;
+
+        $this->listeners['refresh'] = '$refresh';
+    }
+
+    public function bootedHasDataTable(): void
     {
         $this->dirty();
 
@@ -137,10 +133,8 @@ abstract class DataTableComponent extends Component
      * @param mixed $value
      * @return void
      */
-    public function updated($name, $value): void
+    public function updatedHasDataTable($name, $value): void
     {
-        parent::updated($name, $value);
-
         $this->dirty();
 
         $this->validateWithReset();

@@ -9,12 +9,15 @@ use App\Commands\CommandBus;
 use Livewire\Attributes\Locked;
 use Illuminate\Contracts\View\View;
 use App\Livewire\Components\Component;
+use App\Livewire\Components\HasComponent;
 use App\Commands\User\Delete\DeleteCommand;
 use Illuminate\Contracts\Translation\Translator;
 use App\Livewire\Components\Admin\DataTable\User\DataTableComponent;
 
 class DeleteComponent extends Component
 {
+    use HasComponent;
+
     #[Locked]
     public User $user;
 

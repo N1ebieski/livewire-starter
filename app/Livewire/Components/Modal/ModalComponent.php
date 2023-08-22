@@ -9,7 +9,7 @@ use App\View\Components\Modal\Size;
 use Illuminate\Contracts\View\View;
 use App\Livewire\Components\Component;
 use App\Livewire\Components\Modal\Modal;
-use Illuminate\Contracts\View\Factory as ViewFactory;
+use App\Livewire\Components\HasComponent;
 use App\View\Components\Modal\Modal as BootstrapModal;
 
 /**
@@ -17,6 +17,8 @@ use App\View\Components\Modal\Modal as BootstrapModal;
  */
 class ModalComponent extends Component
 {
+    use HasComponent;
+
     #[Locked]
     public Collection $modals;
 

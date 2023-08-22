@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace App\Livewire\Components\Admin\Home;
 
 use Illuminate\Contracts\View\View;
+use App\Livewire\Components\HasComponent;
 use App\Livewire\Components\FullPageComponent;
 use App\View\Metas\Admin\Home\IndexMetaFactory;
 
 class IndexComponent extends FullPageComponent
 {
+    use HasComponent;
+
     public function render(IndexMetaFactory $indexMetaFactory): View
     {
         //$this->gate->authorize('admin.home.view');
