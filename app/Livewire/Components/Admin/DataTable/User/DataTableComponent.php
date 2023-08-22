@@ -167,7 +167,7 @@ final class DataTableComponent extends Component
         Translator $translator,
         User $user
     ): void {
-        // $this->gate->authorize('admin.user.edit');
+        $this->gate->authorize('toggleStatusEmail', $user);
 
         /** @var StatusEmail */
         $status = $user->status_email->toggle();
@@ -241,7 +241,7 @@ final class DataTableComponent extends Component
 
     public function render()
     {
-        // $this->gate->authorize("admin.user.view");
+        $this->gate->authorize("admin.user.view");
 
         return $this->viewFactory->make('livewire.admin.data-table.user.data-table-component');
     }

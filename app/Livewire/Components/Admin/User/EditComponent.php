@@ -67,7 +67,7 @@ final class EditComponent extends Component
         CommandBus $commandBus,
         Translator $translator
     ): void {
-        // $this->gate->authorize('admin.user.edit');
+        $this->gate->authorize('edit', $this->user);
 
         $this->validate();
 
@@ -96,7 +96,7 @@ final class EditComponent extends Component
 
     public function render(): View
     {
-        //$this->gate->authorize('admin.user.edit');
+        $this->gate->authorize('edit', $this->user);
 
         return $this->viewFactory->make('livewire.admin.user.edit-component');
     }

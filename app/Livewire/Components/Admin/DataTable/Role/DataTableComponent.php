@@ -177,7 +177,7 @@ final class DataTableComponent extends Component
 
     public function render()
     {
-        // $this->gate->authorize("admin.user.view");
+        $this->gate->authorize("admin.role.view");
 
         return $this->viewFactory->make('livewire.admin.data-table.role.data-table-component');
     }

@@ -45,7 +45,7 @@ class DeleteMultiComponent extends Component
         CommandBus $commandBus,
         Translator $trans
     ): void {
-        // $this->gate->authorize('admin.user.delete');
+        $this->gate->authorize('deleteMulti', [User::class, $this->users]);
 
         /** @var int */
         $deleted = $commandBus->execute(new DeleteMultiCommand($this->users));
@@ -64,7 +64,7 @@ class DeleteMultiComponent extends Component
 
     public function render(): View
     {
-        // $this->gate->authorize('admin.user.delete');
+        $this->gate->authorize('deleteMulti', [User::class, $this->users]);
 
         return $this->viewFactory->make('livewire.admin.user.delete-multi-component');
     }

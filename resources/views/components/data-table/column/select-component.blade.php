@@ -11,5 +11,5 @@
             aria-label="{{ trans('data-table.select') }} {{ $value }}"
             x-model="selects"
         >      
-    </div>                          
-</th>
+    </div>   
+</th>                       

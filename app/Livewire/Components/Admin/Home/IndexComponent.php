@@ -15,7 +15,7 @@ class IndexComponent extends FullPageComponent
 
     public function render(IndexMetaFactory $metaFactory): View
     {
-        //$this->gate->authorize('admin.home.view');
+        $this->gate->authorize('admin.home.view');
 
         $meta = $metaFactory->make();
 

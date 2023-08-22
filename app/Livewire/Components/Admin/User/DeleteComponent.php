@@ -30,7 +30,7 @@ class DeleteComponent extends Component
         CommandBus $commandBus,
         Translator $trans
     ): void {
-        // $this->gate->authorize('admin.user.delete');
+        $this->gate->authorize('delete', $this->user);
 
         $commandBus->execute(new DeleteCommand($this->user));
 
@@ -46,7 +46,7 @@ class DeleteComponent extends Component
 
     public function render(): View
     {
-        // $this->gate->authorize('admin.user.delete');
+        $this->gate->authorize('delete', $this->user);
 
         return $this->viewFactory->make('livewire.admin.user.delete-component');
     }

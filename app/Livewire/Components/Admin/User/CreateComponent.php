@@ -68,7 +68,7 @@ final class CreateComponent extends Component
         Translator $translator,
         UrlGenerator $urlGenerator
     ): void {
-        // $this->gate->authorize('admin.user.create');
+        $this->gate->authorize('admin.user.create', User::class);
 
         $this->validate();
 
@@ -97,7 +97,7 @@ final class CreateComponent extends Component
 
     public function render(): View
     {
-        //$this->gate->authorize('admin.user.create');
+        $this->gate->authorize('admin.user.create', User::class);
 
         return $this->viewFactory->make('livewire.admin.user.create-component');
     }

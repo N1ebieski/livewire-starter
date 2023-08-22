@@ -69,6 +69,7 @@
     <x-slot:action>
         <x-slot:selected>
             <x-data-table.selected-component :collection="$this->users" />
+            @role(\App\ValueObjects\Role\Name::SUPER_ADMIN->value)
             <x-data-table.bulk-actions.button-component
                 :action="\App\View\Components\Buttons\Action::DANGER"
                 :label="trans('default.delete')"
@@ -77,8 +78,10 @@
                 <x-slot:icon>
                     <i class="bi bi-trash3"></i>
                 </x-slot:icon>
-            </x-data-table.actions.button-component>                    
+            </x-data-table.actions.button-component>  
+            @endrole
         </x-slot:selected>
+        @can('create', \App\Models\User\User::class)
         <x-data-table.actions.button-component
             :action="\App\View\Components\Buttons\Action::PRIMARY"
             :label="trans('default.create')"
@@ -88,6 +91,7 @@
                 <i class="bi bi-plus-square"></i>
             </x-slot:icon>        
         </x-data-table.actions.button-component>
+        @endcan
     </x-slot:action>
     <x-slot:table>
         <x-slot:thead>
@@ -223,12 +227,15 @@
                     {{ $user->updated_at }}
                 </x-data-table.column.column-component>
                 <x-data-table.column.column-component>
+                    @can('toggleStatusEmail', $user) 
                     <x-data-table.actions.toggle-component
                         wire:click.stop="toggleStatusEmail('{{ $user->id }}')"
                         :checked="!is_null($user->email_verified_at)"
                     />
-                </x-data-table.column.column-component>                
+                    @endcan
+                </x-data-table.column.column-component>           
                 <x-data-table.column.column-component class="text-nowrap">
+                    @can('edit', $user) 
                     <x-data-table.actions.button-component
                         :action="\App\View\Components\Buttons\Action::PRIMARY"
                         :label="trans('default.edit')"
@@ -237,9 +244,11 @@
                         <x-slot:icon>
                             <i class="bi bi-pencil-square"></i>
                         </x-slot:icon>        
-                    </x-data-table.actions.button-component>    
+                    </x-data-table.actions.button-component>  
+                    @endcan  
                 </x-data-table.column.column-component>
                 <x-data-table.column.column-component class="text-nowrap">
+                    @can('delete', $user)
                     <x-data-table.actions.button-component
                         :action="\App\View\Components\Buttons\Action::DANGER"
                         :label="trans('default.delete')"
@@ -248,7 +257,8 @@
                         <x-slot:icon>
                             <i class="bi bi-trash3"></i>
                         </x-slot:icon>        
-                    </x-data-table.actions.button-component>    
+                    </x-data-table.actions.button-component> 
+                    @endcan   
                 </x-data-table.column.column-component>                
             </x-data-table.row-component>
             @endforeach

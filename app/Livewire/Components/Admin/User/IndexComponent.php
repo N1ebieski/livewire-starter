@@ -6,8 +6,8 @@ namespace App\Livewire\Components\Admin\User;
 
 use Livewire\WithPagination;
 use Illuminate\Contracts\View\View;
-use App\Livewire\Components\HasTitleWithPage;
 use App\Livewire\Components\HasComponent;
+use App\Livewire\Components\HasTitleWithPage;
 use App\Livewire\Components\FullPageComponent;
 use App\View\Metas\Admin\User\IndexMetaFactory;
 
@@ -26,7 +26,7 @@ final class IndexComponent extends FullPageComponent
 
     public function render(): View
     {
-        //$this->gate->authorize('admin.user.view');
+        $this->gate->authorize('admin.user.view');
 
         $meta = $this->metaFactory->make($this->getPage());
 

@@ -26,7 +26,7 @@ final class IndexComponent extends FullPageComponent
 
     public function render(): View
     {
-        //$this->gate->authorize('admin.role.view');
+        $this->gate->authorize('admin.role.view');
 
         $meta = $this->metaFactory->make($this->getPage());
 

@@ -29,6 +29,12 @@ class PermissionSeeder extends Seeder
         $this->permission->newQuery()->firstOrCreate(['name' => 'admin.home.*']);
         $this->permission->newQuery()->firstOrCreate(['name' => 'admin.home.view']);
 
+        $this->permission->newQuery()->firstOrCreate(['name' => 'admin.user.*']);
+        $this->permission->newQuery()->firstOrCreate(['name' => 'admin.user.view']);
+
+        $this->permission->newQuery()->firstOrCreate(['name' => 'admin.role.*']);
+        $this->permission->newQuery()->firstOrCreate(['name' => 'admin.role.view']);        
+
         $this->permission->newQuery()->firstOrCreate(['name' => 'api.*']);
 
         $this->permission->newQuery()->firstOrCreate(['name' => 'web.*']);
