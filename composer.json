@@ -15,8 +15,7 @@
         "livewire/livewire": "^3.0.0@beta",
         "mews/purifier": "^3.1",
         "predis/predis": "^2.1",
-        "spatie/laravel-permission": "^5.10",
-        "unikent/tfilecache": "2.0.2+icore"
+        "spatie/laravel-permission": "^5.10"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.13",

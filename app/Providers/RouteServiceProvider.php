@@ -122,9 +122,9 @@ class RouteServiceProvider extends ServiceProvider
 
         $router = Route::middleware([
                 'web',
-                // 'auth',
-                // 'force.verified',
-                // 'permission:admin.access'
+                'auth',
+                'force.verified',
+                'permission:admin.access'
             ])
             ->prefix(Config::get('custom.routes.admin.prefix', 'admin'))
             ->as('admin.');

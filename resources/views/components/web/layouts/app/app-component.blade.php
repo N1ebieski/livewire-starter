@@ -27,13 +27,13 @@
         <meta name="msapplication-config" content="{{ asset('images/icons/browserconfig.xml') }}">
         <meta name="theme-color" content="#ffffff">
 
-        @vite('resources/sass/admin.scss')
+        @vite('resources/sass/web.scss')
         @stack('styles')
-        @vite('resources/js/admin.js')
+        @vite('resources/js/web.js')
     </head>
     <body>
         {{ $slot }}
-
+        
         @livewireScriptConfig 
         @stack('scripts')
     </body>

@@ -32,35 +32,27 @@
         </a>
         <ul class="navbar-nav ms-auto">
             <x-multi-theme.multi-theme-component />
-            {{-- <li class="nav-item dropdown">
-                <a 
-                    href="#"
-                    class="nav-link dropdown-toggle" 
-                    role="button" 
-                    data-bs-toggle="dropdown" 
-                    aria-haspopup="true" 
-                    aria-expanded="false"
-                >
+            <x-admin.navbar.dropdown.dropdown-component>
+                <x-slot:icon>
                     <i class="bi bi-person-fill-gear" style="font-size: 1.5rem"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end">
-                    <h6 class="dropdown-header">
-                        {{ trans('auth.hello')}}, {{ auth()->user()->name }}!
-                    </h6>
-                    <div class="dropdown-divider"></div>
-                    <form 
-                        class="d-inline" 
-                        method="POST" 
-                        action="{{ route('logout') }}"
-                    >
-                        @csrf
+                </x-slot:icon>
 
-                        <button type="submit" class="btn btn-link dropdown-item">
-                            {{ trans('auth.logout') }}
-                        </button>
-                    </form>
-                </div>
-            </li>
-        </ul> --}}
+                <h6 class="dropdown-header">
+                    {{ trans('auth.hello')}}, {{ auth()->user()->name }}!
+                </h6>
+                <div class="dropdown-divider"></div>
+                <form 
+                    class="d-inline" 
+                    method="POST" 
+                    action="{{ route('logout') }}"
+                >
+                    @csrf
+
+                    <button type="submit" class="btn btn-link dropdown-item">
+                        {{ trans('auth.logout') }}
+                    </button>
+                </form>
+            </x-admin.navbar.dropdown.dropdown-component>
+        </ul>
     </div>
 </nav>

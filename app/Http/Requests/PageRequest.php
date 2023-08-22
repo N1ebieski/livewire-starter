@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-final class PageRequest extends FormRequest
+final class PageRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
