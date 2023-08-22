@@ -1,5 +1,5 @@
 import { Livewire } from "../livewire/livewire.js";
 
-Livewire.on("update-title", ({ meta }) => {
+Livewire.on("update-meta", ({ meta }) => {
     document.title = meta.title;
 });

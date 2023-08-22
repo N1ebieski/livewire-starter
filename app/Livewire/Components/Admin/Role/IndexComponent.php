@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Livewire\Components\Admin\User;
+namespace App\Livewire\Components\Admin\Role;
 
 use Livewire\WithPagination;
 use Illuminate\Contracts\View\View;
-use App\Livewire\Components\HasTitleWithPage;
 use App\Livewire\Components\HasComponent;
+use App\Livewire\Components\HasTitleWithPage;
 use App\Livewire\Components\FullPageComponent;
-use App\View\Metas\Admin\User\IndexMetaFactory;
+use App\View\Metas\Admin\Role\IndexMetaFactory;
 
 final class IndexComponent extends FullPageComponent
 {
@@ -26,11 +26,11 @@ final class IndexComponent extends FullPageComponent
 
     public function render(): View
     {
-        //$this->gate->authorize('admin.user.view');
+        //$this->gate->authorize('admin.role.view');
 
         $meta = $this->metaFactory->make($this->getPage());
 
-        return $this->viewFactory->make('livewire.admin.user.index-component')
+        return $this->viewFactory->make('livewire.admin.role.index-component')
             ->layout('components.admin.layouts.app.app-component', compact('meta'));
     }
 }

@@ -20,9 +20,19 @@ class SidebarComponent extends Component
     ) {
     }
 
-    public function isCurrentRoute(string $name): bool
+    public function isCurrentRoute(mixed $names): bool
     {
-        return $this->route->currentRouteName() === $name;
+        if (is_string($names)) {
+            $names = [$names];
+        }
+
+        foreach ($names as $name) {
+            if ($this->route->currentRouteName() === $name) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function isCurrentRouteHasPoli(string $name, array $polis): bool

@@ -42,7 +42,10 @@
                 {{-- @endcan                                           --}}
                 {{-- @can('admin.user.view') --}}
                 <x-admin.sidebar.dropdown.dropdown-component
-                    :active="$isCurrentRoute('admin.user.index')"
+                    :active="$isCurrentRoute([
+                        'admin.user.index',
+                        'admin.role.index'
+                    ])"
                     title="{{ trans('user.pages.index.title') }}"
                 >
                     <x-slot:icon>
@@ -56,6 +59,14 @@
                         wire:navigate.hover="true"
                     />
                     {{-- @endcan --}}
+                    {{-- @can('admin.role.view') --}}
+                    <x-admin.sidebar.dropdown.item-component
+                        :active="$isCurrentRoute('admin.role.index')"
+                        href="{{ route('admin.role.index') }}"
+                        title="{{ trans('role.pages.index.title') }}"
+                        wire:navigate.hover="true"
+                    />
+                    {{-- @endcan --}}                    
                 </x-admin.sidebar.dropdown.dropdown-component>
                 {{-- @endcan                                           --}}                
             </ul>

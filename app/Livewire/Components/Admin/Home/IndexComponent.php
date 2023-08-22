@@ -13,11 +13,11 @@ class IndexComponent extends FullPageComponent
 {
     use HasComponent;
 
-    public function render(IndexMetaFactory $indexMetaFactory): View
+    public function render(IndexMetaFactory $metaFactory): View
     {
         //$this->gate->authorize('admin.home.view');
 
-        $meta = $indexMetaFactory->make();
+        $meta = $metaFactory->make();
 
         return $this->viewFactory->make('livewire.admin.home.index-component')
             ->layout('components.admin.layouts.app.app-component', compact('meta'));
