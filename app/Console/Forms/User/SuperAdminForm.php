@@ -29,6 +29,7 @@ class SuperAdminForm extends Form
                 'bail',
                 'required',
                 'alpha_dash',
+                'min:3',
                 'max:255'
             ],
             'password' => [
@@ -36,7 +37,6 @@ class SuperAdminForm extends Form
                 'required',
                 'string',
                 'min:8',
-                'confirmed'
             ],
             'email' => [
                 'bail',

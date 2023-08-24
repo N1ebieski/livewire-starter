@@ -33,7 +33,7 @@
     >
     @endif  
         <input 
-            type="text" 
+            type="search" 
             {{ $attributes->class([
                 'form-control',
                 'highlight' => $errors->isEmpty() && $highlight,

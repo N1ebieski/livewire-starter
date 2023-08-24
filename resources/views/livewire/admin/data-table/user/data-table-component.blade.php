@@ -166,7 +166,12 @@
             >
                 {{ trans('default.updated_at') }}
             </x-data-table.label-component>
-            <th></th>
+            <x-data-table.label.label-component 
+                name="status_email_verified_at"
+                :sorts="$sorts"
+            >
+                {{ trans('user.status_email.label') }}
+            </x-data-table.label-component>
             <th></th>
             <th></th>
         </x-slot:thead>

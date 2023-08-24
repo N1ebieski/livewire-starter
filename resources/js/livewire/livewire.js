@@ -8174,7 +8174,7 @@ function generateEntangleFunction(component, cleanup2) {
     let livewirePropertyValue = livewireComponent.get(livewireProperty);
     let interceptor = import_alpinejs.default.interceptor((initialValue, getter, setter, path, key) => {
       if (typeof livewirePropertyValue === "undefined") {
-        console.error(`Livewire Entangle Error: Livewire property '${livewireProperty}' cannot be found`);
+        console.error(`Livewire Entangle Error: Livewire property ['${livewireProperty}'] cannot be found on component: ['${component.name}']`);
         return;
       }
       queueMicrotask(() => {
@@ -8443,6 +8443,7 @@ function wireFallback(callback) {
   fallback = callback;
 }
 var aliases = {
+  "on": "$on",
   "get": "$get",
   "set": "$set",
   "call": "$call",
@@ -9097,21 +9098,21 @@ on("effects", (component, effects) => {
       ] = event_parts;
       if (["channel", "private", "encryptedPrivate"].includes(channel_type)) {
         window.Echo[channel_type](channel).listen(event_name, (e) => {
-          dispatchSelf(component, event, e);
+          dispatchSelf(component, event, [e]);
         });
       } else if (channel_type == "presence") {
         if (["here", "joining", "leaving"].includes(event_name)) {
           window.Echo.join(channel)[event_name]((e) => {
-            dispatchSelf(component, event, e);
+            dispatchSelf(component, event, [e]);
           });
         } else {
           window.Echo.join(channel).listen(event_name, (e) => {
-            dispatchSelf(component, event, e);
+            dispatchSelf(component, event, [e]);
           });
         }
       } else if (channel_type == "notification") {
         window.Echo.private(channel).notification((notification) => {
-          dispatchSelf(component, event, notification);
+          dispatchSelf(component, event, [notification]);
         });
       } else {
         console.warn("Echo channel type not yet supported");

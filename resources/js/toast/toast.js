@@ -76,7 +76,7 @@ export default function toast() {
                 },
 
                 remove(index) {
-                    this.collection.splice(index, 1);
+                    delete this.collection[index];
                 },
             });
         },

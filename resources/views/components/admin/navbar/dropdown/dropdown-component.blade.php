@@ -8,7 +8,7 @@
         href="#" 
         role="button" 
         data-bs-toggle="dropdown" 
-        data-bs-auto-close="false"
+        data-bs-auto-close="true"
     >
         @if(isset($icon))
         <span>{{ $icon }}</span>

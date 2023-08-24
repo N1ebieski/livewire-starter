@@ -7,12 +7,16 @@ namespace App\Console\Commands\User;
 use App\Models\Role\Role;
 use App\Models\User\User;
 use App\Commands\CommandBus;
-use App\ValueObjects\Role\Name;
 use App\Console\Commands\Command;
 use App\Console\Forms\User\SuperAdminForm;
 use App\Commands\User\Create\CreateCommand;
 use Illuminate\Contracts\Translation\Translator as Lang;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+
+use function Laravel\Prompts\info;
+use function Laravel\Prompts\text;
+use function Laravel\Prompts\error;
+use function Laravel\Prompts\password;
 
 class SuperAdminCommand extends Command
 {
@@ -49,29 +53,35 @@ class SuperAdminCommand extends Command
     public function handle(): void
     {
         if (!$this->superAdminForm->authorize()) {
-            $this->error($this->lang->get('superadmin.exist'));
+            error($this->lang->get('superadmin.exist'));
 
             exit;
         }
 
-        $this->askArguments([
-            'name' => $this->lang->get('auth.name.label'),
-            'password_confirmation' => $this->lang->get('auth.password'),
-            'password' => $this->lang->get('auth.password_confirm'),
-            'email' => $this->lang->get('auth.address.label')
-        ]);
+        $name = text(
+            label: $this->lang->get('auth.name.label'),
+            default: 'admin',
+            validate: fn (string $value) => $this->validateOnly('name', $value)
+        );
+
+        $password = password(
+            label: $this->lang->get('auth.password'),
+            validate: fn (string $value) => $this->validateOnly('password', $value)
+        );
+
+        $email = text(
+            label: $this->lang->get('auth.address.label'),
+            validate: fn (string $value) => $this->validateOnly('email', $value)
+        );
 
         $this->commandBus->execute(new CreateCommand(
             user: $this->user,
-            name: $this->argument('name'), //@phpstan-ignore-line
-            email: $this->argument('email'), //@phpstan-ignore-line
-            password: $this->argument('password'), //@phpstan-ignore-line
-            roles: $this->role->newQuery()->whereIn(
-                'name',
-                [Name::SUPER_ADMIN, Name::ADMIN, Name::USER]
-            )->get()
+            name: $name,
+            email: $email,
+            password: $password,
+            roles: $this->role->all()
         ));
 
-        $this->info($this->lang->get('superadmin.action.create'));
+        info($this->lang->get('superadmin.action.create'));
     }
 }

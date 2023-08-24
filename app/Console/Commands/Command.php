@@ -14,50 +14,16 @@ abstract class Command extends BaseCommand
         parent::__construct();
     }
 
-    /**
-     * @param array<string, string> $arguments
-     */
-    protected function askArguments(array $arguments): void
+    protected function validateOnly(string $key, mixed $value): string
     {
-        $validator = $this->validationFactory->make([], []);
+        $validator = $this->validationFactory->make(
+            [$key => $value],
+            [$key => $this->rules()[$key]]
+        );
 
-        while (($arg = current($arguments)) !== false) {
-            if ($this->hasArgument($arg)) {
-                next($arguments);
+        $errors = $validator->errors()->getMessages();
 
-                continue;
-            }
-
-            $value = $this->ask($arg);
-            $key = key($arguments);
-
-            if (array_key_exists($key, $this->rules())) {
-                $validator = $this->validationFactory->make(
-                    array_merge($this->argument(), [$key => $value]),
-                    [$key => $this->rules()[$key]]
-                );
-
-                foreach ($validator->errors()->getMessages() as $arg => $error) {
-                    $this->error($arg . ": " . $error[0] . "\n");
-                }
-            }
-
-            if (!$validator->fails()) {
-                $this->addArgument(
-                    name: $key,
-                    default: $value
-                );
-
-                next($arguments);
-            } else {
-                if (
-                    array_key_exists($key, $this->rules())
-                    && in_array('confirmed', $this->rules()[$key])
-                ) {
-                    prev($arguments);
-                }
-            }
-        }
+        return $errors[$key][0] ?? '';
     }
 
     protected function rules(): array

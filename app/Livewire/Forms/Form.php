@@ -25,12 +25,6 @@ abstract class Form extends BaseForm
         $this->container = App::make(Container::class);
         $this->rule = App::make(Rule::class);
 
-        /**
-         * Fix. Livewire doesn't have access to the component's mount properties,
-         * so we have to inject the rules manually in the component
-         */
-        //$this->addValidationRulesToComponent();
-
         /** Fix. Livewire doesn't have possibility to set validation messages from method */
         $this->addValidationMessagesToComponent();
     }

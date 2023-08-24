@@ -37,7 +37,7 @@ class EditHandler extends Handler
 
             $user->syncRoles([
                 Name::USER->value,
-                ...$command->roles->map(fn (Role $role) => $role->name)->toArray()
+                ...$command->roles->map(fn (Role $role) => $role->name->value)->toArray()
             ]);
         } catch (\Exception $e) {
             $this->db->rollBack();

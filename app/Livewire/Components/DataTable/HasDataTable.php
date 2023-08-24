@@ -123,7 +123,10 @@ trait HasDataTable
     public function updatedPage(): void
     {
         $this->resetSelects();
+    }
 
+    public function renderedHasDataTable(): void
+    {
         $this->dispatch('updated-page', page: $this->getPage());
     }
 
@@ -174,7 +177,7 @@ trait HasDataTable
 
     public function resetFormSearch(): void
     {
-        $this->reset('form.search');
+        $this->form->reset('search');
 
         $this->dirty();
     }
