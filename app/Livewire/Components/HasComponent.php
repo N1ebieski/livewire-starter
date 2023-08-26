@@ -38,17 +38,6 @@ trait HasComponent
     }
 
     /**
-     * Fix. Livewire doesn't have access to the component's mount properties,
-     * so we have to inject the rules manually in the component
-     */
-    public function bootedHasComponent(): void
-    {
-        if (property_exists($this, 'form')) {
-            $this->form->addValidationRulesToComponent();
-        }
-    }
-
-    /**
      * Temporary fix. Livewire add __rm__ to the array if removing element
      *
      * @param array $attributes

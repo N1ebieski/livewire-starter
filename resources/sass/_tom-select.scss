@@ -35,15 +35,23 @@
         .ts-control {
             input {
                 color: var(--bs-body-color) !important;
-            }
-
+            }   
+            
             .item {
-                color: var(--bs-body-bg) !important;
-            }
+                color: var(--bs-body-color) !important;
+            }            
+        }
 
-            .remove {
-                color: var(--bs-body-bg) !important;
-            }
+        &.multi {
+            .ts-control {
+                .item {
+                    color: var(--bs-body-bg) !important;
+                }
+
+                .remove {
+                    color: var(--bs-body-bg) !important;
+                }
+            }              
         }
     }
 }

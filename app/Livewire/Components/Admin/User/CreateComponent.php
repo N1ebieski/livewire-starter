@@ -33,7 +33,7 @@ final class CreateComponent extends Component
     {
         $this->role = $role;
 
-        $this->form->roles = $this->roles->where('name', Name::USER->value)->pluck('id')->toArray();
+        $this->form->roles = $this->roles->where('name', Name::USER)->pluck('id')->toArray();
     }
 
     public function boot(

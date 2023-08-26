@@ -25,30 +25,36 @@ abstract class Form extends BaseForm
         $this->container = App::make(Container::class);
         $this->rule = App::make(Rule::class);
 
-        /** Fix. Livewire doesn't have possibility to set validation messages from method */
-        $this->addValidationMessagesToComponent();
+        /**
+         * Fix. Livewire doesn't have access to the component's mount properties,
+         * so we have to inject the rules manually in the component
+         */
+        if ($this->areComponentTypedPropertiesInitiated()) {
+            parent::__construct($component, $propertyName);
+        }
     }
 
     /**
-     * Fix. Livewire doesn't have possibility to set validation messages from method
+     * Fix. Livewire doesn't have access to the component's mount properties,
+     * so we have to inject the rules manually in the component
      */
-    public function addValidationMessagesToComponent(): void
+    private function areComponentTypedPropertiesInitiated(): bool
     {
-        $messages = [];
+        $reflectionClass = new \ReflectionClass($this->component);
 
-        if (method_exists($this, 'messages')) {
-            $messages = $this->messages();
-        } elseif (property_exists($this, 'messages')) {
-            $messages = $this->messages;
+        $properties = $reflectionClass->getProperties(\ReflectionProperty::IS_PUBLIC);
+
+        foreach ($properties as $property) {
+            if (
+                !is_null($property->getType())
+                && $property->getName() !== 'form'
+                && !isset($this->component->{$property->getName()})
+            ) {
+                return false;
+            }
         }
 
-        $messagesWithPrefixedKeys = [];
-
-        foreach ($messages as $key => $value) {
-            $messagesWithPrefixedKeys[$this->propertyName . '.' . $key] = $value;
-        }
-
-        $this->component->addMessagesFromOutside($messagesWithPrefixedKeys);
+        return true;
     }
 
     public function resetExcept(...$properties): void
