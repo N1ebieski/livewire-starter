@@ -8,7 +8,7 @@ use App\Commands\Handler;
 use App\Models\Role\Role;
 use App\Models\User\User;
 use App\Commands\CommandBus;
-use App\ValueObjects\Role\Name;
+use App\ValueObjects\Role\DefaultName;
 use Illuminate\Contracts\Hashing\Hasher;
 use App\Commands\User\Create\CreateCommand;
 use Illuminate\Database\DatabaseManager as DB;
@@ -34,8 +34,8 @@ class CreateHandler extends Handler
             $user->save();
 
             $user->assignRole([
-                Name::USER->value,
-                ...$command->roles->map(fn (Role $role) => $role->name->value)->toArray()
+                DefaultName::USER->value,
+                ...$command->roles->map(fn (Role $role) => $role->name)->toArray()
             ]);
         } catch (\Exception $e) {
             $this->db->rollBack();

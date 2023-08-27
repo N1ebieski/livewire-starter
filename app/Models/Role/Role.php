@@ -12,27 +12,6 @@ final class Role extends BaseRole
     use HasRoleScopes;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'id' => 'integer',
-        'name' => \App\ValueObjects\Role\Name::class,
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
-
-    /**
      * The columns of the full text index
      */
     public array $searchable = ['name'];

@@ -141,6 +141,10 @@ export default function tomSelect(data) {
             el.highlight(el.value);
 
             this.tomselect.on("change", (newValue) => {
+                if (Array.isArray(newValue)) {
+                    el.value = [];
+                }
+
                 el.value = newValue;
 
                 el.highlight(newValue);

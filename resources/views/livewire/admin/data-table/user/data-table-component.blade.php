@@ -69,7 +69,7 @@
     <x-slot:action>
         <x-slot:selected>
             <x-data-table.selected-component :collection="$this->users" />
-            @role(\App\ValueObjects\Role\Name::SUPER_ADMIN->value)
+            @role(\App\ValueObjects\Role\DefaultName::SUPER_ADMIN->value)
             <x-data-table.bulk-actions.button-component
                 :action="\App\View\Components\Buttons\Action::DANGER"
                 :label="trans('default.delete')"

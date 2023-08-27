@@ -134,7 +134,7 @@ final class DataTableComponent extends Component
     {
         $this->dispatch(
             'create-modal',
-            alias: 'admin.user.create-component',
+            alias: 'admin.role.create-component',
             modal: new BootstrapModal(
                 static: true,
                 scrollable: true
@@ -142,16 +142,16 @@ final class DataTableComponent extends Component
         )->to(ModalComponent::class);
     }
 
-    public function edit(User $user): void
+    public function edit(Role $role): void
     {
         $this->dispatch(
             'create-modal',
-            alias: 'admin.user.edit-component',
+            alias: 'admin.role.edit-component',
             modal: new BootstrapModal(
                 static: true,
                 scrollable: true
             ),
-            user: $user->id
+            role: $role->id
         )->to(ModalComponent::class);
     }
 

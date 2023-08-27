@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use App\ValueObjects\User\StatusEmail;
-
 return [
     'pages' => [
         'index' => [
@@ -35,4 +33,7 @@ return [
     'name' => [
         'label' => 'Nazwa'
     ],
+    'permissions' => [
+        'label' => 'Uprawnienia'
+    ]
 ];

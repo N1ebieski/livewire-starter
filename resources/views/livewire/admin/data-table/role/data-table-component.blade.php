@@ -30,7 +30,7 @@
     <x-slot:action>
         <x-slot:selected>
             <x-data-table.selected-component :collection="$this->roles" />
-            @role(\App\ValueObjects\Role\Name::SUPER_ADMIN->value)
+            @role(\App\ValueObjects\Role\DefaultName::SUPER_ADMIN->value)
             <x-data-table.bulk-actions.button-component
                 :action="\App\View\Components\Buttons\Action::DANGER"
                 :label="trans('default.delete')"
@@ -119,7 +119,7 @@
                     :columns="$form->columns"
                     :hidingColumns="$hidingColumns"
                 >
-                    {{ $role->name->value }}
+                    {{ $role->name }}
                 </x-data-table.column.column-component>   
                 <x-data-table.column.column-component
                     name="created_at"

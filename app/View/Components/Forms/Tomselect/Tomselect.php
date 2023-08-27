@@ -14,6 +14,7 @@ final class Tomselect
         public readonly ?int $maxItems = 1,
         public readonly ?string $placeholder = null,
         public readonly array $options = [],
+        public readonly array $optgroups = [],
         public readonly array $items = [],
         public readonly bool $allowEmptyOption = true,
         public readonly bool $copyClassesToDropdown = true,

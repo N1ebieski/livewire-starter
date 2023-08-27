@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\ValueObjects\Role;
 
-enum Name: string
+enum DefaultName: string
 {
     case USER = 'user';
 

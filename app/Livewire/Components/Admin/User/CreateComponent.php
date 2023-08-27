@@ -7,11 +7,11 @@ namespace App\Livewire\Components\Admin\User;
 use App\Models\Role\Role;
 use App\Models\User\User;
 use App\Commands\CommandBus;
-use App\ValueObjects\Role\Name;
 use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Validator;
 use App\Livewire\Components\Component;
+use App\ValueObjects\Role\DefaultName;
 use App\Livewire\Components\HasComponent;
 use App\Commands\User\Create\CreateCommand;
 use Illuminate\Database\Eloquent\Collection;
@@ -33,7 +33,7 @@ final class CreateComponent extends Component
     {
         $this->role = $role;
 
-        $this->form->roles = $this->roles->where('name', Name::USER)->pluck('id')->toArray();
+        $this->form->roles = $this->roles->where('name', DefaultName::USER)->pluck('id')->toArray();
     }
 
     public function boot(
@@ -58,7 +58,7 @@ final class CreateComponent extends Component
         return $this->role->all();
     }
 
-    private function getRolesAsCollection(): Collection
+    private function getFormRolesAsCollection(): Collection
     {
         return $this->role->findMany($this->form->roles);
     }
@@ -68,7 +68,7 @@ final class CreateComponent extends Component
         Translator $translator,
         UrlGenerator $urlGenerator
     ): void {
-        $this->gate->authorize('admin.user.create', User::class);
+        $this->gate->authorize('create', User::class);
 
         $this->validate();
 
@@ -79,7 +79,7 @@ final class CreateComponent extends Component
                 name: $this->form->name,
                 email: $this->form->email,
                 password: $this->form->password,
-                roles: $this->getRolesAsCollection()
+                roles: $this->getFormRolesAsCollection()
             )
         );
 
@@ -97,7 +97,7 @@ final class CreateComponent extends Component
 
     public function render(): View
     {
-        $this->gate->authorize('admin.user.create', User::class);
+        $this->gate->authorize('create', User::class);
 
         return $this->viewFactory->make('livewire.admin.user.create-component');
     }

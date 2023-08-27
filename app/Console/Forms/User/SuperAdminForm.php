@@ -6,7 +6,7 @@ namespace App\Console\Forms\User;
 
 use App\Models\User\User;
 use App\Console\Forms\Form;
-use App\ValueObjects\Role\Name;
+use App\ValueObjects\Role\DefaultName;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class SuperAdminForm extends Form
@@ -18,7 +18,7 @@ class SuperAdminForm extends Form
     public function authorize(): bool
     {
         return $this->user->whereHas('roles', function (Builder $query) {
-            return $query->where('name', Name::SUPER_ADMIN);
+            return $query->where('name', DefaultName::SUPER_ADMIN);
         })->count() === 0;
     }
 

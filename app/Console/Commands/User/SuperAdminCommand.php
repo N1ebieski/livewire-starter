@@ -10,13 +10,9 @@ use App\Commands\CommandBus;
 use App\Console\Commands\Command;
 use App\Console\Forms\User\SuperAdminForm;
 use App\Commands\User\Create\CreateCommand;
-use Illuminate\Contracts\Translation\Translator as Lang;
+use Illuminate\Contracts\Translation\Translator;
+use App\Extends\Laravel\Prompts\Contracts\Prompts;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
-
-use function Laravel\Prompts\info;
-use function Laravel\Prompts\text;
-use function Laravel\Prompts\error;
-use function Laravel\Prompts\password;
 
 class SuperAdminCommand extends Command
 {
@@ -38,9 +34,10 @@ class SuperAdminCommand extends Command
         protected ValidationFactory $validationFactory,
         private User $user,
         private Role $role,
-        private Lang $lang,
+        private Translator $translator,
         private SuperAdminForm $superAdminForm,
-        private CommandBus $commandBus
+        private CommandBus $commandBus,
+        private Prompts $prompts
     ) {
         parent::__construct($validationFactory);
     }
@@ -53,24 +50,24 @@ class SuperAdminCommand extends Command
     public function handle(): void
     {
         if (!$this->superAdminForm->authorize()) {
-            error($this->lang->get('superadmin.exist'));
+            $this->prompts->error($this->translator->get('superadmin.exist'));
 
             exit;
         }
 
-        $name = text(
-            label: $this->lang->get('auth.name.label'),
+        $name = $this->prompts->text(
+            label: $this->translator->get('auth.name.label'),
             default: 'admin',
             validate: fn (string $value) => $this->validateOnly('name', $value)
         );
 
-        $password = password(
-            label: $this->lang->get('auth.password'),
+        $password = $this->prompts->password(
+            label: $this->translator->get('auth.password'),
             validate: fn (string $value) => $this->validateOnly('password', $value)
         );
 
-        $email = text(
-            label: $this->lang->get('auth.address.label'),
+        $email = $this->prompts->text(
+            label: $this->translator->get('auth.address.label'),
             validate: fn (string $value) => $this->validateOnly('email', $value)
         );
 
@@ -82,6 +79,6 @@ class SuperAdminCommand extends Command
             roles: $this->role->all()
         ));
 
-        info($this->lang->get('superadmin.action.create'));
+        $this->prompts->info($this->translator->get('superadmin.action.create'));
     }
 }
