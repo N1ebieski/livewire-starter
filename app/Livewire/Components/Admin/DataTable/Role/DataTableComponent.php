@@ -155,13 +155,13 @@ final class DataTableComponent extends Component
         )->to(ModalComponent::class);
     }
 
-    public function delete(User $user): void
+    public function delete(Role $role): void
     {
         $this->dispatch(
             'create-modal',
-            alias: 'admin.user.delete-component',
+            alias: 'admin.role.delete-component',
             modal: new BootstrapModal(),
-            user: $user->id
+            role: $role->id
         )->to(ModalComponent::class);
     }
 
@@ -169,7 +169,7 @@ final class DataTableComponent extends Component
     {
         $this->dispatch(
             'create-modal',
-            alias: 'admin.user.delete-multi-component',
+            alias: 'admin.role.delete-multi-component',
             modal: new BootstrapModal(),
             ids: $ids
         )->to(ModalComponent::class);

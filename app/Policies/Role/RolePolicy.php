@@ -17,19 +17,19 @@ final class RolePolicy
     public function edit(User $user, Role $role): bool
     {
         return $user->hasRole(DefaultName::SUPER_ADMIN->value)
-            && !in_array($role->name, [DefaultName::SUPER_ADMIN, DefaultName::ADMIN]);
+            && !$role->name->isAdmin();
     }
 
     public function delete(User $user, Role $role): bool
     {
         return $user->hasRole(DefaultName::SUPER_ADMIN->value)
-            && !in_array($role->name, DefaultName::cases());
+            && !$role->name->isDefault();
     }
 
     public function deleteMulti(User $user, Collection $roles): bool
     {
-        foreach ($roles as $user) {
-            if (!$this->delete($user, $user)) {
+        foreach ($roles as $role) {
+            if (!$this->delete($user, $role)) {
                 return false;
             }
         }

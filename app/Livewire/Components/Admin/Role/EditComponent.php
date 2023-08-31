@@ -30,7 +30,7 @@ final class EditComponent extends Component
     {
         $this->role = $role;
 
-        $this->form->name = $role->name;
+        $this->form->name = $role->name->value;
         $this->form->permissions = $role->permissions->pluck('id')->toArray();
     }
 
@@ -60,7 +60,7 @@ final class EditComponent extends Component
 
         $this->dispatch(
             'create-toast',
-            body: $translator->get('role.actions.edit', ['name' => $role->name])
+            body: $translator->get('role.actions.edit', ['name' => $role->name->value])
         );
 
         $this->dispatch('highlight', ids: [$role->id], action: 'primary');

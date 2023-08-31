@@ -7,6 +7,9 @@ namespace App\Livewire\Forms\Admin\Role;
 use App\Models\Role\Role;
 use App\Livewire\Forms\Form;
 use App\Models\Permission\Permission;
+use App\ValueObjects\Role\DefaultName;
+use Illuminate\Validation\Rules\Exists;
+use Illuminate\Contracts\Database\Query\Builder;
 use App\Livewire\Components\Admin\Role\EditComponent;
 
 /**
@@ -35,7 +38,28 @@ final class EditForm extends Form
             'permissions' => [
                 'required',
                 'array',
+            ],
+            'permissions.*' => [
+                'bail',
+                'integer',
                 $this->rule->exists($permission->getTable(), 'id')
+                    ->when(
+                        $this->component->role->name->isEqualsDefault(DefaultName::USER),
+                        function (Exists $builder) {
+                            return $builder->where(function (Builder $builder) {
+                                return $builder->where('name', 'like', 'web.%')
+                                    ->orWhere('name', 'like', 'api.%');
+                            });
+                        }
+                    )
+                    ->when(
+                        $this->component->role->name->isEqualsDefault(DefaultName::API),
+                        function (Exists $builder) {
+                            return $builder->where(function (Builder $builder) {
+                                return $builder->where('name', 'like', 'api.%');
+                            });
+                        }
+                    )
             ]
         ];
     }

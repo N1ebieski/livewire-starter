@@ -119,7 +119,7 @@
                     :columns="$form->columns"
                     :hidingColumns="$hidingColumns"
                 >
-                    {{ $role->name }}
+                    {{ $role->name->value }}
                 </x-data-table.column.column-component>   
                 <x-data-table.column.column-component
                     name="created_at"

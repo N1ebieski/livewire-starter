@@ -48,7 +48,7 @@
                 <option value="">{{ trans('filter.default') }}</option>
                 @foreach($this->roles as $role)
                 <option value="{{ $role->id }}">
-                    {{ $role->name }}
+                    {{ $role->name->value }}
                 </option>
                 @endforeach
             </x-forms.select-component>

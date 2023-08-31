@@ -37,7 +37,7 @@
                         options: $this->roles->map(function ($role) {
                             return [
                                 'value' => $role->id,
-                                'text' => $role->name
+                                'text' => $role->name->value
                             ];
                         })->toArray(),
                         maxItems: $this->roles->count(),
