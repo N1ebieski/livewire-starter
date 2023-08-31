@@ -40,14 +40,12 @@ export default function tomSelect(data) {
 
         deactivate() {
             this.$refs.tomselect.nextElementSibling.classList.remove(
-                "border-primary"
+                "highlight"
             );
         },
 
         activate() {
-            this.$refs.tomselect.nextElementSibling.classList.add(
-                "border-primary"
-            );
+            this.$refs.tomselect.nextElementSibling.classList.add("highlight");
         },
 
         default() {
@@ -115,7 +113,7 @@ export default function tomSelect(data) {
                             "data",
                             "escape",
                             data.config.render.option
-                        ),
+                        ).bind(this),
                     }),
                     ...(data.lang === "pl" && {
                         no_results: function () {

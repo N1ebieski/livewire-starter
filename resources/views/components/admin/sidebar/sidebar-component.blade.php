@@ -71,8 +71,22 @@
                     />
                     @endcan                    
                 </x-admin.sidebar.dropdown.dropdown-component>
-                @endcan                                                          
+                @endcan                                                                            
             </ul>
+            <ul class="navbar-nav justify-content-end flex-grow-1 position-absolute bottom-0">
+                @can('admin.home.view')
+                <x-admin.sidebar.item-component
+                    :active="$isCurrentRoute('admin.sandbox.index')"
+                    href="{{ route('admin.sandbox.index') }}"
+                    title="Sandbox"
+                    wire:navigate.hover="true"
+                >
+                    <x-slot:icon>
+                        <i class="bi bi-code-square"></i>
+                    </x-slot:icon>
+                </x-admin.sidebar.item-component>
+                @endcan 
+            </ul>                
         </div>
     </div>
 </div>

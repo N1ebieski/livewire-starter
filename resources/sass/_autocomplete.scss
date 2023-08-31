@@ -1,0 +1,12 @@
+.autocomplete {
+    ul {
+        li {
+            cursor: pointer;
+
+            mark {
+                @extend .fw-bold;
+            }
+        }
+    }
+}
+

@@ -4,6 +4,7 @@ import "./bootstrap";
 import { Alpine, Livewire } from "./livewire/livewire.js";
 
 import sidebar from "./admin/sidebar/sidebar";
+import autoComplete from "./autocomplete/autocomplete";
 import bulkAction from "./data-table/bulk-action";
 import dataTable from "./data-table/data-table";
 import row from "./data-table/row";
@@ -25,6 +26,7 @@ Alpine.data("bulkAction", bulkAction);
 Alpine.data("tomSelect", tomSelect);
 Alpine.data("toast", toast);
 Alpine.data("multiTheme", multiTheme);
+Alpine.data("autoComplete", autoComplete);
 
 window.bootstrap = bootstrap;
 window.Popper = Popper;
