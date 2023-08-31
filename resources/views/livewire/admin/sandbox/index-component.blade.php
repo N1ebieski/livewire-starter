@@ -1,8 +1,8 @@
 <x-admin.layouts.app.slot-component>
     <x-forms.autocomplete.autocomplete-component
-        name="dupa"
-        id="dupa"
-        label="Bambo"
+        name="autocomplete"
+        id="autocomplete"
+        label="Autocomplete form z label floating, closure od query oraz selection"
         labelFloating="true"
         :autocomplete="new \App\View\Components\Forms\Autocomplete\Autocomplete(
             data: new \App\View\Components\Forms\Autocomplete\Data(
@@ -25,7 +25,7 @@
                         const selection = event.detail.selection.value;
 
                         this.autocomplete.input.value = this.autocomplete.input.value.replace(
-                            new RegExp(`${query}\s*$`),
+                            new RegExp(`${query}\\s*?$`),
                             selection
                         );
                     JS

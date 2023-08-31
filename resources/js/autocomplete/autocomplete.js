@@ -97,6 +97,12 @@ export default function autoComplete(data) {
             }
         },
 
+        destroy() {
+            this.autocomplete.unInit();
+
+            this.$refs.autocomplete.nextElementSibling.remove();
+        },
+
         highlight(value) {
             if (!data.highlight) {
                 return;
