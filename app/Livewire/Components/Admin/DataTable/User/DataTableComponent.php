@@ -15,7 +15,6 @@ use App\Commands\CommandBus;
 use App\Queries\SearchFactory;
 use App\Filters\User\UserFilter;
 use Livewire\Attributes\Computed;
-use App\Livewire\Components\Component;
 use App\ValueObjects\User\StatusEmail;
 use App\Livewire\Components\HasComponent;
 use Illuminate\Database\Eloquent\Collection;
@@ -27,11 +26,12 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Livewire\Forms\Admin\DataTable\User\DataTableForm;
 use App\Queries\User\PaginateByFilter\PaginateByFilterQuery;
 use App\Commands\User\EditStatusEmail\EditStatusEmailCommand;
+use App\Livewire\Components\DataTable\DataTableComponent as BaseDataTableComponent;
 
 /**
  * @property Collection $users
  */
-final class DataTableComponent extends Component
+final class DataTableComponent extends BaseDataTableComponent
 {
     use HasComponent;
     use HasDataTable;

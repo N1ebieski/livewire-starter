@@ -6,7 +6,6 @@
         @if($active)
         aria-current="page"
         @endif
-        x-on:click="navigate()"
     >
         {{ $attributes->get('title') }}
     </a>

@@ -18,7 +18,7 @@ class AutocompleteComponent extends FormComponent
         public readonly ?string $endpoint = null,
         public readonly ?array $exceptIds = null,
         public readonly bool $validation = true,
-        public readonly bool $highlight = true,
+        public readonly bool $highlight = false,
         public readonly Autocomplete $autocomplete = new Autocomplete()
     ) {
     }

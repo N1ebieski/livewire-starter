@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Livewire\Components;
 
+use Illuminate\Support\Str;
 use App\Livewire\Forms\Form;
 use App\Livewire\Converts\Property;
 use Illuminate\Contracts\Auth\Guard;
@@ -25,16 +26,20 @@ trait HasComponent
 
     private Guard $guard;
 
+    private Str $str;
+
     public function bootHasComponent(
         Container $container,
         ViewFactory $viewFactory,
         Gate $gate,
-        Guard $guard
+        Guard $guard,
+        Str $str
     ): void {
         $this->container = $container;
         $this->viewFactory = $viewFactory;
         $this->gate = $gate;
         $this->guard = $guard;
+        $this->str = $str;
     }
 
     /**
@@ -77,5 +82,33 @@ trait HasComponent
             ->thenReturn();
 
         data_set($this, $name, $property->value);
+
+        $this->callUpdatedArrayHooks($name);
+    }
+
+    /**
+     * Fix for Livewire 3.0. Livewire doesn't call array property updated hook.
+     * For example if user updates $columns[3] = 'something',
+     * Livewire calls only a updatedColumns3 method, instead a updatedColumns.
+     */
+    private function callUpdatedArrayHooks(string $name): void
+    {
+        $ascendantsNames = explode('.', $name);
+
+        if (count($ascendantsNames) > 1) {
+            $parentAlias = implode('.', array_slice($ascendantsNames, 0, -1));
+
+            $parent = data_get($this, $parentAlias);
+
+            if (is_array($parent)) {
+                $parentName = $this->str->of($parentAlias)->replace('.', '_')->camel()->ucfirst();
+
+                $methodName = 'updated' . $parentName;
+
+                if (method_exists($this, $methodName)) {
+                    call_user_func([$this, $methodName], $parent);
+                }
+            }
+        }
     }
 }

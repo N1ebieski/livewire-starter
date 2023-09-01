@@ -8,13 +8,11 @@ use App\Queries\Order;
 use App\Queries\Search;
 use App\Queries\OrderBy;
 use App\Models\Role\Role;
-use App\Models\User\User;
 use App\Queries\Paginate;
 use App\Queries\QueryBus;
 use App\Queries\SearchFactory;
 use App\Filters\Role\RoleFilter;
 use Livewire\Attributes\Computed;
-use App\Livewire\Components\Component;
 use App\Livewire\Components\HasComponent;
 use Illuminate\Database\Eloquent\Collection;
 use App\Livewire\Components\Modal\ModalComponent;
@@ -23,11 +21,12 @@ use App\View\Components\Modal\Modal as BootstrapModal;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Livewire\Forms\Admin\DataTable\Role\DataTableForm;
 use App\Queries\Role\PaginateByFilter\PaginateByFilterQuery;
+use App\Livewire\Components\DataTable\DataTableComponent as BaseDataTableComponent;
 
 /**
  * @property Collection $roles
  */
-final class DataTableComponent extends Component
+final class DataTableComponent extends BaseDataTableComponent
 {
     use HasComponent;
     use HasDataTable;

@@ -6,7 +6,6 @@ namespace App\Livewire\Components\Admin\Role;
 
 use App\Models\Role\Role;
 use App\Commands\CommandBus;
-use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
 use App\Models\Permission\Permission;
 use App\Livewire\Components\Component;
@@ -16,7 +15,6 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Livewire\Forms\Admin\Role\CreateForm;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Contracts\Translation\Translator;
-use Illuminate\Support\Collection as SupportCollection;
 
 /**
  * @property-read Collection<Permission> $permissions

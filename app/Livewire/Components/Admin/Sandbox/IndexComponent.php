@@ -6,7 +6,7 @@ namespace App\Livewire\Components\Admin\Sandbox;
 
 use Illuminate\Contracts\View\View;
 use App\Livewire\Components\HasComponent;
-use App\Livewire\Components\FullPageComponent;
+use App\Livewire\Components\FullPage\FullPageComponent;
 use App\View\Metas\Admin\Home\IndexMetaFactory;
 
 class IndexComponent extends FullPageComponent

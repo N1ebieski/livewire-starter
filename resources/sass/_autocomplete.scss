@@ -3,10 +3,14 @@
         li {
             cursor: pointer;
 
+            &[aria-selected="true"] {
+                background-color: $dropdown-link-hover-bg;
+            }
+
             mark {
-                @extend .fw-bold;
+                color: var(--bs-body-color);
+                background-color: $autocomplete-highlight-bg;
             }
         }
     }
 }
-

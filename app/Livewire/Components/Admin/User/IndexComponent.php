@@ -8,7 +8,7 @@ use Livewire\WithPagination;
 use Illuminate\Contracts\View\View;
 use App\Livewire\Components\HasComponent;
 use App\Livewire\Components\HasTitleWithPage;
-use App\Livewire\Components\FullPageComponent;
+use App\Livewire\Components\FullPage\FullPageComponent;
 use App\View\Metas\Admin\User\IndexMetaFactory;
 
 final class IndexComponent extends FullPageComponent

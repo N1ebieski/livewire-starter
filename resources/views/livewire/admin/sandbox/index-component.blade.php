@@ -10,7 +10,12 @@
                     'pomorskie',
                     'kujawsko-pomorskie',
                     'mazowieckie',
-                    'śląskie'
+                    'śląskie',
+                    'łódzkie',
+                    'podlaskie',
+                    'zachodnio-pomorskie',
+                    'warmińsko-mazurskie',
+                    'wielkopolskie'
                 ]
             ),
             query: <<<'JS'

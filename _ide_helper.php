@@ -18368,6 +18368,36 @@
      *
      */ 
         class Str {
+                    /**
+         * 
+         *
+         * @see \App\Macros\Str\CookieAlias::__invoke()
+         * @param string $namespace
+         * @return string 
+         * @static 
+         */ 
+        public static function cookieAlias($namespace)
+        {
+                        return \Illuminate\Support\Str::cookieAlias($namespace);
+        }
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class Stringable {
+                    /**
+         * 
+         *
+         * @see \App\Macros\Stringable\CookieAlias::__invoke()
+         * @return \Illuminate\Support\Stringable 
+         * @static 
+         */ 
+        public static function cookieAlias()
+        {
+                        return \Illuminate\Support\Stringable::cookieAlias();
+        }
          
     }
      
@@ -19707,6 +19737,17 @@
         {
                         return \Illuminate\View\View::layout($view, $params);
         }
+         
+    }
+     
+}
+
+    namespace App\Macros\Stringable { 
+            /**
+     * 
+     *
+     */ 
+        class CookieAlias {
          
     }
      

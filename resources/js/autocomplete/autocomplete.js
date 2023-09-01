@@ -39,6 +39,7 @@ export default function autoComplete(data) {
                     }),
                 },
                 wrapper: false,
+                threshold: 3,
                 resultsList: {
                     class: "dropdown-menu show",
                 },

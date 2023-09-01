@@ -8,7 +8,6 @@
         @if($active)
         aria-current="page"
         @endif
-        x-on:click="navigate()"
     >
         @if($icon)
         <span class="me-1">{{ $icon }}</span>

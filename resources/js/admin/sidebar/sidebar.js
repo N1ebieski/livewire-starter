@@ -37,10 +37,25 @@ export default function sidebar(data) {
             });
         },
 
-        navigate() {
+        destroy() {
             if (this.isSizeDownLg()) {
-                this.offcanvas.hide();
+                const sidebarWrapper =
+                    document.querySelector(".sidebar-wrapper");
+
+                const sidebar = document.querySelector(".sidebar");
+
+                const backdrop = document.querySelector(".offcanvas-backdrop");
+
+                sidebarWrapper.classList.remove("show");
+
+                sidebar.classList.remove("show");
+
+                if (backdrop) {
+                    backdrop.remove();
+                }
             }
+
+            this.offcanvas.dispose();
         },
 
         isSizeDownLg() {

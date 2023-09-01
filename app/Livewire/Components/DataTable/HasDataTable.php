@@ -9,7 +9,9 @@ use Livewire\Attributes\Locked;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\Validator;
 use App\Livewire\Components\HasDirty;
+use App\Utils\DataTable\Columns\Columns;
 use App\Livewire\Forms\DataTable\DataTableForm;
+use App\Utils\DataTable\Columns\ColumnsFactory;
 use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 
@@ -28,6 +30,8 @@ trait HasDataTable
     private Translator $translator;
 
     private ValidationFactory $validationFactory;
+
+    private ColumnsFactory $columnsFactory;
 
     /**
      * All available columns' names to sort
@@ -79,16 +83,37 @@ trait HasDataTable
         $this->showingColumns = $showingColumns ?? $this->getShowingColumns();
 
         $this->hidingColumns = $hidingColumns ?? $this->getHidingColumns();
+
+        $this->updateColumnsFromCookie();
     }
 
     public function bootHasDataTable(
         Translator $translator,
         ValidationFactory $validationFactory,
+        ColumnsFactory $columnsFactory
     ): void {
         $this->translator = $translator;
         $this->validationFactory = $validationFactory;
+        $this->columnsFactory = $columnsFactory;
 
         $this->listeners['refresh'] = '$refresh';
+    }
+
+    private function updateColumnsFromCookie(): void
+    {
+        if (
+            !$this->columnsFactory->columnsHelper->doesUserHaveColumns(
+                $this->columnsFactory->columnsHelper->getAlias($this::class)
+            )
+        ) {
+            return;
+        }
+
+        $columns = $this->columnsFactory->makeColumns($this::class);
+
+        $this->form->columns = array_values($columns->value);
+
+        $this->validateWithReset();
     }
 
     public function bootedHasDataTable(): void
@@ -118,6 +143,14 @@ trait HasDataTable
     protected function arePropertiesDirty(): bool
     {
         return $this->isDirty(['form.orderby', 'form.search']);
+    }
+
+    public function updatedFormColumns($value): void
+    {
+        $this->columnsFactory->columnsService->createCookie(
+            $this->columnsFactory->columnsHelper->getAlias($this::class),
+            new Columns($value)
+        );
     }
 
     public function updatedPage(): void
@@ -163,6 +196,10 @@ trait HasDataTable
             ->after(function (Validator $validator) {
                 if ($validator->errors()->isNotEmpty()) {
                     $this->clear();
+
+                    $this->columnsFactory->columnsService->removeCookie(
+                        $this->columnsFactory->columnsHelper->getAlias($this::class)
+                    );
                 }
             })
             ->validate();
@@ -231,4 +268,10 @@ trait HasDataTable
     {
         $this->form->columns = array_diff($this->form->columns, $this->hidingColumns[$size]);
     }
+
+    abstract protected function prepareForValidation($attributes): array;
+
+    abstract protected function getDataForValidation($rules);
+
+    abstract public function dispatch($event, ...$params);
 }
