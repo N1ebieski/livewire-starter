@@ -1,4 +1,5 @@
 import axios from "axios";
+import _ from "lodash";
 import TomSelect from "tom-select";
 
 export default function tomSelect(data) {
@@ -10,9 +11,106 @@ export default function tomSelect(data) {
         delete data.config.items;
     }
 
+    if (!data.config.render.option) {
+        delete data.config.render.option;
+    }
+
     return {
         value: data.value,
         tomselect: null,
+
+        init() {
+            const el = this;
+
+            this.tomselect = new TomSelect(
+                el.$refs.tomselect,
+                _.merge(data.config, {
+                    ...(data.endpoint !== null && {
+                        load: async function (query, callback) {
+                            if (query.length < 3) {
+                                callback();
+
+                                return;
+                            }
+
+                            try {
+                                const response = await axios.post(
+                                    data.endpoint,
+                                    {
+                                        search: encodeURIComponent(query),
+                                        except: data.except,
+                                    }
+                                );
+
+                                callback(response.data);
+                            } catch (error) {
+                                callback();
+                            }
+                        },
+                    }),
+                    render: {
+                        ...(data.config.render.option && {
+                            option: new Function(
+                                "data",
+                                "escape",
+                                data.config.render.option
+                            ).bind(this),
+                        }),
+                        ...(data.lang === "pl" && {
+                            no_results: function () {
+                                return '<div class="no-results">Brak wyników</div>';
+                            },
+                            option_create: function (data, escape) {
+                                return (
+                                    '<div class="create">Dodaj <strong>' +
+                                    escape(data.input) +
+                                    "</strong>&hellip;</div>"
+                                );
+                            },
+                        }),
+                    },
+                })
+            );
+
+            this.tomselect.setValue(
+                typeof el.value === "string"
+                    ? el.value.split(",").map((item) => item.trim())
+                    : el.value
+            );
+
+            el.highlight(el.value);
+
+            this.tomselect.on("change", (newValue) => {
+                if (Array.isArray(newValue)) {
+                    el.value = [];
+                }
+
+                el.value = newValue;
+
+                el.highlight(newValue);
+            });
+
+            if (data.validation) {
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach(function (mutation) {
+                        if (mutation.target.classList.contains("is-valid")) {
+                            return el.valid();
+                        }
+
+                        if (mutation.target.classList.contains("is-invalid")) {
+                            return el.invalid();
+                        }
+
+                        return el.default();
+                    });
+                });
+
+                observer.observe(el.$refs.valid, {
+                    attributes: true,
+                    attributeFilter: ["class"],
+                });
+            }
+        },
 
         // addItem(item) {
         //     if (!this.$refs.tomselect) {
@@ -79,95 +177,6 @@ export default function tomSelect(data) {
 
         destroy() {
             this.tomselect.destroy();
-        },
-
-        init() {
-            const el = this;
-
-            this.tomselect = new TomSelect(el.$refs.tomselect, {
-                ...data.config,
-
-                ...(data.endpoint !== null && {
-                    load: async function (query, callback) {
-                        if (query.length < 3) {
-                            callback();
-
-                            return;
-                        }
-
-                        try {
-                            const response = await axios.post(data.endpoint, {
-                                search: encodeURIComponent(query),
-                                except: data.except,
-                            });
-
-                            callback(response.data);
-                        } catch (error) {
-                            callback();
-                        }
-                    },
-                }),
-                render: {
-                    ...(data.config.render.option && {
-                        option: new Function(
-                            "data",
-                            "escape",
-                            data.config.render.option
-                        ).bind(this),
-                    }),
-                    ...(data.lang === "pl" && {
-                        no_results: function () {
-                            return '<div class="no-results">Brak wyników</div>';
-                        },
-                        option_create: function (data, escape) {
-                            return (
-                                '<div class="create">Dodaj <strong>' +
-                                escape(data.input) +
-                                "</strong>&hellip;</div>"
-                            );
-                        },
-                    }),
-                },
-            });
-
-            this.tomselect.setValue(
-                typeof el.value === "string"
-                    ? el.value.split(",").map((item) => item.trim())
-                    : el.value
-            );
-
-            el.highlight(el.value);
-
-            this.tomselect.on("change", (newValue) => {
-                if (Array.isArray(newValue)) {
-                    el.value = [];
-                }
-
-                el.value = newValue;
-
-                el.highlight(newValue);
-            });
-
-            if (data.validation) {
-                const observer = new MutationObserver((mutations) => {
-                    mutations.forEach(function (mutation) {
-                        if (mutation.target.classList.contains("is-valid")) {
-                            return el.valid();
-                        }
-
-                        if (mutation.target.classList.contains("is-invalid")) {
-                            return el.invalid();
-                        }
-
-                        return el.default();
-                    });
-                });
-
-                observer.observe(el.$refs.valid, {
-                    attributes: true,
-                    attributeFilter: ["class"],
-                });
-            }
         },
     };
 }

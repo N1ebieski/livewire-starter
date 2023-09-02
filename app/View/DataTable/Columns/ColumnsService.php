@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Utils\DataTable\Columns;
+namespace App\View\DataTable\Columns;
 
 use Illuminate\Contracts\Cookie\Factory as CookieFactory;
 use Illuminate\Contracts\Cookie\QueueingFactory as CookieQueueingFactory;
@@ -28,7 +28,7 @@ final class ColumnsService
 
     public function removeCookie(string $name): void
     {
-        $this->cookieQueueingFactory->queue(        
+        $this->cookieQueueingFactory->queue(
             $this->cookieFactory->forget($name)
         );
     }

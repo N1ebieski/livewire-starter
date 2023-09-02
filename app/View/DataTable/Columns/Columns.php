@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Utils\DataTable\Columns;
+namespace App\View\DataTable\Columns;
 
 final class Columns
 {

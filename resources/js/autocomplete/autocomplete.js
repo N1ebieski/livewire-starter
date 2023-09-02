@@ -1,7 +1,16 @@
-import { default as tarekraafatAutoComplete } from "@tarekraafat/autocomplete.js";
+import { default as TarekraafatAutoComplete } from "@tarekraafat/autocomplete.js";
 import axios from "axios";
+import _ from "lodash";
 
 export default function autoComplete(data) {
+    if (!data.config.query) {
+        delete data.config.query;
+    }
+
+    if (!data.config.events.input.selection) {
+        delete data.config.events.input.selection;
+    }
+
     return {
         value: data.value,
         autocomplete: null,
@@ -9,64 +18,76 @@ export default function autoComplete(data) {
         init() {
             const el = this;
 
-            this.autocomplete = new tarekraafatAutoComplete({
-                ...data.config,
+            this.autocomplete = new TarekraafatAutoComplete(
+                _.merge(
+                    {
+                        selector: `#${el.$refs.autocomplete.id}`,
+                        wrapper: false,
+                        threshold: 3,
+                        resultsList: {
+                            class: "dropdown-menu show",
+                        },
+                        resultItem: {
+                            highlight: true,
+                            class: "dropdown-item",
+                        },
+                        events: {
+                            input: {
+                                selection: (event) => {
+                                    const selection =
+                                        event.detail.selection.value;
 
-                selector: `#${el.$refs.autocomplete.id}`,
-                data: {
-                    ...data.config.data,
-
-                    ...(data.endpoint !== null && {
-                        src: async function (query) {
-                            if (query.length < 3) {
-                                return;
-                            }
-
-                            try {
-                                const response = await axios.post(
-                                    data.endpoint,
-                                    {
-                                        search: encodeURIComponent(query),
-                                        except: data.except,
+                                    el.autocomplete.input.value = selection;
+                                },
+                            },
+                        },
+                    },
+                    data.config,
+                    {
+                        data: {
+                            ...(data.endpoint !== null && {
+                                src: async function (query) {
+                                    if (query.length < 3) {
+                                        return;
                                     }
-                                );
 
-                                return response.data;
-                            } catch (error) {
-                                return error;
-                            }
+                                    try {
+                                        const response = await axios.post(
+                                            data.endpoint,
+                                            {
+                                                search: encodeURIComponent(
+                                                    query
+                                                ),
+                                                except: data.except,
+                                            }
+                                        );
+
+                                        return response.data;
+                                    } catch (error) {
+                                        return error;
+                                    }
+                                },
+                            }),
                         },
-                    }),
-                },
-                wrapper: false,
-                threshold: 3,
-                resultsList: {
-                    class: "dropdown-menu show",
-                },
-                resultItem: {
-                    highlight: true,
-                    class: "dropdown-item",
-                },
-                events: {
-                    input: {
-                        selection: (event) => {
-                            const selection = event.detail.selection.value;
-
-                            el.autocomplete.input.value = selection;
+                        events: {
+                            input: {
+                                ...(data.config.events.input.selection && {
+                                    selection: new Function(
+                                        "event",
+                                        data.config.events.input.selection
+                                    ).bind(this),
+                                }),
+                            },
                         },
-
-                        ...(data.config.events.input.selection && {
-                            selection: new Function(
-                                "event",
-                                data.config.events.input.selection
+                        ...(data.config.query && {
+                            query: new Function(
+                                "input",
+                                data.config.query
                             ).bind(this),
                         }),
-                    },
-                },
-                ...(data.config.query && {
-                    query: new Function("input", data.config.query).bind(this),
-                }),
-            });
+                    }
+                )
+            );
 
             el.highlight(el.value);
 

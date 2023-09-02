@@ -9,9 +9,9 @@ use Livewire\Attributes\Locked;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\Validator;
 use App\Livewire\Components\HasDirty;
-use App\Utils\DataTable\Columns\Columns;
+use App\View\DataTable\Columns\Columns;
 use App\Livewire\Forms\DataTable\DataTableForm;
-use App\Utils\DataTable\Columns\ColumnsFactory;
+use App\View\DataTable\Columns\ColumnsFactory;
 use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 
