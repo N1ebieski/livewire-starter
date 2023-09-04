@@ -1,7 +1,7 @@
 import * as Popper from "@popperjs/core";
 import * as bootstrap from "bootstrap";
+import { Livewire } from "../../vendor/livewire/livewire/dist/livewire.esm";
 import "./bootstrap";
-import { Livewire } from "./livewire/livewire.js";
 
 import "./modal/modal";
 // import "./toast/toast";

@@ -13,7 +13,6 @@ use App\Livewire\Components\HasComponent;
 use App\Commands\Role\Create\CreateCommand;
 use Illuminate\Database\Eloquent\Collection;
 use App\Livewire\Forms\Admin\Role\CreateForm;
-use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Contracts\Translation\Translator;
 
 /**
@@ -40,8 +39,7 @@ final class CreateComponent extends Component
 
     public function submit(
         CommandBus $commandBus,
-        Translator $translator,
-        UrlGenerator $urlGenerator
+        Translator $translator
     ): void {
         $this->gate->authorize('create', Role::class);
 
@@ -63,9 +61,7 @@ final class CreateComponent extends Component
             body: $translator->get('role.actions.create', ['name' => $role->name->value])
         );
 
-        $this->redirect($urlGenerator->route('admin.role.index', [
-            'search' => "attr:id:\"{$role->id}\"",
-        ]), navigate: true);
+        $this->dispatch('created-role', role: $role->id);
     }
 
     public function render(): View

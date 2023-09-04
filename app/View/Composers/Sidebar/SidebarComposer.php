@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\View\Composers\Sidebar;
 
 use Illuminate\View\View;
-use App\View\Sidebar\SidebarFactory;
+use App\View\Admin\Sidebar\SidebarFactory;
 
 class SidebarComposer
 {

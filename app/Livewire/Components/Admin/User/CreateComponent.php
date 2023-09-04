@@ -7,6 +7,7 @@ namespace App\Livewire\Components\Admin\User;
 use App\Models\Role\Role;
 use App\Models\User\User;
 use App\Commands\CommandBus;
+use App\ValueObjects\Role\Name;
 use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Validator;
@@ -16,9 +17,12 @@ use App\Livewire\Components\HasComponent;
 use App\Commands\User\Create\CreateCommand;
 use Illuminate\Database\Eloquent\Collection;
 use App\Livewire\Forms\Admin\User\CreateForm;
-use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Contracts\Translation\Translator;
+use Illuminate\Support\Collection as SupportCollection;
 
+/**
+ * @property-read Collection $roles
+ */
 final class CreateComponent extends Component
 {
     use HasComponent;
@@ -29,11 +33,12 @@ final class CreateComponent extends Component
 
     public CreateForm $form;
 
-    public function mount(Role $role): void
+    public function mount(?string $role = null): void
     {
-        $this->role = $role;
-
-        $this->form->roles = $this->roles->where('name', DefaultName::USER)->pluck('id')->toArray();
+        $this->form->roles = $this->roles->where('name', new Name(DefaultName::USER->value))
+            ->pluck('id')
+            ->when($role, fn (SupportCollection $collection) => $collection->merge($role))
+            ->toArray();
     }
 
     public function boot(
@@ -65,8 +70,7 @@ final class CreateComponent extends Component
 
     public function submit(
         CommandBus $commandBus,
-        Translator $translator,
-        UrlGenerator $urlGenerator
+        Translator $translator
     ): void {
         $this->gate->authorize('create', User::class);
 
@@ -90,9 +94,7 @@ final class CreateComponent extends Component
             body: $translator->get('user.actions.create', ['name' => $user->name])
         );
 
-        $this->redirect($urlGenerator->route('admin.user.index', [
-            'search' => "attr:id:\"{$user->id}\"",
-        ]), navigate: true);
+        $this->dispatch('created-user', user: $user->id);
     }
 
     public function render(): View

@@ -5,7 +5,7 @@
             alias: @js($modal->alias),
             config: @js($modal->modal)
         })"
-        x-on:hide-modal="hide($event.detail)"
+        x-on:hide-modal="hide($event)"
         wire:key="{{ $modal->alias }}"
         wire:ignore
     >

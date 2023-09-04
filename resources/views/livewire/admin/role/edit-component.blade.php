@@ -9,6 +9,7 @@
                 <x-forms.text-component
                     wire:model="form.name"
                     :label="trans('role.name.label')"
+                    :disabled="$role->name->isDefault()"
                 />
             </div>
             <div class="mb-3">

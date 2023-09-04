@@ -17,7 +17,7 @@ use App\Livewire\Components\HasComponent;
 use App\Livewire\Forms\Admin\User\EditForm;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Translation\Translator;
-use App\Livewire\Components\Admin\DataTable\User\DataTableComponent;
+use App\Livewire\Components\Admin\DataTables\User\DataTableComponent;
 
 final class EditComponent extends Component
 {

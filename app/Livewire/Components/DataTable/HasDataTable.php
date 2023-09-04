@@ -4,19 +4,23 @@ declare(strict_types=1);
 
 namespace App\Livewire\Components\DataTable;
 
+use Illuminate\Support\Str;
+use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use Livewire\Attributes\Locked;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\Validator;
 use App\Livewire\Components\HasDirty;
 use App\View\DataTable\Columns\Columns;
-use App\Livewire\Forms\DataTable\DataTableForm;
 use App\View\DataTable\Columns\ColumnsFactory;
+use App\Livewire\Forms\DataTable\DataTableForm;
 use Illuminate\Contracts\Translation\Translator;
+use Livewire\Features\SupportAttributes\AttributeCollection;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 
 /**
  * @property-read DataTableForm $form
+ * @property AttributeCollection $attributes
  */
 trait HasDataTable
 {
@@ -32,6 +36,8 @@ trait HasDataTable
     private ValidationFactory $validationFactory;
 
     private ColumnsFactory $columnsFactory;
+
+    private Str $str;
 
     /**
      * All available columns' names to sort
@@ -67,12 +73,34 @@ trait HasDataTable
         'lg' => []
     ];
 
+    /**
+     * Locked specific form attributes
+     */
+    #[Locked]
+    public ?array $lockedAttributes = null;
+
+    /**
+     * Pass to url specific form attributes
+     */
+    #[Locked]
+    public ?array $urlAttributes = null;
+
+    #[Locked]
+    public ?array $filters = null;
+
+    #[Locked]
+    public bool $showPage = true;
+
     public function mountHasDataTable(
         ?array $columns = null,
         ?array $sorts = null,
+        ?array $filters = null,
         ?array $availableColumns = null,
         ?array $showingColumns = null,
         ?array $hidingColumns = null,
+        ?array $lockedAttributes = null,
+        ?array $urlAttributes = null,
+        bool $showPage = true
     ): void {
         $this->form->columns = $columns ?? $this->form->getColumns();
 
@@ -84,19 +112,95 @@ trait HasDataTable
 
         $this->hidingColumns = $hidingColumns ?? $this->getHidingColumns();
 
+        $this->filters = $filters ?? $this->getFilters();
+
+        $this->lockedAttributes = $lockedAttributes;
+
+        $this->urlAttributes = $urlAttributes;
+
+        $this->showPage = $showPage;
+
+        $this->setPaginators();
+
         $this->updateColumnsFromCookie();
     }
 
     public function bootHasDataTable(
         Translator $translator,
         ValidationFactory $validationFactory,
-        ColumnsFactory $columnsFactory
+        ColumnsFactory $columnsFactory,
+        Str $str
     ): void {
         $this->translator = $translator;
         $this->validationFactory = $validationFactory;
         $this->columnsFactory = $columnsFactory;
+        $this->str = $str;
 
         $this->listeners['refresh'] = '$refresh';
+
+        $this->updateLockedAttributes();
+
+        $this->updateUrlAttributes();
+    }
+
+    /**
+     * Fix. Livewire doesn't support disabling a page param in the query string.
+     * This hack terminate a function SupportPagination::ensurePaginatorIsInitialized
+     */
+    private function setPaginators(): void
+    {
+        if (!$this->showPage) {
+            $this->paginators['page'] = 1;
+        }
+    }
+
+    private function updateUrlAttributes(): void
+    {
+        if (is_null($this->urlAttributes)) {
+            return;
+        }
+
+        $this->attributes->each(function ($attribute, $key) {
+            if (!$attribute instanceof Url) {
+                return;
+            }
+
+            if (!$this->str->startsWith($attribute->getName(), 'form.')) {
+                return;
+            }
+
+            $this->attributes->forget($key);
+        });
+
+        foreach ($this->urlAttributes as $attribute) {
+            $this->setPropertyAttribute(
+                $attribute,
+                new Url(as: $this->str->match('/\.([^.]*?)$/', $attribute))
+            );
+        }
+    }
+
+    private function updateLockedAttributes(): void
+    {
+        if (is_null($this->lockedAttributes)) {
+            return;
+        }
+
+        $this->attributes->each(function ($attribute, $key) {
+            if (!$attribute instanceof Url) {
+                return;
+            }
+
+            if (!$this->str->startsWith($attribute->getName(), 'form.')) {
+                return;
+            }
+
+            $this->attributes->forget($key);
+        });
+
+        foreach ($this->lockedAttributes as $attribute) {
+            $this->setPropertyAttribute($attribute, new Locked());
+        }
     }
 
     private function updateColumnsFromCookie(): void
@@ -132,14 +236,6 @@ trait HasDataTable
         return $this;
     }
 
-    abstract protected function getSorts(): array;
-
-    abstract protected function getAvailableColumns(): array;
-
-    abstract protected function getShowingColumns(): array;
-
-    abstract protected function getHidingColumns(): array;
-
     protected function arePropertiesDirty(): bool
     {
         return $this->isDirty(['form.orderby', 'form.search']);
@@ -160,7 +256,9 @@ trait HasDataTable
 
     public function renderedHasDataTable(): void
     {
-        $this->dispatch('updated-page', page: $this->getPage());
+        if ($this->showPage) {
+            $this->dispatch('updated-page', page: $this->getPage());
+        }
     }
 
     /**
@@ -207,7 +305,16 @@ trait HasDataTable
 
     public function clear(): void
     {
-        $this->form->reset();
+        $attributes = [];
+
+        if ($this->lockedAttributes) {
+            $attributes = array_map(
+                fn (string $attribute) => $this->str->match('/^form\.(.*)/', $attribute),
+                $this->lockedAttributes
+            );
+        }
+
+        $this->form->resetExcept(...$attributes);
 
         $this->dirty();
     }
@@ -262,12 +369,22 @@ trait HasDataTable
 
     /**
      * Hide specific columns on specific devices. Component is re-render by Alpine
-     * during initialization. Use with defer loading queries
+     * during initialization.
      */
     public function hideColumns(string $size): void
     {
         $this->form->columns = array_diff($this->form->columns, $this->hidingColumns[$size]);
     }
+
+    abstract protected function getSorts(): array;
+
+    abstract protected function getFilters(): array;
+
+    abstract protected function getAvailableColumns(): array;
+
+    abstract protected function getShowingColumns(): array;
+
+    abstract protected function getHidingColumns(): array;
 
     abstract protected function prepareForValidation($attributes): array;
 

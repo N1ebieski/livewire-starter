@@ -14,7 +14,7 @@ use App\Livewire\Components\HasComponent;
 use App\Livewire\Forms\Admin\Role\EditForm;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Translation\Translator;
-use App\Livewire\Components\Admin\DataTable\User\DataTableComponent;
+use App\Livewire\Components\Admin\DataTables\Role\DataTableComponent;
 
 final class EditComponent extends Component
 {
@@ -32,6 +32,10 @@ final class EditComponent extends Component
 
         $this->form->name = $role->name->value;
         $this->form->permissions = $role->permissions->pluck('id')->toArray();
+
+        if ($this->role->name->isDefault()) {
+            $this->setPropertyAttribute('form.name', new Locked());
+        }
     }
 
     private function getFormPermissionsAsCollection(): Collection

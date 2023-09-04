@@ -42,7 +42,10 @@
         <li>
             <div class="dropdown-item">
                 <div 
-                    x-data="{ show: @js(in_array($column, $value)) }"
+                    x-data="{ 
+                        show: @js(in_array($column, $value)),
+                        id: $id('column-{{ $column }}')
+                    }"
                     x-key="$column"
                     class="form-check form-switch"
                 >
@@ -50,7 +53,7 @@
                         class="form-check-input" 
                         type="checkbox" 
                         role="switch" 
-                        id="column-{{ $column }}"
+                        :id="id"
                         wire:model="form.columns"
                         x-on:click="
                             outside = true
@@ -59,7 +62,7 @@
                         value="{{ $column }}"
                         {{ in_array($column, $value) ? 'checked' : '' }}
                     >
-                    <label class="form-check-label" for="column-{{ $column }}">
+                    <label class="form-check-label" :for="id">
                         <span x-cloak x-show="show">{{ trans('data-table.show') }}</span>
                         <span x-cloak x-show="!show">{{ trans('data-table.hide') }}</span>
                         <span>"{{ $label ?? $column }}"</span>

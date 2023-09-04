@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Livewire\Forms\Admin\DataTable\User;
+namespace App\Livewire\Forms\Admin\DataTables\User;
 
 use App\Models\Role\Role;
 use Livewire\Attributes\Url;
 use App\ValueObjects\User\StatusEmail;
 use App\Livewire\Forms\DataTable\DataTableForm as BaseDataTableForm;
 
-final class DataTableForm extends BaseDataTableForm
+class DataTableForm extends BaseDataTableForm
 {
     #[Url(as: 'columns')]
     public array $columns = ['id', 'name', 'email', 'roles', 'created_at', 'updated_at'];

@@ -22,11 +22,11 @@ export default function row(data) {
         action: [],
 
         highlight(event) {
-            if (!event.ids.includes(data.id)) {
+            if (!event.detail.ids.includes(data.id)) {
                 return;
             }
 
-            const action = new Action(event.action);
+            const action = new Action(event.detail.action);
 
             this.action = action.getClass();
 

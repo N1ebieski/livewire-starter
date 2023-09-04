@@ -33,7 +33,9 @@ final class EditForm extends Form
                 'required',
                 'string',
                 'max:255',
-                $this->rule->unique($role->getTable(), 'name')->ignore($this->component->role->id)
+                $this->rule->unique($role->getTable(), 'name')->ignore($this->component->role->id),
+                $this->component->role->name->isDefault() ?
+                    $this->rule->in([$this->component->role->name->value]) : null
             ],
             'permissions' => [
                 'required',

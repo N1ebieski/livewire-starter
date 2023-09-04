@@ -12,7 +12,7 @@ use App\Livewire\Components\Component;
 use App\Livewire\Components\HasComponent;
 use App\Commands\Role\Delete\DeleteCommand;
 use Illuminate\Contracts\Translation\Translator;
-use App\Livewire\Components\Admin\DataTable\Role\DataTableComponent;
+use App\Livewire\Components\Admin\DataTables\Role\DataTableComponent;
 
 class DeleteComponent extends Component
 {

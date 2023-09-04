@@ -15,10 +15,7 @@
                     'form-check-input',
                     'is-invalid' => $errors->has($attributes->get('name')),
                     'is-valid' => $errors->isNotEmpty() && !$errors->has($attributes->get('name'))
-                ])->filter(fn ($value) => is_string($value)) }}      
-                @if($attributes->get('checked'))
-                checked
-                @endif                       
+                ])->filter(fn ($value) => is_string($value) || $value === true) }}                    
             >
             <label 
                 for="{{ $attributes->get('id') }}" 

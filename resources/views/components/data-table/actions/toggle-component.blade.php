@@ -12,10 +12,7 @@
             role="switch" 
             aria-label="{{ trans('default.toggle') }}"
             x-on:click.stop="loading=true"
-            {{ $attributes->filter(fn ($value) => is_string($value)) }}
-            @if($attributes->get('checked'))
-            checked
-            @endif
+            {{ $attributes->filter(fn ($value) => is_string($value) || $value === true) }}
         >
     </div>
     <span x-show="loading" x-cloak>

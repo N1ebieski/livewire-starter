@@ -5,14 +5,25 @@ declare(strict_types=1);
 namespace App\Livewire\Components;
 
 use Livewire\Attributes\Locked;
+use Livewire\Features\SupportAttributes\Attribute;
+use Livewire\Features\SupportAttributes\AttributeCollection;
 
 /**
  * Trait to check if any specific property is dirty
+ *
+ * @property AttributeCollection $attributes
  */
 trait HasDirty
 {
     #[Locked]
     public bool $isDirty = false;
+
+    private function isPropertyLocked(string $name)
+    {
+        return $this->attributes->contains(function (Attribute $attribute) use ($name) {
+            return $attribute instanceof Locked && $attribute->getName() === $name;
+        });
+    }
 
     protected function isDirty(mixed ...$properties): bool
     {
@@ -24,6 +35,10 @@ trait HasDirty
         $freshInstance = new static();
 
         foreach ($properties as $property) {
+            if ($this->isPropertyLocked($property)) {
+                continue;
+            }
+
             if (data_get($this, $property) !== data_get($freshInstance, $property)) {
                 return true;
             }

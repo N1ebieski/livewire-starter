@@ -23,7 +23,7 @@ export default function modal(data) {
         },
 
         hide(event) {
-            if (event.alias !== data.alias) {
+            if (event.detail.alias !== data.alias) {
                 return;
             }
 

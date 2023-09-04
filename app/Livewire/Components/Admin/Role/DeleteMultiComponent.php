@@ -14,7 +14,7 @@ use App\Livewire\Components\HasComponent;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Translation\Translator;
 use App\Commands\Role\DeleteMulti\DeleteMultiCommand;
-use App\Livewire\Components\Admin\DataTable\Role\DataTableComponent;
+use App\Livewire\Components\Admin\DataTables\Role\DataTableComponent;
 
 class DeleteMultiComponent extends Component
 {

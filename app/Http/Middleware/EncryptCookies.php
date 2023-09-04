@@ -13,6 +13,6 @@ class EncryptCookies extends Middleware
      */
     protected $except = [
         'theme_toggle',
-        'sidebar_toggle'
+        'admin_sidebar_toggle'
     ];
 }

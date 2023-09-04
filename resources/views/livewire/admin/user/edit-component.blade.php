@@ -46,8 +46,8 @@
                     multiple="true"
                 />
             </div>                      
-        </form>
-    </x-slot:body>    
+        </form>       
+    </x-slot:body>
 
     <x-slot:footer>
         <x-buttons.button-component

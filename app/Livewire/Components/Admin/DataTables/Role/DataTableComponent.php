@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Livewire\Components\Admin\DataTable\Role;
+namespace App\Livewire\Components\Admin\DataTables\Role;
 
 use App\Queries\Order;
 use App\Queries\Search;
@@ -10,16 +10,18 @@ use App\Queries\OrderBy;
 use App\Models\Role\Role;
 use App\Queries\Paginate;
 use App\Queries\QueryBus;
+use Livewire\Attributes\On;
 use App\Queries\SearchFactory;
 use App\Filters\Role\RoleFilter;
 use Livewire\Attributes\Computed;
+use App\View\Components\Modal\Size;
 use App\Livewire\Components\HasComponent;
 use Illuminate\Database\Eloquent\Collection;
 use App\Livewire\Components\Modal\ModalComponent;
 use App\Livewire\Components\DataTable\HasDataTable;
 use App\View\Components\Modal\Modal as BootstrapModal;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use App\Livewire\Forms\Admin\DataTable\Role\DataTableForm;
+use App\Livewire\Forms\Admin\DataTables\Role\DataTableForm;
 use App\Queries\Role\PaginateByFilter\PaginateByFilterQuery;
 use App\Livewire\Components\DataTable\DataTableComponent as BaseDataTableComponent;
 
@@ -100,6 +102,11 @@ final class DataTableComponent extends BaseDataTableComponent
         return $this->role->sortable;
     }
 
+    protected function getFilters(): array
+    {
+        return ['search', 'columns', 'paginate'];
+    }
+
     protected function getAvailableColumns(): array
     {
         return [
@@ -148,7 +155,8 @@ final class DataTableComponent extends BaseDataTableComponent
             alias: 'admin.role.edit-component',
             modal: new BootstrapModal(
                 static: true,
-                scrollable: true
+                scrollable: true,
+                size: Size::MODAL_XL
             ),
             role: $role->id
         )->to(ModalComponent::class);
@@ -174,10 +182,16 @@ final class DataTableComponent extends BaseDataTableComponent
         )->to(ModalComponent::class);
     }
 
+    #[On('created-role')]
+    public function updateSearch(Role $role): void
+    {
+        $this->form->search = "attr:id:\"{$role->id}\"";
+    }
+
     public function render()
     {
         $this->gate->authorize("admin.role.view");
 
-        return $this->viewFactory->make('livewire.admin.data-table.role.data-table-component');
+        return $this->viewFactory->make('livewire.admin.data-tables.role.data-table-component');
     }
 }

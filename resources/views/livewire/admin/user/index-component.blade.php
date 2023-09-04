@@ -7,5 +7,5 @@
 
     {{-- <a href="{{ route('admin.home.index') }}" wire:navigate.hover>home</a> --}}
     
-    <livewire:admin.data-table.user.data-table-component />
+    <livewire:admin.data-tables.user.data-table-component />
 </x-admin.layouts.app.slot-component>

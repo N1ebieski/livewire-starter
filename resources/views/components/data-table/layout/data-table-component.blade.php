@@ -4,7 +4,7 @@
     {{ $attributes->class(['data-table'])->filter(fn ($value) => is_string($value)) }}    
 >
     @if(isset($filter))
-    <x-data-table.filter-component :isDirty="$isDirty">
+    <x-data-table.filters-component :isDirty="$isDirty">
         <div
             {{ $filter->attributes->class([
                 'd-flex', 'flex-wrap', 'gap-2', 'w-100'

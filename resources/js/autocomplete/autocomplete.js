@@ -1,6 +1,6 @@
 import { default as TarekraafatAutoComplete } from "@tarekraafat/autocomplete.js";
 import axios from "axios";
-import _ from "lodash";
+import _merge from "lodash/merge";
 
 export default function autoComplete(data) {
     if (!data.config.query) {
@@ -19,7 +19,7 @@ export default function autoComplete(data) {
             const el = this;
 
             this.autocomplete = new TarekraafatAutoComplete(
-                _.merge(
+                _merge(
                     {
                         selector: `#${el.$refs.autocomplete.id}`,
                         wrapper: false,

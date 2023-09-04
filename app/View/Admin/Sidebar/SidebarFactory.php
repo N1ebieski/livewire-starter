@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\View\Sidebar;
+namespace App\View\Admin\Sidebar;
 
 use Illuminate\Http\Request;
-use App\View\Sidebar\Sidebar;
+use App\View\Admin\Sidebar\Sidebar;
 
 class SidebarFactory
 {
@@ -17,8 +17,8 @@ class SidebarFactory
     {
         $show = null;
 
-        if (in_array($this->request->cookie('sidebar_toggle'), ['false', 'true'])) {
-            $show = $this->request->cookie('sidebar_toggle') === 'true' ?
+        if (in_array($this->request->cookie('admin_sidebar_toggle'), ['false', 'true'])) {
+            $show = $this->request->cookie('admin_sidebar_toggle') === 'true' ?
                 true : false;
         }
 

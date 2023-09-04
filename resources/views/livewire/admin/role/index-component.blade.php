@@ -5,5 +5,5 @@
         </x-breadcrumb.item-component>
     </x-slot:breadcrumb>
 
-    <livewire:admin.data-table.role.data-table-component />
+    <livewire:admin.data-tables.role.data-table-component />
 </x-admin.layouts.app.slot-component>

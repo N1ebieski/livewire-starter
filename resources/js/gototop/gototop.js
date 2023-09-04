@@ -1,4 +1,4 @@
-import { Livewire } from "../livewire/livewire.js";
+import { Livewire } from "../../../vendor/livewire/livewire/dist/livewire.esm";
 
 Livewire.on("gototop", () => {
     window.scrollTo({

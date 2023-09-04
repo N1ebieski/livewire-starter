@@ -1,5 +1,5 @@
 import axios from "axios";
-import _ from "lodash";
+import _merge from "lodash/merge";
 import TomSelect from "tom-select";
 
 export default function tomSelect(data) {
@@ -24,7 +24,23 @@ export default function tomSelect(data) {
 
             this.tomselect = new TomSelect(
                 el.$refs.tomselect,
-                _.merge(data.config, {
+                _merge(data.config, {
+                    onInitialize: () => {
+                        const tsDropdown =
+                            document.querySelector("body .ts-dropdown");
+                        const dropdowns = document.querySelector("#dropdowns");
+
+                        dropdowns.appendChild(tsDropdown);
+                    },
+                    onChange: (newValue) => {
+                        if (Array.isArray(newValue)) {
+                            el.value = [];
+                        }
+
+                        el.value = newValue;
+
+                        el.highlight(newValue);
+                    },
                     ...(data.endpoint !== null && {
                         load: async function (query, callback) {
                             if (query.length < 3) {
@@ -79,16 +95,6 @@ export default function tomSelect(data) {
             );
 
             el.highlight(el.value);
-
-            this.tomselect.on("change", (newValue) => {
-                if (Array.isArray(newValue)) {
-                    el.value = [];
-                }
-
-                el.value = newValue;
-
-                el.highlight(newValue);
-            });
 
             if (data.validation) {
                 const observer = new MutationObserver((mutations) => {

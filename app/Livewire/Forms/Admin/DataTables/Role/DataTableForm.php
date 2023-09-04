@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Livewire\Forms\Admin\DataTable\Role;
+namespace App\Livewire\Forms\Admin\DataTables\Role;
 
 use Livewire\Attributes\Url;
 use App\Livewire\Forms\DataTable\DataTableForm as BaseDataTableForm;

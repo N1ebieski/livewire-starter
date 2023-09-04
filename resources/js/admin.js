@@ -1,7 +1,10 @@
 import * as Popper from "@popperjs/core";
 import * as bootstrap from "bootstrap";
+import {
+    Alpine,
+    Livewire,
+} from "../../vendor/livewire/livewire/dist/livewire.esm";
 import "./bootstrap";
-import { Alpine, Livewire } from "./livewire/livewire.js";
 
 import sidebar from "./admin/sidebar/sidebar";
 import autoComplete from "./autocomplete/autocomplete";
