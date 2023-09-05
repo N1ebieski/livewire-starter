@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Commands\Role\Edit;
 
 use App\Commands\Handler;
-use Spatie\Permission\Models\Role;
+use App\Models\Role\Role;
 use App\Models\Permission\Permission;
 use App\Commands\Role\Edit\EditCommand;
 
@@ -33,6 +33,7 @@ class EditHandler extends Handler
 
         $this->db->commit();
 
+        /** @var Role */
         return $role->fresh();
     }
 }

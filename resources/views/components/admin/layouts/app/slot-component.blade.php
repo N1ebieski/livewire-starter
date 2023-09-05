@@ -15,11 +15,11 @@
             </div>
         </div>
 
-        {{-- <x-admin.footer.footer-component /> --}}
+        <x-admin.footer.footer-component />
     </div>
 
     <x-toast.toast-component />
-    {{-- <x-scroll-to-top.scroll-to-top-component /> --}}
+    <x-scroll-to-top.scroll-to-top-component />
 
     <livewire:modal.modal-component />
 </div>

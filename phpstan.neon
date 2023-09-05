@@ -1,0 +1,26 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+	level: 8
+	paths:
+		- ./app
+		- ./database
+		- ./routes
+		- ./tests	
+	noModelMake: false
+	checkMissingIterableValueType: false
+	checkGenericClassInNonGenericObjectType: false
+	universalObjectCratesClasses:
+
+	ignoreErrors:
+		- '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$created_at#'
+		- '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$updated_at#'
+		- '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$id#'
+		- '#^Call to an undefined method Illuminate\\Contracts\\View\\View::layout\(\)#'
+		- '#^Parameter \#1 \$callback of method Illuminate\\(Support|Database\\Eloquent)\\Collection\<\(int\|string\),Illuminate\\Database\\Eloquent\\Model\>::(each|map)\(\) expects#'
+		- '#^Parameter \#1 \$column of method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>::where\(\) expects#'
+		- '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Factories\\Factory\<[A-Za-z\d\\]+\>::(afterMaking|afterCreating)\(\) expects#'
+		- '#^Call to an undefined method ReflectionType::getName\(\)#'
+		- '#^Parameter \#\d \$column of method .*? Illuminate\\Contracts\\Database\\Query\\Expression given#'
+	

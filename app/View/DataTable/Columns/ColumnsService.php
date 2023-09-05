@@ -11,19 +11,22 @@ final class ColumnsService
 {
     public function __construct(
         private CookieFactory $cookieFactory,
-        private ColumnsHelper $columnsHelper,
         private CookieQueueingFactory $cookieQueueingFactory
     ) {
     }
 
     public function createCookie(string $name, Columns $columns): void
     {
-        $this->cookieQueueingFactory->queue(
-            $this->cookieFactory->forever(
-                name: $name,
-                value: json_encode($columns->value)
-            )
-        );
+        $value = json_encode($columns->value);
+
+        if ($value) {
+            $this->cookieQueueingFactory->queue(
+                $this->cookieFactory->forever(
+                    name: $name,
+                    value: $value
+                )
+            );
+        }
     }
 
     public function removeCookie(string $name): void

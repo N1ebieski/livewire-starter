@@ -14,7 +14,7 @@ use Livewire\Attributes\On;
 use App\Queries\SearchFactory;
 use App\Filters\Role\RoleFilter;
 use Livewire\Attributes\Computed;
-use App\View\Components\Modal\Size;
+use Illuminate\Contracts\View\View;
 use App\Livewire\Components\HasComponent;
 use Illuminate\Database\Eloquent\Collection;
 use App\Livewire\Components\Modal\ModalComponent;
@@ -27,6 +27,7 @@ use App\Livewire\Components\DataTable\DataTableComponent as BaseDataTableCompone
 
 /**
  * @property Collection $roles
+ * @property DataTableForm $form
  */
 final class DataTableComponent extends BaseDataTableComponent
 {
@@ -69,7 +70,7 @@ final class DataTableComponent extends BaseDataTableComponent
         return $roles;
     }
 
-    private function getFilterPaginate(): ?Paginate
+    private function getFilterPaginate(): Paginate
     {
         return new Paginate($this->form->paginate);
     }
@@ -155,8 +156,7 @@ final class DataTableComponent extends BaseDataTableComponent
             alias: 'admin.role.edit-component',
             modal: new BootstrapModal(
                 static: true,
-                scrollable: true,
-                size: Size::MODAL_XL
+                scrollable: true
             ),
             role: $role->id
         )->to(ModalComponent::class);
@@ -188,7 +188,7 @@ final class DataTableComponent extends BaseDataTableComponent
         $this->form->search = "attr:id:\"{$role->id}\"";
     }
 
-    public function render()
+    public function render(): View
     {
         $this->gate->authorize("admin.role.view");
 

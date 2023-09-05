@@ -21,7 +21,8 @@ use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Support\Collection as SupportCollection;
 
 /**
- * @property-read Collection $roles
+ * @property-read Collection<Role> $roles
+ * @property CreateForm $form
  */
 final class CreateComponent extends Component
 {
@@ -37,7 +38,7 @@ final class CreateComponent extends Component
     {
         $this->form->roles = $this->roles->where('name', new Name(DefaultName::USER->value))
             ->pluck('id')
-            ->when($role, fn (SupportCollection $collection) => $collection->merge($role))
+            ->when($role, fn (SupportCollection $collection) => $collection->merge([$role]))
             ->toArray();
     }
 
@@ -80,9 +81,9 @@ final class CreateComponent extends Component
         $user = $commandBus->execute(
             new CreateCommand(
                 user: $this->user,
-                name: $this->form->name,
-                email: $this->form->email,
-                password: $this->form->password,
+                name: $this->form->name, //@phpstan-ignore-line
+                email: $this->form->email, //@phpstan-ignore-line
+                password: $this->form->password, //@phpstan-ignore-line
                 roles: $this->getFormRolesAsCollection()
             )
         );

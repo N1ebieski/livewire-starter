@@ -45,6 +45,7 @@ class CreateHandler extends Handler
 
         $this->db->commit();
 
+        /** @var User */
         return $user->fresh();
     }
 }

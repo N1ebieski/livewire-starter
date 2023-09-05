@@ -35,6 +35,7 @@ final class CommandBus
 
         $handlerNamespace = $this->str->beforeLast($class, '\\');
 
+        /** @var string */
         $handlerName = $this->str->replace('Command', 'Handler', class_basename($command));
 
         $handlerName = $handlerNamespace . '\\' . $handlerName;

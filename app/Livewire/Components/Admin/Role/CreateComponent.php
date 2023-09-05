@@ -17,6 +17,8 @@ use Illuminate\Contracts\Translation\Translator;
 
 /**
  * @property-read Collection<Permission> $permissions
+ * @property-write Role $role
+ * @property CreateForm $form
  */
 final class CreateComponent extends Component
 {
@@ -49,7 +51,7 @@ final class CreateComponent extends Component
         $role = $commandBus->execute(
             new CreateCommand(
                 role: $this->role,
-                name: $this->form->name,
+                name: $this->form->name, //@phpstan-ignore-line
                 permissions: $this->getFormPermissionsAsCollection()
             )
         );

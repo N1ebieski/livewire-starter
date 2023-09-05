@@ -17,6 +17,7 @@ import "./meta/meta";
 import modal from "./modal/modal";
 import multiTheme from "./multi-theme/multi-theme";
 import navbar from "./navbar/navbar";
+import scrollToTop from "./scroll-to-top/scroll-to-top";
 import toast from "./toast/toast";
 import tomSelect from "./tomselect/tomselect";
 
@@ -30,6 +31,7 @@ Alpine.data("tomSelect", tomSelect);
 Alpine.data("toast", toast);
 Alpine.data("multiTheme", multiTheme);
 Alpine.data("autoComplete", autoComplete);
+Alpine.data("scrollToTop", scrollToTop);
 
 window.bootstrap = bootstrap;
 window.Popper = Popper;

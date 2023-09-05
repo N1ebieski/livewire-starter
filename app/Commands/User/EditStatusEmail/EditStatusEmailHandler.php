@@ -48,6 +48,7 @@ class EditStatusEmailHandler extends Handler
 
         $this->db->commit();
 
+        /** @var User */
         return $command->user->fresh();
     }
 }

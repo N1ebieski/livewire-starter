@@ -6,6 +6,7 @@ use App\Models\Role\Role;
 use App\Models\User\User;
 use App\ValueObjects\Role\DefaultName;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 final class RolePolicy
 {
@@ -26,6 +27,13 @@ final class RolePolicy
             && !$role->name->isDefault();
     }
 
+    /**
+     *
+     * @param User $user
+     * @param Collection<Role> $roles
+     * @return bool
+     * @throws BindingResolutionException
+     */
     public function deleteMulti(User $user, Collection $roles): bool
     {
         foreach ($roles as $role) {

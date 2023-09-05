@@ -105,8 +105,10 @@ trait HasComponent
 
                 $methodName = 'updated' . $parentName;
 
-                if (method_exists($this, $methodName)) {
-                    call_user_func([$this, $methodName], $parent);
+                $callback = [$this, $methodName];
+
+                if (is_callable($callback)) {
+                    call_user_func($callback, $parent);
                 }
             }
         }

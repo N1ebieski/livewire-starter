@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Role\Role;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -12,9 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $role = new Role();
-
-        DB::statement("ALTER TABLE `{$role->getTable()}` ADD FULLTEXT `fulltext_index` (`name`)");
+        DB::statement("ALTER TABLE `roles` ADD FULLTEXT `fulltext_index` (`name`)");
     }
 
     /**
@@ -22,9 +19,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        $role = new Role();
-
-        Schema::create($role->getTable(), function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->dropIndex('fulltext_index');
         });
     }

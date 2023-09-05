@@ -21,11 +21,10 @@ class ColumnsFactory
 
         $alias = $this->columnsHelper->getAlias($namespace);
 
-        if ($this->columnsHelper->doesUserHaveColumns($alias)) {
-            $value = json_decode(
-                $this->request->cookie($alias),
-                flags: JSON_OBJECT_AS_ARRAY
-            );
+        $cookie = $this->request->cookie($alias);
+
+        if ($this->columnsHelper->doesUserHaveColumns($alias) && is_string($cookie)) {
+            $value = json_decode($cookie, flags: JSON_OBJECT_AS_ARRAY);
         }
 
         return new Columns($value);

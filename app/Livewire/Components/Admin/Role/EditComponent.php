@@ -16,6 +16,10 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Translation\Translator;
 use App\Livewire\Components\Admin\DataTables\Role\DataTableComponent;
 
+/**
+ * @property-write Role $role
+ * @property EditForm $form
+ */
 final class EditComponent extends Component
 {
     use HasComponent;
@@ -54,7 +58,7 @@ final class EditComponent extends Component
         /** @var Role */
         $role = $commandBus->execute(new EditCommand(
             role: $this->role,
-            name: $this->form->name,
+            name: $this->form->name, //@phpstan-ignore-line
             permissions: $this->getFormPermissionsAsCollection()
         ));
 

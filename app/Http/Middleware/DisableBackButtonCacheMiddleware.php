@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Config;
 use Symfony\Component\HttpFoundation\Response;
 use Livewire\Features\SupportDisablingBackButtonCache\SupportDisablingBackButtonCache;
 use Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware as BaseDisableBackButtonCacheMiddleware ;
@@ -13,7 +14,7 @@ final class DisableBackButtonCacheMiddleware extends BaseDisableBackButtonCacheM
     {
         $response = $next($request);
 
-        SupportDisablingBackButtonCache::$disableBackButtonCache = false;
+        SupportDisablingBackButtonCache::$disableBackButtonCache = Config::get('livewire.back_button_cache');
 
         if ($response instanceof Response && SupportDisablingBackButtonCache::$disableBackButtonCache) {
             $response->headers->add([

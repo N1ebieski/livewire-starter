@@ -21,11 +21,15 @@ trait HasFilterableScopes
     public function scopeFilterSearchAttributes(Builder $builder, ?Search $search = null): Builder
     {
         return $builder->when(!is_null($search), function (Builder $builder) use ($search) {
+            /** @var Search $search */
             return $builder->when(!is_null($search->attributes), function (Builder $builder) use ($search) {
-                return $builder->where(function (Builder $builder) use ($search) {
+                /** @var array */
+                $attributes = $search->attributes;
+
+                return $builder->where(function (Builder $builder) use ($attributes) {
                     foreach ($this->searchableAttributes as $attr) {
-                        $builder = $builder->when(array_key_exists($attr, $search->attributes), function (Builder $builder) use ($attr, $search) {
-                            return $builder->where("{$this->getTable()}.{$attr}", $search->attributes[$attr]);
+                        $builder = $builder->when(array_key_exists($attr, $attributes), function (Builder $builder) use ($attr, $attributes) {
+                            return $builder->where("{$this->getTable()}.{$attr}", $attributes[$attr]);
                         });
                     }
 
@@ -38,6 +42,7 @@ trait HasFilterableScopes
     public function scopeFilterSearch(Builder $builder, ?Search $search = null): Builder
     {
         return $builder->when(!is_null($search), function (Builder $builder) use ($search) {
+            /** @var Search $search */
             return $builder->when(!is_null($search->getSearchAsString()), function (Builder $builder) use ($search) {
                 /** @var ColumnsHelper */
                 $columnsHelper = App::make(ColumnsHelper::class);
@@ -62,6 +67,7 @@ trait HasFilterableScopes
     public function scopeFilterOrderBySearch(Builder $builder, ?Search $search = null): Builder
     {
         return $builder->when(!is_null($search), function (Builder $builder) use ($search) {
+            /** @var Search $search */
             return $builder->when(!is_null($search->getSearchAsString()), function (Builder $builder) {
                 foreach ($this->searchable as $column) {
                     $builder = $builder->orderBy("{$column}_relevance", 'desc');
@@ -80,6 +86,7 @@ trait HasFilterableScopes
     public function scopeFilterOrderBy(Builder $builder, ?OrderBy $orderby = null): Builder
     {
         return $builder->when(!is_null($orderby), function (Builder $builder) use ($orderby) {
+            /** @var OrderBy $orderby */
             return $builder->orderBy($orderby->attribute, $orderby->order->value);
         });
     }

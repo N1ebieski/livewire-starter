@@ -17,12 +17,16 @@ final class Modal implements Wireable
     ) {
     }
 
-    public function toLivewire()
+    public function toLivewire(): array
     {
-        return json_decode(json_encode($this), true);
+        return json_decode(json_encode($this) ?: '', true);
     }
 
-    public static function fromLivewire($value)
+    /**
+     * @param array $value
+     * @return Modal
+     */
+    public static function fromLivewire($value): self
     {
         $value['modal']['size'] = Size::tryFrom($value['modal']['size'] ?? '');
         $value['modal'] = new BootstrapModal(...$value['modal']);

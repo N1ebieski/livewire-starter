@@ -16,6 +16,43 @@ use Illuminate\Contracts\Auth\Access\Authorizable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * App\Models\User\User
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property mixed $password
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Permission> $permissions
+ * @property-read int|null $permissions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Role> $roles
+ * @property-read int|null $roles_count
+ * @property-read StatusEmail $status_email
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
+ * @property-read int|null $tokens_count
+ * @method static \Database\Factories\User\UserFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|User filterExcept(?array $except = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|User filterOrderBy(?\App\Queries\OrderBy $orderby = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|User filterOrderBySearch(?\App\Queries\Search $search = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|User filterPaginate(?\App\Queries\Paginate $paginate = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|User filterRole(?\App\Models\Role\Role $role = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|User filterSearch(?\App\Queries\Search $search = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|User filterSearchAttributes(?\App\Queries\Search $search = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|User filterStatusEmail(?bool $status = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User permission($permissions)
+ * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|User withAllRelations()
+ * @mixin \Eloquent
+ */
 class User extends Authenticatable implements MustVerifyEmail, Authorizable
 {
     use HasRoles;

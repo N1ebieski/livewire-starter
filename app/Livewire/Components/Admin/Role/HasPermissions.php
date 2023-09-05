@@ -14,6 +14,7 @@ use App\Queries\Permission\GetAvailable\GetAvailableQuery;
 
 /**
  * @property-read Role $role
+ * @property-read Collection<Permission> $permissions;
  */
 trait HasPermissions
 {
@@ -46,6 +47,7 @@ trait HasPermissions
             ->map(function (Permission $permission) {
                 preg_match('/[^.]*?\.([a-z]+){1}\..*/', $permission->name, $optgroup);
 
+                //@phpstan-ignore-next-line
                 $permission->optgroup = $optgroup[1] ?? null;
 
                 return $permission;

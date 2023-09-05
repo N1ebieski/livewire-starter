@@ -15,7 +15,7 @@ trait HasTitleWithPage
          * Fix for livewire navigate with lazy mode.
          * @see https://github.com/livewire/livewire/discussions/5958
          */
-        $this->setPage($request->query('page', 1));
+        $this->setPage($request->query('page', "1"));
     }
 
     #[On('updated-page')]

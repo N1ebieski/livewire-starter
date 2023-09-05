@@ -21,6 +21,7 @@ use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 /**
  * @property-read DataTableForm $form
  * @property AttributeCollection $attributes
+ * @property DataTableForm $form
  */
 trait HasDataTable
 {
@@ -85,9 +86,15 @@ trait HasDataTable
     #[Locked]
     public ?array $urlAttributes = null;
 
+    /**
+     * All available filters
+     */
     #[Locked]
     public ?array $filters = null;
 
+    /**
+     * Whether show a "page" query param and push state to history
+     */
     #[Locked]
     public bool $showPage = true;
 
@@ -241,7 +248,7 @@ trait HasDataTable
         return $this->isDirty(['form.orderby', 'form.search']);
     }
 
-    public function updatedFormColumns($value): void
+    public function updatedFormColumns(array $value): void
     {
         $this->columnsFactory->columnsService->createCookie(
             $this->columnsFactory->columnsHelper->getAlias($this::class),

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Queries;
 
-use Illuminate\Support\Collection;
-
 class Search
 {
     public function __construct(

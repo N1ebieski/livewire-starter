@@ -7,7 +7,32 @@ namespace App\Models\Role;
 use App\Scopes\Role\HasRoleScopes;
 use Spatie\Permission\Models\Role as BaseRole;
 
-final class Role extends BaseRole
+/**
+ * App\Models\Role\Role
+ *
+ * @property int $id
+ * @property \App\ValueObjects\Role\Name $name
+ * @property string $guard_name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Permission> $permissions
+ * @property-read int|null $permissions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User\User> $users
+ * @property-read int|null $users_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Role filterExcept(?array $except = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role filterOrderBy(?\App\Queries\OrderBy $orderby = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role filterOrderBySearch(?\App\Queries\Search $search = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role filterPaginate(?\App\Queries\Paginate $paginate = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role filterSearch(?\App\Queries\Search $search = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role filterSearchAttributes(?\App\Queries\Search $search = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Role newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Role permission($permissions)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Role withAllRelations()
+ * @mixin \Eloquent
+ */
+class Role extends BaseRole
 {
     use HasRoleScopes;
 

@@ -18,6 +18,7 @@ abstract class Form extends BaseForm
 
     protected Rule $rule;
 
+    //@phpstan-ignore-next-line
     public function __construct(
         protected Component $component,
         protected $propertyName
@@ -60,7 +61,7 @@ abstract class Form extends BaseForm
     /**
      * Fix. Livewire doesn't have a resetExcept method
      */
-    public function resetExcept(...$properties): void
+    public function resetExcept(string|array ...$properties): void
     {
         if (count($properties) && is_array($properties[0])) {
             $properties = $properties[0];

@@ -16,12 +16,10 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(\App\Extends\Laravel\Prompts\Contracts\Prompts::class, \App\Extends\Laravel\Prompts\PromptsFactory::class);
 
-        if (Config::get('livewire.back_button_cache')) {
-            $this->app->bind(
-                \Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware::class,
-                \App\Http\Middleware\DisableBackButtonCacheMiddleware::class
-            );
-        }
+        $this->app->bind(
+            \Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware::class,
+            \App\Http\Middleware\DisableBackButtonCacheMiddleware::class
+        );
     }
 
     /**

@@ -44,7 +44,7 @@ class ResetPasswordController extends Controller
     {
         $meta = $this->metaFactory->make();
 
-        $token = $request->route()->parameter('token');
+        $token = $request->route()?->parameter('token');
 
         return $this->responseFactory->view('auth.passwords.reset', [
             'token' => $token,

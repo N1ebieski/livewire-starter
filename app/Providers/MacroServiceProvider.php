@@ -18,7 +18,7 @@ class MacroServiceProvider extends ServiceProvider
 
         Str::macro('cookieAlias', $cookieAlias());
 
-        /** @var \App\Macros\Stringable\Alias */
+        /** @var \App\Macros\Stringable\CookieAlias */
         $cookieAlias = $this->app->make(\App\Macros\Stringable\CookieAlias::class);
 
         Stringable::macro('cookieAlias', $cookieAlias());

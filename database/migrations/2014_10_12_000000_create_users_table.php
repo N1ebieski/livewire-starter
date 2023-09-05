@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\User\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,9 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $user = new User();
-
-        Schema::create($user->getTable(), function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
             $table->string('email')->unique();
@@ -26,9 +23,9 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        DB::statement("ALTER TABLE `{$user->getTable()}` ADD FULLTEXT `fulltext_index` (`name`, `email`)");
-        DB::statement("ALTER TABLE `{$user->getTable()}` ADD FULLTEXT `fulltext_name` (`name`)");
-        DB::statement("ALTER TABLE `{$user->getTable()}` ADD FULLTEXT `fulltext_email` (`email`)");
+        DB::statement("ALTER TABLE `users` ADD FULLTEXT `fulltext_index` (`name`, `email`)");
+        DB::statement("ALTER TABLE `users` ADD FULLTEXT `fulltext_name` (`name`)");
+        DB::statement("ALTER TABLE `users` ADD FULLTEXT `fulltext_email` (`email`)");
     }
 
     /**
@@ -36,8 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        $user = new User();
-
-        Schema::dropIfExists($user->getTable());
+        Schema::dropIfExists('users');
     }
 };

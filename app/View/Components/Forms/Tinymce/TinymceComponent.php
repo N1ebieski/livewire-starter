@@ -20,9 +20,12 @@ class TinymceComponent extends FormComponent
 
     public function withAttributes(array $attributes): self
     {
-        return parent::withAttributes(array_merge([
+        /** @var self */
+        $parent = parent::withAttributes(array_merge([
             'rows' => 10,
         ], $attributes));
+
+        return $parent;
     }
 
     /**

@@ -16,6 +16,9 @@ use Illuminate\Contracts\Translation\Translator;
 use App\Commands\Role\DeleteMulti\DeleteMultiCommand;
 use App\Livewire\Components\Admin\DataTables\Role\DataTableComponent;
 
+/**
+ * @property-read Collection<Role> $roles
+ */
 class DeleteMultiComponent extends Component
 {
     use HasComponent;

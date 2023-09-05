@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\View\Components\DataTable;
 
+/**
+ * @property array|null $columns
+ * @property array $hidingColumns
+ */
 trait HasDisplay
 {
     public function display(): ?string

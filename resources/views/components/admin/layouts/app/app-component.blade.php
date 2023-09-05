@@ -35,6 +35,7 @@
         {{ $slot }}
 
         <div id="dropdowns"></div>
+        
         @livewireScriptConfig 
         @stack('scripts')
     </body>

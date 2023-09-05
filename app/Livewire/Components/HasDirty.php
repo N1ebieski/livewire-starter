@@ -18,7 +18,7 @@ trait HasDirty
     #[Locked]
     public bool $isDirty = false;
 
-    private function isPropertyLocked(string $name)
+    private function isPropertyLocked(string $name): bool
     {
         return $this->attributes->contains(function (Attribute $attribute) use ($name) {
             return $attribute instanceof Locked && $attribute->getName() === $name;

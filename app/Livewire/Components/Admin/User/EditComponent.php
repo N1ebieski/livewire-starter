@@ -19,6 +19,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Translation\Translator;
 use App\Livewire\Components\Admin\DataTables\User\DataTableComponent;
 
+/**
+ * @property EditForm $form
+ */
 final class EditComponent extends Component
 {
     use HasComponent;
@@ -75,8 +78,8 @@ final class EditComponent extends Component
         $user = $commandBus->execute(
             new EditCommand(
                 user: $this->user,
-                name: $this->form->name,
-                email: $this->form->email,
+                name: $this->form->name, //@phpstan-ignore-line
+                email: $this->form->email, //@phpstan-ignore-line
                 password: $this->form->password ?? $this->user->password,
                 roles: $this->getFormRolesAsCollection()
             )

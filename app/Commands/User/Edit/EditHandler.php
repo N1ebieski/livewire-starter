@@ -47,6 +47,7 @@ class EditHandler extends Handler
 
         $this->db->commit();
 
+        /** @var User */
         return $user->fresh();
     }
 }

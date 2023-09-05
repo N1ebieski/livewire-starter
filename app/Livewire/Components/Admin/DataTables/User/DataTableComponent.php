@@ -28,9 +28,11 @@ use App\Livewire\Forms\Admin\DataTables\User\DataTableForm;
 use App\Queries\User\PaginateByFilter\PaginateByFilterQuery;
 use App\Commands\User\EditStatusEmail\EditStatusEmailCommand;
 use App\Livewire\Components\DataTable\DataTableComponent as BaseDataTableComponent;
+use Illuminate\Contracts\View\View;
 
 /**
  * @property Collection $users
+ * @property DataTableForm $form
  */
 final class DataTableComponent extends BaseDataTableComponent
 {
@@ -91,7 +93,7 @@ final class DataTableComponent extends BaseDataTableComponent
             $this->role->find($this->form->role) : null;
     }
 
-    private function getFilterPaginate(): ?Paginate
+    private function getFilterPaginate(): Paginate
     {
         return new Paginate($this->form->paginate);
     }
@@ -252,7 +254,7 @@ final class DataTableComponent extends BaseDataTableComponent
         $this->form->search = "attr:id:\"{$user->id}\"";
     }
 
-    public function render()
+    public function render(): View
     {
         // dd($this->form->columns, $this->getErrorBag());
 

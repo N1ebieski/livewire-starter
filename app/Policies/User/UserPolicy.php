@@ -5,6 +5,7 @@ namespace App\Policies\User;
 use App\Models\User\User;
 use App\ValueObjects\Role\DefaultName;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 final class UserPolicy
 {
@@ -23,6 +24,13 @@ final class UserPolicy
         return $authUser->hasRole(DefaultName::SUPER_ADMIN->value) && ($authUser->id !== $user->id);
     }
 
+    /**
+     *
+     * @param User $authUser
+     * @param Collection<User> $users
+     * @return bool
+     * @throws BindingResolutionException
+     */
     public function deleteMulti(User $authUser, Collection $users): bool
     {
         foreach ($users as $user) {

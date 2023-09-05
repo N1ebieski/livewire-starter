@@ -17,9 +17,10 @@ class SidebarFactory
     {
         $show = null;
 
-        if (in_array($this->request->cookie('admin_sidebar_toggle'), ['false', 'true'])) {
-            $show = $this->request->cookie('admin_sidebar_toggle') === 'true' ?
-                true : false;
+        $cookie = $this->request->cookie('admin_sidebar_toggle');
+
+        if (in_array($cookie, ['false', 'true'])) {
+            $show = $cookie === 'true';
         }
 
         return new Sidebar(show: $show);

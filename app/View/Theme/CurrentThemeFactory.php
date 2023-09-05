@@ -22,16 +22,15 @@ class CurrentThemeFactory
         /** @var string */
         $theme = $this->config->get('custom.theme');
 
+        $cookie = $this->request->cookie('theme_toggle');
+
         if (
             $this->themeHelper->isMultiThemeEnabled()
             && $this->themeHelper->doesUserHaveTheme()
-            && $this->themeHelper->isThemeAvailable(
-                //@phpstan-ignore-next-line
-                $this->request->cookie('theme_toggle')
-            )
+            && is_string($cookie)
+            && $this->themeHelper->isThemeAvailable($cookie)
         ) {
-            /** @var string */
-            $theme = $this->request->cookie('theme_toggle');
+            $theme = $cookie;
         }
 
         return new Theme(name: $theme);

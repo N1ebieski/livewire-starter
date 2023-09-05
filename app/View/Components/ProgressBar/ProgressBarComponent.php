@@ -6,7 +6,6 @@ namespace App\View\Components\ProgressBar;
 
 use App\View\Components\Component;
 use Illuminate\Contracts\View\View;
-use App\View\Components\DataTable\HasDisplay;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
 /**
@@ -14,8 +13,6 @@ use Illuminate\Contracts\View\Factory as ViewFactory;
  */
 class ProgressBarComponent extends Component
 {
-    use HasDisplay;
-
     /**
      * Create a new component instance.
      */

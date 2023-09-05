@@ -23,6 +23,7 @@ abstract class FormComponent extends Component
 
     public function getId(string $name): string
     {
+        /** @var string */
         return Str::replace('.', '-', $name);
     }
 }
