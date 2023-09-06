@@ -7,8 +7,8 @@ namespace App\View\Components\Forms\Tinymce;
 final class Tinymce
 {
     public function __construct(
-        public readonly string $skin = 'tinymce-5',
-        public readonly string $content_css = 'default',
+        public ?string $skin = null,
+        public ?string $content_css = null,
         public readonly string $language = 'pl',
         public readonly string $entity_encoding = 'raw',
         public readonly string $plugins = 'fullscreen image link table lists code autoresize',

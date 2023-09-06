@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Seeders\Install\Role;
 
-use App\ValueObjects\Role\DefaultName;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use App\ValueObjects\Role\DefaultName;
 use Spatie\Permission\PermissionRegistrar;
 
 class RoleSeeder extends Seeder
@@ -24,7 +24,11 @@ class RoleSeeder extends Seeder
     {
         $this->permissionRegistrar->forgetCachedPermissions();
 
-        $this->role->newQuery()->firstOrCreate(['name' => DefaultName::SUPER_ADMIN->value]);
+        $superAdmin = $this->role->newQuery()->firstOrCreate(['name' => DefaultName::SUPER_ADMIN->value]);
+
+        if ($superAdmin->wasRecentlyCreated) {
+            $superAdmin->givePermissionTo(['admin.*', 'web.*', 'api.*']);
+        }
 
         $admin = $this->role->newQuery()->firstOrCreate(['name' => DefaultName::ADMIN->value]);
 

@@ -16,6 +16,7 @@ use App\Commands\CommandBus;
 use App\Queries\SearchFactory;
 use App\Filters\User\UserFilter;
 use Livewire\Attributes\Computed;
+use Illuminate\Contracts\View\View;
 use App\ValueObjects\User\StatusEmail;
 use App\Livewire\Components\HasComponent;
 use Illuminate\Database\Eloquent\Collection;
@@ -28,7 +29,6 @@ use App\Livewire\Forms\Admin\DataTables\User\DataTableForm;
 use App\Queries\User\PaginateByFilter\PaginateByFilterQuery;
 use App\Commands\User\EditStatusEmail\EditStatusEmailCommand;
 use App\Livewire\Components\DataTable\DataTableComponent as BaseDataTableComponent;
-use Illuminate\Contracts\View\View;
 
 /**
  * @property Collection $users
@@ -256,8 +256,6 @@ final class DataTableComponent extends BaseDataTableComponent
 
     public function render(): View
     {
-        // dd($this->form->columns, $this->getErrorBag());
-
         $this->gate->authorize("admin.user.view");
 
         return $this->viewFactory->make('livewire.admin.data-tables.user.data-table-component');

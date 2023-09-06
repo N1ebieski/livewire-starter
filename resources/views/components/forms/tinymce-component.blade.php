@@ -35,12 +35,14 @@
                 'is-invalid' : ($errors->isNotEmpty() ? 'is-valid' : '') }}"
         >
             <div
-                x-data="tinymce({
+                x-data="tinyMCE({
                     @if($attributes->wire('model')->value())
                     value: @entangle($attributes->wire('model')),
                     @endif
                     config: @js($tinymce)
                 })"
+                x-on:tinymce:load.window="init()"
+                x-on:livewire:navigating.window="destroy()"
                 wire:ignore
             >
                 <textarea 
@@ -57,3 +59,7 @@
     </div>  
     @endif        
 </div>
+
+@pushOnce('head-scripts')
+<script data-load="tinymce" src="{{ asset('build/assets/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>     
+@endPushOnce

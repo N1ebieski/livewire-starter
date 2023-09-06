@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="{{ $currentTheme }}">
     <head>
-
         <title>{{ $meta->title }}</title>
 
         <meta charset="utf-8">
@@ -29,7 +28,8 @@
 
         @vite('resources/sass/admin.scss')
         @stack('styles')
-        @vite('resources/js/admin.js')
+        @vite('resources/js/admin.js')   
+        @stack('head-scripts')     
     </head>
     <body>
         {{ $slot }}
@@ -37,6 +37,5 @@
         <div id="dropdowns"></div>
         
         @livewireScriptConfig 
-        @stack('scripts')
     </body>
 </html>

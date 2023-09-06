@@ -38,4 +38,9 @@
             )
         )"
     />
+    <x-forms.tinymce.tinymce-component
+        name="tinymce"
+        id="tinymce"
+        label="Tinymce"
+    />
 </x-admin.layouts.app.slot-component>

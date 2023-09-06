@@ -2,8 +2,10 @@
 
 namespace Database\Factories\User;
 
+use App\Models\User\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
+use App\ValueObjects\Role\DefaultName;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -35,5 +37,19 @@ final class UserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
+    }
+
+    public function admin(): self
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->assignRole(DefaultName::ADMIN->value);
+        });
+    }
+
+    public function superAdmin(): self
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->assignRole(DefaultName::SUPER_ADMIN->value);
+        });
     }
 }
