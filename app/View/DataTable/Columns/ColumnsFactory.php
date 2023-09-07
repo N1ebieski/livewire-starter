@@ -6,7 +6,7 @@ namespace App\View\DataTable\Columns;
 
 use Illuminate\Http\Request;
 
-class ColumnsFactory
+final class ColumnsFactory
 {
     public function __construct(
         private Request $request,

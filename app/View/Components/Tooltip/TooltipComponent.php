@@ -7,7 +7,7 @@ namespace App\View\Components\Tooltip;
 use App\View\Components\Component;
 use Illuminate\Contracts\View\View;
 
-class TooltipComponent extends Component
+final class TooltipComponent extends Component
 {
     /**
      * Get the view / contents that represent the component.

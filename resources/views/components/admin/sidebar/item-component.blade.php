@@ -5,6 +5,7 @@
         {{ $attributes->class([
             'nav-link', 'disabled' => $disabled
         ])->filter(fn ($value) => is_string($value)) }}    
+        @wireNavigate('hover')
         @if($active)
         aria-current="page"
         @endif

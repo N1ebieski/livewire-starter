@@ -9,7 +9,7 @@ use App\Console\Forms\Form;
 use App\ValueObjects\Role\DefaultName;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
-class SuperAdminForm extends Form
+final class SuperAdminForm extends Form
 {
     public function __construct(private User $user)
     {

@@ -9,7 +9,7 @@ use App\Models\Role\Role;
 use App\Models\Permission\Permission;
 use App\Commands\Role\Edit\EditCommand;
 
-class EditHandler extends Handler
+final class EditHandler extends Handler
 {
     public function handle(EditCommand $command): Role
     {

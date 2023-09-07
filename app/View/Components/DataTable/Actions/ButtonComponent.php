@@ -9,7 +9,7 @@ use Illuminate\Contracts\View\View;
 use App\View\Components\Buttons\Action;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
-class ButtonComponent extends Component
+final class ButtonComponent extends Component
 {
     /**
      * Create a new component instance.

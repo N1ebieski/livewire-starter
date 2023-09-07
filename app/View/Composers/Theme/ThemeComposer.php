@@ -7,7 +7,7 @@ namespace App\View\Composers\Theme;
 use Illuminate\View\View;
 use App\View\Theme\CurrentThemeFactory;
 
-class ThemeComposer
+final class ThemeComposer
 {
     /**
      * Create a new profile composer.

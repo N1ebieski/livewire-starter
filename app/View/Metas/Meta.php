@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\View\Metas;
 
-class Meta implements MetaInterface
+final class Meta implements MetaInterface
 {
     public function __construct(
         public readonly string $title,

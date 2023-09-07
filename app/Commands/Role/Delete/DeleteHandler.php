@@ -7,7 +7,7 @@ namespace App\Commands\Role\Delete;
 use App\Commands\Handler;
 use App\Commands\Role\Delete\DeleteCommand;
 
-class DeleteHandler extends Handler
+final class DeleteHandler extends Handler
 {
     public function handle(DeleteCommand $command): bool
     {

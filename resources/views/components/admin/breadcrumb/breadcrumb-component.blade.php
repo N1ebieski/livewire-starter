@@ -3,7 +3,7 @@
         <a 
             href="{{ route('admin.home.index') }}" 
             title="Dashboard"
-            wire:navigate.hover="true"
+            @wireNavigate('hover')
         >
             Dashboard
         </a>

@@ -8,7 +8,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Config\Repository as Config;
 
-abstract class Form
+final abstract class Form
 {
     public function __construct(
         protected Rule $rule,

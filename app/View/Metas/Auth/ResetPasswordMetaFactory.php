@@ -6,7 +6,7 @@ namespace App\View\Metas\Auth;
 
 use App\View\Metas\MetaInterface;
 
-class ResetPasswordMetaFactory extends MetaFactory
+final class ResetPasswordMetaFactory extends MetaFactory
 {
     public function make(): MetaInterface
     {

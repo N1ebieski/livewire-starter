@@ -7,7 +7,7 @@ namespace App\View\Components\DataTable\Actions;
 use App\View\Components\Component;
 use Illuminate\Contracts\View\View;
 
-class ToggleComponent extends Component
+final class ToggleComponent extends Component
 {
     /**
      * Get the view / contents that represent the component.

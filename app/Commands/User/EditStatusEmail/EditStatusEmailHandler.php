@@ -14,7 +14,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\DatabaseManager as DB;
 use App\Commands\User\EditStatusEmail\EditStatusEmailCommand;
 
-class EditStatusEmailHandler extends Handler
+final class EditStatusEmailHandler extends Handler
 {
     public function __construct(
         protected DB $db,

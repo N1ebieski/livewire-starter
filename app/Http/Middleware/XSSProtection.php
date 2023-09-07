@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Mews\Purifier\Facades\Purifier;
 
-class XSSProtection
+final class XSSProtection
 {
     /**
      * Tablica zawierajca klucze requestow ktore maja byc pomijane przy strip_tags,

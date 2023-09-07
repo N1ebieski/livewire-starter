@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
-class ConfigServiceProvider extends ServiceProvider
+final class ConfigServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

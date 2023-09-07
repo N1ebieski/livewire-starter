@@ -8,7 +8,7 @@ use App\View\Components\Component;
 use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
-class ItemComponent extends Component
+final class ItemComponent extends Component
 {
     public function __construct(
         protected ViewFactory $viewFactory,

@@ -8,7 +8,7 @@ use Closure;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 
-class CookieAlias extends Stringable
+final class CookieAlias extends Stringable
 {
     public function __invoke(): Closure
     {

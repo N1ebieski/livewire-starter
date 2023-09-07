@@ -15,10 +15,11 @@ class DataTableComponentTest extends TestCase
     use DatabaseTransactions;
 
     /** @test */
-    public function test_whether_component_supports_locked_attributes_in_mount()
+    public function test_whether_component_supports_locked_attributes_in_mount(): void
     {
         $user = User::factory()->superAdmin()->create();
 
+        /** @var Role */
         $role = Role::where('name', DefaultName::USER->value)->first();
 
         /** @var array<Attribute> */
@@ -30,8 +31,10 @@ class DataTableComponentTest extends TestCase
             )
         ];
 
+        $this->actingAs($user);
+
         /** Without a locked attribute */
-        $response = Livewire::actingAs($user)->test(DataTableComponent::class);
+        $response = Livewire::test(DataTableComponent::class);
 
         foreach ($lockedAttributes as $attribute) {
             $response->assertSet($attribute->name, $attribute->from)
@@ -40,7 +43,7 @@ class DataTableComponentTest extends TestCase
         }
 
         /** With a locked attribute */
-        $response = Livewire::actingAs($user)->test(DataTableComponent::class, [
+        $response = Livewire::test(DataTableComponent::class, [
             'lockedAttributes' => array_map(
                 fn (Attribute $attribute) => $attribute->name,
                 $lockedAttributes

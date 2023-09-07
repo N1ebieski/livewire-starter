@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\Install\Role\RoleSeeder;
 use Database\Seeders\Install\Permission\PermissionSeeder;
 
-class InstallSeeder extends Seeder
+final class InstallSeeder extends Seeder
 {
     public function run(): void
     {

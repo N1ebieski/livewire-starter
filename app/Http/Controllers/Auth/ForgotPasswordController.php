@@ -10,7 +10,7 @@ use App\View\Metas\Auth\ForgotEmailMetaFactory;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
-class ForgotPasswordController extends Controller
+final class ForgotPasswordController extends Controller
 {
     /*
     |--------------------------------------------------------------------------

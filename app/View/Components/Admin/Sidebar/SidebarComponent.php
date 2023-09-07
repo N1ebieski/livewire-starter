@@ -12,7 +12,7 @@ use Illuminate\Contracts\View\Factory as ViewFactory;
 /**
  * @property \Illuminate\Routing\Router $route
  */
-class SidebarComponent extends Component
+final class SidebarComponent extends Component
 {
     public function __construct(
         protected ViewFactory $viewFactory,

@@ -14,7 +14,7 @@ use Illuminate\Contracts\Translation\Translator;
 use App\Extends\Laravel\Prompts\Contracts\Prompts;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 
-class SuperAdminCommand extends Command
+final class SuperAdminCommand extends Command
 {
     /**
      * The name and signature of the console command.

@@ -14,7 +14,7 @@ use App\Commands\Role\Delete\DeleteCommand;
 use Illuminate\Contracts\Translation\Translator;
 use App\Livewire\Components\Admin\DataTables\Role\DataTableComponent;
 
-class DeleteComponent extends Component
+final class DeleteComponent extends Component
 {
     use HasComponent;
 

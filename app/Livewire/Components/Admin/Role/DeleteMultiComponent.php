@@ -19,7 +19,7 @@ use App\Livewire\Components\Admin\DataTables\Role\DataTableComponent;
 /**
  * @property-read Collection<Role> $roles
  */
-class DeleteMultiComponent extends Component
+final class DeleteMultiComponent extends Component
 {
     use HasComponent;
 

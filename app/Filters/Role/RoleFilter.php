@@ -7,7 +7,7 @@ namespace App\Filters\Role;
 use App\Filters\Filter;
 use App\Queries\Search;
 
-class RoleFilter extends Filter
+final class RoleFilter extends Filter
 {
     public function __construct(
         public readonly ?Search $search = null,

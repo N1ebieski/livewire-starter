@@ -13,7 +13,7 @@ use App\Commands\User\Edit\EditCommand;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Database\DatabaseManager as DB;
 
-class EditHandler extends Handler
+final class EditHandler extends Handler
 {
     public function __construct(
         protected DB $db,

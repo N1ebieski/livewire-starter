@@ -107,7 +107,7 @@ trait HasComponent
 
                 $callback = [$this, $methodName];
 
-                if (is_callable($callback)) {
+                if (is_callable($callback) && method_exists(...$callback)) {
                     call_user_func($callback, $parent);
                 }
             }

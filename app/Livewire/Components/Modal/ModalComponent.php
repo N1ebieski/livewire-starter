@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Components\Modal;
 
 use Livewire\Attributes\On;
@@ -15,7 +17,7 @@ use App\View\Components\Modal\Modal as BootstrapModal;
 /**
  * @property-read Collection<Modal> $modals
  */
-class ModalComponent extends Component
+final class ModalComponent extends Component
 {
     use HasComponent;
 

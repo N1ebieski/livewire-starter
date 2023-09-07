@@ -7,7 +7,7 @@ namespace App\View\Components\Forms;
 use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
-class EmailComponent extends FormComponent
+final class EmailComponent extends FormComponent
 {
     public function __construct(
         protected ViewFactory $viewFactory,

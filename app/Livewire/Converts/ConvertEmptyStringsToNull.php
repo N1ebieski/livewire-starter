@@ -7,7 +7,7 @@ namespace App\Livewire\Converts;
 use Closure;
 use App\Livewire\Converts\HandlerInterface;
 
-class ConvertEmptyStringsToNull implements HandlerInterface
+final class ConvertEmptyStringsToNull implements HandlerInterface
 {
     private array $except = [];
 

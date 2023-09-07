@@ -11,7 +11,7 @@ use App\View\Theme\CurrentThemeFactory;
 use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
-class MultiThemeComponent extends Component
+final class MultiThemeComponent extends Component
 {
     /**
      * Create a new component instance.

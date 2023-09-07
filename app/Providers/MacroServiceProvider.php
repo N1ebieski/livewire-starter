@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Stringable;
 use Illuminate\Support\ServiceProvider;
 
-class MacroServiceProvider extends ServiceProvider
+final class MacroServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {

@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Builder as Schema;
 
-class SearchFactory
+final class SearchFactory
 {
     private string $search;
 

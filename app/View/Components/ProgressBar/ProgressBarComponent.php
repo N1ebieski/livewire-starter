@@ -11,7 +11,7 @@ use Illuminate\Contracts\View\Factory as ViewFactory;
 /**
  * @property-read array<Segment> $segments
  */
-class ProgressBarComponent extends Component
+final class ProgressBarComponent extends Component
 {
     /**
      * Create a new component instance.

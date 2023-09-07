@@ -8,7 +8,7 @@ use App\ValueObjects\Role\Name;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
-class NameCast implements CastsAttributes
+final class NameCast implements CastsAttributes
 {
     /**
      * Transform the attribute from the underlying model values.

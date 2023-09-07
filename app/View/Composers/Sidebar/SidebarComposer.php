@@ -7,7 +7,7 @@ namespace App\View\Composers\Sidebar;
 use Illuminate\View\View;
 use App\View\Admin\Sidebar\SidebarFactory;
 
-class SidebarComposer
+final class SidebarComposer
 {
     /**
      * Create a new profile composer.

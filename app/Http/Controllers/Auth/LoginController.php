@@ -12,7 +12,7 @@ use App\Http\Requests\Auth\Login\LoginRequest;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-class LoginController extends Controller
+final class LoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------

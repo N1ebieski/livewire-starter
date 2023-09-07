@@ -32,7 +32,7 @@ use Spatie\Permission\Models\Role as BaseRole;
  * @method static \Illuminate\Database\Eloquent\Builder|Role withAllRelations()
  * @mixin \Eloquent
  */
-class Role extends BaseRole
+final class Role extends BaseRole
 {
     use HasRoleScopes;
 

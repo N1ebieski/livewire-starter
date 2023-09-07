@@ -7,7 +7,7 @@ namespace App\Commands\User\EditStatusEmail;
 use App\Models\User\User;
 use App\ValueObjects\User\StatusEmail;
 
-class EditStatusEmailCommand
+final class EditStatusEmailCommand
 {
     public function __construct(
         public readonly User $user,

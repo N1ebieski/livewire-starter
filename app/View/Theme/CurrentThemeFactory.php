@@ -8,7 +8,7 @@ use App\View\Theme\Theme;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Config\Repository as Config;
 
-class CurrentThemeFactory
+final class CurrentThemeFactory
 {
     public function __construct(
         private Config $config,

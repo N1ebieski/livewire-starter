@@ -9,7 +9,7 @@ use Illuminate\Contracts\View\View;
 use App\View\Components\DataTable\HasDisplay;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
-class LabelComponent extends Component
+final class LabelComponent extends Component
 {
     use HasDisplay;
 

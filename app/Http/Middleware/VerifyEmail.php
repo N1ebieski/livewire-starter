@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+declare(strict_types=1);
+
 namespace App\Http\Middleware;
 
 use Closure;
@@ -11,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Response as HttpResponse;
 
-class VerifyEmail
+final class VerifyEmail
 {
     public function handle(Request $request, Closure $next): mixed
     {

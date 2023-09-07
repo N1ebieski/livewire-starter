@@ -12,7 +12,7 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 use App\View\Metas\Auth\ResetPasswordMetaFactory;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
-class ResetPasswordController extends Controller
+final class ResetPasswordController extends Controller
 {
     /*
     |--------------------------------------------------------------------------

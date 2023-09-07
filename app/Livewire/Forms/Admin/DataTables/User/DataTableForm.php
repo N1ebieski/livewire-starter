@@ -9,7 +9,7 @@ use Livewire\Attributes\Url;
 use App\ValueObjects\User\StatusEmail;
 use App\Livewire\Forms\DataTable\DataTableForm as BaseDataTableForm;
 
-class DataTableForm extends BaseDataTableForm
+final class DataTableForm extends BaseDataTableForm
 {
     #[Url(as: 'columns')]
     public array $columns = ['id', 'name', 'email', 'roles', 'created_at', 'updated_at'];

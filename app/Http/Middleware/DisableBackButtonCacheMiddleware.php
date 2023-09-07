@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Middleware;
 
 use Closure;
@@ -14,7 +16,7 @@ final class DisableBackButtonCacheMiddleware extends BaseDisableBackButtonCacheM
     {
         $response = $next($request);
 
-        SupportDisablingBackButtonCache::$disableBackButtonCache = Config::get('livewire.back_button_cache');
+        SupportDisablingBackButtonCache::$disableBackButtonCache = !Config::get('livewire.back_button_cache');
 
         if ($response instanceof Response && SupportDisablingBackButtonCache::$disableBackButtonCache) {
             $response->headers->add([

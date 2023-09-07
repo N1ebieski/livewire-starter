@@ -53,7 +53,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|User withAllRelations()
  * @mixin \Eloquent
  */
-class User extends Authenticatable implements MustVerifyEmail, Authorizable
+final class User extends Authenticatable implements MustVerifyEmail, Authorizable
 {
     use HasRoles;
     use HasUserScopes;

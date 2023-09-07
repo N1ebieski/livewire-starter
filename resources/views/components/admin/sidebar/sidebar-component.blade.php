@@ -34,7 +34,6 @@
                     :active="$isCurrentRoute('admin.home.index')"
                     href="{{ route('admin.home.index') }}"
                     title="Dashboard"
-                    wire:navigate.hover="true"
                 >
                     <x-slot:icon>
                         <i class="bi bi-speedometer2"></i>
@@ -60,7 +59,6 @@
                         :active="$isCurrentRoute('admin.user.index')"
                         href="{{ route('admin.user.index') }}"
                         title="{{ trans('user.pages.index.title') }}"
-                        wire:navigate.hover="true"
                     />
                     @endcan
                     @can('admin.role.view')
@@ -68,7 +66,6 @@
                         :active="$isCurrentRoute('admin.role.index')"
                         href="{{ route('admin.role.index') }}"
                         title="{{ trans('role.pages.index.title') }}"
-                        wire:navigate.hover="true"
                     />
                     @endcan                    
                 </x-admin.sidebar.dropdown.dropdown-component>
@@ -80,7 +77,6 @@
                     :active="$isCurrentRoute('admin.sandbox.index')"
                     href="{{ route('admin.sandbox.index') }}"
                     title="Sandbox"
-                    wire:navigate.hover="true"
                 >
                     <x-slot:icon>
                         <i class="bi bi-code-square"></i>

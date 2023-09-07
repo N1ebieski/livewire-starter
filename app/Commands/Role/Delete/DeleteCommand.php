@@ -6,7 +6,7 @@ namespace App\Commands\Role\Delete;
 
 use App\Models\Role\Role;
 
-class DeleteCommand
+final class DeleteCommand
 {
     public function __construct(public readonly Role $role)
     {

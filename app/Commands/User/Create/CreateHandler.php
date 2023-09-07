@@ -13,7 +13,7 @@ use Illuminate\Contracts\Hashing\Hasher;
 use App\Commands\User\Create\CreateCommand;
 use Illuminate\Database\DatabaseManager as DB;
 
-class CreateHandler extends Handler
+final class CreateHandler extends Handler
 {
     public function __construct(
         protected DB $db,

@@ -9,7 +9,7 @@ use App\Models\Role\Role;
 use App\Models\Permission\Permission;
 use App\Commands\Role\Create\CreateCommand;
 
-class CreateHandler extends Handler
+final class CreateHandler extends Handler
 {
     public function handle(CreateCommand $command): Role
     {

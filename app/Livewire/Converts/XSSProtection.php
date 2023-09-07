@@ -8,7 +8,7 @@ use Closure;
 use Mews\Purifier\Facades\Purifier;
 use App\Livewire\Converts\HandlerInterface;
 
-class XSSProtection implements HandlerInterface
+final class XSSProtection implements HandlerInterface
 {
     protected array $except = ['content_html'];
 

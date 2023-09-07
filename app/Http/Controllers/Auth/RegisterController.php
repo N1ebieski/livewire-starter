@@ -6,9 +6,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User\User;
 use App\Commands\CommandBus;
-use App\ValueObjects\User\Status;
 use App\Http\Controllers\Controller;
-use App\ValueObjects\User\Marketing;
 use App\Providers\RouteServiceProvider;
 use App\Commands\User\Create\CreateCommand;
 use App\View\Metas\Auth\RegisterMetaFactory;
@@ -19,7 +17,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use App\Http\Requests\Auth\Register\RegisterRequest;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 
-class RegisterController extends Controller
+final class RegisterController extends Controller
 {
     /*
     |--------------------------------------------------------------------------

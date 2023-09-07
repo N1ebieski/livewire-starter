@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace App\View\Metas\Auth;
 
 use App\View\Metas\Meta;
-use App\View\Metas\MetaInterface;
 use Illuminate\Http\Request;
+use App\View\Metas\MetaInterface;
 use App\View\Metas\OpenGraphInterface;
 use Illuminate\Support\Collection as Collect;
 use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Contracts\Translation\Translator as Trans;
 
-class AuthMetaFactory
+final class AuthMetaFactory
 {
     public function __construct(
         protected Config $config,

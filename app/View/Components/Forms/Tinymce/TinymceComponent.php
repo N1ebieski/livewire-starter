@@ -9,7 +9,7 @@ use App\View\Theme\CurrentThemeFactory;
 use App\View\Components\Forms\FormComponent;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
-class TinymceComponent extends FormComponent
+final class TinymceComponent extends FormComponent
 {
     public function __construct(
         protected ViewFactory $viewFactory,

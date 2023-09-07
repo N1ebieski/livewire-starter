@@ -6,7 +6,7 @@ namespace App\View\Components\ProgressBar;
 
 use App\View\Components\ProgressBar\Action;
 
-class Segment
+final class Segment
 {
     public function __construct(
         public readonly string $label,

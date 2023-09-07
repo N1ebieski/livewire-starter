@@ -6,12 +6,23 @@ namespace App\Livewire\Components\Admin\Sandbox;
 
 use Illuminate\Contracts\View\View;
 use App\Livewire\Components\HasComponent;
-use App\Livewire\Components\FullPage\FullPageComponent;
 use App\View\Metas\Admin\Home\IndexMetaFactory;
+use App\Livewire\Components\FullPage\FullPageComponent;
 
-class IndexComponent extends FullPageComponent
+final class IndexComponent extends FullPageComponent
 {
     use HasComponent;
+
+    public ?string $autocomplete = 'example';
+
+    public ?string $tinymce = 'example text';
+
+    public ?string $datetime = null;
+
+    public function submit(): void
+    {
+        dump($this->all());
+    }
 
     public function render(IndexMetaFactory $metaFactory): View
     {

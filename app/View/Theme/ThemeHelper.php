@@ -7,7 +7,7 @@ namespace App\View\Theme;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Config\Repository as Config;
 
-class ThemeHelper
+final class ThemeHelper
 {
     public function __construct(
         private Config $config,

@@ -9,7 +9,7 @@ use App\Models\User\User;
 use App\Queries\Paginate;
 use App\Filters\User\UserFilter;
 
-class PaginateByFilterQuery
+final class PaginateByFilterQuery
 {
     public function __construct(
         public readonly User $user,

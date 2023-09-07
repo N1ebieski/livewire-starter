@@ -6,7 +6,7 @@ namespace App\Utils\Query\Columns;
 
 use Illuminate\Support\Collection;
 
-class ColumnsHelper
+final class ColumnsHelper
 {
     public static function getColumnsAsString(array $columns): string
     {

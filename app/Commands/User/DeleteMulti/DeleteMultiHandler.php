@@ -7,7 +7,7 @@ namespace App\Commands\User\DeleteMulti;
 use App\Commands\Handler;
 use App\Commands\User\Delete\DeleteCommand;
 
-class DeleteMultiHandler extends Handler
+final class DeleteMultiHandler extends Handler
 {
     public function handle(DeleteMultiCommand $command): int
     {

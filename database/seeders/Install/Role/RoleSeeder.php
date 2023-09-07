@@ -9,7 +9,7 @@ use Spatie\Permission\Models\Role;
 use App\ValueObjects\Role\DefaultName;
 use Spatie\Permission\PermissionRegistrar;
 
-class RoleSeeder extends Seeder
+final class RoleSeeder extends Seeder
 {
     public function __construct(
         private Role $role,

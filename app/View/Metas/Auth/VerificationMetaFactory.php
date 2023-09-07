@@ -6,7 +6,7 @@ namespace App\View\Metas\Auth;
 
 use App\View\Metas\MetaInterface;
 
-class VerificationMetaFactory extends MetaFactory
+final class VerificationMetaFactory extends MetaFactory
 {
     public function make(): MetaInterface
     {

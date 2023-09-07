@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\PermissionRegistrar;
 
-class PermissionSeeder extends Seeder
+final class PermissionSeeder extends Seeder
 {
     public function __construct(
         private Permission $permission,

@@ -7,7 +7,7 @@ namespace App\View\Admin\Sidebar;
 use Illuminate\Http\Request;
 use App\View\Admin\Sidebar\Sidebar;
 
-class SidebarFactory
+final class SidebarFactory
 {
     public function __construct(private Request $request)
     {

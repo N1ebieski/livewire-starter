@@ -91,6 +91,8 @@ export default function autoComplete(data) {
 
             el.highlight(el.value);
 
+            el.$refs.autocomplete.value = el.value;
+
             el.$refs.autocomplete.addEventListener("change", (event) => {
                 el.value = event.target.value;
 

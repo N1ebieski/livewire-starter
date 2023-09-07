@@ -6,7 +6,7 @@ namespace App\View\Metas\Auth;
 
 use App\View\Metas\MetaInterface;
 
-class ForgotEmailMetaFactory extends MetaFactory
+final class ForgotEmailMetaFactory extends MetaFactory
 {
     public function make(): MetaInterface
     {

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 /**
  * @property-read Collection<User> $users
  */
-class DeleteMultiCommand
+final class DeleteMultiCommand
 {
     public function __construct(
         public readonly Collection $users

@@ -9,7 +9,7 @@ use Illuminate\Contracts\View\View;
 use App\View\Components\Modal\Modal;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
-class ModalComponent extends Component
+final class ModalComponent extends Component
 {
     /**
      * Create a new component instance.

@@ -6,7 +6,7 @@ namespace App\Commands\User\Delete;
 
 use App\Models\User\User;
 
-class DeleteCommand
+final class DeleteCommand
 {
     public function __construct(public readonly User $user)
     {

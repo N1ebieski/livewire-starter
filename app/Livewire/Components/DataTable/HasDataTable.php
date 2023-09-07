@@ -312,7 +312,7 @@ trait HasDataTable
 
     public function clear(): void
     {
-        $attributes = [];
+        $attributes = ['columns'];
 
         if ($this->lockedAttributes) {
             $attributes = array_map(

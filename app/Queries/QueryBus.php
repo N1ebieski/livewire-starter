@@ -6,7 +6,7 @@ namespace App\Queries;
 
 use Illuminate\Container\Container;
 
-class QueryBus
+final class QueryBus
 {
     public function __construct(
         private Container $container

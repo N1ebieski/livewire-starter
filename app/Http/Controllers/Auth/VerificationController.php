@@ -14,7 +14,7 @@ use Illuminate\Foundation\Auth\VerifiesEmails;
 use App\View\Metas\Auth\VerificationMetaFactory;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
-class VerificationController extends Controller
+final class VerificationController extends Controller
 {
     /*
     |--------------------------------------------------------------------------

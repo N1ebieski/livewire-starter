@@ -6,7 +6,6 @@ namespace App\Queries\Role\PaginateByFilter;
 
 use App\Queries\Handler;
 use App\Models\Role\Role;
-use App\Models\User\User;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 

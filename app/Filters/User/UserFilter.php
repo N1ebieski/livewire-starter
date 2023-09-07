@@ -8,7 +8,7 @@ use App\Filters\Filter;
 use App\Queries\Search;
 use App\Models\Role\Role;
 
-class UserFilter extends Filter
+final class UserFilter extends Filter
 {
     public function __construct(
         public readonly ?bool $status_email = null,

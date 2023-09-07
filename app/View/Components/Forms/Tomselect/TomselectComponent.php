@@ -8,7 +8,7 @@ use Illuminate\Contracts\View\View;
 use App\View\Components\Forms\FormComponent;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
-class TomselectComponent extends FormComponent
+final class TomselectComponent extends FormComponent
 {
     public function __construct(
         protected ViewFactory $viewFactory,

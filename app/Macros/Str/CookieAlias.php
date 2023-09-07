@@ -7,7 +7,7 @@ namespace App\Macros\Str;
 use Closure;
 use Illuminate\Support\Str;
 
-class CookieAlias
+final class CookieAlias
 {
     public function __invoke(): Closure
     {
