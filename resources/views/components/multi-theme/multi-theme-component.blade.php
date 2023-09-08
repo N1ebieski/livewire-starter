@@ -1,8 +1,6 @@
-<div
-    x-data="multiTheme({ theme: @js($currentTheme) })"
->
+<li class="nav-item dropdown">
     @if($themeHelper->isMultiThemeEnabled())
-    <li class="nav-item dropdown">
+    <div x-data="multiTheme({ theme: @js($currentTheme) })">   
         <a 
             class="nav-link dropdown-toggle" 
             href="#" 
@@ -34,6 +32,6 @@
             </button>
             @endforeach                       
         </div>
-    </li>
+    </div>
     @endif
-</div>
+</li>

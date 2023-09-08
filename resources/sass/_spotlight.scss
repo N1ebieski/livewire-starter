@@ -1,0 +1,8 @@
+.spotlight {
+    z-index: $zindex-modal !important;
+    
+    .backdrop {
+        background-color: $modal-backdrop-bg !important;
+        opacity: $modal-backdrop-opacity !important;
+    }
+}

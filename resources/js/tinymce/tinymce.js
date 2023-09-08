@@ -1,6 +1,10 @@
 import _merge from "lodash/merge";
 
 window.addEventListener("popstate", () => {
+    if (!window.tinyMCE) {
+        return;
+    }
+
     /** @type {import("tinymce").TinyMCE} */
     const TinyMCE = window.tinyMCE;
 

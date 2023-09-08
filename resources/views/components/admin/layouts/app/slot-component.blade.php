@@ -22,4 +22,6 @@
     <x-scroll-to-top.scroll-to-top-component />
 
     <livewire:modal.modal-component />
+    
+    <livewire:livewire-ui-spotlight />
 </div>

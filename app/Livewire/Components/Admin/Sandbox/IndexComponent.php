@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace App\Livewire\Components\Admin\Sandbox;
 
 use Illuminate\Contracts\View\View;
+use App\Livewire\Components\Component;
 use App\Livewire\Components\HasComponent;
+use App\Livewire\Components\FullPageInterface;
 use App\View\Metas\Admin\Home\IndexMetaFactory;
-use App\Livewire\Components\FullPage\FullPageComponent;
 
-final class IndexComponent extends FullPageComponent
+final class IndexComponent extends Component implements FullPageInterface
 {
     use HasComponent;
 

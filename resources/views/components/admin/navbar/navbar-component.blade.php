@@ -24,13 +24,20 @@
         >
             <img 
                 src="{{ asset('images/logo.svg') }}" 
-                class="mx-1 mb-2 logo" 
+                class="mx-1 mb-2 logo d-inline" 
                 alt="{{ config('app.name_short') }}" 
                 title="{{ config('app.name') }}"
             >
             <span class="d-none d-md-inline">{{ config('app.name_short') }}</span>
         </a>
         <ul class="navbar-nav ms-auto">
+            <li class="nav-item dropdown">
+                <div class="px-3" style="padding-top:0.7rem;">
+                    <button type="button" x-on:click="$dispatch('toggle-spotlight')">
+                        <i class="bi bi-search" style="font-size: 1.3rem"></i>
+                    </button>
+                </div>
+            </li>
             <x-multi-theme.multi-theme-component />
             <x-admin.navbar.dropdown.dropdown-component>
                 <x-slot:icon>

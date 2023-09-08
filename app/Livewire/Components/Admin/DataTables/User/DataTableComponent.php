@@ -17,6 +17,7 @@ use App\Queries\SearchFactory;
 use App\Filters\User\UserFilter;
 use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
+use App\Livewire\Components\Component;
 use App\ValueObjects\User\StatusEmail;
 use App\Livewire\Components\HasComponent;
 use Illuminate\Database\Eloquent\Collection;
@@ -24,17 +25,17 @@ use Illuminate\Contracts\Translation\Translator;
 use App\Livewire\Components\Modal\ModalComponent;
 use App\Livewire\Components\DataTable\HasDataTable;
 use App\View\Components\Modal\Modal as BootstrapModal;
+use App\Livewire\Components\DataTable\DataTableInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Livewire\Forms\Admin\DataTables\User\DataTableForm;
 use App\Queries\User\PaginateByFilter\PaginateByFilterQuery;
 use App\Commands\User\EditStatusEmail\EditStatusEmailCommand;
-use App\Livewire\Components\DataTable\DataTableComponent as BaseDataTableComponent;
 
 /**
  * @property Collection $users
  * @property DataTableForm $form
  */
-final class DataTableComponent extends BaseDataTableComponent
+final class DataTableComponent extends Component implements DataTableInterface
 {
     use HasComponent;
     use HasDataTable;

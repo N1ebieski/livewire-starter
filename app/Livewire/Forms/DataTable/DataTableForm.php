@@ -7,10 +7,10 @@ namespace App\Livewire\Forms\DataTable;
 use App\Livewire\Forms\Form;
 use Livewire\Attributes\Url;
 use App\Utils\Query\Sorts\SortsHelper;
-use App\Livewire\Components\DataTable\DataTableComponent;
+use App\Livewire\Components\DataTable\DataTableInterface;
 
 /**
- * @property-read DataTableComponent $component
+ * @property-read DataTableInterface $component
  */
 abstract class DataTableForm extends Form
 {

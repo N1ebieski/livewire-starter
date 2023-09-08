@@ -12,6 +12,7 @@ parameters:
 	checkMissingIterableValueType: false
 	checkGenericClassInNonGenericObjectType: false
 	universalObjectCratesClasses:
+		- App\Livewire\Components\DataTable\DataTableInterface
 
 	ignoreErrors:
 		- '#^Call to an undefined method Illuminate\\Contracts\\View\\View::layout\(\)#'

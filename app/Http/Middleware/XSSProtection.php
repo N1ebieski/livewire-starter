@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Mews\Purifier\Facades\Purifier;
 
 final class XSSProtection
@@ -17,9 +17,9 @@ final class XSSProtection
      */
     protected array $except = ['content_html'];
 
-    private function isLivewire(Request $request): bool
+    private function isLivewireRequest(): bool
     {
-        return Str::startsWith($request->path(), 'livewire/message/');
+        return class_exists(LivewireManager::class) && App::Make(LivewireManager::class)->isLivewireRequest();
     }
 
     /**
@@ -27,7 +27,7 @@ final class XSSProtection
      */
     public function handle(Request $request, Closure $next): mixed
     {
-        if ($this->isLivewire($request)) {
+        if ($this->isLivewireRequest()) {
             return $next($request);
         }
 

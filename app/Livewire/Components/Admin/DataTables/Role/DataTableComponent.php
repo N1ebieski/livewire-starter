@@ -15,21 +15,22 @@ use App\Queries\SearchFactory;
 use App\Filters\Role\RoleFilter;
 use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
+use App\Livewire\Components\Component;
 use App\Livewire\Components\HasComponent;
 use Illuminate\Database\Eloquent\Collection;
 use App\Livewire\Components\Modal\ModalComponent;
 use App\Livewire\Components\DataTable\HasDataTable;
 use App\View\Components\Modal\Modal as BootstrapModal;
+use App\Livewire\Components\DataTable\DataTableInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Livewire\Forms\Admin\DataTables\Role\DataTableForm;
 use App\Queries\Role\PaginateByFilter\PaginateByFilterQuery;
-use App\Livewire\Components\DataTable\DataTableComponent as BaseDataTableComponent;
 
 /**
  * @property Collection $roles
  * @property DataTableForm $form
  */
-final class DataTableComponent extends BaseDataTableComponent
+final class DataTableComponent extends Component implements DataTableInterface
 {
     use HasComponent;
     use HasDataTable;
