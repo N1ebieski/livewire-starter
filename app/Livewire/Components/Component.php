@@ -9,6 +9,7 @@ use App\Extends\Illuminate\Contracts\Auth\Guard;
 
 /**
  * @property-read Guard $guard
+ * @property-read string $alias
  */
 abstract class Component extends BaseComponent
 {

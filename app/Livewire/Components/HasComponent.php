@@ -6,8 +6,10 @@ namespace App\Livewire\Components;
 
 use Illuminate\Support\Str;
 use App\Livewire\Forms\Form;
+use Livewire\Attributes\Computed;
 use App\Livewire\Converts\Property;
 use Illuminate\Contracts\Auth\Guard;
+use App\Utils\Livewire\LivewireHelper;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Pipeline\Pipeline;
 use Illuminate\Contracts\Container\Container;
@@ -22,6 +24,8 @@ trait HasComponent
 
     private ViewFactory $viewFactory;
 
+    private LivewireHelper $livewireHelper;
+
     private Gate $gate;
 
     private Guard $guard;
@@ -31,15 +35,23 @@ trait HasComponent
     public function bootHasComponent(
         Container $container,
         ViewFactory $viewFactory,
+        LivewireHelper $livewireHelper,
         Gate $gate,
         Guard $guard,
         Str $str
     ): void {
         $this->container = $container;
         $this->viewFactory = $viewFactory;
+        $this->livewireHelper = $livewireHelper;
         $this->gate = $gate;
         $this->guard = $guard;
         $this->str = $str;
+    }
+
+    #[Computed()]
+    public function alias(): string
+    {
+        return $this->livewireHelper->getAlias($this::class);
     }
 
     /**

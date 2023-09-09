@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\Queries\User\PaginateByFilter;
+namespace App\Queries\User\GetByFilter;
 
 use App\Queries\Handler;
 use App\Models\User\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
-final class PaginateByFilterHandler extends Handler
+final class GetByFilterHandler extends Handler
 {
-    public function handle(PaginateByFilterQuery $query): LengthAwarePaginator
+    public function handle(GetByFilterQuery $query): LengthAwarePaginator|Collection|Builder
     {
-        /** @var LengthAwarePaginator */
+        /** @var LengthAwarePaginator|Collection */
         $users = $query->user->newQuery()
             ->selectRaw("`{$query->user->getTable()}`.*")
             ->when(!is_null($query->filters->search), function (Builder|User $builder) use ($query) {
@@ -31,7 +32,7 @@ final class PaginateByFilterHandler extends Handler
             ->orderBy("{$query->user->getTable()}.created_at", 'desc')
             ->orderBy("{$query->user->getTable()}.id", 'desc')
             ->withAllRelations()
-            ->filterPaginate($query->paginate);
+            ->filterResult($query->result);
 
         return $users;
     }

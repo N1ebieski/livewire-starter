@@ -13,6 +13,16 @@ final class MacroServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        /** @var \App\Macros\Str\Alias */
+        $alias = $this->app->make(\App\Macros\Str\Alias::class);
+
+        Str::macro('alias', $alias());
+
+        /** @var \App\Macros\Stringable\Alias */
+        $alias = $this->app->make(\App\Macros\Stringable\Alias::class);
+
+        Stringable::macro('alias', $alias());
+
         /** @var \App\Macros\Str\CookieAlias */
         $cookieAlias = $this->app->make(\App\Macros\Str\CookieAlias::class);
 

@@ -32,8 +32,12 @@
         </a>
         <ul class="navbar-nav ms-auto">
             <li class="nav-item dropdown">
-                <div class="px-3" style="padding-top:0.7rem;">
-                    <button type="button" x-on:click="$dispatch('toggle-spotlight')">
+                <div class="px-1" style="padding-top:0.3rem;">
+                    <button 
+                        class="btn"
+                        type="button" 
+                        x-on:click="$dispatch('toggle-spotlight')"
+                    >
                         <i class="bi bi-search" style="font-size: 1.3rem"></i>
                     </button>
                 </div>

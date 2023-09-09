@@ -28,7 +28,7 @@ export default defineConfig({
                     dest: "assets",
                 },
                 {
-                    src: "resources/js/tinymce/langs",
+                    src: "resources/js/vendor/tinymce/langs",
                     dest: "assets/tinymce",
                 },
             ],

@@ -1,5 +1,9 @@
 .spotlight {
-    z-index: $zindex-modal !important;
+    @import "vendor/livewire-ui-spotlight/spotlight.scss";
+
+    .z-50 {
+        z-index: $zindex-modal + 100 !important;
+    }
     
     .backdrop {
         background-color: $modal-backdrop-bg !important;

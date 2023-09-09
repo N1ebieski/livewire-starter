@@ -1,4 +1,7 @@
-<x-data-table.layout.data-table-component :isDirty="$isDirty">
+<x-data-table.layout.data-table-component 
+    :isDirty="$isDirty"
+    :alias="$this->alias"
+>
     <x-slot:filter>
         <x-data-table.filter.filter-component
             name="search"

@@ -1,5 +1,5 @@
 <div 
-    x-data="dataTable()"
+    x-data="dataTable({ alias: @js($alias) })"
     x-on:reset-selects.window="resetSelectAll"
     {{ $attributes->class(['data-table'])->filter(fn ($value) => is_string($value)) }}    
 >

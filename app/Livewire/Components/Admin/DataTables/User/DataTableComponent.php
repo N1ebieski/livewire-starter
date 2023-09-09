@@ -23,12 +23,12 @@ use App\Livewire\Components\HasComponent;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Translation\Translator;
 use App\Livewire\Components\Modal\ModalComponent;
+use App\Queries\User\GetByFilter\GetByFilterQuery;
 use App\Livewire\Components\DataTable\HasDataTable;
 use App\View\Components\Modal\Modal as BootstrapModal;
 use App\Livewire\Components\DataTable\DataTableInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Livewire\Forms\Admin\DataTables\User\DataTableForm;
-use App\Queries\User\PaginateByFilter\PaginateByFilterQuery;
 use App\Commands\User\EditStatusEmail\EditStatusEmailCommand;
 
 /**
@@ -72,11 +72,11 @@ final class DataTableComponent extends Component implements DataTableInterface
         );
 
         /** @var LengthAwarePaginator<User> */
-        $users = $this->queryBus->execute(new PaginateByFilterQuery(
+        $users = $this->queryBus->execute(new GetByFilterQuery(
             user: $this->user,
             filters: $filters,
             orderby: $this->getFilterOrderBy(),
-            paginate: $this->getFilterPaginate()
+            result: $this->getFilterPaginate()
         ));
 
         return $users;
@@ -199,6 +199,7 @@ final class DataTableComponent extends Component implements DataTableInterface
         $this->dispatch(
             'highlight',
             ids: [$user->id],
+            alias: $this->alias,
             action: $status->getAction()
         );
     }

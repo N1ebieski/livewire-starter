@@ -94,7 +94,12 @@ final class EditComponent extends Component
             body: $translator->get('user.actions.edit', ['name' => $user->name])
         );
 
-        $this->dispatch('highlight', ids: [$user->id], action: 'primary');
+        $this->dispatch(
+            'highlight',
+            ids: [$user->id],
+            alias: $this->livewireHelper->getAlias(DataTableComponent::class),
+            action: 'primary'
+        );
     }
 
     public function render(): View

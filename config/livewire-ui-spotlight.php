@@ -42,7 +42,7 @@ return [
     | to set this parameter to true. This includes the modern-normalize css.
     |
     */
-    'include_css' => true,
+    'include_css' => false,
 
 
     /*
@@ -57,7 +57,7 @@ return [
     | to your script bundler like webpack.
     |
     */
-    'include_js' => true,
+    'include_js' => false,
 
     /*
     |--------------------------------------------------------------------------

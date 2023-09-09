@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\Queries\Role\PaginateByFilter;
+namespace App\Queries\Role\GetByFilter;
 
 use App\Queries\Handler;
 use App\Models\Role\Role;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
-final class PaginateByFilterHandler extends Handler
+final class GetByFilterHandler extends Handler
 {
-    public function handle(PaginateByFilterQuery $query): LengthAwarePaginator
+    public function handle(GetByFilterQuery $query): LengthAwarePaginator|Collection|Builder
     {
-        /** @var LengthAwarePaginator */
+        /** @var LengthAwarePaginator|Collection */
         $roles = $query->role->newQuery()
             ->selectRaw("`{$query->role->getTable()}`.*")
             ->when(!is_null($query->filters->search), function (Builder|Role $builder) use ($query) {
@@ -29,7 +30,7 @@ final class PaginateByFilterHandler extends Handler
             ->orderBy("{$query->role->getTable()}.created_at", 'desc')
             ->orderBy("{$query->role->getTable()}.id", 'desc')
             ->withAllRelations()
-            ->filterPaginate($query->paginate);
+            ->filterResult($query->result);
 
         return $roles;
     }

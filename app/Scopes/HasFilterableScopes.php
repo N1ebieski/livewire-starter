@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Scopes;
 
+use App\Queries\Get;
 use App\Queries\Search;
 use App\Queries\OrderBy;
 use App\Queries\Paginate;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use App\Utils\Query\Columns\ColumnsHelper;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -78,9 +80,30 @@ trait HasFilterableScopes
         });
     }
 
-    public function scopeFilterPaginate(Builder $builder, ?Paginate $paginate = null): LengthAwarePaginator
+    public function scopeFilterResult(Builder $builder, Paginate|Get|null $result = null): LengthAwarePaginator|Collection|Builder
+    {
+        if ($result instanceof Paginate) {
+            return $builder->filterPaginate($result);
+        }
+
+        if ($result instanceof Get) {
+            return $builder->filterGet($result);
+        }
+
+        return $builder;
+    }
+
+    public function scopeFilterPaginate(Builder $builder, Paginate $paginate): LengthAwarePaginator
     {
         return $builder->paginate($paginate->perPage ?? Config::get('database.paginate'));
+    }
+
+    public function scopeFilterGet(Builder $builder, Get $get): Collection
+    {
+        return $builder->when($get->take, function (Builder $builder) use ($get) {
+            return $builder->take($get->take);
+        })
+        ->get();
     }
 
     public function scopeFilterOrderBy(Builder $builder, ?OrderBy $orderby = null): Builder

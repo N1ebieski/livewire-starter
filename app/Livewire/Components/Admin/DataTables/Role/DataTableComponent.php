@@ -19,12 +19,12 @@ use App\Livewire\Components\Component;
 use App\Livewire\Components\HasComponent;
 use Illuminate\Database\Eloquent\Collection;
 use App\Livewire\Components\Modal\ModalComponent;
+use App\Queries\Role\GetByFilter\GetByFilterQuery;
 use App\Livewire\Components\DataTable\HasDataTable;
 use App\View\Components\Modal\Modal as BootstrapModal;
 use App\Livewire\Components\DataTable\DataTableInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Livewire\Forms\Admin\DataTables\Role\DataTableForm;
-use App\Queries\Role\PaginateByFilter\PaginateByFilterQuery;
 
 /**
  * @property Collection $roles
@@ -61,11 +61,11 @@ final class DataTableComponent extends Component implements DataTableInterface
         );
 
         /** @var LengthAwarePaginator<Role> */
-        $roles = $this->queryBus->execute(new PaginateByFilterQuery(
+        $roles = $this->queryBus->execute(new GetByFilterQuery(
             role: $this->role,
             filters: $filters,
             orderby: $this->getFilterOrderBy(),
-            paginate: $this->getFilterPaginate()
+            result: $this->getFilterPaginate()
         ));
 
         return $roles;

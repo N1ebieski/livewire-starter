@@ -1,4 +1,4 @@
-<div>
+<div class="spotlight">
     @isset($jsPath)
         <script>{!! file_get_contents($jsPath) !!}</script>
     @endisset
@@ -21,7 +21,7 @@
          @endforeach
          @keydown.window.escape="isOpen = false"
          @toggle-spotlight.window="toggleOpen()"
-         class="fixed z-50 px-4 pt-16 flex items-start justify-center inset-0 sm:pt-24 spotlight">
+         class="fixed z-50 px-4 pt-16 flex items-start justify-center inset-0 sm:pt-24">
         <div x-show="isOpen" @click="isOpen = false" x-transition:enter="ease-out duration-200" x-transition:enter-start="opacity-0"
              x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-150"
              x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
@@ -51,8 +51,37 @@
                        class="appearance-none w-full bg-transparent px-6 py-4 text-gray-300 text-lg placeholder-gray-500 focus:border-0 focus:border-transparent focus:shadow-none outline-none focus:outline-none"
                        x-bind:placeholder="inputPlaceholder">
             </div>
-            <div class="border-t border-gray-800" x-show="filteredItems().length > 0" style="display: none;">
+            <div class="border-t border-gray-800" x-show="filteredItems().length > 0 || selectedCommand !== null" style="display: none;">
                 <ul x-ref="results" style="max-height: 265px;" class="overflow-y-auto">
+
+                    <li 
+                        x-show="selectedCommand !== null"
+                        x-data="{ reset() {
+                            input = ''
+                            inputPlaceholder = '{{ trans('livewire-ui-spotlight::spotlight.placeholder') }}'
+                            searchEngine = 'commands'
+                            resolvedDependencies = {}
+                            selectedCommand = null
+                            currentDependency = null
+                            selectedCommand = null
+                            requiredDependencies = []
+                            dependencySearch.setCollection([])
+                            $refs.input.focus()                            
+                        } }"
+                    >
+                        <button 
+                            x-on:click="reset()"
+                            class="block w-full px-6 py-3 text-left hover:bg-gray-800"
+                            x-ref="commands"
+                            class="bg-gray-700"
+                        >
+                            <span class="text-gray-300">
+                                <i class="bi bi-arrow-90deg-up"></i>
+                                <span>...</span>
+                            </span>
+                        </button>
+                    </li>
+
                     <template x-for="(item, i) in filteredItems()" :key>
                         <li>
                             <button @click="go(item[0].item.id)" class="block w-full px-6 py-3 text-left"

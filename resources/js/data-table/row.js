@@ -22,6 +22,10 @@ export default function row(data) {
         action: [],
 
         highlight(event) {
+            if (event.detail.alias !== this.alias) {
+                return;
+            }
+
             if (!event.detail.ids.includes(data.id)) {
                 return;
             }

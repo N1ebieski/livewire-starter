@@ -1,5 +1,6 @@
-export default function dataTable() {
+export default function dataTable(data) {
     return {
+        ...data,
         selects: [],
         selectAll: false,
 

@@ -21,6 +21,7 @@ import scrollToTop from "./scroll-to-top/scroll-to-top";
 import tinyMCE from "./tinymce/tinymce";
 import toast from "./toast/toast";
 import tomSelect from "./tomselect/tomselect";
+import "./vendor/livewire-ui-spotlight/spotlight";
 
 Alpine.data("modal", modal);
 Alpine.data("navbar", navbar);
