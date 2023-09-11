@@ -52,6 +52,7 @@
                 <input 
                     type="text" 
                     x-ref="autocomplete" 
+                    autocomplete="off"
                     {{ $attributes->class(['form-control'])
                         ->filter(fn ($value, $key) => is_string($value) && !str_starts_with($key, 'wire:')) }} 
                 >

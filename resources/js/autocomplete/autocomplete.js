@@ -93,6 +93,8 @@ export default function autoComplete(data) {
 
             el.$refs.autocomplete.value = el.value;
 
+            el.observeDropdown();
+
             el.$refs.autocomplete.addEventListener("change", (event) => {
                 el.value = event.target.value;
 
@@ -119,6 +121,18 @@ export default function autoComplete(data) {
                     attributeFilter: ["class"],
                 });
             }
+        },
+
+        observeDropdown() {
+            const el = this;
+
+            const dropdown = el.$refs.autocomplete.nextElementSibling;
+
+            const observer = new MutationObserver(function() {
+                el.autocomplete.goTo(0);
+            });
+
+            observer.observe(dropdown, { childList: true });
         },
 
         destroy() {
