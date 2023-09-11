@@ -18,10 +18,10 @@ import modal from "./modal/modal";
 import multiTheme from "./multi-theme/multi-theme";
 import navbar from "./navbar/navbar";
 import scrollToTop from "./scroll-to-top/scroll-to-top";
+import spotlight from "./spotlight/spotlight";
 import tinyMCE from "./tinymce/tinymce";
 import toast from "./toast/toast";
 import tomSelect from "./tomselect/tomselect";
-import "./vendor/livewire-ui-spotlight/spotlight";
 
 Alpine.data("modal", modal);
 Alpine.data("navbar", navbar);
@@ -35,6 +35,7 @@ Alpine.data("multiTheme", multiTheme);
 Alpine.data("autoComplete", autoComplete);
 Alpine.data("scrollToTop", scrollToTop);
 Alpine.data("tinyMCE", tinyMCE);
+Alpine.data("spotlight", spotlight);
 
 window.bootstrap = bootstrap;
 window.Popper = Popper;
