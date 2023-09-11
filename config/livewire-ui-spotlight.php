@@ -29,7 +29,7 @@ return [
     */
 
     'commands' => [
-        \LivewireUI\Spotlight\Commands\Logout::class,
+        // \LivewireUI\Spotlight\Commands\Logout::class,
         // \App\Spotlight\Admin\Role\IndexCommand::class
     ],
 

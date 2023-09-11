@@ -15,6 +15,26 @@ export default function spotlight(data) {
     return {
         ...baseSpotlight(data),
 
+        initDefault() {
+            const el = this;
+
+            this.$watch("isOpen", function (value) {
+                if (value === false || el.selectedCommand !== null) {
+                    return;
+                }
+
+                const defaultCommand = el.commands.find(
+                    (command) => command.default
+                );
+
+                if (!defaultCommand) {
+                    return;
+                }
+
+                el.go(defaultCommand.id);
+            });
+        },
+
         reset() {
             this.input = "";
             this.inputPlaceholder = data.placeholder;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use Livewire;
 use App\Utils\Route\RouteHelper;
 use Illuminate\Support\ServiceProvider;
 use App\Extends\LivewireUI\Spotlight\Spotlight;
@@ -20,6 +21,8 @@ final class SpotlightServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        Livewire::component('livewire-ui-spotlight', Spotlight::class);
+
         /** @var RouteHelper */
         $routeHelper = $this->app->make(RouteHelper::class);
 

@@ -126,6 +126,7 @@
                             </button>
                         </li>
                     </template>
+                    <div x-effect="$nextTick(() => initDefault())"></div>
                 </ul>
             </div>
         </div>

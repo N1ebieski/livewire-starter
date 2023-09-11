@@ -14,9 +14,16 @@ use Illuminate\Contracts\Auth\Guard as BaseGuard;
  */
 abstract class Command extends SpotlightCommand
 {
+    protected bool $default = false;
+
     public function __construct(
         protected Gate $gate,
         protected BaseGuard $guard,
     ) {
+    }
+
+    public function getDefault(): bool
+    {
+        return $this->default;
     }
 }

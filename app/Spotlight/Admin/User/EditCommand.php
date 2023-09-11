@@ -45,6 +45,8 @@ class EditCommand extends Command
      */
     protected array $synonyms = [];
 
+    protected bool $default = true;
+
     public function __construct(
         protected Gate $gate,
         protected BaseGuard $guard,
