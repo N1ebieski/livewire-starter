@@ -16,6 +16,6 @@ parameters:
 
 	ignoreErrors:
 		- '#^Call to an undefined method Illuminate\\Contracts\\View\\View::layout\(\)#'
-		- '#^Parameter \#1 \$callback of method Illuminate\\(Support|Database\\Eloquent)\\Collection\<\(int\|string\),Illuminate\\Database\\Eloquent\\Model\>::(each|map)\(\) expects#'
+		- '#^Parameter \#1 \$callback of method Illuminate\\(Support|Database\\Eloquent)\\Collection\<\(int\|string\),Illuminate\\Database\\Eloquent\\Model\>::(each|map|filter)\(\) expects#'
 		- '#^Parameter \#1 \$column of method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>::where\(\) expects#'
 	

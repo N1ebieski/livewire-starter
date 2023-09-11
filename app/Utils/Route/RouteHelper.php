@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Utils\Route;
 
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use Livewire\LivewireManager;
 use Illuminate\Support\Collection;
 use Illuminate\Contracts\Config\Repository as Config;
@@ -17,13 +16,15 @@ final class RouteHelper
         private Config $config,
         private Collection $collection,
         private Str $str,
-        private Request $request
     ) {
     }
 
     private function getAvailablePrefixes(): array
     {
-        $prefixes = $this->collection->make($this->config->get('custom.routes'))
+        /** @var array */
+        $routes = $this->config->get('custom.routes');
+
+        $prefixes = $this->collection->make($routes)
             ->pluck('prefix')
             ->filter()
             ->toArray();

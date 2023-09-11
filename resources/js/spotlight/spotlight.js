@@ -18,8 +18,8 @@ export default function spotlight(data) {
         _init() {
             const el = this;
 
-            this.$watch("currentDependency", function (value) {
-                if (value !== null) {
+            this.$watch("selectedCommand", function (value) {
+                if (value === null) {
                     return;
                 }
 

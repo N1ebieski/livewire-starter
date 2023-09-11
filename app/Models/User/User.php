@@ -51,6 +51,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
  * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null)
  * @method static \Illuminate\Database\Eloquent\Builder|User withAllRelations()
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|User filterGet(\App\Queries\Get $get)
+ * @method static \Illuminate\Database\Eloquent\Builder|User filterResult(\App\Queries\Paginate|\App\Queries\Get|null $result = null)
  * @mixin \Eloquent
  */
 final class User extends Authenticatable implements MustVerifyEmail, Authorizable

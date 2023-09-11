@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 10.21.1.
+ * Generated for Laravel 10.22.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -18395,6 +18395,18 @@
                     /**
          * 
          *
+         * @see \App\Macros\Str\Alias::__invoke()
+         * @param string $namespace
+         * @return string 
+         * @static 
+         */ 
+        public static function alias($namespace)
+        {
+                        return \Illuminate\Support\Str::alias($namespace);
+        }
+                    /**
+         * 
+         *
          * @see \App\Macros\Str\CookieAlias::__invoke()
          * @param string $namespace
          * @return string 
@@ -18411,6 +18423,17 @@
      *
      */ 
         class Stringable {
+                    /**
+         * 
+         *
+         * @see \App\Macros\Stringable\Alias::__invoke()
+         * @return \Illuminate\Support\Stringable 
+         * @static 
+         */ 
+        public static function alias()
+        {
+                        return \Illuminate\Support\Stringable::alias();
+        }
                     /**
          * 
          *
@@ -19098,6 +19121,78 @@
      
 }
 
+    namespace RalphJSmit\Livewire\Urls\Facades { 
+            /**
+     * 
+     *
+     * @see \RalphJSmit\Livewire\Urls\Url
+     */ 
+        class Url {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function current($fallback = null)
+        {
+                        /** @var \RalphJSmit\Livewire\Urls\Url $instance */
+                        return $instance->current($fallback);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function currentRoute($fallback = null)
+        {
+                        /** @var \RalphJSmit\Livewire\Urls\Url $instance */
+                        return $instance->currentRoute($fallback);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function previous($fallback = null)
+        {
+                        /** @var \RalphJSmit\Livewire\Urls\Url $instance */
+                        return $instance->previous($fallback);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function previousRoute($fallback = null)
+        {
+                        /** @var \RalphJSmit\Livewire\Urls\Url $instance */
+                        return $instance->previousRoute($fallback);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function lastRecorded($fallback = null)
+        {
+                        /** @var \RalphJSmit\Livewire\Urls\Url $instance */
+                        return $instance->lastRecorded($fallback);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function lastRecordedRoute($fallback = null)
+        {
+                        /** @var \RalphJSmit\Livewire\Urls\Url $instance */
+                        return $instance->lastRecordedRoute($fallback);
+        }
+         
+    }
+     
+}
+
     namespace Spatie\LaravelIgnition\Facades { 
             /**
      * 
@@ -19767,6 +19862,13 @@
 }
 
     namespace App\Macros\Stringable { 
+            /**
+     * 
+     *
+     */ 
+        class Alias {
+         
+    }
             /**
      * 
      *
@@ -23706,6 +23808,7 @@ namespace  {
             class Clockwork extends \Clockwork\Support\Laravel\Facade {}
             class Livewire extends \Livewire\Livewire {}
             class Purifier extends \Mews\Purifier\Facades\Purifier {}
+            class LivewireUrls extends \RalphJSmit\Livewire\Urls\Facades\Url {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
      
 }

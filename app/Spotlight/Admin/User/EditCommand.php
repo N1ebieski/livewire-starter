@@ -40,8 +40,6 @@ class EditCommand extends Command
         private UserPolicy $userPolicy
     ) {
         $this->name = "{$this->translator->get('user.pages.index.title')}: {$this->translator->get('default.edit')}";
-
-        $this->default = true;
     }
 
     /**
@@ -86,7 +84,8 @@ class EditCommand extends Command
         ));
 
         return $users->filter(function (User $user) {
-            return $this->userPolicy->edit($this->guard->user(), $user);
+            return $this->guard->user() ?
+                $this->userPolicy->edit($this->guard->user(), $user) : false;
         })
         ->map(function (User $user) {
             return new SpotlightSearchResult(

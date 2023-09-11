@@ -83,11 +83,11 @@ trait HasFilterableScopes
     public function scopeFilterResult(Builder $builder, Paginate|Get|null $result = null): LengthAwarePaginator|Collection|Builder
     {
         if ($result instanceof Paginate) {
-            return $builder->filterPaginate($result);
+            return $this->scopeFilterPaginate($builder, $result);
         }
 
         if ($result instanceof Get) {
-            return $builder->filterGet($result);
+            return $this->scopeFilterGet($builder, $result);
         }
 
         return $builder;
@@ -100,8 +100,8 @@ trait HasFilterableScopes
 
     public function scopeFilterGet(Builder $builder, Get $get): Collection
     {
-        return $builder->when($get->take, function (Builder $builder) use ($get) {
-            return $builder->take($get->take);
+        return $builder->when(!is_null($get->take), function (Builder $builder) use ($get) {
+            return $builder->take($get->take); //@phpstan-ignore-line
         })
         ->get();
     }

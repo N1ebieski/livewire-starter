@@ -51,10 +51,14 @@ final class Spotlight extends BaseSpotlight
 
     public function render(): View|Factory
     {
+        /** @var View */
         $view = parent::render();
 
-        $view->commands = $this->collection->make(self::$commands)
-            ->map(fn (Command $command) => $command->toArray());
+        $view->with(
+            'commands',
+            $this->collection->make(self::$commands)
+                ->map(fn (Command $command) => $command->toArray())
+        );
 
         return $view;
     }

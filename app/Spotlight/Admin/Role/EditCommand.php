@@ -80,7 +80,8 @@ class EditCommand extends Command
         ));
 
         return $roles->filter(function (Role $role) {
-            return $this->rolePolicy->edit($this->guard->user(), $role);
+            return $this->guard->user() ?
+                $this->rolePolicy->edit($this->guard->user(), $role) : false;
         })
         ->map(function (Role $role) {
             return new SpotlightSearchResult(
