@@ -1,4 +1,4 @@
-import Fuse from 'fuse.js'
+import Fuse from 'fuse.js';
 
 window.LivewireUISpotlight = (config) => {
     return {

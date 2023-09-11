@@ -23,6 +23,7 @@
         x-on:keydown.backspace="!input.length ? reset() : null" 
         x-on:keydown.window.escape="isOpen = false"
         x-on:toggle-spotlight.window="toggleOpen()"
+        x-on:livewire:navigating="destroy()"
         class="fixed z-50 px-2 pt-16 flex items-start justify-center inset-0 sm:pt-24"
     >
         <div 
@@ -92,7 +93,11 @@
                 x-show="filteredItems().length > 0 || selectedCommand !== null" 
                 style="display:none;"
             >
-                <ul x-ref="results" style="max-height: 365px;" class="overflow-y-auto">
+                <ul 
+                    x-ref="results" 
+                    style="max-height: 365px;" 
+                    class="overflow-y-auto"
+                >
 
                     <li x-show="currentDependency">
                         <button 
@@ -109,7 +114,7 @@
                     </li>
 
                     <template x-for="(item, i) in filteredItems()" x-bind:key>
-                        <li>
+                        <li class="item">
                             <button 
                                 x-on:click="go(item[0].item.id)" 
                                 class="block w-full px-6 py-3 text-left"

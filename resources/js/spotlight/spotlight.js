@@ -43,6 +43,14 @@ export default function spotlight(data) {
             });            
         },
 
+        destroy() {
+            const items = document.querySelectorAll('.spotlight .item');
+
+            items.forEach((item) => item.remove());
+
+            this.reset();
+        },
+
         reset() {
             this.input = "";
             this.inputPlaceholder = data.placeholder;
