@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Spotlight\Admin\Role;
+namespace App\Spotlight\Admin\User;
 
 use App\Spotlight\Command;
 use LivewireUI\Spotlight\Spotlight;
@@ -19,16 +19,16 @@ class IndexCommand extends Command
         protected BaseGuard $guard,
         protected Translator $translator
     ) {
-        $this->name = $this->translator->get('role.pages.index.title');
+        $this->name = $this->translator->get('user.pages.index.title');
     }
 
     public function execute(Spotlight $spotlight): void
     {
-        $spotlight->redirectRoute('admin.role.index', navigate: true);
+        $spotlight->redirectRoute('admin.user.index', navigate: true);
     }
 
     public function shouldBeShown(): bool
     {
-        return $this->guard->user()?->can('admin.role.view') ?? false;
+        return $this->guard->user()?->can('admin.user.view') ?? false;
     }
 }

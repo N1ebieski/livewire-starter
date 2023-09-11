@@ -11,7 +11,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\App;
 use Illuminate\Contracts\View\Factory;
 use App\Livewire\Components\HasComponent;
-use LivewireUI\Spotlight\SpotlightCommand;
 use LivewireUI\Spotlight\Spotlight as BaseSpotlight;
 use Illuminate\Contracts\Config\Repository as Config;
 
@@ -33,7 +32,11 @@ final class Spotlight extends BaseSpotlight
 
     public static function registerCommand(string $command): void
     {
-        tap(App::make($command), function (SpotlightCommand $command) {
+        tap(App::make($command), function (Command $command) {
+            if ($command->getDefault() && !method_exists($command, 'dependencies')) {
+                throw new \Exception('A command without dependencies cannot be default.');
+            }
+
             parent::$commands[] = $command;
         });
     }

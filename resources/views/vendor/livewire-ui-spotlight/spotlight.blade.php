@@ -13,7 +13,7 @@
             commands: @js($commands),
             showResultsWithoutInput: '{{ config('livewire-ui-spotlight.show_results_without_input') }}',
         })"
-        x-init="init()"
+        x-init="_init()"
         x-show="isOpen"
         x-cloak
         @foreach(config('livewire-ui-spotlight.shortcuts') as $key)
@@ -94,7 +94,7 @@
             >
                 <ul x-ref="results" style="max-height: 365px;" class="overflow-y-auto">
 
-                    <li x-show="selectedCommand !== null">
+                    <li x-show="currentDependency">
                         <button 
                             x-on:click="reset()"
                             class="block w-full px-6 py-3 text-left hover:bg-gray-800"
@@ -127,7 +127,6 @@
                             </button>
                         </li>
                     </template>
-                    <div x-effect="$nextTick(() => initDefault())"></div>
                 </ul>
             </div>
             <div class="border-t border-gray-800 mx-4 pt-2 mb-3">

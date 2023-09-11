@@ -14,6 +14,9 @@ return [
         ],
         'edit' => [
             'title' => 'Edycja roli: :name'
+        ],
+        'search' => [
+            'title' => 'Szukaj roli'
         ]
     ],
     'actions' => [

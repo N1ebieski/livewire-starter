@@ -13,8 +13,11 @@ final class SpotlightServiceProvider extends ServiceProvider
 {
     protected array $commands = [
         'admin' => [
+            \App\Spotlight\Admin\User\IndexCommand::class,
+            \App\Spotlight\Admin\User\CreateCommand::class,
             \App\Spotlight\Admin\User\EditCommand::class,
             \App\Spotlight\Admin\Role\IndexCommand::class,
+            \App\Spotlight\Admin\Role\CreateCommand::class,
             \App\Spotlight\Admin\Role\EditCommand::class,
         ]
     ];

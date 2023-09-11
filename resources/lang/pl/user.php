@@ -16,6 +16,9 @@ return [
         ],
         'edit' => [
             'title' => 'Edycja użytkownika: :name'
+        ],
+        'search' => [
+            'title' => 'Szukaj użytkownika'
         ]
     ],
     'actions' => [

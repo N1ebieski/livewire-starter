@@ -15,8 +15,16 @@ export default function spotlight(data) {
     return {
         ...baseSpotlight(data),
 
-        initDefault() {
+        _init() {
             const el = this;
+
+            this.$watch("currentDependency", function (value) {
+                if (value !== null) {
+                    return;
+                }
+
+                el.$refs.input.focus();
+            });
 
             this.$watch("isOpen", function (value) {
                 if (value === false || el.selectedCommand !== null) {
@@ -32,7 +40,7 @@ export default function spotlight(data) {
                 }
 
                 el.go(defaultCommand.id);
-            });
+            });            
         },
 
         reset() {

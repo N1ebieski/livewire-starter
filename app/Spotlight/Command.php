@@ -7,6 +7,7 @@ namespace App\Spotlight;
 use Illuminate\Contracts\Auth\Access\Gate;
 use LivewireUI\Spotlight\SpotlightCommand;
 use App\Extends\Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Contracts\Auth\Guard as BaseGuard;
 
 /**
@@ -19,6 +20,7 @@ abstract class Command extends SpotlightCommand
     public function __construct(
         protected Gate $gate,
         protected BaseGuard $guard,
+        protected Translator $translator
     ) {
     }
 
