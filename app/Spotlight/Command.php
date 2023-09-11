@@ -26,4 +26,16 @@ abstract class Command extends SpotlightCommand
     {
         return $this->default;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
+            'synonyms' => $this->getSynonyms(),
+            'dependencies' => $this->dependencies()?->toArray() ?? [],
+            'default' => $this->getDefault()
+        ];
+    }
 }

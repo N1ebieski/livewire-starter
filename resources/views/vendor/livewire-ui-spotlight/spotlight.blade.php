@@ -20,9 +20,10 @@
             x-on:keydown.window.prevent.cmd.{{ $key }}="toggleOpen()"
             x-on:keydown.window.prevent.ctrl.{{ $key }}="toggleOpen()"
         @endforeach
+        x-on:keydown.backspace="!input.length ? reset() : null" 
         x-on:keydown.window.escape="isOpen = false"
         x-on:toggle-spotlight.window="toggleOpen()"
-        class="fixed z-50 px-4 pt-16 flex items-start justify-center inset-0 sm:pt-24"
+        class="fixed z-50 px-2 pt-16 flex items-start justify-center inset-0 sm:pt-24"
     >
         <div 
             x-show="isOpen" 
@@ -116,18 +117,43 @@
                             >
                                 <span 
                                     x-text="item[0].item.name"
-                                    x-bind:class="{'text-gray-300': selected !== i, 'text-white': selected === i }"
+                                    x-bind:class="{ 'text-gray-300': selected !== i, 'text-white': selected === i }"
                                 ></span>
                                 <span 
                                     x-text="item[0].item.description" 
                                     class="ml-1"
-                                    x-bind:class="{'text-gray-500': selected !== i, 'text-gray-400': selected === i }"
+                                    x-bind:class="{ 'text-gray-500': selected !== i, 'text-gray-400': selected === i }"
                                 ></span>
                             </button>
                         </li>
                     </template>
                     <div x-effect="$nextTick(() => initDefault())"></div>
                 </ul>
+            </div>
+            <div class="border-t border-gray-800 mx-4 pt-2 mb-3">
+                <div class="d-flex justify-content-between gap-1">
+                    <div class="text-truncate">
+                        <small class="inline-flex items-center border border-light rounded text-xs font-sans font-medium text-gray-300 me-1">
+                            <i class="bi bi-arrow-down-short" style="margin-right:-4px;padding:2px;"></i>
+                        </small>
+                        <small class="inline-flex items-center border border-light rounded text-xs font-sans font-medium text-gray-300">
+                            <i class="bi bi-arrow-up-short" style="margin-right:-4px;padding:2px;"></i>
+                        </small>                        
+                        <small class="ms-1 text-gray-300">{{ trans('spotlight.navigation') }}</small>
+                    </div>                
+                    <div class="text-truncate" x-show="selectedCommand">
+                        <small class="inline-flex items-center border border-light rounded px-2 text-xs font-sans font-medium text-gray-300">
+                            <i class="bi bi-arrow-left" style="margin-right:-4px;padding:2px;"></i>
+                        </small>
+                        <small class="ms-1 text-gray-300">{{ trans('spotlight.back') }}</small>
+                    </div>
+                    <div class="text-truncate">
+                        <small class="inline-flex items-center border border-light rounded px-1 text-xs font-sans font-medium text-gray-300">
+                            <span style="margin-right:-4px;padding:2px;">{{ $this->shortcutsAsString }}</span>
+                        </small>
+                        <small class="ms-1 text-gray-300">{{ trans('spotlight.enable') }}</small>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
