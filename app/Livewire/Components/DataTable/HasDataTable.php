@@ -224,6 +224,8 @@ trait HasDataTable
 
         $this->form->columns = array_values($columns->value);
 
+        $this->reset('hidingColumns');
+
         $this->validateWithReset();
     }
 
@@ -250,6 +252,8 @@ trait HasDataTable
 
     public function updatedFormColumns(array $value): void
     {
+        $this->reset('hidingColumns');
+
         $this->columnsFactory->columnsService->createCookie(
             $this->columnsFactory->columnsHelper->getAlias($this::class),
             new Columns($value)
@@ -315,10 +319,10 @@ trait HasDataTable
         $attributes = ['columns'];
 
         if ($this->lockedAttributes) {
-            $attributes = array_map(
+            $attributes = array_merge($attributes, array_map(
                 fn (string $attribute) => $this->str->match('/^form\.(.*)/', $attribute),
                 $this->lockedAttributes
-            );
+            ));
         }
 
         $this->form->resetExcept(...$attributes);
