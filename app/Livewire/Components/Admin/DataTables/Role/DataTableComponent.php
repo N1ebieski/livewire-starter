@@ -125,9 +125,7 @@ final class DataTableComponent extends Component implements DataTableInterface
 
     protected function getHidingColumns(): array
     {
-        return array_merge_recursive([
-            'sm' => ['created_at', 'updated_at'],
-        ], $this->hidingColumns);
+        return $this->hidingColumns;
     }
 
     protected function arePropertiesDirty(): bool
