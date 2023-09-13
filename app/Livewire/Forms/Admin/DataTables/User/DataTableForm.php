@@ -12,7 +12,7 @@ use App\Livewire\Forms\DataTable\DataTableForm as BaseDataTableForm;
 final class DataTableForm extends BaseDataTableForm
 {
     #[Url(as: 'columns')]
-    public array $columns = ['id', 'name', 'email', 'roles', 'created_at', 'updated_at'];
+    public array $columns = ['id', 'name', 'email', 'roles'];
 
     #[Url(as: 'status_email')]
     public ?string $status_email = null;
