@@ -145,7 +145,7 @@
                         </small>                        
                         <small class="ms-1 text-gray-300">{{ trans('spotlight.navigation') }}</small>
                     </div>                
-                    <div class="text-truncate" x-show="selectedCommand">
+                    <div class="text-truncate" x-show="currentDependency">
                         <small class="inline-flex items-center border border-light rounded px-2 text-xs font-sans font-medium text-gray-300">
                             <i class="bi bi-arrow-left" style="margin-right:-4px;padding:2px;"></i>
                         </small>
