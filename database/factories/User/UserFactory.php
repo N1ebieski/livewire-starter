@@ -39,6 +39,13 @@ final class UserFactory extends Factory
         ]);
     }
 
+    public function user(): self
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->assignRole(DefaultName::USER->value);
+        });
+    }
+
     public function admin(): self
     {
         return $this->afterCreating(function (User $user) {

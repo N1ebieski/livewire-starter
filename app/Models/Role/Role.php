@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Models\Role;
 
 use App\Scopes\Role\HasRoleScopes;
+use Database\Factories\Role\RoleFactory;
 use Spatie\Permission\Models\Role as BaseRole;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * App\Models\Role\Role
@@ -36,6 +38,7 @@ use Spatie\Permission\Models\Role as BaseRole;
  */
 final class Role extends BaseRole
 {
+    use HasFactory;
     use HasRoleScopes;
 
     /**
@@ -68,4 +71,12 @@ final class Role extends BaseRole
     public array $searchableAttributes = ['id'];
 
     public array $sortable = ['id', 'name', 'created_at', 'updated_at'];
+
+    /**
+     * Create a new factory instance for the model.
+     */
+    protected static function newFactory(): RoleFactory
+    {
+        return RoleFactory::new();
+    }
 }

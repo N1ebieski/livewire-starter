@@ -50,7 +50,7 @@
         "phpunit": [
             "php artisan migrate:fresh --env=testing",
             "php artisan db:seed --env=testing --class=\"Database\\Seeders\\Install\\InstallSeeder\"",
-            "vendor/bin/phpunit > storage/logs/phpunit.log"
+            "php artisan test > storage/logs/phpunit.log"
         ],        
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
