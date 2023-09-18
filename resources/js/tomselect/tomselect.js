@@ -26,8 +26,10 @@ export default function tomSelect(data) {
                 el.$refs.tomselect,
                 _merge(data.config, {
                     onInitialize: () => {
-                        const tsDropdown =
-                            document.querySelector("body .ts-dropdown");
+                        const tsDropdown = document.querySelector(
+                            "body > .ts-dropdown"
+                        );
+
                         const dropdowns = document.querySelector("#dropdowns");
 
                         dropdowns.appendChild(tsDropdown);

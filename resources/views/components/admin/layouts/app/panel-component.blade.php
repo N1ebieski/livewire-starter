@@ -24,4 +24,6 @@
     <livewire:modal.modal-component />
     
     <livewire:livewire-ui-spotlight />
+
+    <div id="dropdowns" wire:ignore></div>
 </div>

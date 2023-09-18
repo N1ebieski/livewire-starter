@@ -16,7 +16,7 @@
                 ></icon>
             </span>
 
-            <span class="d-inline d-md-none">
+            <span class="d-inline d-lg-none">
                 {{ trans('default.' . $currentTheme) }}
             </span>
         </a>

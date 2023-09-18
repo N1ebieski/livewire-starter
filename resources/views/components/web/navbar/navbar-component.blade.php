@@ -7,13 +7,15 @@
     wire:ignore
 >
     <div class="container-fluid">
-        <x-admin.navbar.toggler-component
+        @if($sidebar)
+        <x-web.navbar.toggler-component
             class="me-2 d-block"
-            x-on:click.prevent="toggleSidebar()"
+            x-on:click.prevent="toggleSidebar('{{ $sidebar }}')"
             aria-label="{{ trans('default.sidebar_toggle') }}"
         />
+        @endif
         <a 
-            href="{{ route('admin.home.index') }}"
+            href="{{ route('web.home.index') }}"
             class="navbar-brand"
             title="{{ config('app.name') }}"
         >
@@ -26,7 +28,7 @@
             <span class="d-none d-lg-inline">{{ config('app.name_short') }}</span>
         </a>
         <ul class="navbar-nav ms-auto">
-            <x-admin.navbar.item-component>
+            <x-web.navbar.item-component>
                 <div class="px-1 px-lg-0" style="padding-top:0.1rem;">
                     <button 
                         class="btn"
@@ -36,9 +38,9 @@
                         <i class="bi bi-search" style="font-size: 1.4rem"></i>
                     </button>
                 </div>
-            </x-admin.navbar.item-component>
+            </x-web.navbar.item-component>
         </ul>
-        <x-admin.navbar.toggler-component
+        <x-web.navbar.toggler-component
             class="ms-lg-2"
             x-on:click.prevent="toggleCollapse()"
             aria-label="{{ trans('default.navbar_toggle') }}"
@@ -48,11 +50,12 @@
             x-ref="collapse"
         >
             <ul class="navbar-nav navbar-nav-scroll">
-                <x-admin.navbar.item-component>
+                <x-web.navbar.item-component>
                     <x-multi-theme.multi-theme-component />
-                </x-admin.navbar.item-component>
-                <x-admin.navbar.item-component>
-                    <x-admin.navbar.dropdown.dropdown-component>
+                </x-web.navbar.item-component>
+                <x-web.navbar.item-component>
+                    @if(auth()->check())
+                    <x-web.navbar.dropdown.dropdown-component>
                         <x-slot:icon>
                             <i class="bi bi-person-fill-gear" style="font-size: 1.5rem"></i>
                         </x-slot:icon>
@@ -76,8 +79,21 @@
                                 {{ trans('auth.logout') }}
                             </button>
                         </form>
-                    </x-admin.navbar.dropdown.dropdown-component>
-                </x-admin.navbar.item-component>
+                    </x-web.navbar.dropdown.dropdown-component>
+                    @else
+                    <x-buttons.button-component
+                        class="btn btn-outline-primary text-nowrap text-center text-primary ms-lg-1" 
+                        href="{{ route('login') }}" 
+                        title="{{ trans('auth.login') }}"                    
+                        label="{{ trans('auth.login') }}"
+                        :action="\App\View\Components\Buttons\Action::OUTLINE_PRIMARY"
+                        :type="\App\View\Components\Buttons\Type::A"
+                        :responsive="false"
+                    >
+                        <x-slot:parent class="d-flex d-lg-inline-flex"></x-slot:parent>
+                    </x-buttons.button-component>
+                    @endif                    
+                </x-web.navbar.item-component>
             </ul>
         </div> 
     </div>

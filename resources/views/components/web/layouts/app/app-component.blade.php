@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="{{ $currentTheme }}">
     <head>
-
         <title>{{ $meta->title }}</title>
 
         <meta charset="utf-8">
@@ -29,12 +28,16 @@
 
         @vite('resources/sass/web.scss')
         @stack('styles')
-        @vite('resources/js/web.js')
+
+        @vite('resources/js/web.js')   
+        @stack('head-scripts')  
     </head>
     <body>
         {{ $slot }}
         
         @livewireScriptConfig 
-        @stack('scripts')
+        @if(config('livewire.wire_navigate') && !config('livewire.back_button_cache'))
+        <script>window.addEventListener("popstate", () => window.location.reload() );</script>
+        @endif   
     </body>
 </html>

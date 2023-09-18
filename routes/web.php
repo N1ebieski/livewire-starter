@@ -1,9 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Cookie;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,17 +11,6 @@ use Illuminate\Support\Facades\Cookie;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('proba', function (Request $request) {
-    // Cookie::queue(
-    //     Cookie::forever(
-    //         name: 'admin.datatable',
-    //         value: 'dupa'
-    //     )
-    // );
-
-    dd($request->cookie('admin.datatable'));
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });

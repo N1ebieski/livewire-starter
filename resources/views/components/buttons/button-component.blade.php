@@ -1,10 +1,18 @@
 <div 
-    class="btn-group"
+    @if(isset($parent))
+    {{ $parent->attributes->class([
+        'btn-group'
+    ])->filter(fn ($value) => is_string($value)) }}
+    @endif
     x-data="{ loading: false }"
     x-on:livewire:commit:respond.window="loading=false"      
 > 
-    <button
-        type="button" 
+    <{{ $type->value }}
+        @if($type->isEquals(\App\View\Components\Buttons\Type::BUTTON))
+        type="button"
+        @elseif($type->isEquals(\App\View\Components\Buttons\Type::A))
+        role="button"
+        @endif
         @if($attributes->has('wire:click'))
         x-bind:disabled="loading"
         x-on:click.stop="loading=true"
@@ -13,7 +21,7 @@
             'btn', "btn-{$action->value}"
         ])->filter(fn ($value) => is_string($value)) }}
     >
-        @if($icon)
+        @if(isset($icon))
         <span 
             @if($attributes->has('wire:click'))
             x-show="!loading"
@@ -35,7 +43,7 @@
         <span class="{{ $responsive ? 'd-none d-md-inline' : '' }}">
             {{ $label }}
         </span>        
-    </button>
+    </{{ $type->value }}>
     @if(isset($options))
     <button 
         type="button" 

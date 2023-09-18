@@ -34,8 +34,6 @@
     </head>
     <body>
         {{ $slot }}
-
-        <div id="dropdowns"></div>
         
         @livewireScriptConfig 
         @if(config('livewire.wire_navigate') && !config('livewire.back_button_cache'))
