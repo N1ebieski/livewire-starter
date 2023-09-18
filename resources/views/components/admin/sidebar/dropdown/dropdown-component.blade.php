@@ -1,5 +1,8 @@
-<li 
-    class="nav-item my-1 dropdown {{ $active ? 'active' : '' }}"
+<div 
+    {{ $attributes->class([ 
+        'dropdown',
+        'active' => $active
+    ])->filter(fn ($value) => is_string($value)) }} 
 >
     <a 
         {{ $attributes->class([
@@ -17,8 +20,8 @@
         <span>{{ $attributes->get('title') }}</span>
     </a>
     <ul 
-        class="dropdown-menu {{ $active ? 'show' : '' }}"
+        class="dropdown-menu w-100 {{ $active ? 'show' : '' }}"
     >
         {{ $slot }}
     </ul>
-</li> 
+</div> 

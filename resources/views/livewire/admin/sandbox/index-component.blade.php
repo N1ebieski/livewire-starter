@@ -1,4 +1,10 @@
 <x-admin.layouts.app.slot-component>
+    <x-slot:breadcrumb>
+        <x-breadcrumb.item-component :active="true">
+            Sandbox
+        </x-breadcrumb.item-component>
+    </x-slot:breadcrumb>
+
     <form wire:submit.prevent="submit">
         <div class="mb-3">
             <x-forms.autocomplete.autocomplete-component

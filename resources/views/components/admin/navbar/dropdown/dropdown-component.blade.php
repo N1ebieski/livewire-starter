@@ -1,6 +1,4 @@
-<li 
-    class="nav-item dropdown"
->
+<div class="dropdown">
     <a 
         {{ $attributes->class([
             'nav-link', 'dropdown-toggle'
@@ -22,4 +20,4 @@
     >
         {{ $slot }}
     </ul>
-</li> 
+</div> 

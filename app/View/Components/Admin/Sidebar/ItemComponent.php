@@ -12,8 +12,7 @@ final class ItemComponent extends Component
 {
     public function __construct(
         protected ViewFactory $viewFactory,
-        public readonly bool $active = false,
-        public readonly bool $disabled = false
+        public readonly bool $active = false
     ) {
     }
 

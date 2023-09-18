@@ -5,18 +5,15 @@
     class="navbar navbar-expand bg-{{ $currentTheme }} fixed-top border-bottom"
 >
     <div class="container-fluid">
-        <button 
-            class="navbar-toggler d-block me-2" 
-            type="button" 
+        <x-admin.navbar.toggler-component
+            class="me-2"
             aria-controls="sidebar"
             x-on:click.prevent="
                 const offcanvas = bootstrap.Offcanvas.getInstance('#sidebar');
 
                 offcanvas.toggle();
             "
-        >
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        />
         <a 
             href="{{ route('admin.home.index') }}"
             class="navbar-brand"
@@ -31,7 +28,7 @@
             <span class="d-none d-md-inline">{{ config('app.name_short') }}</span>
         </a>
         <ul class="navbar-nav ms-auto">
-            <li class="nav-item dropdown">
+            <x-admin.navbar.item-component>
                 <div class="px-1" style="padding-top:0.3rem;">
                     <button 
                         class="btn"
@@ -41,29 +38,33 @@
                         <i class="bi bi-search" style="font-size: 1.3rem"></i>
                     </button>
                 </div>
-            </li>
-            <x-multi-theme.multi-theme-component />
-            <x-admin.navbar.dropdown.dropdown-component>
-                <x-slot:icon>
-                    <i class="bi bi-person-fill-gear" style="font-size: 1.5rem"></i>
-                </x-slot:icon>
+            </x-admin.navbar.item-component>
+            <x-admin.navbar.item-component>
+                <x-multi-theme.multi-theme-component />
+            </x-admin.navbar.item-component>
+            <x-admin.navbar.item-component>
+                <x-admin.navbar.dropdown.dropdown-component>
+                    <x-slot:icon>
+                        <i class="bi bi-person-fill-gear" style="font-size: 1.5rem"></i>
+                    </x-slot:icon>
 
-                <h6 class="dropdown-header">
-                    {{ trans('auth.hello')}}, {{ auth()->user()->name }}!
-                </h6>
-                <div class="dropdown-divider"></div>
-                <form 
-                    class="d-inline" 
-                    method="POST" 
-                    action="{{ route('logout') }}"
-                >
-                    @csrf
+                    <h6 class="dropdown-header">
+                        {{ trans('auth.hello')}}, {{ auth()->user()->name }}!
+                    </h6>
+                    <div class="dropdown-divider"></div>
+                    <form 
+                        class="d-inline" 
+                        method="POST" 
+                        action="{{ route('logout') }}"
+                    >
+                        @csrf
 
-                    <button type="submit" class="btn btn-link dropdown-item">
-                        {{ trans('auth.logout') }}
-                    </button>
-                </form>
-            </x-admin.navbar.dropdown.dropdown-component>
+                        <button type="submit" class="btn btn-link dropdown-item">
+                            {{ trans('auth.logout') }}
+                        </button>
+                    </form>
+                </x-admin.navbar.dropdown.dropdown-component>
+            </x-admin.navbar.item-component>
         </ul>
     </div>
 </nav>

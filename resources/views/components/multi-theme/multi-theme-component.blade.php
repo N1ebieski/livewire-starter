@@ -1,5 +1,5 @@
-<li class="nav-item dropdown">
-    @if($themeHelper->isMultiThemeEnabled())
+@if($themeHelper->isMultiThemeEnabled())
+<div class="dropdown">
     <div x-data="multiTheme({ theme: @js($currentTheme) })">   
         <a 
             class="nav-link dropdown-toggle" 
@@ -33,5 +33,5 @@
             @endforeach                       
         </div>
     </div>
-    @endif
-</li>
+</div>
+@endif

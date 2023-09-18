@@ -158,7 +158,7 @@ return [
     |
     */
 
-    'back_button_cache' => true,
+    'back_button_cache' => false,
 
     'wire_navigate' => true
 ];

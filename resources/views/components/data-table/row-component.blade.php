@@ -7,7 +7,7 @@
     {{ $attributes->class([
         'transition'
     ])->merge([
-        'style' => 'height:55px'
+        'style' => 'height:65px'
     ])->filter(fn ($value) => is_string($value)) }}  
     wire:ignore.self
 > 

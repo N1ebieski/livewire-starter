@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\View\Components\Forms\DateTime;
+namespace App\View\Components\Forms\Datetime;
 
 use Illuminate\Contracts\View\View;
 use App\View\Components\Forms\FormComponent;
