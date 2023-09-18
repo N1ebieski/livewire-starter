@@ -1,4 +1,4 @@
-<x-admin.layouts.app.slot-component>
+<x-admin.layouts.app.panel-component>
     <x-slot:breadcrumb>
         <x-breadcrumb.item-component :active="true">
             {{ trans('role.pages.index.title') }}
@@ -6,4 +6,4 @@
     </x-slot:breadcrumb>
 
     <livewire:admin.data-tables.role.data-table-component />
-</x-admin.layouts.app.slot-component>
+</x-admin.layouts.app.panel-component>

@@ -18,7 +18,7 @@
                 class="offcanvas-title" 
                 id="sidebar-label"
             >
-                {{ trans('default.menu') }}
+                {{ trans('admin.title') }}
             </h5>
             <button 
                 type="button" 

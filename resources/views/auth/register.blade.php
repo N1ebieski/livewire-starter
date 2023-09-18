@@ -1,5 +1,5 @@
 <x-web.layouts.app.app-component :meta="$meta">
-    <x-web.layouts.app.slot-component>
+    <x-web.layouts.app.landing-page-component>
         <x-auth.layouts.auth-component>
             <x-card.card-component>
                 <x-slot:header>
@@ -75,7 +75,7 @@
                                 label=""
                                 :checked="old('privacy_agreement')"
                             >
-                                <x-slot:label>
+                                <x-slot:label class="pt-0">
                                     <small>{!! trans('policy.agreement.privacy', ['privacy' => str_slug(trans('policy.privacy'))]) !!}</small>
                                 </x-slot:label>
                                 <x-slot:parent class="row"></x-slot:parent>
@@ -90,7 +90,7 @@
                                 label=""
                                 :checked="old('contact_agreement')"
                             >
-                                <x-slot:label>
+                                <x-slot:label class="pt-0">
                                     <small>{{ trans('policy.agreement.register') }}</small>
                                 </x-slot:label>
                                 <x-slot:parent class="row"></x-slot:parent>
@@ -105,7 +105,7 @@
                                 label=""
                                 :checked="old('marketing_agreement')"
                             >
-                                <x-slot:label>
+                                <x-slot:label class="pt-0">
                                     <small>{{ trans('policy.agreement.marketing') }}</small>
                                 </x-slot:label>
                                 <x-slot:parent class="row"></x-slot:parent>
@@ -124,5 +124,5 @@
                 </x-slot:body>
             </x-card.card-component>
         </x-auth.layouts.auth-component>
-    </x-web.layouts.app.slot-component>
+    </x-web.layouts.app.landing-page-component>
 </x-web.layouts.app-component>

@@ -1,0 +1,9 @@
+.navbar {
+    z-index: $zindex-offcanvas + 2 !important;
+}
+
+.navbar-collapse-backdrop {
+    z-index: $zindex-offcanvas + 1;
+
+    @extend .offcanvas-backdrop;
+}

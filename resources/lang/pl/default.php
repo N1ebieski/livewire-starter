@@ -43,6 +43,8 @@ return [
     'lang_toggle' => 'Zmień język',
     'loading' => 'Wczytywanie',
     'toggle' => 'Przełącz',
+    'sidebar_toggle' => 'Przełącz menu boczne',
+    'navbar_toggle' => 'Przełącz navbar',
     'menu' => 'Menu główne',
     'go_to' => 'Idź do',
     'choose' => 'Wybierz',

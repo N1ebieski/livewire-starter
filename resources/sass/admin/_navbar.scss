@@ -3,7 +3,7 @@
 }
 
 .navbar {
-    height: $navbar-base-height;
+    min-height: $navbar-base-height;
     z-index: calc(#{$zindex-offcanvas} + 1);
 }
 
@@ -14,6 +14,16 @@
 
     .logo {
         width: 2.5rem;
+    }    
+}
+
+.navbar-nav {
+    .dropdown {
+        @include media-breakpoint-down(md) {
+            .dropdown-menu {
+                display: block;
+            }
+        }
     }    
 }
 

@@ -1,6 +1,6 @@
 <button 
     {{ $attributes->class([
-        'navbar-toggler', 'd-block'
+        'navbar-toggler'
     ])->filter(fn ($value) => is_string($value)) }}    
     type="button" 
 >

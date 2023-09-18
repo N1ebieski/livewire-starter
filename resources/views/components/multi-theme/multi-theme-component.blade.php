@@ -9,10 +9,16 @@
             aria-haspopup="true" 
             aria-expanded="false"
         >
-            <span 
-                class="bi bi-custom-{{ $currentTheme }}"
-                style="font-size: 1.5rem"
-            ></span>
+            <span class="me-1">
+                <icon 
+                    class="bi bi-custom-{{ $currentTheme }}"
+                    style="font-size: 1.5rem"
+                ></icon>
+            </span>
+
+            <span class="d-inline d-md-none">
+                {{ trans('default.' . $currentTheme) }}
+            </span>
         </a>
         <div 
             class="dropdown-menu dropdown-menu-end"

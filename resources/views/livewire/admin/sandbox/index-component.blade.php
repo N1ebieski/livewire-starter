@@ -1,4 +1,4 @@
-<x-admin.layouts.app.slot-component>
+<x-admin.layouts.app.panel-component>
     <x-slot:breadcrumb>
         <x-breadcrumb.item-component :active="true">
             Sandbox
@@ -63,4 +63,4 @@
             Submit
         </button>
     </form>
-</x-admin.layouts.app.slot-component>
+</x-admin.layouts.app.panel-component>
