@@ -16,8 +16,8 @@ final class ButtonComponent extends Component
      */
     public function __construct(
         protected ViewFactory $viewFactory,
-        public readonly string $label,
-        public readonly Action $action = Action::PRIMARY,
+        public readonly ?string $label = null,
+        public readonly ?Action $action = Action::PRIMARY,
         public readonly Type $type = Type::BUTTON,
         public readonly bool $responsive = true
     ) {

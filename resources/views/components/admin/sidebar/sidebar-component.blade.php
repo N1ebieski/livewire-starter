@@ -30,10 +30,10 @@
         <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1">
                 @can('admin.home.view')
-                <x-admin.sidebar.item-component
+                <x-sidebar.item-component
                     :active="$isCurrentRoute('admin.home.index')"
                 >
-                    <x-admin.sidebar.page-component
+                    <x-sidebar.page-component
                         :active="$isCurrentRoute('admin.home.index')"
                         href="{{ route('admin.home.index') }}"
                         title="Dashboard"
@@ -41,20 +41,20 @@
                         <x-slot:icon>
                             <i class="bi bi-speedometer2"></i>
                         </x-slot:icon>
-                    </x-admin.sidebar.page-component>
-                </x-admin.sidebar.item-component>
+                    </x-sidebar.page-component>
+                </x-sidebar.item-component>
                 @endcan                                          
                 @canAny([
                     'admin.user.view',
                     'admin.role.view'
                 ])
-                <x-admin.sidebar.item-component
+                <x-sidebar.item-component
                     :active="$isCurrentRoute([
                         'admin.user.index',
                         'admin.role.index'
                     ])"
                 >                
-                    <x-admin.sidebar.dropdown.dropdown-component
+                    <x-sidebar.dropdown.dropdown-component
                         :active="$isCurrentRoute([
                             'admin.user.index',
                             'admin.role.index'
@@ -65,29 +65,29 @@
                             <i class="bi bi-people-fill"></i>
                         </x-slot:icon>
                         @can('admin.user.view')
-                        <x-admin.sidebar.dropdown.item-component
+                        <x-sidebar.dropdown.item-component
                             :active="$isCurrentRoute('admin.user.index')"
                             href="{{ route('admin.user.index') }}"
                             title="{{ trans('user.pages.index.title') }}"
                         />
                         @endcan
                         @can('admin.role.view')
-                        <x-admin.sidebar.dropdown.item-component
+                        <x-sidebar.dropdown.item-component
                             :active="$isCurrentRoute('admin.role.index')"
                             href="{{ route('admin.role.index') }}"
                             title="{{ trans('role.pages.index.title') }}"
                         />
                         @endcan                    
-                    </x-admin.sidebar.dropdown.dropdown-component>
-                </x-admin.sidebar.item-component>    
+                    </x-sidebar.dropdown.dropdown-component>
+                </x-sidebar.item-component>    
                 @endcan                                                                            
             </ul>
             <ul class="navbar-nav justify-content-end flex-grow-1 position-absolute bottom-0">
                 @can('admin.home.view')
-                <x-admin.sidebar.item-component
+                <x-sidebar.item-component
                     :active="$isCurrentRoute('admin.sandbox.index')"
                 >                
-                    <x-admin.sidebar.page-component
+                    <x-sidebar.page-component
                         :active="$isCurrentRoute('admin.sandbox.index')"
                         href="{{ route('admin.sandbox.index') }}"
                         title="Sandbox"
@@ -95,8 +95,8 @@
                         <x-slot:icon>
                             <i class="bi bi-code-square"></i>
                         </x-slot:icon>
-                    </x-admin.sidebar.item-component>
-                </x-admin.sidebar.item-component>
+                    </x-sidebar.item-component>
+                </x-sidebar.item-component>
                 @endcan 
             </ul>                
         </div>

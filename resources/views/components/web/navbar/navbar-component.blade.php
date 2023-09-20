@@ -8,7 +8,7 @@
 >
     <div class="container-fluid">
         @if($sidebar)
-        <x-web.navbar.toggler-component
+        <x-navbar.toggler-component
             class="me-2 d-block"
             x-on:click.prevent="toggleSidebar('{{ $sidebar }}')"
             aria-label="{{ trans('default.sidebar_toggle') }}"
@@ -28,19 +28,19 @@
             <span class="d-none d-lg-inline">{{ config('app.name_short') }}</span>
         </a>
         <ul class="navbar-nav ms-auto">
-            <x-web.navbar.item-component>
+            <x-navbar.item-component>
                 <div class="px-1 px-lg-0" style="padding-top:0.1rem;">
-                    <button 
-                        class="btn"
-                        type="button" 
-                        x-on:click.prevent="toggleSpotlight()"
+                    <x-buttons.button-component
+                        :action="null"
                     >
-                        <i class="bi bi-search" style="font-size: 1.4rem"></i>
-                    </button>
+                        <x-slot:icon>
+                            <i class="bi bi-search" style="font-size: 1.4rem"></i>
+                        </x-slot:icon>
+                    </x-buttons.button-component>
                 </div>
-            </x-web.navbar.item-component>
+            </x-navbar.item-component>
         </ul>
-        <x-web.navbar.toggler-component
+        <x-navbar.toggler-component
             class="ms-lg-2"
             x-on:click.prevent="toggleCollapse()"
             aria-label="{{ trans('default.navbar_toggle') }}"
@@ -50,12 +50,12 @@
             x-ref="collapse"
         >
             <ul class="navbar-nav navbar-nav-scroll">
-                <x-web.navbar.item-component>
+                <x-navbar.item-component>
                     <x-multi-theme.multi-theme-component />
-                </x-web.navbar.item-component>
-                <x-web.navbar.item-component>
+                </x-navbar.item-component>
+                <x-navbar.item-component>
                     @if(auth()->check())
-                    <x-web.navbar.dropdown.dropdown-component>
+                    <x-navbar.dropdown.dropdown-component>
                         <x-slot:icon>
                             <i class="bi bi-person-fill-gear" style="font-size: 1.5rem"></i>
                         </x-slot:icon>
@@ -79,7 +79,7 @@
                                 {{ trans('auth.logout') }}
                             </button>
                         </form>
-                    </x-web.navbar.dropdown.dropdown-component>
+                    </x-navbar.dropdown.dropdown-component>
                     @else
                     <x-buttons.button-component
                         class="btn btn-outline-primary text-nowrap text-center text-primary ms-lg-1" 
@@ -93,7 +93,7 @@
                         <x-slot:parent class="d-flex d-lg-inline-flex"></x-slot:parent>
                     </x-buttons.button-component>
                     @endif                    
-                </x-web.navbar.item-component>
+                </x-navbar.item-component>
             </ul>
         </div> 
     </div>

@@ -7,9 +7,9 @@
     wire:ignore
 >
     <div class="container-fluid">
-        <x-admin.navbar.toggler-component
+        <x-navbar.toggler-component
             class="me-2 d-block"
-            x-on:click.prevent="toggleSidebar()"
+            x-on:click.prevent="toggleSidebar('#sidebar')"
             aria-label="{{ trans('default.sidebar_toggle') }}"
         />
         <a 
@@ -26,19 +26,19 @@
             <span class="d-none d-lg-inline">{{ config('app.name_short') }}</span>
         </a>
         <ul class="navbar-nav ms-auto">
-            <x-admin.navbar.item-component>
+            <x-navbar.item-component>
                 <div class="px-1 px-lg-0" style="padding-top:0.1rem;">
-                    <button 
-                        class="btn"
-                        type="button" 
-                        x-on:click.prevent="toggleSpotlight()"
+                    <x-buttons.button-component
+                        :action="null"
                     >
-                        <i class="bi bi-search" style="font-size: 1.4rem"></i>
-                    </button>
+                        <x-slot:icon>
+                            <i class="bi bi-search" style="font-size: 1.4rem"></i>
+                        </x-slot:icon>
+                    </x-buttons.button-component>
                 </div>
-            </x-admin.navbar.item-component>
+            </x-navbar.item-component>
         </ul>
-        <x-admin.navbar.toggler-component
+        <x-navbar.toggler-component
             class="ms-lg-2"
             x-on:click.prevent="toggleCollapse()"
             aria-label="{{ trans('default.navbar_toggle') }}"
@@ -48,11 +48,11 @@
             x-ref="collapse"
         >
             <ul class="navbar-nav navbar-nav-scroll">
-                <x-admin.navbar.item-component>
+                <x-navbar.item-component>
                     <x-multi-theme.multi-theme-component />
-                </x-admin.navbar.item-component>
-                <x-admin.navbar.item-component>
-                    <x-admin.navbar.dropdown.dropdown-component>
+                </x-navbar.item-component>
+                <x-navbar.item-component>
+                    <x-navbar.dropdown.dropdown-component>
                         <x-slot:icon>
                             <i class="bi bi-person-fill-gear" style="font-size: 1.5rem"></i>
                         </x-slot:icon>
@@ -76,8 +76,8 @@
                                 {{ trans('auth.logout') }}
                             </button>
                         </form>
-                    </x-admin.navbar.dropdown.dropdown-component>
-                </x-admin.navbar.item-component>
+                    </x-navbar.dropdown.dropdown-component>
+                </x-navbar.item-component>
             </ul>
         </div> 
     </div>

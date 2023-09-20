@@ -6,7 +6,6 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
 final class ViewServiceProvider extends ServiceProvider
@@ -19,18 +18,9 @@ final class ViewServiceProvider extends ServiceProvider
         View::composer('*', \App\View\Composers\Theme\ThemeComposer::class);
         View::composer('components.admin.sidebar.sidebar-component', \App\View\Composers\Sidebar\SidebarComposer::class);
 
-        Blade::directive('wireNavigate', function (?string $modifier = null) {
-            $navigate = "";
+        /** @var \App\View\Directives\WireNavigate\WireNavigateDirective */
+        $wireNavigateDirective = $this->app->make(\App\View\Directives\WireNavigate\WireNavigateDirective::class);
 
-            if (Config::get('livewire.wire_navigate')) {
-                $navigate .= "wire:navigate";
-
-                if ($modifier) {
-                    $navigate .= "." . substr($modifier, 1, -1);
-                }
-            }
-
-            return $navigate;
-        });
+        Blade::directive('wireNavigate', $wireNavigateDirective());
     }
 }

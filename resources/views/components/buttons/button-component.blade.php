@@ -18,7 +18,8 @@
         x-on:click.stop="loading=true"
         @endif
         {{ $attributes->class([
-            'btn', "btn-{$action->value}"
+            'btn', 
+            "btn-{$action?->value}" => !is_null($action)
         ])->filter(fn ($value) => is_string($value)) }}
     >
         @if(isset($icon))
@@ -40,14 +41,16 @@
         </span>
         @endif
         @endif
+        @if(isset($label))
         <span class="{{ $responsive ? 'd-none d-md-inline' : '' }}">
             {{ $label }}
-        </span>        
+        </span>
+        @endif 
     </{{ $type->value }}>
     @if(isset($options))
     <button 
         type="button" 
-        class="btn btn-{{ $action->value }} dropdown-toggle dropdown-toggle-split" 
+        class="btn {{ !is_null($action) ? 'btn-' . $action->value : '' }} dropdown-toggle dropdown-toggle-split" 
         data-bs-toggle="dropdown" 
         aria-expanded="false"
         @if($attributes->has('wire:click'))
