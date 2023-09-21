@@ -14,7 +14,11 @@ return [
         ],
         'web' => [
             'prefix' => env('ROUTES_WEB_PREFIX', null),
-            'enabled' => true
+            'enabled' => true,
+
+            'user' => [
+                'prefix' => env('ROUTES_WEB_USER_PREFIX', 'user')
+            ]
         ],
         'admin' => [
             'prefix' => env('ROUTES_ADMIN_PREFIX', 'admin'),

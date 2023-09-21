@@ -16,7 +16,10 @@ final class ViewServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('*', \App\View\Composers\Theme\ThemeComposer::class);
-        View::composer('components.admin.sidebar.sidebar-component', \App\View\Composers\Sidebar\SidebarComposer::class);
+        View::composer([
+            'components.admin.sidebar.sidebar-component',
+            'components.web.user.sidebar.sidebar-component'
+        ], \App\View\Composers\Sidebar\SidebarComposer::class);
 
         /** @var \App\View\Directives\WireNavigate\WireNavigateDirective */
         $wireNavigateDirective = $this->app->make(\App\View\Directives\WireNavigate\WireNavigateDirective::class);

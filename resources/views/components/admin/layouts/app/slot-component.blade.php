@@ -1,21 +1,17 @@
 <div>
+    <x-admin.navbar.navbar-component />
+    <div class="navbar-height"></div>
+
     <div class="wrapper">
-        <x-admin.navbar.navbar-component />
         <x-admin.sidebar.sidebar-component />
 
         <div class="content-wrapper">
-            <div class="navbar-height"></div>
-
-            <div class="container-fluid">
-                <x-admin.breadcrumb.breadcrumb-component>
-                    {{ $breadcrumb ?? null }}
-                </x-admin.breadcrumb.breadcrumb-component>
-
+            <div class="content">
                 {{ $slot }}
             </div>
-        </div>
 
-        <x-admin.footer.footer-component />
+            <x-admin.footer.footer-component />
+        </div>
     </div>
 
     <x-toast.toast-component />

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\View\Components\Admin\Sidebar;
+namespace App\View\Components\Navbar\Dropdown;
 
 use App\View\Components\Component;
 use Illuminate\Contracts\View\View;
@@ -12,7 +12,8 @@ final class ItemComponent extends Component
 {
     public function __construct(
         protected ViewFactory $viewFactory,
-        public readonly bool $active = false
+        public readonly bool $active = false,
+        public readonly bool $disabled = false
     ) {
     }
 
@@ -21,6 +22,6 @@ final class ItemComponent extends Component
      */
     public function render(): View
     {
-        return $this->viewFactory->make('components.admin.sidebar.item-component');
+        return $this->viewFactory->make('components.navbar.dropdown.item-component');
     }
 }

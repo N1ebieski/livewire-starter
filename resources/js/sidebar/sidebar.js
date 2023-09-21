@@ -67,11 +67,11 @@ export default function sidebar(data) {
         },
 
         createCookie() {
-            document.cookie = `admin_sidebar_toggle=${this.getShowAsString()}; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
+            document.cookie = `sidebar_toggle=${this.getShowAsString()}; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
         },
 
         removeCookie() {
-            document.cookie = "admin_sidebar_toggle=; Max-Age=0; path=/";
+            document.cookie = "sidebar_toggle=; Max-Age=0; path=/";
         },
 
         setDownLg() {

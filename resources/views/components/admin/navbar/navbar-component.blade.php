@@ -1,4 +1,5 @@
 <nav 
+    aria-label="navbar"
     x-data="navbar({ autohide: @js($autohide) })"
     x-show="show"
     x-on:click.outside="hideCollapse()"
@@ -30,6 +31,7 @@
                 <div class="px-1 px-lg-0" style="padding-top:0.1rem;">
                     <x-buttons.button-component
                         :action="null"
+                        x-on:click.prevent="toggleSpotlight()"
                     >
                         <x-slot:icon>
                             <i class="bi bi-search" style="font-size: 1.4rem"></i>

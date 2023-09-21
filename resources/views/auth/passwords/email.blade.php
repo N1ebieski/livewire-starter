@@ -1,5 +1,5 @@
 <x-web.layouts.app.app-component :meta="$meta">
-    <x-web.layouts.app.landing-page-component>
+    <x-web.layouts.app.slot-component>
         <x-auth.layouts.auth-component>
             <x-card.card-component>
                 <x-slot:header>
@@ -45,5 +45,5 @@
                 </x-slot:body>
             </x-card.card-component>
         </x-auth.layouts.auth-component>
-    </x-web.layouts.app.landing-page-component>
+    </x-web.layouts.app.slot-component>
 </x-web.layouts.app-component>

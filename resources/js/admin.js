@@ -6,7 +6,6 @@ import {
 } from "../../vendor/livewire/livewire/dist/livewire.esm";
 import "./bootstrap";
 
-import sidebar from "./admin/sidebar/sidebar";
 import autoComplete from "./autocomplete/autocomplete";
 import bulkAction from "./data-table/bulk-action";
 import dataTable from "./data-table/data-table";
@@ -18,6 +17,7 @@ import modal from "./modal/modal";
 import multiTheme from "./multi-theme/multi-theme";
 import navbar from "./navbar/navbar";
 import scrollToTop from "./scroll-to-top/scroll-to-top";
+import sidebar from "./sidebar/sidebar";
 import spotlight from "./spotlight/spotlight";
 import tinyMCE from "./tinymce/tinymce";
 import toast from "./toast/toast";

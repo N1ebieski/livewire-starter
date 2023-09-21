@@ -98,8 +98,8 @@ export default function navbar(data) {
             }
         },
 
-        toggleSidebar(selector = "#sidebar") {
-            const offcanvas = Offcanvas.getInstance(selector);
+        toggleSidebar() {
+            const offcanvas = Offcanvas.getInstance("#sidebar");
 
             offcanvas.toggle();
         },

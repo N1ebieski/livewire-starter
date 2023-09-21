@@ -13,7 +13,7 @@ final class NavbarComponent extends Component
     public function __construct(
         protected ViewFactory $viewFactory,
         public readonly bool $autohide = true,
-        public readonly ?string $sidebar = null
+        public readonly bool $sidebar = false
     ) {
     }
 

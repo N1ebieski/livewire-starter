@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\ValueObjects\User\StatusEmail;
 
 return [
+    'title' => 'Panel użytkownika',
     'pages' => [
         'index' => [
             'title' => 'Użytkownicy',

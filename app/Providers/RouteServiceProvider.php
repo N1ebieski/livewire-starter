@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -30,13 +31,6 @@ final class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            Route::middleware('api')
-                ->prefix('api')
-                ->group(base_path('routes/api.php'));
-
-            Route::middleware('web')
-                ->group(base_path('routes/web.php'));
-
             $this->mapAuthRoutes();
 
             $this->mapApiRoutes();
@@ -62,8 +56,8 @@ final class RouteServiceProvider extends ServiceProvider
         }
 
         $router->group(function () {
-            if (!file_exists(base_path('routes') . '/vendor/icore/auth.php')) {
-                require(__DIR__ . '/../../routes/auth.php');
+            if (file_exists(base_path('routes') . '/auth.php')) {
+                require(base_path('routes') . '/auth.php');
             }
         });
     }
@@ -84,10 +78,18 @@ final class RouteServiceProvider extends ServiceProvider
         }
 
         $router->group(function () {
-            $filenames = glob(__DIR__ . '/../../routes/api/*.php') ?: [];
+            $filenames = File::allFiles(base_path('routes') . '/api');
 
             foreach ($filenames as $filename) {
+                if ($filename->getExtension() !== 'php') {
+                    continue;
+                }
+
                 require($filename);
+            }
+
+            if (file_exists(base_path('routes') . '/api.php')) {
+                require(base_path('routes') . '/api.php');
             }
         });
     }
@@ -108,10 +110,18 @@ final class RouteServiceProvider extends ServiceProvider
         }
 
         $router->group(function () {
-            $filenames = glob(__DIR__ . '/../../routes/web/*.php') ?: [];
+            $filenames = File::allFiles(base_path('routes') . '/web');
 
             foreach ($filenames as $filename) {
-                require($filename);
+                if ($filename->getExtension() !== 'php') {
+                    continue;
+                }
+
+                require($filename->getPathname());
+            }
+
+            if (file_exists(base_path('routes') . '/web.php')) {
+                require(base_path('routes') . '/web.php');
             }
         });
     }
@@ -137,10 +147,18 @@ final class RouteServiceProvider extends ServiceProvider
         }
 
         $router->group(function () {
-            $filenames = glob(__DIR__ . '/../../routes/admin/*.php') ?: [];
+            $filenames = File::allFiles(base_path('routes') . '/admin');
 
             foreach ($filenames as $filename) {
+                if ($filename->getExtension() !== 'php') {
+                    continue;
+                }
+
                 require($filename);
+            }
+
+            if (file_exists(base_path('routes') . '/admin.php')) {
+                require(base_path('routes') . '/admin.php');
             }
         });
     }

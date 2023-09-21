@@ -4,10 +4,17 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
+@import 'modal';
+
+@import 'spotlight';
+
 @import 'alpine';
 
 @import 'sidebar';
 @import 'navbar';
 @import 'icons';
+@import 'scrolltotop';
+@import 'button';
+@import 'breadcrumb';
 
 @import 'web/layout';

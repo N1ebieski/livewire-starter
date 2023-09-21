@@ -1,3 +1,5 @@
-<x-admin.layouts.app.panel-component>
-    <a href="{{ route('admin.user.index') }}" wire:navigate.hover>user</a>
-</x-admin.layouts.app.panel-component>
+<x-admin.layouts.app.slot-component>
+    <div class="container-fluid">
+        <x-admin.breadcrumb.breadcrumb-component /> 
+    </div>
+</x-admin.layouts.app.slot-component>

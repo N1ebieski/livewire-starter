@@ -1,4 +1,5 @@
-<div 
+<nav 
+    aria-label="sidebar"
     x-data="sidebar({ show: @js($sidebarToggle) })"
     x-on:livewire:navigating="destroy()"
     class="sidebar-wrapper d-none d-lg-block {{ $sidebarToggle ? 'show' : '' }}"
@@ -101,4 +102,4 @@
             </ul>                
         </div>
     </div>
-</div>
+</nav>

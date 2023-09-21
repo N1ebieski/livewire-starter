@@ -7,22 +7,16 @@ body {
     height: 100%;
 }
 
-footer {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    height: $sticky-footer-height;
-}
-
 .wrapper {
     display: flex;
     position: relative;
-    min-height: 100vh;
 
     .content-wrapper {
         overflow-x: hidden;
         width: 100%;
-        padding-top: 1rem;
-        padding-bottom: $sticky-footer-height;
+
+        .content {
+            min-height: 100vh;            
+        }
     }
 }

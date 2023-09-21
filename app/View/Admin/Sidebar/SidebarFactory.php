@@ -15,9 +15,9 @@ final class SidebarFactory
 
     public function make(): Sidebar
     {
-        $show = null;
+        $show = true;
 
-        $cookie = $this->request->cookie('admin_sidebar_toggle');
+        $cookie = $this->request->cookie('sidebar_toggle');
 
         if (in_array($cookie, ['false', 'true'])) {
             $show = $cookie === 'true';
