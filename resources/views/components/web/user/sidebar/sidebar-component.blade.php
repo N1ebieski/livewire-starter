@@ -1,13 +1,13 @@
 <nav
     aria-label="sidebar"
-    x-data="sidebar({ show: @js($sidebarToggle->show) })"
+    x-data="sidebar({ show: @js($sidebar->show) })"
     x-on:livewire:navigating="destroy()"
-    class="sidebar-wrapper d-none d-lg-block {{ $sidebarToggle->show ? 'show' : '' }}"
+    class="sidebar-wrapper d-none d-lg-block {{ $sidebar->show ? 'show' : '' }}"
     :class="{ 'show': show, 'd-none': !display, 'd-lg-block': !display }"
     wire:ignore
 >
     <div 
-        class="sidebar offcanvas offcanvas-start d-none d-lg-block {{ $sidebarToggle->show ? 'show' : '' }}" 
+        class="sidebar offcanvas offcanvas-start d-none d-lg-block {{ $sidebar->show ? 'show' : '' }}" 
         :class="{ 'show': show, 'd-none': !display, 'd-lg-block': !display }"
         tabindex="-1" 
         id="sidebar" 
