@@ -4,7 +4,7 @@
     x-show="show"
     x-on:click.outside="hideCollapse()"
     x-transition
-    class="navbar navbar-expand-lg bg-{{ $currentTheme }} fixed-top border-bottom"
+    class="navbar navbar-expand-lg bg-{{ $currentTheme->name }} fixed-top border-bottom"
     wire:ignore
 >
     <div class="container-fluid">
@@ -66,6 +66,20 @@
                         <h6 class="dropdown-header d-lg-block d-none">
                             {{ trans('auth.hello')}}, {{ auth()->user()->name }}!
                         </h6>
+                        @auth
+                        <x-navbar.dropdown.item-component
+                            :active="$routeHelper->isCurrentRouteStartsWith('web.user.')"
+                            href="{{ route('web.user.account.index') }}"
+                            title="{{ trans('user.title') }}"
+                        />
+                        @endauth                         
+                        @can('admin.access')
+                        <x-navbar.dropdown.item-component
+                            :active="$routeHelper->isCurrentRouteStartsWith('admin.')"
+                            href="{{ route('admin.home.index') }}"
+                            title="{{ trans('admin.title') }}"
+                        />
+                        @endcan
                         <div class="dropdown-divider d-lg-block d-none"></div>
                         <form 
                             class="d-inline" 

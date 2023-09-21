@@ -1,13 +1,13 @@
 <nav 
     aria-label="sidebar"
-    x-data="sidebar({ show: @js($sidebarToggle) })"
+    x-data="sidebar({ show: @js($sidebarToggle->show) })"
     x-on:livewire:navigating="destroy()"
-    class="sidebar-wrapper d-none d-lg-block {{ $sidebarToggle ? 'show' : '' }}"
+    class="sidebar-wrapper d-none d-lg-block {{ $sidebarToggle->show ? 'show' : '' }}"
     :class="{ 'show': show, 'd-none': !display, 'd-lg-block': !display }"
     wire:ignore
 >
     <div 
-        class="sidebar offcanvas offcanvas-start d-none d-lg-block {{ $sidebarToggle ? 'show' : '' }}" 
+        class="sidebar offcanvas offcanvas-start d-none d-lg-block {{ $sidebarToggle->show ? 'show' : '' }}" 
         :class="{ 'show': show, 'd-none': !display, 'd-lg-block': !display }"
         tabindex="-1" 
         id="sidebar" 
@@ -32,10 +32,10 @@
             <ul class="navbar-nav justify-content-end flex-grow-1">
                 @can('admin.home.view')
                 <x-sidebar.item-component
-                    :active="$isCurrentRoute('admin.home.index')"
+                    :active="$routeHelper->isCurrentRoute('admin.home.index')"
                 >
                     <x-sidebar.page-component
-                        :active="$isCurrentRoute('admin.home.index')"
+                        :active="$routeHelper->isCurrentRoute('admin.home.index')"
                         href="{{ route('admin.home.index') }}"
                         title="Dashboard"
                     >
@@ -50,13 +50,13 @@
                     'admin.role.view'
                 ])
                 <x-sidebar.item-component
-                    :active="$isCurrentRoute([
+                    :active="$routeHelper->isCurrentRoute([
                         'admin.user.index',
                         'admin.role.index'
                     ])"
                 >                
                     <x-sidebar.dropdown.dropdown-component
-                        :active="$isCurrentRoute([
+                        :active="$routeHelper->isCurrentRoute([
                             'admin.user.index',
                             'admin.role.index'
                         ])"
@@ -67,14 +67,14 @@
                         </x-slot:icon>
                         @can('admin.user.view')
                         <x-sidebar.dropdown.item-component
-                            :active="$isCurrentRoute('admin.user.index')"
+                            :active="$routeHelper->isCurrentRoute('admin.user.index')"
                             href="{{ route('admin.user.index') }}"
                             title="{{ trans('user.pages.index.title') }}"
                         />
                         @endcan
                         @can('admin.role.view')
                         <x-sidebar.dropdown.item-component
-                            :active="$isCurrentRoute('admin.role.index')"
+                            :active="$routeHelper->isCurrentRoute('admin.role.index')"
                             href="{{ route('admin.role.index') }}"
                             title="{{ trans('role.pages.index.title') }}"
                         />
@@ -86,10 +86,10 @@
             <ul class="navbar-nav justify-content-end flex-grow-1 position-absolute bottom-0">
                 @can('admin.home.view')
                 <x-sidebar.item-component
-                    :active="$isCurrentRoute('admin.sandbox.index')"
+                    :active="$routeHelper->isCurrentRoute('admin.sandbox.index')"
                 >                
                     <x-sidebar.page-component
-                        :active="$isCurrentRoute('admin.sandbox.index')"
+                        :active="$routeHelper->isCurrentRoute('admin.sandbox.index')"
                         href="{{ route('admin.sandbox.index') }}"
                         title="Sandbox"
                     >

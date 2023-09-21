@@ -21,6 +21,6 @@ final class SidebarComposer
      */
     public function compose(View $view): void
     {
-        $view->with('sidebarToggle', $this->sidebarFactory->make()->show);
+        $view->with('sidebarToggle', $this->sidebarFactory->make());
     }
 }

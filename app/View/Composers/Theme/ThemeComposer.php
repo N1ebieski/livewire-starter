@@ -21,6 +21,6 @@ final class ThemeComposer
      */
     public function compose(View $view): void
     {
-        $view->with('currentTheme', $this->themeFactory->make()->name);
+        $view->with('currentTheme', $this->themeFactory->make());
     }
 }

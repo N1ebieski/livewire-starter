@@ -1,13 +1,13 @@
 <nav
     aria-label="sidebar"
-    x-data="sidebar({ show: @js($sidebarToggle) })"
+    x-data="sidebar({ show: @js($sidebarToggle->show) })"
     x-on:livewire:navigating="destroy()"
-    class="sidebar-wrapper d-none d-lg-block {{ $sidebarToggle ? 'show' : '' }}"
+    class="sidebar-wrapper d-none d-lg-block {{ $sidebarToggle->show ? 'show' : '' }}"
     :class="{ 'show': show, 'd-none': !display, 'd-lg-block': !display }"
     wire:ignore
 >
     <div 
-        class="sidebar offcanvas offcanvas-start d-none d-lg-block {{ $sidebarToggle ? 'show' : '' }}" 
+        class="sidebar offcanvas offcanvas-start d-none d-lg-block {{ $sidebarToggle->show ? 'show' : '' }}" 
         :class="{ 'show': show, 'd-none': !display, 'd-lg-block': !display }"
         tabindex="-1" 
         id="sidebar" 
@@ -31,10 +31,10 @@
         <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1">
                 <x-sidebar.item-component
-                    :active="$isCurrentRoute('web.user.account.index')"
+                    :active="$routeHelper->isCurrentRoute('web.user.account.index')"
                 >
                     <x-sidebar.page-component
-                        :active="$isCurrentRoute('web.user.account.index')"
+                        :active="$routeHelper->isCurrentRoute('web.user.account.index')"
                         href="{{ route('web.user.account.index') }}"
                         title="{{ trans('account.pages.show.title') }}"
                     >

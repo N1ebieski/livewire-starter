@@ -1,6 +1,6 @@
 @if($themeHelper->isMultiThemeEnabled())
 <div class="dropdown">
-    <div x-data="multiTheme({ theme: @js($currentTheme) })">   
+    <div x-data="multiTheme({ theme: @js($currentTheme->name) })">   
         <a 
             class="nav-link dropdown-toggle" 
             href="#" 
@@ -11,13 +11,13 @@
         >
             <span class="me-1">
                 <icon 
-                    class="bi bi-custom-{{ $currentTheme }}"
+                    class="bi bi-custom-{{ $currentTheme->name }}"
                     style="font-size: 1.5rem"
                 ></icon>
             </span>
 
             <span class="d-inline d-lg-none">
-                {{ trans('default.' . $currentTheme) }}
+                {{ trans('default.' . $currentTheme->name) }}
             </span>
         </a>
         <div 
@@ -29,7 +29,7 @@
             </h6>
             @foreach($themes as $theme)
             <button 
-                class="btn dropdown-item {{ $theme === $currentTheme ? 'active' : '' }}"
+                class="btn dropdown-item {{ $theme === $currentTheme->name ? 'active' : '' }}"
                 title="{{ trans('default.' . $theme) }}"
                 x-on:click="toggle('{{ $theme }}')"
             >

@@ -5,39 +5,64 @@ declare(strict_types=1);
 namespace App\Utils\Route;
 
 use Illuminate\Support\Str;
-use Livewire\LivewireManager;
-use Illuminate\Support\Collection;
-use Illuminate\Contracts\Config\Repository as Config;
+use Illuminate\Contracts\Routing\Registrar as Router;
 
+/**
+ * @property-read \Illuminate\Routing\Router $router
+ */
 final class RouteHelper
 {
     public function __construct(
-        private LivewireManager $livewireManager,
-        private Config $config,
-        private Collection $collection,
-        private Str $str,
+        private Router $router,
+        private Str $str
     ) {
     }
 
-    private function getAvailablePrefixes(): array
+    public function isCurrentRouteStartsWith(mixed $names): bool
     {
-        /** @var array */
-        $routes = $this->config->get('custom.routes');
+        if (is_string($names)) {
+            $names = [$names];
+        }
 
-        $prefixes = $this->collection->make($routes)
-            ->pluck('prefix')
-            ->filter()
-            ->toArray();
+        foreach ($names as $name) {
+            if ($this->str->startsWith($this->router->currentRouteName(), $name)) {
+                return true;
+            }
 
-        return $prefixes;
+            return false;
+        }
     }
 
-    public function getPrefix(): ?string
+    public function isCurrentRoute(mixed $names): bool
     {
-        $url = $this->str->start($this->livewireManager->originalPath(), '/');
+        if (is_string($names)) {
+            $names = [$names];
+        }
 
-        $prefix = $this->str->match('/(?:(?:^\/[a-z]{2})|^)\/(' . implode('|', $this->getAvailablePrefixes()) . ')/', $url);
+        foreach ($names as $name) {
+            if ($this->router->currentRouteName() === $name) {
+                return true;
+            }
+        }
 
-        return !empty($prefix) ? $prefix : null;
+        return false;
+    }
+
+    public function isCurrentRouteHasPoli(string $name, array $polis): bool
+    {
+        foreach ($polis as $poli) {
+            if ($this->isCurrentRoute(str_replace('{poli}', $poli, $name))) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function getPermissionsByPoli(string $permission, array $polis): array
+    {
+        return array_map(function (string $poli) use ($permission) {
+            return str_replace('{poli}', $poli, $permission);
+        }, $polis);
     }
 }
