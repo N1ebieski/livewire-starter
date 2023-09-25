@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Utils\Query\Columns;
+namespace App\Support\Query\Columns;
 
 use Illuminate\Support\Collection;
 

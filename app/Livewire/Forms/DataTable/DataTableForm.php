@@ -6,7 +6,7 @@ namespace App\Livewire\Forms\DataTable;
 
 use App\Livewire\Forms\Form;
 use Livewire\Attributes\Url;
-use App\Utils\Query\Sorts\SortsHelper;
+use App\Support\Query\Sorts\SortsHelper;
 use App\Livewire\Components\DataTable\DataTableInterface;
 
 /**

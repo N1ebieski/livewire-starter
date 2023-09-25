@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Utils\Route;
+namespace App\Support\Route;
 
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Routing\Registrar as Router;

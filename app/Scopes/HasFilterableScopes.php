@@ -10,7 +10,7 @@ use App\Queries\OrderBy;
 use App\Queries\Paginate;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
-use App\Utils\Query\Columns\ColumnsHelper;
+use App\Support\Query\Columns\ColumnsHelper;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\View\Components\Web\User\Sidebar;
 
-use App\Utils\Route\RouteHelper;
+use App\Support\Route\RouteHelper;
 use App\View\Components\Component;
 use Illuminate\Contracts\View\View;
 use App\View\Admin\Sidebar\SidebarFactory;

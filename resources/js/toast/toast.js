@@ -1,6 +1,6 @@
 import { Toast as BootstrapToast } from "bootstrap";
 import { Alpine } from "../../../vendor/livewire/livewire/dist/livewire.esm";
-import { Enum } from "../utils/enum/enum";
+import { Enum } from "../support/enum/enum";
 
 class Action extends Enum {
     static SUCCESS = new Action("success");

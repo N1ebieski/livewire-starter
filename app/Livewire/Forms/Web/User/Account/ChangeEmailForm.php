@@ -6,8 +6,7 @@ namespace App\Livewire\Forms\Web\User\Account;
 
 use App\Models\User\User;
 use App\Livewire\Forms\Form;
-use Illuminate\Contracts\Hashing\Hasher;
-use Illuminate\Contracts\Translation\Translator;
+use App\Rules\PasswordConfirmation\PasswordConfirmation;
 
 final class ChangeEmailForm extends Form
 {
@@ -18,7 +17,7 @@ final class ChangeEmailForm extends Form
     public function rules(): array
     {
         /** @var User */
-        $user = $this->container->make(User::class);
+        $user = $this->guard->user();
 
         return [
             'email' => [
@@ -33,18 +32,9 @@ final class ChangeEmailForm extends Form
                 'bail',
                 'required',
                 'string',
-                function ($attribute, $value, $fail) {
-                    /** @var User */
-                    $user = $this->guard->user();
-
-                    $hasher = $this->container->make(Hasher::class);
-
-                    $translator = $this->container->make(Translator::class);
-
-                    if (!$hasher->check($value, $user->password)) {
-                        return $fail($translator->get('passwords.confirmation'));
-                    }
-                }
+                $this->container->make(PasswordConfirmation::class, [
+                    'password' => $user->password
+                ])
             ],
         ];
     }

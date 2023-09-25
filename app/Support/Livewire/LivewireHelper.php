@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Utils\Livewire;
+namespace App\Support\Livewire;
 
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Config\Repository as Config;

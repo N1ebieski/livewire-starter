@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Utils\Query\Sorts;
+namespace App\Support\Query\Sorts;
 
 final class SortsHelper
 {
