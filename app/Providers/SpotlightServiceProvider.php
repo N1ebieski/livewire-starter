@@ -19,6 +19,9 @@ final class SpotlightServiceProvider extends ServiceProvider
             \App\Spotlight\Admin\Role\IndexCommand::class,
             \App\Spotlight\Admin\Role\CreateCommand::class,
             \App\Spotlight\Admin\Role\EditCommand::class,
+        ],
+        'web' => [
+            \App\Spotlight\Web\User\Account\IndexCommand::class
         ]
     ];
 

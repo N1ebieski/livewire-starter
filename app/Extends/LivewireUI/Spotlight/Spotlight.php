@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\App;
 use Illuminate\Contracts\View\Factory;
 use App\Livewire\Components\HasComponent;
+use Illuminate\Contracts\Container\Container;
 use LivewireUI\Spotlight\Spotlight as BaseSpotlight;
 use Illuminate\Contracts\Config\Repository as Config;
 
@@ -22,12 +23,16 @@ final class Spotlight extends BaseSpotlight
 
     private Collection $collection;
 
+    private Container $container;
+
     public function boot(
         Config $config,
-        Collection $collection
+        Collection $collection,
+        Container $container
     ): void {
         $this->config = $config;
         $this->collection = $collection;
+        $this->container = $container;
     }
 
     public static function registerCommand(string $command): void
@@ -57,6 +62,14 @@ final class Spotlight extends BaseSpotlight
         $view->with(
             'commands',
             $this->collection->make(self::$commands)
+                ->filter(function (Command $command) {
+                    if (!method_exists($command, 'shouldBeShown')) {
+                        return true;
+                    }
+
+                    return $this->container->call([$command, 'shouldBeShown']);
+                })
+                ->values()
                 ->map(fn (Command $command) => $command->toArray())
         );
 

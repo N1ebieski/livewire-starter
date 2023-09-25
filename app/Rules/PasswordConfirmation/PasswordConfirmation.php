@@ -13,9 +13,9 @@ use Illuminate\Contracts\Validation\ValidationRule;
 class PasswordConfirmation implements ValidationRule, Stringable
 {
     public function __construct(
+        private string $password,
         private Hasher $hasher,
-        private Translator $translator,
-        private string $password
+        private Translator $translator
     ) {
     }
 
