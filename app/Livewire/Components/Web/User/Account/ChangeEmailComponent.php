@@ -14,6 +14,9 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Contracts\Translation\Translator;
 use App\Livewire\Forms\Web\User\Account\ChangeEmailForm;
 
+/**
+ * @property ChangeEmailForm $form
+ */
 final class ChangeEmailComponent extends Component
 {
     use HasComponent;
@@ -57,11 +60,13 @@ final class ChangeEmailComponent extends Component
             new EditCommand(
                 user: $user,
                 name: $user->name,
-                email: $this->form->email,
+                email: $this->form->email, //@phpstan-ignore-line
                 password: $user->password,
                 roles: $user->roles
             )
         );
+
+        $user->sendEmailVerificationNotification();
 
         $this->dispatch('hide-modal', alias: $this->alias);
 

@@ -21,6 +21,7 @@ use App\View\Components\Modal\Modal as BootstrapModal;
 
 /**
  * @property-read Gate $gate
+ * @property IndexForm $form
  */
 final class IndexComponent extends Component implements FullPageInterface
 {

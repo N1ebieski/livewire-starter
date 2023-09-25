@@ -12,7 +12,7 @@
                         :action="\App\View\Components\Alert\Action::SUCCESS"
                         :close="false"
                     >
-                        {{ trans('auth.action.verify') }}
+                        {{ trans('auth.actions.verify') }}
                     </x-alert.alert-component>
                     @endif
 
@@ -31,7 +31,7 @@
                             :label="__('click here to request another')"
                             :responsive="false"
                             :type="\App\View\Components\Buttons\Type::SUBMIT"
-                            class="p-0 m-0 align-baseline"
+                            class="p-0 m-0 align-top"
                         >
                             <x-slot:parent class="d-inline"></x-slot:parent>
                         </x-buttons.button-component>                        

@@ -29,11 +29,11 @@ final class EditHandler extends Handler
         try {
             $user = $command->user->fill($command->toArray());
 
-            if (!$this->hasher->check($command->password, $user->password)) {
+            if ($command->user->getOriginal('password') !== $command->password) {
                 $user->password = $this->hasher->make($command->password);
             }
 
-            if ($command->user->email !== $command->email) {
+            if ($command->user->getOriginal('email') !== $command->email) {
                 $user->email_verified_at = null;
             }
 
