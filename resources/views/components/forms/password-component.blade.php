@@ -38,7 +38,7 @@
                 'form-control',
                 'is-invalid' => $errors->has($attributes->get('name')),
                 'is-valid' => $errors->isNotEmpty() && !$errors->has($attributes->get('name'))
-            ])->filter(fn ($value) => is_string($value)) }}
+            ])->filter(fn ($value) => is_string($value) || $value === true) }}
         >
         @if($labelFloating && !is_null($label))
         <label for="{{ $attributes->get('id') }}">

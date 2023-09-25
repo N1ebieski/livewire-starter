@@ -23,6 +23,21 @@ final class ButtonComponent extends Component
     ) {
     }
 
+    public function withAttributes(array $attributes): self
+    {
+        return parent::withAttributes(array_merge(match ($this->type) {
+            Type::SUBMIT => [
+                'type' => 'submit',
+            ],
+            Type::A => [
+                'role' => 'button'
+            ],
+            default => [
+                'type' => 'button'
+            ]
+        }, $attributes));
+    }
+
     /**
      * Get the view / contents that represent the component.
      */

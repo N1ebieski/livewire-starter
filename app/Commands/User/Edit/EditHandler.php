@@ -33,6 +33,10 @@ final class EditHandler extends Handler
                 $user->password = $this->hasher->make($command->password);
             }
 
+            if ($command->user->email !== $command->email) {
+                $user->email_verified_at = null;
+            }
+
             $user->save();
 
             $user->syncRoles([

@@ -10,13 +10,13 @@ use App\Commands\CommandBus;
 use App\ValueObjects\Role\Name;
 use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
-use Illuminate\Validation\Validator;
 use App\Livewire\Components\Component;
 use App\ValueObjects\Role\DefaultName;
 use App\Livewire\Components\HasComponent;
 use App\Commands\User\Create\CreateCommand;
 use Illuminate\Database\Eloquent\Collection;
 use App\Livewire\Forms\Admin\User\CreateForm;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Support\Collection as SupportCollection;
 

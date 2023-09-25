@@ -34,12 +34,14 @@ final class EditForm extends Form
 
         return [
             'name' => [
+                'bail',
                 'required',
                 'string',
                 'max:255',
                 $this->rule->unique($user->getTable(), 'name')->ignore($this->component->user->id)
             ],
             'email' => [
+                'bail',
                 'required',
                 'string',
                 'email',
@@ -47,12 +49,14 @@ final class EditForm extends Form
                 $this->rule->unique($user->getTable(), 'email')->ignore($this->component->user->id)
             ],
             'password' => [
+                'bail',
                 'nullable',
                 'string',
                 'min:8',
                 'confirmed'
             ],
             'roles' => [
+                'bail',
                 'required',
                 'array',
                 $this->rule->exists($role->getTable(), 'id')

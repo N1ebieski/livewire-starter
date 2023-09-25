@@ -26,9 +26,15 @@
                     >
                         @csrf
 
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">
-                            {{ __('click here to request another') }}
-                        </button>.
+                        <x-buttons.button-component
+                            :action="\App\View\Components\Buttons\Action::LINK"
+                            :label="__('click here to request another')"
+                            :responsive="false"
+                            :type="\App\View\Components\Buttons\Type::SUBMIT"
+                            class="p-0 m-0 align-baseline"
+                        >
+                            <x-slot:parent class="d-inline"></x-slot:parent>
+                        </x-buttons.button-component>                        
                     </form>
                 </x-slot:body>
             </x-card.card-component>

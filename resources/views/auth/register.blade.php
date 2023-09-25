@@ -114,10 +114,13 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-lg-6 offset-lg-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ trans('auth.register') }}
-                                </button>
+                            <div class="col-md-6 offset-md-4">
+                                <x-buttons.button-component
+                                    :action="\App\View\Components\Buttons\Action::PRIMARY"
+                                    :label="trans('auth.register')"
+                                    :responsive="false"
+                                    :type="\App\View\Components\Buttons\Type::SUBMIT"
+                                />
                             </div>
                         </div>
                     </form>

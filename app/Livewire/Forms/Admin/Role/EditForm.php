@@ -30,6 +30,7 @@ final class EditForm extends Form
 
         return [
             'name' => [
+                'bail',
                 'required',
                 'string',
                 'max:255',
@@ -38,6 +39,7 @@ final class EditForm extends Form
                     $this->rule->in([$this->component->role->name->value]) : null
             ],
             'permissions' => [
+                'bail',
                 'required',
                 'array',
             ],

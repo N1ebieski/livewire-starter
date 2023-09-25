@@ -27,12 +27,14 @@ final class CreateForm extends Form
 
         return [
             'name' => [
+                'bail',
                 'required',
                 'string',
                 'max:255',
                 $this->rule->unique($role->getTable(), 'name')
             ],
             'permissions' => [
+                'bail',
                 'required',
                 'array',
                 $this->rule->exists($permission->getTable(), 'id')

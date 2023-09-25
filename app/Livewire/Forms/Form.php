@@ -8,6 +8,8 @@ use Livewire\Component;
 use Livewire\Form as BaseForm;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\App;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Container\Container;
 
 abstract class Form extends BaseForm
@@ -18,6 +20,10 @@ abstract class Form extends BaseForm
 
     protected Rule $rule;
 
+    protected Gate $gate;
+
+    protected Guard $guard;
+
     //@phpstan-ignore-next-line
     public function __construct(
         protected Component $component,
@@ -25,6 +31,8 @@ abstract class Form extends BaseForm
     ) {
         $this->container = App::make(Container::class);
         $this->rule = App::make(Rule::class);
+        $this->guard = App::make(Guard::class);
+        $this->gate = App::make(Gate::class);
 
         /**
          * Fix. Livewire doesn't have access to the component's mount properties,

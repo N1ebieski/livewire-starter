@@ -36,7 +36,7 @@
                     <x-sidebar.page-component
                         :active="$routeHelper->isCurrentRoute('web.user.account.index')"
                         href="{{ route('web.user.account.index') }}"
-                        title="{{ trans('account.pages.show.title') }}"
+                        title="{{ trans('account.pages.index.title') }}"
                     >
                         <x-slot:icon>
                             <i class="bi bi-person-fill-gear"></i>

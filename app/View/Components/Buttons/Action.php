@@ -22,6 +22,8 @@ enum Action: string
 
     case DARK = 'dark';
 
+    case LINK = 'link';
+
     case OUTLINE_PRIMARY = 'outline-primary';
 
     case OUTLINE_SECONDARY = 'outline-secondary';

@@ -12,5 +12,15 @@ enum Type: string
 
     case BUTTON = 'button';
 
+    case SUBMIT = 'submit';
+
     case A = 'a';
+
+    public function getElement(): string
+    {
+        return match ($this) {
+            self::SUBMIT => 'button',
+            default => $this->value
+        };
+    }
 }

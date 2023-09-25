@@ -8,4 +8,5 @@ return [
     'throttled' => 'Proszę zaczekać zanim spróbujesz ponownie.',
     'token'     => 'Token resetowania hasła jest nieprawidłowy.',
     'user'      => 'Nie znaleziono użytkownika z takim adresem e-mail.',
+    'confirmation' => 'Błędne potwierdzenie hasła.'
 ];

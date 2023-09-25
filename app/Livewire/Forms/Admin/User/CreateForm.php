@@ -34,12 +34,14 @@ final class CreateForm extends Form
 
         return [
             'name' => [
+                'bail',
                 'required',
                 'string',
                 'max:255',
                 $this->rule->unique($user->getTable(), 'name')
             ],
             'email' => [
+                'bail',
                 'required',
                 'string',
                 'email',
@@ -47,12 +49,14 @@ final class CreateForm extends Form
                 $this->rule->unique($user->getTable(), 'email')
             ],
             'password' => [
+                'bail',
                 'required',
                 'string',
                 'min:8',
                 'confirmed'
             ],
             'roles' => [
+                'bail',
                 'required',
                 'array',
                 $this->rule->exists($role->getTable(), 'id')

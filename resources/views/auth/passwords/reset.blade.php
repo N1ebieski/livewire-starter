@@ -57,9 +57,12 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ trans('auth.reset') }}
-                                </button>
+                                <x-buttons.button-component
+                                    :action="\App\View\Components\Buttons\Action::PRIMARY"
+                                    :label="trans('auth.reset')"
+                                    :responsive="false"
+                                    :type="\App\View\Components\Buttons\Type::SUBMIT"
+                                />
                             </div>
                         </div>
                     </form>

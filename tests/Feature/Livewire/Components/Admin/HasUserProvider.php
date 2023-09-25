@@ -14,19 +14,19 @@ trait HasUserProvider
     {
         return [
             'super-admin' => [
-                function (?string $permission = null) {
+                function () {
                     return User::factory()->superAdmin()->create();
                 },
                 Response::HTTP_OK
             ],
             'admin' => [
-                function (?string $permission = null) {
+                function () {
                     return User::factory()->admin()->create();
                 },
                 Response::HTTP_OK
             ],            
             'user-with-a-role-with-a-specific-permission' => [
-                function (?string $permission = null) {
+                function (string $permission) {
                     return User::factory()->afterCreating(function (User $user) use ($permission) {
                         $role = Role::factory()->afterCreating(function (Role $role) use ($permission) {
                             $role->givePermissionTo($permission);
@@ -38,7 +38,7 @@ trait HasUserProvider
                 Response::HTTP_OK
             ],
             'user' => [
-                function (?string $permission = null) {
+                function () {
                     return User::factory()->user()->create();
                 },
                 Response::HTTP_FORBIDDEN

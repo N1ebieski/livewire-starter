@@ -7,12 +7,7 @@
     x-data="{ loading: false }"
     x-on:livewire:commit:respond.window="loading=false"      
 > 
-    <{{ $type->value }}
-        @if($type->isEquals(\App\View\Components\Buttons\Type::BUTTON))
-        type="button"
-        @elseif($type->isEquals(\App\View\Components\Buttons\Type::A))
-        role="button"
-        @endif
+    <{{ $type->getElement() }}
         @if($attributes->has('wire:click'))
         x-bind:disabled="loading"
         x-on:click.stop="loading=true"
@@ -31,7 +26,7 @@
             {{ $icon }}
         </span>
         @if($attributes->has('wire:click'))
-        <span x-show="loading">
+        <span x-show="loading" x-cloak>
             <span 
                 class="spinner-border spinner-border-sm" 
                 role="status" 
@@ -46,7 +41,7 @@
             {{ $label }}
         </span>
         @endif 
-    </{{ $type->value }}>
+    </{{ $type->getElement() }}>
     @if(isset($options))
     <button 
         type="button" 

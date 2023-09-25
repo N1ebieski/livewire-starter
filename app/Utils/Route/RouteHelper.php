@@ -25,12 +25,12 @@ final class RouteHelper
         }
 
         foreach ($names as $name) {
-            if ($this->str->startsWith($this->router->currentRouteName(), $name)) {
+            if ($this->str->startsWith($this->router->currentRouteName() ?? '', $name)) {
                 return true;
             }
-
-            return false;
         }
+
+        return false;
     }
 
     public function isCurrentRoute(mixed $names): bool

@@ -7,6 +7,15 @@
                 </x-slot:header>
 
                 <x-slot:body>
+                    @if (session('resent'))
+                    <x-alert.alert-component
+                        :action="\App\View\Components\Alert\Action::SUCCESS"
+                        :close="false"
+                    >
+                        {{ session('resent') }}
+                    </x-alert.alert-component>
+                    @endif 
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -58,31 +67,42 @@
                                     value="{{ old('redirect', url()->previous() ?? null) }}"
                                 >
 
-                                <button type="submit" class="btn btn-primary">
-                                    {{ trans('auth.login') }}
-                                </button>
+                                <div class="d-flex">
+                                    <x-buttons.button-component
+                                        :action="\App\View\Components\Buttons\Action::PRIMARY"
+                                        :label="trans('auth.login')"
+                                        :responsive="false"
+                                        :type="\App\View\Components\Buttons\Type::SUBMIT"
+                                    />
 
-                                @if (app('router')->has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ trans('auth.reset') }}
-                                </a>
-                                @endif
+                                    @if (app('router')->has('password.request'))
+                                    <x-buttons.button-component
+                                        :action="\App\View\Components\Buttons\Action::LINK"
+                                        :label="trans('auth.reset')"
+                                        :responsive="false"
+                                        :type="\App\View\Components\Buttons\Type::A"
+                                        href="{{ route('password.request') }}"
+                                    />
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         <hr>
                         @if (app('router')->has('register'))
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <span class="me-1">
+                                <span class="me-1 align-middle">
                                     {{ trans('auth.no_profile') }}
                                 </span>
-                                <a 
-                                    class="btn btn-outline-primary" 
+                                <x-buttons.button-component
+                                    :action="\App\View\Components\Buttons\Action::OUTLINE_PRIMARY"
+                                    :label="trans('auth.register')"
+                                    :responsive="false"
+                                    :type="\App\View\Components\Buttons\Type::A"
                                     href="{{ route('register') }}"
-                                    title="{{ trans('auth.register') }}"
                                 >
-                                    {{ trans('auth.register') }}
-                                </a>
+                                    <x-slot:parent class="d-inline"></x-slot:parent>
+                                </x-buttons.button-component>
                             </div>
                         </div>
                         @endif
