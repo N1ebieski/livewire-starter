@@ -32,9 +32,7 @@ final class ChangeEmailForm extends Form
                 'bail',
                 'required',
                 'string',
-                $this->container->make(PasswordConfirmation::class, [
-                    'password' => $user->password
-                ])
+                $this->container->make(PasswordConfirmation::class)
             ],
         ];
     }
