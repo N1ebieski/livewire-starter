@@ -37,7 +37,8 @@
                 "sanderronde.phpstan-vscode",
                 "pcbowers.alpine-intellisense",
                 "cierra.livewire-vscode",
-                "lennardv.livewire-goto-updated"
+                "lennardv.livewire-goto-updated",
+                "formulahendry.auto-close-tag"
             ]
         }
     }  
