@@ -7,7 +7,7 @@ namespace App\View\Components\Admin\Sidebar;
 use App\Support\Route\RouteHelper;
 use App\View\Components\Component;
 use Illuminate\Contracts\View\View;
-use App\View\Admin\Sidebar\SidebarFactory;
+use App\View\Sidebar\SidebarFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
 final class SidebarComponent extends Component

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\View\Admin\Sidebar;
+namespace App\View\Sidebar;
 
 use Illuminate\Http\Request;
-use App\View\Admin\Sidebar\Sidebar;
+use App\View\Sidebar\Sidebar;
 
 final class SidebarFactory
 {
