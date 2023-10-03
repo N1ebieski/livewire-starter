@@ -6,8 +6,8 @@
     </x-slot:title>
 
     <x-slot:footer>
-        <x-buttons.button-component
-            :action="\App\View\Components\Buttons\Action::SECONDARY"
+        <x-button.button-component
+            :action="\App\View\Components\Button\Action::SECONDARY"
             :label="trans('default.cancel')"
             :responsive="false"
             data-bs-dismiss="modal"
@@ -15,9 +15,9 @@
             <x-slot:icon>
                 <i class="bi bi-x-circle"></i>
             </x-slot:icon>
-        </x-buttons.button-component>
-        <x-buttons.button-component
-            :action="\App\View\Components\Buttons\Action::DANGER"
+        </x-button.button-component>
+        <x-button.button-component
+            :action="\App\View\Components\Button\Action::DANGER"
             :label="trans('default.delete')"
             :responsive="false"
             wire:click="submit"
@@ -25,6 +25,6 @@
             <x-slot:icon>
                 <i class="bi bi-trash3"></i>
             </x-slot:icon>
-        </x-buttons.button-component>
+        </x-button.button-component>
     </x-slot:footer>
 </x-modal.layout.content-component>

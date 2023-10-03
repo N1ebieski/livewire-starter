@@ -1,6 +1,6 @@
 <x-web.layouts.app.app-component :meta="$meta">
     <x-web.layouts.app.slot-component>
-        <x-auth.layouts.auth-component>
+        <x-auth.layout.auth-component>
             <x-card.card-component>
                 <x-slot:header>
                     <h5 class="py-2 m-0">{{ trans('auth.pages.verify.title') }}</h5>
@@ -26,18 +26,18 @@
                     >
                         @csrf
 
-                        <x-buttons.button-component
-                            :action="\App\View\Components\Buttons\Action::LINK"
+                        <x-button.button-component
+                            :action="\App\View\Components\Button\Action::LINK"
                             :label="__('click here to request another')"
                             :responsive="false"
-                            :type="\App\View\Components\Buttons\Type::SUBMIT"
+                            :type="\App\View\Components\Button\Type::SUBMIT"
                             class="p-0 m-0 align-top"
                         >
                             <x-slot:parent class="d-inline"></x-slot:parent>
-                        </x-buttons.button-component>                        
+                        </x-button.button-component>                        
                     </form>
                 </x-slot:body>
             </x-card.card-component>
-        </x-auth.layouts.auth-component>
+        </x-auth.layout.auth-component>
     </x-web.layouts.app.slot-component>
 </x-web.layouts.app.app-component>

@@ -1,6 +1,6 @@
 <x-web.layouts.app.app-component :meta="$meta">
     <x-web.layouts.app.slot-component>
-        <x-auth.layouts.auth-component>
+        <x-auth.layout.auth-component>
             <x-card.card-component>
                 <x-slot:header>
                     <h5 class="py-2 m-0">{{ trans('auth.pages.reset.title') }}</h5>
@@ -36,11 +36,11 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <x-buttons.button-component
-                                    :action="\App\View\Components\Buttons\Action::PRIMARY"
+                                <x-button.button-component
+                                    :action="\App\View\Components\Button\Action::PRIMARY"
                                     :label="trans('auth.submit_reset')"
                                     :responsive="false"
-                                    :type="\App\View\Components\Buttons\Type::SUBMIT"
+                                    :type="\App\View\Components\Button\Type::SUBMIT"
                                 />
                             </div>
                         </div>

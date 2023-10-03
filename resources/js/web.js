@@ -10,7 +10,7 @@ import "./livewire/hooks";
 import modal from "./modal/modal";
 import multiTheme from "./multi-theme/multi-theme";
 import navbar from "./navbar/navbar";
-import scrollToTop from "./scrolltotop/scrolltotop";
+import scrollToTop from "./scroll-to-top/scroll-to-top";
 import sidebar from "./sidebar/sidebar";
 import spotlight from "./spotlight/spotlight";
 import toast from "./toast/toast";

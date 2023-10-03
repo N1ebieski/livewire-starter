@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\View\Components\Buttons;
+namespace App\View\Components\Button;
 
 enum Action: string
 {

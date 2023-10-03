@@ -1,6 +1,6 @@
 <x-web.layouts.app.app-component :meta="$meta">
     <x-web.layouts.app.slot-component>
-        <x-auth.layouts.auth-component>
+        <x-auth.layout.auth-component>
             <x-card.card-component>
                 <x-slot:header>
                     <h5 class="py-2 m-0">{{ trans('auth.pages.login.title') }}</h5>
@@ -68,19 +68,19 @@
                                 >
 
                                 <div class="d-flex">
-                                    <x-buttons.button-component
-                                        :action="\App\View\Components\Buttons\Action::PRIMARY"
+                                    <x-button.button-component
+                                        :action="\App\View\Components\Button\Action::PRIMARY"
                                         :label="trans('auth.login')"
                                         :responsive="false"
-                                        :type="\App\View\Components\Buttons\Type::SUBMIT"
+                                        :type="\App\View\Components\Button\Type::SUBMIT"
                                     />
 
                                     @if (app('router')->has('password.request'))
-                                    <x-buttons.button-component
-                                        :action="\App\View\Components\Buttons\Action::LINK"
+                                    <x-button.button-component
+                                        :action="\App\View\Components\Button\Action::LINK"
                                         :label="trans('auth.reset')"
                                         :responsive="false"
-                                        :type="\App\View\Components\Buttons\Type::A"
+                                        :type="\App\View\Components\Button\Type::A"
                                         href="{{ route('password.request') }}"
                                     />
                                     @endif
@@ -94,15 +94,15 @@
                                 <span class="me-1 align-middle">
                                     {{ trans('auth.no_profile') }}
                                 </span>
-                                <x-buttons.button-component
-                                    :action="\App\View\Components\Buttons\Action::OUTLINE_PRIMARY"
+                                <x-button.button-component
+                                    :action="\App\View\Components\Button\Action::OUTLINE_PRIMARY"
                                     :label="trans('auth.register')"
                                     :responsive="false"
-                                    :type="\App\View\Components\Buttons\Type::A"
+                                    :type="\App\View\Components\Button\Type::A"
                                     href="{{ route('register') }}"
                                 >
                                     <x-slot:parent class="d-inline"></x-slot:parent>
-                                </x-buttons.button-component>
+                                </x-button.button-component>
                             </div>
                         </div>
                         @endif

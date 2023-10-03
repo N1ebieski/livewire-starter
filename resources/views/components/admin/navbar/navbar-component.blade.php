@@ -29,14 +29,14 @@
         <ul class="navbar-nav ms-auto">
             <x-navbar.item-component>
                 <div class="px-1 px-lg-0" style="padding-top:0.1rem;">
-                    <x-buttons.button-component
+                    <x-button.button-component
                         :action="null"
                         x-on:click.prevent="toggleSpotlight()"
                     >
                         <x-slot:icon>
                             <i class="bi bi-search" style="font-size: 1.4rem"></i>
                         </x-slot:icon>
-                    </x-buttons.button-component>
+                    </x-button.button-component>
                 </div>
             </x-navbar.item-component>
         </ul>

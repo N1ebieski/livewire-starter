@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command as BaseCommand;
+use App\Extends\Laravel\Prompts\Contracts\Prompts;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 
 abstract class Command extends BaseCommand
 {
-    public function __construct(protected ValidationFactory $validationFactory)
-    {
+    public function __construct(
+        protected ValidationFactory $validationFactory,
+        protected Prompts $prompts
+    ) {
         parent::__construct();
     }
 

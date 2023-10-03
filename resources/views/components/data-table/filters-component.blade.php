@@ -15,8 +15,8 @@
 >
     <div class="d-flex justify-content-end mb-2 gap-2">
         @if($isDirty)
-        <x-buttons.button-component
-            :action="\App\View\Components\Buttons\Action::OUTLINE_DARK"
+        <x-button.button-component
+            :action="\App\View\Components\Button\Action::OUTLINE_DARK"
             :label="trans('default.clear')"
             :responsive="false"
             class="btn-sm highlight"
@@ -25,10 +25,10 @@
             <x-slot:icon>
                 <i class="bi bi-x-square"></i>
             </x-slot:icon>
-        </x-buttons.button-component>
+        </x-button.button-component>
         @endif
-        <x-buttons.button-component
-            :action="\App\View\Components\Buttons\Action::OUTLINE_DARK"
+        <x-button.button-component
+            :action="\App\View\Components\Button\Action::OUTLINE_DARK"
             :label="trans_choice('filter.filters', 2)"
             :responsive="false"
             class="btn-sm"
@@ -46,7 +46,7 @@
                     <i class="bi bi-chevron-up"></i>
                 </span>                
             </x-slot:label>
-        </x-buttons.button-component>
+        </x-button.button-component>
     </div>
     <div 
         class="d-none d-lg-block"

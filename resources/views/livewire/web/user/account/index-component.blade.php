@@ -22,8 +22,8 @@
 
             <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-4">
-                    <x-buttons.button-component
-                        :action="\App\View\Components\Buttons\Action::PRIMARY"
+                    <x-button.button-component
+                        :action="\App\View\Components\Button\Action::PRIMARY"
                         :label="trans('default.submit')"
                         :responsive="false"
                         wire:click="submit"
@@ -31,7 +31,7 @@
                         <x-slot:icon>
                             <i class="bi bi-check-circle"></i>
                         </x-slot:icon>
-                    </x-buttons.button-component>                    
+                    </x-button.button-component>                    
                 </div>
             </div>
 
@@ -42,8 +42,8 @@
                     {{ trans('user.password.label') }}:
                 </div>
                 <div class="col-md-6">
-                    <x-buttons.button-component
-                        :action="\App\View\Components\Buttons\Action::OUTLINE_PRIMARY"
+                    <x-button.button-component
+                        :action="\App\View\Components\Button\Action::OUTLINE_PRIMARY"
                         :label="trans('account.change_password')"
                         :responsive="false"
                         wire:click="changePassword()"
@@ -51,7 +51,7 @@
                         <x-slot:icon>
                             <i class="bi bi-shield-check"></i>
                         </x-slot:icon>
-                    </x-buttons.button-component>                    
+                    </x-button.button-component>                    
                 </div>
             </div>
 
@@ -60,8 +60,8 @@
                     {{ trans('user.email.label') }}:
                 </div>
                 <div class="col-md-6">
-                    <x-buttons.button-component
-                        :action="\App\View\Components\Buttons\Action::OUTLINE_PRIMARY"
+                    <x-button.button-component
+                        :action="\App\View\Components\Button\Action::OUTLINE_PRIMARY"
                         :label="trans('account.change_email')"
                         :responsive="false"
                         wire:click="changeEmail()"
@@ -69,7 +69,7 @@
                         <x-slot:icon>
                             <i class="bi bi-shield-check"></i>
                         </x-slot:icon>
-                    </x-buttons.button-component>                    
+                    </x-button.button-component>                    
                 </div>
             </div>                                   
         </form>        

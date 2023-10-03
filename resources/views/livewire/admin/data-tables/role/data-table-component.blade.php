@@ -43,7 +43,7 @@
             <x-data-table.selected-component :collection="$this->roles" />
             @role(\App\ValueObjects\Role\DefaultName::SUPER_ADMIN->value)
             <x-data-table.bulk-actions.button-component
-                :action="\App\View\Components\Buttons\Action::DANGER"
+                :action="\App\View\Components\Button\Action::DANGER"
                 :label="trans('default.delete')"
                 x-on:click="bulkAction('deleteMulti')"              
             >        
@@ -55,7 +55,7 @@
         </x-slot:selected>
         @can('create', \App\Models\Role\Role::class)
         <x-data-table.actions.button-component
-            :action="\App\View\Components\Buttons\Action::PRIMARY"
+            :action="\App\View\Components\Button\Action::PRIMARY"
             :label="trans('default.create')"
             wire:click="create"
         >        
@@ -149,7 +149,7 @@
                 <x-data-table.column.column-component class="text-nowrap">
                     @can('edit', $role)
                     <x-data-table.actions.button-component
-                        :action="\App\View\Components\Buttons\Action::PRIMARY"
+                        :action="\App\View\Components\Button\Action::PRIMARY"
                         :label="trans('default.edit')"
                         wire:click.stop="edit('{{ $role->id }}')"
                     >
@@ -162,7 +162,7 @@
                 <x-data-table.column.column-component class="text-nowrap">
                     @can('delete', $role)
                     <x-data-table.actions.button-component
-                        :action="\App\View\Components\Buttons\Action::DANGER"
+                        :action="\App\View\Components\Button\Action::DANGER"
                         :label="trans('default.delete')"
                         wire:click.stop="delete('{{ $role->id }}')"
                     >        

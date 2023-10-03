@@ -6,7 +6,7 @@ namespace App\View\Components\DataTable\Actions;
 
 use App\View\Components\Component;
 use Illuminate\Contracts\View\View;
-use App\View\Components\Buttons\Action;
+use App\View\Components\Button\Action;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
 final class ButtonComponent extends Component

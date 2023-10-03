@@ -31,14 +31,14 @@
         <ul class="navbar-nav ms-auto">
             <x-navbar.item-component>
                 <div class="px-1 px-lg-0" style="padding-top:0.1rem;">
-                    <x-buttons.button-component
+                    <x-button.button-component
                         :action="null"
                         x-on:click.prevent="toggleSpotlight()"
                     >
                         <x-slot:icon>
                             <i class="bi bi-search" style="font-size: 1.4rem"></i>
                         </x-slot:icon>
-                    </x-buttons.button-component>
+                    </x-button.button-component>
                 </div>
             </x-navbar.item-component>
         </ul>
@@ -97,17 +97,17 @@
                         </form>
                     </x-navbar.dropdown.dropdown-component>
                     @else
-                    <x-buttons.button-component
+                    <x-button.button-component
                         class="btn btn-outline-primary text-nowrap text-center text-primary ms-lg-1" 
                         href="{{ route('login') }}" 
                         title="{{ trans('auth.login') }}"                    
                         label="{{ trans('auth.login') }}"
-                        :action="\App\View\Components\Buttons\Action::OUTLINE_PRIMARY"
-                        :type="\App\View\Components\Buttons\Type::A"
+                        :action="\App\View\Components\Button\Action::OUTLINE_PRIMARY"
+                        :type="\App\View\Components\Button\Type::A"
                         :responsive="false"
                     >
                         <x-slot:parent class="d-flex d-lg-inline-flex"></x-slot:parent>
-                    </x-buttons.button-component>
+                    </x-button.button-component>
                     @endif                    
                 </x-navbar.item-component>
             </ul>
