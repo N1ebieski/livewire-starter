@@ -21,7 +21,6 @@
                 "bmewburn.vscode-intelephense-client",
                 "calebporzio.better-phpunit",
                 "codingyu.laravel-goto-view",
-                "stef-k.laravel-goto-controller",
                 "dbaeumer.vscode-eslint",
                 "eamodio.gitlens",
                 "GitHub.vscode-pull-request-github",
@@ -37,7 +36,7 @@
                 "sanderronde.phpstan-vscode",
                 "pcbowers.alpine-intellisense",
                 "cierra.livewire-vscode",
-                "lennardv.livewire-goto-updated",
+                "m4tr1ck.livewire-goto-updated-3",
                 "formulahendry.auto-close-tag"
             ]
         }

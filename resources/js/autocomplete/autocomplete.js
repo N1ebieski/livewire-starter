@@ -34,8 +34,7 @@ export default function autoComplete(data) {
                         events: {
                             input: {
                                 selection: (event) => {
-                                    const selection =
-                                        event.detail.selection.value;
+                                    const selection = event.detail.selection.value;
 
                                     el.autocomplete.input.value = selection;
                                 },
@@ -52,15 +51,10 @@ export default function autoComplete(data) {
                                     }
 
                                     try {
-                                        const response = await axios.post(
-                                            data.endpoint,
-                                            {
-                                                search: encodeURIComponent(
-                                                    query
-                                                ),
-                                                except: data.except,
-                                            }
-                                        );
+                                        const response = await axios.post(data.endpoint, {
+                                            search: encodeURIComponent(query),
+                                            except: data.except,
+                                        });
 
                                         return response.data;
                                     } catch (error) {
@@ -80,10 +74,7 @@ export default function autoComplete(data) {
                             },
                         },
                         ...(data.config.query && {
-                            query: new Function(
-                                "input",
-                                data.config.query
-                            ).bind(this),
+                            query: new Function("input", data.config.query).bind(this),
                         }),
                     }
                 )
@@ -128,7 +119,7 @@ export default function autoComplete(data) {
 
             const dropdown = el.$refs.autocomplete.nextElementSibling;
 
-            const observer = new MutationObserver(function() {
+            const observer = new MutationObserver(function () {
                 el.autocomplete.goTo(0);
             });
 

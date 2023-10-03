@@ -33,9 +33,7 @@ export default function navbar(data) {
         },
 
         isModalOpen() {
-            return document
-                .querySelector("body")
-                .classList.contains("modal-open");
+            return document.querySelector("body").classList.contains("modal-open");
         },
 
         isCollapseOpen() {
@@ -56,9 +54,7 @@ export default function navbar(data) {
             body.classList.remove("navbar-collapse-open");
             body.style.overflow = "auto";
 
-            const backdrop = document.querySelector(
-                ".navbar-collapse-backdrop"
-            );
+            const backdrop = document.querySelector(".navbar-collapse-backdrop");
 
             backdrop.classList.remove("show");
 
@@ -123,10 +119,7 @@ export default function navbar(data) {
                 return;
             }
 
-            if (
-                this.previousScrollTop < this.currentScrollTop &&
-                this.previousScrollTop > b
-            ) {
+            if (this.previousScrollTop < this.currentScrollTop && this.previousScrollTop > b) {
                 this.show = false;
             } else {
                 this.show = true;

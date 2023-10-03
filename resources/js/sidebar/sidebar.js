@@ -39,8 +39,7 @@ export default function sidebar(data) {
 
         destroy() {
             if (this.isSizeDownLg()) {
-                const sidebarWrapper =
-                    document.querySelector(".sidebar-wrapper");
+                const sidebarWrapper = document.querySelector(".sidebar-wrapper");
 
                 const sidebar = document.querySelector(".sidebar");
 

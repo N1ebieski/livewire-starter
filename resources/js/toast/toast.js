@@ -58,6 +58,7 @@ class Toast {
 
 export default function toast() {
     return {
+        /** @type {BootstrapToast} */
         bootstrapToast: null,
 
         init() {
@@ -71,7 +72,7 @@ export default function toast() {
                             ...(config.action && {
                                 action: new Action(config.action),
                             }),
-                        })
+                        }),
                     );
                 },
 

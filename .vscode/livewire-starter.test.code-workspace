@@ -6,14 +6,14 @@
 		}
 	],
 	"settings": {
-		"phpsab.executablePathCBF": "/var/www/livewire-starter.test/vendor/squizlabs/php_codesniffer/bin/phpcbf",
-		"phpsab.executablePathCS": "/var/www/livewire-starter.test/vendor/squizlabs/php_codesniffer/bin/phpcs",
+		"phpsab.executablePathCBF": "vendor/squizlabs/php_codesniffer/bin/phpcbf",
+		"phpsab.executablePathCS": "vendor/squizlabs/php_codesniffer/bin/phpcs",
 		"phpsab.standard": "PSR12",
-		"phpstan.configFile": "/var/www/livewire-starter.test/phpstan.neon",
-		"phpstan.binPath": "/var/www/livewire-starter.test/vendor/bin/phpstan",
-		"phpunit.phpunit": "/var/www/livewire-starter.test/vendor/bin/phpunit",
+		"phpstan.configFile": "phpstan.neon",
+		"phpstan.binPath": "vendor/bin/phpstan",
+		"phpunit.phpunit": "vendor/bin/phpunit",
 		"phpunit.args": [
-			"--configuration /var/www/livewire-starter.test/phpunit.xml"
+			"--configuration phpunit.xml"
 		]	
 	}
 }
