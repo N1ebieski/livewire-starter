@@ -16,7 +16,7 @@ import "./meta/meta";
 import modal from "./modal/modal";
 import multiTheme from "./multi-theme/multi-theme";
 import navbar from "./navbar/navbar";
-import scrollToTop from "./scroll-to-top/scroll-to-top";
+import scrollToTop from "./scrolltotop/scrolltotop";
 import sidebar from "./sidebar/sidebar";
 import spotlight from "./spotlight/spotlight";
 import tinyMCE from "./tinymce/tinymce";
