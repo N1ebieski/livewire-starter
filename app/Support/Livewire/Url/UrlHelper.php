@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Support\Url;
+namespace App\Support\Livewire\Url;
 
 use Illuminate\Support\Str;
 use Livewire\LivewireManager;
