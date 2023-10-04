@@ -2,7 +2,7 @@
 
 return [
     'exist' => 'W bazie istnieje już zarejestrowany super admin.',
-    'action' => [
+    'messages' => [
         'create' => 'Super admin został dodany.'
     ]
 ];

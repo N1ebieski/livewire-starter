@@ -67,14 +67,14 @@
                             {{ trans('auth.hello')}}, {{ auth()->user()->name }}!
                         </h6>
                         @auth
-                        <x-navbar.dropdown.item-component
+                        <x-navbar.dropdown.page-component
                             :active="$routeHelper->isCurrentRouteStartsWith('web.user.')"
                             href="{{ route('web.user.account.index') }}"
                             title="{{ trans('user.title') }}"
                         />
                         @endauth                         
                         @can('admin.access')
-                        <x-navbar.dropdown.item-component
+                        <x-navbar.dropdown.page-component
                             :active="$routeHelper->isCurrentRouteStartsWith('admin.')"
                             href="{{ route('admin.home.index') }}"
                             title="{{ trans('admin.title') }}"

@@ -79,6 +79,6 @@ final class SuperAdminCommand extends Command
             roles: $this->role->all()
         ));
 
-        $this->prompts->info($this->translator->get('superadmin.action.create'));
+        $this->prompts->info($this->translator->get('superadmin.messages.create'));
     }
 }

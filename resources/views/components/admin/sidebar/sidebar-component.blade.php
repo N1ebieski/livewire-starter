@@ -66,14 +66,14 @@
                             <i class="bi bi-people-fill"></i>
                         </x-slot:icon>
                         @can('admin.user.view')
-                        <x-sidebar.dropdown.item-component
+                        <x-sidebar.dropdown.page-component
                             :active="$routeHelper->isCurrentRoute('admin.user.index')"
                             href="{{ route('admin.user.index') }}"
                             title="{{ trans('user.pages.index.title') }}"
                         />
                         @endcan
                         @can('admin.role.view')
-                        <x-sidebar.dropdown.item-component
+                        <x-sidebar.dropdown.page-component
                             :active="$routeHelper->isCurrentRoute('admin.role.index')"
                             href="{{ route('admin.role.index') }}"
                             title="{{ trans('role.pages.index.title') }}"
@@ -96,7 +96,7 @@
                         <x-slot:icon>
                             <i class="bi bi-code-square"></i>
                         </x-slot:icon>
-                    </x-sidebar.item-component>
+                    </x-sidebar.page-component>
                 </x-sidebar.item-component>
                 @endcan 
             </ul>                
