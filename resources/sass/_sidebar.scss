@@ -16,12 +16,14 @@
         height: 100%;
 
         .navbar-nav {
-            .nav-item.dropdown {
-                .dropdown-menu.show {
-                    position: relative !important;
-                    transform: none !important;
-                    display: block;
-                    width: 100%;
+            .nav-item {
+                .dropdown {
+                    .dropdown-menu.show {
+                        position: relative !important;
+                        transform: none !important;
+                        display: block;
+                        width: 100%;
+                    }
                 }
             }
         }
