@@ -68,7 +68,22 @@
                 @endif       
                 @if($labelFloating && !is_null($label))
                 <label for="{{ $attributes->get('id') }}">
-                    {{ $label }}:
+                    @if($attributes->wire('model')?->hasModifier('live'))
+                    <span 
+                        class="d-none"
+                        wire:loading 
+                        wire:target="{{ $attributes->get('name') }}"
+                        wire:loading.class.remove="d-none" 
+                    >
+                        <span 
+                            class="spinner-border spinner-border-sm" 
+                            role="status" 
+                            aria-hidden="true"
+                        ></span>
+                        <span class="visually-hidden">{{ trans('default.loading') }}...</span>
+                    </span>
+                    @endif                 
+                    <span>{{ $label }}:</span>
                 </label>
                 @endif                 
             </div>

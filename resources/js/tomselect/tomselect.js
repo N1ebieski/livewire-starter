@@ -90,11 +90,7 @@ export default function tomSelect(data) {
                 })
             );
 
-            this.tomselect.setValue(
-                typeof el.value === "string"
-                    ? el.value.split(",").map((item) => item.trim())
-                    : el.value
-            );
+            el.setValue(el.value);
 
             el.highlight(el.value);
 
@@ -120,17 +116,30 @@ export default function tomSelect(data) {
             }
         },
 
-        // addItem(item) {
-        //     if (!this.$refs.tomselect) {
-        //         return;
-        //     }
+        setValue(value) {
+            if (value === null) {
+                value = "";
+            } else if (typeof value === "string") {
+                value = value.split(",").map((item) => item.trim());
+            }
 
-        //     this.$refs.tomselect.tomselect.addOption({
-        //         id: item[data.config.valueField],
-        //         name: item[data.config.labelField],
-        //     });
-        //     this.$refs.tomselect.tomselect.addItem(item[config.valueField]);
-        // },
+            this.tomselect.setValue(value);
+        },
+
+        addItem(item) {
+            if (item === null) {
+                return;
+            }
+
+            this.tomselect.addOption({
+                id: item[data.config.valueField],
+                name: item[data.config.labelField],
+            });
+
+            this.tomselect.addItem(item[data.config.valueField]);
+
+            this.highlight(this.value);
+        },
 
         highlight(value) {
             if (!data.highlight) {
