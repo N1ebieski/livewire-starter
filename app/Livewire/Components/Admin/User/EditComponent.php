@@ -15,6 +15,7 @@ use App\Commands\User\Edit\EditCommand;
 use App\Livewire\Components\HasComponent;
 use App\Livewire\Forms\Admin\User\EditForm;
 use Illuminate\Database\Eloquent\Collection;
+use App\View\Components\DataTable\Row\Action;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Contracts\Translation\Translator;
 use App\Livewire\Components\Admin\DataTables\User\DataTableComponent;
@@ -98,7 +99,7 @@ final class EditComponent extends Component
             'highlight',
             ids: [$user->id],
             alias: $this->livewireHelper->getAlias(DataTableComponent::class),
-            action: 'primary'
+            action: Action::PRIMARY->value
         );
     }
 

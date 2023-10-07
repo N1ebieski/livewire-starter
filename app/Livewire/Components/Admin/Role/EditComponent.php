@@ -13,6 +13,7 @@ use App\Commands\Role\Edit\EditCommand;
 use App\Livewire\Components\HasComponent;
 use App\Livewire\Forms\Admin\Role\EditForm;
 use Illuminate\Database\Eloquent\Collection;
+use App\View\Components\DataTable\Row\Action;
 use Illuminate\Contracts\Translation\Translator;
 use App\Livewire\Components\Admin\DataTables\Role\DataTableComponent;
 
@@ -75,7 +76,7 @@ final class EditComponent extends Component
             'highlight',
             ids: [$role->id],
             alias: $this->livewireHelper->getAlias(DataTableComponent::class),
-            action: 'primary'
+            action: Action::PRIMARY->value
         );
     }
 

@@ -200,7 +200,7 @@ final class DataTableComponent extends Component implements DataTableInterface
             'highlight',
             ids: [$user->id],
             alias: $this->alias,
-            action: $status->getAction()
+            action: $status->getAction()->value
         );
     }
 

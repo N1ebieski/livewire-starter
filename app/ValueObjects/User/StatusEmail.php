@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\ValueObjects\User;
 
 use App\Support\Enum\Enum;
+use App\View\Components\DataTable\Row\Action;
 
 enum StatusEmail: string
 {
@@ -30,11 +31,11 @@ enum StatusEmail: string
         };
     }
 
-    public function getAction(): string
+    public function getAction(): Action
     {
         return match ($this) {
-            self::VERIFIED => 'success',
-            self::UNVERIFIED => 'warning'
+            self::VERIFIED => Action::SUCCESS,
+            self::UNVERIFIED => Action::WARNING
         };
     }
 }
