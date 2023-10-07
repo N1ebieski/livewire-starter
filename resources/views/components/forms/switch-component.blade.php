@@ -1,6 +1,8 @@
 <div
     x-data
+    @if(isset($parent))
     {{ $parent->attributes->filter(fn ($value) => is_string($value)) }}    
+    @endif
 >
     @if(isset($col))
     <div 

@@ -6,9 +6,16 @@ namespace App\View\Components\Tooltip;
 
 use App\View\Components\Component;
 use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory as ViewFactory;
 
 final class TooltipComponent extends Component
 {
+    public function __construct(
+        protected ViewFactory $viewFactory,
+        public readonly string $value
+    ) {
+    }
+
     /**
      * Get the view / contents that represent the component.
      */

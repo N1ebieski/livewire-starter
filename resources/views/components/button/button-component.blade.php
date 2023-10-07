@@ -3,6 +3,8 @@
     {{ $parent->attributes->class([
         'btn-group'
     ])->filter(fn ($value) => is_string($value)) }}
+@else
+    class="btn-group"
     @endif
     x-data="{ loading: false }"
     x-on:livewire:commit:respond.window="loading=false"      
@@ -15,7 +17,7 @@
         {{ $attributes->class([
             'btn', 
             "btn-{$action?->value}" => !is_null($action)
-        ])->filter(fn ($value) => is_string($value)) }}
+        ])->filter(fn ($value) => is_string($value) || $value === true) }}
     >
         @if(isset($icon))
         <span 
@@ -47,6 +49,7 @@
         type="button" 
         class="btn {{ !is_null($action) ? 'btn-' . $action->value : '' }} dropdown-toggle dropdown-toggle-split" 
         data-bs-toggle="dropdown" 
+        data-bs-reference="parent"
         aria-expanded="false"
         @if($attributes->has('wire:click'))
         x-bind:disabled="loading"

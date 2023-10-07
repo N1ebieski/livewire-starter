@@ -1,6 +1,6 @@
 <div
     x-data
-    x-init="new bootstrap.Tooltip(document.querySelector($refs.tooltip))"
+    x-init="new bootstrap.Tooltip($refs.tooltip)"
     wire:ignore
 >
     <a 

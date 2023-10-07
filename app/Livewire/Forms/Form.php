@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Contracts\Config\Repository as Config;
 
 abstract class Form extends BaseForm
 {
@@ -24,6 +25,8 @@ abstract class Form extends BaseForm
 
     protected Guard $guard;
 
+    protected Config $config;
+
     //@phpstan-ignore-next-line
     public function __construct(
         protected Component $component,
@@ -33,6 +36,7 @@ abstract class Form extends BaseForm
         $this->rule = App::make(Rule::class);
         $this->guard = App::make(Guard::class);
         $this->gate = App::make(Gate::class);
+$this->config = App::make(Config::class);
 
         /**
          * Fix. Livewire doesn't have access to the component's mount properties,
