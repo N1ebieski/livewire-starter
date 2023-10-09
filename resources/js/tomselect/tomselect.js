@@ -39,7 +39,7 @@ export default function tomSelect(data) {
                             el.value = [];
                         }
 
-                        el.value = newValue;
+                        el.value = newValue.length === 0 ? null : newValue;
 
                         el.highlight(newValue);
                     },
@@ -116,8 +116,12 @@ export default function tomSelect(data) {
             }
         },
 
+        isSelect() {
+            return this.$refs.tomselect.tagName.toLowerCase() === "select";
+        },
+
         setValue(value) {
-            if (value === null) {
+            if (value === null && this.isSelect()) {
                 value = "";
             } else if (typeof value === "string") {
                 value = value.split(",").map((item) => item.trim());

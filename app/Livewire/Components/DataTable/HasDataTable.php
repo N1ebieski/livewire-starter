@@ -25,11 +25,7 @@ use Illuminate\Contracts\Validation\Factory as ValidationFactory;
  */
 trait HasDataTable
 {
-    use WithPagination {
-        WithPagination::gotoPage as baseGotoPage;
-        WithPagination::previousPage as basePreviousPage;
-        WithPagination::nextPage as baseNextPage;
-    }
+    use WithPagination;
     use HasDirty;
 
     private Translator $translator;
@@ -340,42 +336,6 @@ trait HasDataTable
     private function resetSelects(): void
     {
         $this->dispatch('reset-selects');
-    }
-
-    /**
-     *
-     * @param mixed $page
-     * @param string $pageName
-     * @return void
-     */
-    public function gotoPage($page, $pageName = 'page'): void
-    {
-        $this->baseGotoPage($page, $pageName);
-
-        $this->dispatch('gototop');
-    }
-
-    /**
-     *
-     * @param string $pageName
-     * @return void
-     */
-    public function previousPage($pageName = 'page'): void
-    {
-        $this->basePreviousPage($pageName);
-
-        $this->dispatch('gototop');
-    }
-
-    /**
-     * @param string $pageName
-     * @return void
-     */
-    public function nextPage($pageName = 'page'): void
-    {
-        $this->baseNextPage($pageName);
-
-        $this->dispatch('gototop');
     }
 
     /**

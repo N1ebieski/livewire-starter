@@ -10,7 +10,6 @@ import autoComplete from "./autocomplete/autocomplete";
 import bulkAction from "./data-table/bulk-action";
 import dataTable from "./data-table/data-table";
 import row from "./data-table/row";
-import "./go-to-top/go-to-top";
 import "./livewire/hooks";
 import "./meta/meta";
 import modal from "./modal/modal";

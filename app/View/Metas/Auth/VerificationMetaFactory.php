@@ -11,9 +11,9 @@ final class VerificationMetaFactory extends MetaFactory
     public function make(): MetaInterface
     {
         return $this->authMetaFactory->make(
-            title: $this->trans->get('auth.pages.verify.title'),
-            description: $this->trans->get('auth.pages.verify.description'),
-            keywords: $this->trans->get('auth.pages.verify.keywords'),
+            title: $this->translator->get('auth.pages.verify.title'),
+            description: $this->translator->get('auth.pages.verify.description'),
+            keywords: $this->translator->get('auth.pages.verify.keywords'),
         );
     }
 }

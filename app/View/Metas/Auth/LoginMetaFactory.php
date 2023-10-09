@@ -11,9 +11,9 @@ final class LoginMetaFactory extends MetaFactory
     public function make(): MetaInterface
     {
         return $this->authMetaFactory->make(
-            title: $this->trans->get('auth.pages.login.title'),
-            description: $this->trans->get('auth.pages.login.description'),
-            keywords: $this->trans->get('auth.pages.login.keywords'),
+            title: $this->translator->get('auth.pages.login.title'),
+            description: $this->translator->get('auth.pages.login.description'),
+            keywords: $this->translator->get('auth.pages.login.keywords'),
         );
     }
 }

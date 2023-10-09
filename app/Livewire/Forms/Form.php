@@ -32,11 +32,12 @@ abstract class Form extends BaseForm
         protected Component $component,
         protected $propertyName
     ) {
+        /** @var Container */
         $this->container = App::make(Container::class);
         $this->rule = App::make(Rule::class);
         $this->guard = App::make(Guard::class);
         $this->gate = App::make(Gate::class);
-$this->config = App::make(Config::class);
+        $this->config = App::make(Config::class);
 
         /**
          * Fix. Livewire doesn't have access to the component's mount properties,
@@ -44,6 +45,10 @@ $this->config = App::make(Config::class);
          */
         if ($this->areComponentTypedPropertiesInitiated()) {
             parent::__construct($component, $propertyName);
+        }
+
+        if (method_exists($this, 'boot')) {
+            $this->container->call([$this, 'boot']);
         }
     }
 
@@ -83,4 +88,23 @@ $this->config = App::make(Config::class);
 
         $this->reset($keysToReset);
     }
+
+    /**
+     * Temporary fix. Livewire add __rm__ to the array if removing element
+     *
+     * @param array $attributes
+     * @return array
+     */
+    public function prepareForValidation(array $attributes): array
+    {
+        foreach ($attributes as $key => $value) {
+            if (is_array($value)) {
+                $attributes[$key] = array_filter($value, function (mixed $value) {
+                    return $value !== "__rm__";
+                });
+            }
+        }
+
+        return $attributes;
+    }    
 }

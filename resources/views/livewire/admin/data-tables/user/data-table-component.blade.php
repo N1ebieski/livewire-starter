@@ -261,7 +261,7 @@
                     <x-data-table.actions.button-component
                         :action="\App\View\Components\Button\Action::PRIMARY"
                         :label="trans('default.edit')"
-                        wire:click.stop="edit('{{ $user->id }}')"
+                        wire:click="edit('{{ $user->id }}')"
                     >        
                         <x-slot:icon>
                             <i class="bi bi-pencil-square"></i>
@@ -274,7 +274,7 @@
                     <x-data-table.actions.button-component
                         :action="\App\View\Components\Button\Action::DANGER"
                         :label="trans('default.delete')"
-                        wire:click.stop="delete('{{ $user->id }}')"
+                        wire:click="delete('{{ $user->id }}')"
                     >        
                         <x-slot:icon>
                             <i class="bi bi-trash3"></i>

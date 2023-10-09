@@ -3,7 +3,7 @@
     {{ $parent->attributes->class([
         'btn-group'
     ])->filter(fn ($value) => is_string($value)) }}
-@else
+    @else
     class="btn-group"
     @endif
     x-data="{ loading: false }"
@@ -21,6 +21,7 @@
     >
         @if(isset($icon))
         <span 
+            {{ $icon->attributes->filter(fn ($value) => is_string($value)) }}
             @if($attributes->has('wire:click'))
             x-show="!loading"
             @endif
@@ -28,7 +29,11 @@
             {{ $icon }}
         </span>
         @if($attributes->has('wire:click'))
-        <span x-show="loading" x-cloak>
+        <span 
+            {{ $icon->attributes->filter(fn ($value) => is_string($value)) }}
+            x-show="loading" 
+            x-cloak
+        >
             <span 
                 class="spinner-border spinner-border-sm" 
                 role="status" 
@@ -39,7 +44,13 @@
         @endif
         @endif
         @if(isset($label))
-        <span class="{{ $responsive ? 'd-none d-md-inline' : '' }}">
+        <span 
+            @if(is_object($label))
+            {{ $label->attributes->class([
+                'd-none d-md-inline' => $responsive
+            ])->filter(fn ($value) => is_string($value)) }}
+            @endif
+        >
             {{ $label }}
         </span>
         @endif 

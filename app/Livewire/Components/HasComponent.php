@@ -55,21 +55,19 @@ trait HasComponent
     }
 
     /**
-     * Temporary fix. Livewire add __rm__ to the array if removing element
-     *
      * @param array $attributes
      * @return array
      */
     protected function prepareForValidation($attributes): array
     {
-        if (property_exists($this, 'form')) {
-            foreach (get_object_vars($attributes['form']) as $key => $value) {
-                if (is_array($value)) {
-                    $attributes['form']->{$key} = array_filter($value, function (mixed $value) {
-                        return $value !== "__rm__";
-                    });
-                }
-            }
+        $attributes = $this->unwrapDataForValidation($attributes);
+
+        if (
+            array_key_exists('form', $attributes)
+            && property_exists($this, 'form')
+            && method_exists($this->form, 'prepareForValidation')
+        ) {
+            $attributes['form'] = $this->form->prepareForValidation($attributes['form']);
         }
 
         return $attributes;
@@ -96,6 +94,48 @@ trait HasComponent
         data_set($this, $name, $property->value);
 
         $this->callUpdatedArrayHooks($name);
+    }
+
+    /**
+     * Fix. Livewire has method validateOnly but only accepts one field.
+     *
+     * @param mixed $fields
+     * @param mixed $rules
+     * @param array $messages
+     * @param array $attributes
+     * @param array $dataOverrides
+     * @return array
+     */
+    public function validateOnly(
+        $fields,
+        $rules = null,
+        $messages = [],
+        $attributes = [],
+        $dataOverrides = []
+    ): array {
+        $fields = is_array($fields) ? $fields : [$fields];
+
+        $validated = [];
+
+        $validateOnly = function ($field, $rules, $messages, $attributes, $dataOverrides) use (&$validated, &$validateOnly) {
+            $validatedData = parent::validateOnly($field, $rules, $messages, $attributes);
+
+            $value = data_get($this, $field, false);
+
+            if ($value && is_array($value)) {
+                foreach (array_keys(array_filter($value)) as $key) {
+                    $validateOnly("{$field}.{$key}", $rules, $messages, $attributes, $dataOverrides);
+                }
+            }
+
+            $validated[key($validatedData)] = current($validatedData);
+        };
+
+        foreach ($fields as $field) {
+            $validateOnly($field, $rules, $messages, $attributes, $dataOverrides);
+        }
+
+        return $validated;
     }
 
     /**

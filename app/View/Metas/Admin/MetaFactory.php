@@ -6,13 +6,13 @@ namespace App\View\Metas\Admin;
 
 use Illuminate\Support\Collection as Collect;
 use Illuminate\Contracts\Config\Repository as Config;
-use Illuminate\Contracts\Translation\Translator as Trans;
+use Illuminate\Contracts\Translation\Translator;
 
 abstract class MetaFactory
 {
     public function __construct(
         protected Config $config,
-        protected Trans $trans,
+        protected Translator $translator,
         protected Collect $collect,
         protected AdminMetaFactory $adminMetaFactory
     ) {

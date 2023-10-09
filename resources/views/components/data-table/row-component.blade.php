@@ -3,7 +3,6 @@
     x-bind:key="`row-${id}`"
     x-bind:class="action"
     x-on:highlight.window="highlight(event)"
-    x-on:click="toggleSelect(id)"
     {{ $attributes->class([
         'transition'
     ])->merge([
