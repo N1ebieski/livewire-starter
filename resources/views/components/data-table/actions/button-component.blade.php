@@ -10,7 +10,9 @@
     x-on:livewire:commit:respond.window="loading=false"  
 > 
     <{{ $type->getElement() }}
-        @if($attributes->has('wire:click'))
+        @if($attributes->has('wire:click') && (
+            !$attributes->has('disabled') || $attributes->get('disabled') !== true
+        ))
         x-bind:disabled="loading"
         x-on:click.stop="loading=true"
         @endif

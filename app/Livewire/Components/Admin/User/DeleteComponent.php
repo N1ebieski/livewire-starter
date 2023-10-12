@@ -28,7 +28,7 @@ final class DeleteComponent extends Component
 
     public function submit(
         CommandBus $commandBus,
-        Translator $trans
+        Translator $translator
     ): void {
         $this->gate->authorize('delete', $this->user);
 

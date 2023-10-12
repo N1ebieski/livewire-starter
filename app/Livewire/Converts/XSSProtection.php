@@ -10,7 +10,7 @@ use App\Livewire\Converts\HandlerInterface;
 
 final class XSSProtection implements HandlerInterface
 {
-    protected array $except = ['content_html'];
+    protected array $except = ['form.content_html'];
 
     public function handle(Property $property, Closure $next): mixed
     {

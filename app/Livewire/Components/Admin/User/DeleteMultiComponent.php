@@ -46,7 +46,7 @@ final class DeleteMultiComponent extends Component
 
     public function submit(
         CommandBus $commandBus,
-        Translator $trans
+        Translator $translator
     ): void {
         $this->gate->authorize('deleteMulti', [User::class, $this->users]);
 
