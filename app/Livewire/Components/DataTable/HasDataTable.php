@@ -190,7 +190,7 @@ trait HasDataTable
         }
 
         $this->attributes->each(function ($attribute, $key) {
-            if (!$attribute instanceof Url) {
+            if (!$attribute instanceof Locked) {
                 return;
             }
 

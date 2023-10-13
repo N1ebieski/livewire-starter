@@ -22,14 +22,9 @@
         ])->filter(fn ($value) => is_string($value) || $value === true) }}
     >
         @if(isset($icon))
-        <span 
-            @if($attributes->has('wire:click'))
-            x-show="!loading"
-            @endif
-        >
+        <span x-show="!loading">
             {{ $icon }}
         </span>
-        @if($attributes->has('wire:click'))
         <span x-show="loading" x-cloak>
             <span 
                 class="spinner-border spinner-border-sm" 
@@ -38,7 +33,6 @@
             ></span>
             <span class="visually-hidden">{{ trans('default.loading') }}...</span>
         </span>
-        @endif
         @endif
         @if(isset($label))
         <span class="{{ $responsive ? 'd-none d-md-inline' : '' }}">

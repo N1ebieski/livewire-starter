@@ -24,13 +24,10 @@
         @if(isset($icon))
         <span 
             {{ $icon->attributes->filter(fn ($value) => is_string($value)) }}
-            @if($attributes->has('wire:click'))
             x-show="!loading"
-            @endif
         >
             {{ $icon }}
         </span>
-        @if($attributes->has('wire:click'))
         <span 
             {{ $icon->attributes->filter(fn ($value) => is_string($value)) }}
             x-show="loading" 
@@ -43,7 +40,6 @@
             ></span>
             <span class="visually-hidden">{{ trans('default.loading') }}...</span>
         </span>
-        @endif
         @endif
         @if(isset($label))
         <span 

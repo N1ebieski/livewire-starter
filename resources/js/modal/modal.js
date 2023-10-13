@@ -29,5 +29,13 @@ export default function modal(data) {
 
             this.modal.hide();
         },
+
+        destroy() {
+            const backdrop = document.querySelector(".modal-backdrop");
+
+            if (backdrop) {
+                backdrop.remove();
+            }
+        },        
     };
 }

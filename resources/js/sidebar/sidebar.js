@@ -37,6 +37,10 @@ export default function sidebar(data) {
             });
         },
 
+        toggle() {
+            this.offcanvas.toggle();
+        },
+
         destroy() {
             if (this.isSizeDownLg()) {
                 const sidebarWrapper = document.querySelector(".sidebar-wrapper");
