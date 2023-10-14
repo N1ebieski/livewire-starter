@@ -1,7 +1,14 @@
 import { Livewire } from "../../../vendor/livewire/livewire/dist/livewire.esm";
+import { Commit } from "./commit";
+
+Livewire.hook("commit.prepare", () => {
+    Commit.responded = false;
+});
 
 Livewire.hook("commit", ({ respond }) => {
     respond(() => {
+        Commit.responded = true;
+
         Livewire.dispatch("livewire:commit:respond");
     });
 });

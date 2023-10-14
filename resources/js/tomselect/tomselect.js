@@ -148,6 +148,12 @@ export default function tomSelect(data) {
             this.highlight(this.value);
         },
 
+        reset() {
+            this.setValue(null);
+
+            this.deactivate();
+        },
+
         highlight(value) {
             if (!data.highlight) {
                 return;
