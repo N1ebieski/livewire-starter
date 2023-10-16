@@ -23,6 +23,6 @@ final class DatetimeComponent extends FormComponent
      */
     public function render(): View
     {
-        return $this->viewFactory->make('components.forms.datetime-component');
+        return $this->viewFactory->make('components.forms.datetime.datetime-component');
     }
 }

@@ -88,7 +88,7 @@ final class EditComponent extends Component
 
         $this->dispatch('refresh')->to(DataTableComponent::class);
 
-        $this->dispatch('hide-modal', alias: 'admin.user.edit-component');
+        $this->dispatch('hide-modal', alias: $this->alias);
 
         $this->dispatch(
             'create-toast',

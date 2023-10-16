@@ -6,13 +6,13 @@
     <x-slot:body>
         <form wire:submit.prevent="submit">
             <div class="mb-3">
-                <x-forms.email-component
+                <x-forms.email.email-component
                     wire:model="form.email"
                     :label="trans('user.email.label')"
                 />
             </div>
             <div class="mb-3">
-                <x-forms.password-component
+                <x-forms.password.password-component
                     x-data
                     x-on:focus="$el.removeAttribute('readonly')"
                     wire:model="form.password"

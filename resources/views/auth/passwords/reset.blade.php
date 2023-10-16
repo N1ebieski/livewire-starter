@@ -13,7 +13,7 @@
                         <input type="hidden" name="token" value="{{ $token }}">
 
                         <div class="mb-3">
-                            <x-forms.email-component
+                            <x-forms.email.email-component
                                 name="email"
                                 id="email"
                                 :label="trans('auth.address.label')"
@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="mb-3">                        
-                            <x-forms.password-component
+                            <x-forms.password.password-component
                                 name="password"
                                 id="password"
                                 :label="trans('auth.password')"
@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <x-forms.password-component
+                            <x-forms.password.password-component
                                 name="password_confirmation"
                                 id="password_confirmation"
                                 :label="trans('auth.password')"

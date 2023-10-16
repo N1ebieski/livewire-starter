@@ -36,7 +36,7 @@ final class DeleteComponent extends Component
 
         $this->dispatch('refresh')->to(DataTableComponent::class);
 
-        $this->dispatch('hide-modal', alias: 'admin.role.delete-component');
+        $this->dispatch('hide-modal', alias: $this->alias);
 
         $this->dispatch(
             'create-toast',

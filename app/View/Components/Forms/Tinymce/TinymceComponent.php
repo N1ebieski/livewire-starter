@@ -49,6 +49,6 @@ final class TinymceComponent extends FormComponent
      */
     public function render(): View
     {
-        return $this->viewFactory->make('components.forms.tinymce-component');
+        return $this->viewFactory->make('components.forms.tinymce.tinymce-component');
     }
 }

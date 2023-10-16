@@ -9,7 +9,7 @@ use App\Livewire\Forms\Form;
 
 final class IndexForm extends Form
 {
-    public string $name;
+    public ?string $name;
 
     public function rules(): array
     {

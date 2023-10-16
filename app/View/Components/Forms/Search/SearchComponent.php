@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\View\Components\Forms;
+namespace App\View\Components\Forms\Search;
 
 use Illuminate\Support\Str;
 use Illuminate\Contracts\View\View;
+use App\View\Components\Forms\FormComponent;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
 final class SearchComponent extends FormComponent
@@ -34,6 +35,6 @@ final class SearchComponent extends FormComponent
      */
     public function render(): View
     {
-        return $this->viewFactory->make('components.forms.search-component');
+        return $this->viewFactory->make('components.forms.search.search-component');
     }
 }

@@ -9,7 +9,7 @@
             class="flex-fill"
             style="min-width:300px;"
         >
-            <x-forms.search-component 
+            <x-forms.search.search-component 
                 wire:model.live.debounce.750ms="form.search"
                 :highlight="!is_null($form->search)"
                 :labelFloating="true"
@@ -17,7 +17,7 @@
                 <x-slot:label>
                     {{ trans_choice('filter.filters', 1) }} "{{ trans('filter.search') }}":
                 </x-slot:label> 
-            </x-forms.search-component>
+            </x-forms.search.search-component>
         </x-data-table.filter.filter-component>
         <x-data-table.filter.filter-component
             name="status_email"
@@ -25,7 +25,7 @@
             class="flex-fill"
             style="min-width:200px;"
         >
-            <x-forms.select-component
+            <x-forms.select.select-component
                 wire:model.live="form.status_email"
                 :highlight="!is_null($form->status_email)"
                 :labelFloating="true"
@@ -40,14 +40,14 @@
                     {{ trans('user.status_email.' . $enum->value) }}
                 </option>
                 @endforeach
-            </x-forms.select-component>
+            </x-forms.select.select-component>
         </x-data-table.filter.filter-component>
         <x-data-table.filter.filter-component
             name="role"
             class="flex-fill"
             :filters="$filters"
         >
-            <x-forms.select-component
+            <x-forms.select.select-component
                 wire:model.live="form.role"
                 :highlight="!is_null($form->role)"
                 :labelFloating="true"
@@ -62,7 +62,7 @@
                     {{ $role->name->value }}
                 </option>
                 @endforeach
-            </x-forms.select-component>
+            </x-forms.select.select-component>
         </x-data-table.filter.filter-component>
         <x-data-table.filter.filter-component
             name="columns"

@@ -11,7 +11,7 @@
                         @csrf
 
                         <div class="mb-3">
-                            <x-forms.text-component
+                            <x-forms.text.text-component
                                 name="name"
                                 id="name"
                                 :label="trans('auth.name.label')"
@@ -26,7 +26,7 @@
                         </div>                            
 
                         <div class="mb-3">
-                            <x-forms.email-component
+                            <x-forms.email.email-component
                                 name="email"
                                 id="email"
                                 :label="trans('auth.address.label')"
@@ -41,7 +41,7 @@
                         </div>                            
 
                         <div class="mb-3">
-                            <x-forms.password-component
+                            <x-forms.password.password-component
                                 name="password"
                                 id="password"
                                 :label="trans('auth.password')"
@@ -55,7 +55,7 @@
                         </div>                                                  
 
                         <div class="mb-3">    
-                            <x-forms.password-component
+                            <x-forms.password.password-component
                                 name="password_confirmation"
                                 id="password_confirmation"
                                 :label="trans('auth.password')"
@@ -69,7 +69,7 @@
                         </div>                            
 
                         <div class="mb-3">
-                            <x-forms.switch-component
+                            <x-forms.switch.switch-component
                                 name="privacy_agreement"
                                 id="privacy_agreement"
                                 label=""
@@ -84,7 +84,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <x-forms.switch-component
+                            <x-forms.switch.switch-component
                                 name="contact_agreement"
                                 id="contact_agreement"
                                 label=""
@@ -99,7 +99,7 @@
                         </div>                            
 
                         <div class="mb-3">
-                            <x-forms.switch-component
+                            <x-forms.switch.switch-component
                                 name="marketing_agreement"
                                 id="marketing_agreement"
                                 label=""

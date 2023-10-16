@@ -34,7 +34,7 @@ final class IndexComponent extends Component implements FullPageInterface
         /** @var User */
         $user = $this->guard->user();
 
-        $this->form->name = $user->name;
+        $this->form->name = $user?->name;
     }
 
     public function submit(

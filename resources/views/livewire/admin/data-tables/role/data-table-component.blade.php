@@ -9,7 +9,7 @@
             class="flex-fill"
             style="min-width:300px;"
         >    
-            <x-forms.search-component 
+            <x-forms.search.search-component 
                 wire:model.live.debounce.750ms="form.search"
                 :highlight="!is_null($form->search)"
                 :labelFloating="true"
@@ -17,7 +17,7 @@
                 <x-slot:label>
                     {{ trans_choice('filter.filters', 1) }} "{{ trans('filter.search') }}":
                 </x-slot:label> 
-            </x-forms.search-component>
+            </x-forms.search.search-component>
         </x-data-table.filter.filter-component>     
         <x-data-table.filter.filter-component
             name="columns"

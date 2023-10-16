@@ -30,7 +30,7 @@ final class TomselectComponent extends FormComponent
      */
     public function render(): View
     {
-        return $this->viewFactory->make('components.forms.tomselect-component', [
+        return $this->viewFactory->make('components.forms.tomselect.tomselect-component', [
             'except' => $this->exceptIds
         ]);
     }

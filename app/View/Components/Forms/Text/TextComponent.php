@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\View\Components\Forms;
+namespace App\View\Components\Forms\Text;
 
 use Illuminate\Contracts\View\View;
+use App\View\Components\Forms\FormComponent;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
-final class PasswordComponent extends FormComponent
+final class TextComponent extends FormComponent
 {
     public function __construct(
         protected ViewFactory $viewFactory,
@@ -22,6 +23,6 @@ final class PasswordComponent extends FormComponent
      */
     public function render(): View
     {
-        return $this->viewFactory->make('components.forms.password-component');
+        return $this->viewFactory->make('components.forms.text.text-component');
     }
 }

@@ -20,7 +20,7 @@
                         @csrf
 
                         <div class="mb-3">
-                            <x-forms.email-component
+                            <x-forms.email.email-component
                                 name="email"
                                 id="email"
                                 :label="trans('auth.address.label')"

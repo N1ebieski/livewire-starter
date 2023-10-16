@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\View\Components\Forms;
+namespace App\View\Components\Forms\Email;
 
 use Illuminate\Contracts\View\View;
 use App\View\Components\Forms\FormComponent;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
-final class SwitchComponent extends FormComponent
+final class EmailComponent extends FormComponent
 {
     public function __construct(
         protected ViewFactory $viewFactory,
-        public readonly string $label,
+        public readonly ?string $label = null,
         public readonly ?string $tooltip = null,
+        public readonly bool $labelFloating = false,
     ) {
     }
 
@@ -22,6 +23,6 @@ final class SwitchComponent extends FormComponent
      */
     public function render(): View
     {
-        return $this->viewFactory->make('components.forms.switch-component');
+        return $this->viewFactory->make('components.forms.email.email-component');
     }
 }

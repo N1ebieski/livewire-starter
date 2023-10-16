@@ -56,7 +56,7 @@ final class CreateComponent extends Component
             )
         );
 
-        $this->dispatch('hide-modal', alias: 'admin.role.create-component');
+        $this->dispatch('hide-modal', alias: $this->alias);
 
         $this->dispatch(
             'create-toast',

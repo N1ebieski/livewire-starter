@@ -6,7 +6,7 @@
     <x-slot:body>
         <form wire:submit.prevent="submit">
             <div class="mb-3">
-                <x-forms.text-component
+                <x-forms.text.text-component
                     wire:model="form.name"
                     :label="trans('role.name.label')"
                     :disabled="$role->name->isDefault()"
