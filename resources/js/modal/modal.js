@@ -30,7 +30,7 @@ export default function modal(data) {
             this.modal.hide();
         },
 
-        destroy() {
+        dispose() {
             const backdrop = document.querySelector(".modal-backdrop");
 
             if (backdrop) {

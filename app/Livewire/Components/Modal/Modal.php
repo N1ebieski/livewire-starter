@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Livewire\Components\Modal;
 
-use Livewire\Wireable;
+use App\Extends\Livewire\Wireable;
 use App\View\Components\Modal\Size;
 use App\View\Components\Modal\Modal as BootstrapModal;
 
-final class Modal implements Wireable
+final class Modal extends Wireable
 {
     public function __construct(
         public readonly string $alias,

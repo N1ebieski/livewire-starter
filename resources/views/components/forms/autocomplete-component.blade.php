@@ -46,7 +46,7 @@
                     highlight: @js($highlight),            
                     config: @js($autocomplete)
                 })"
-                x-on:livewire:navigating.window="destroy()"
+                x-on:livewire:navigating.window="dispose()"
                 wire:ignore
             >         
                 <input 

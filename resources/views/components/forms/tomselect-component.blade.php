@@ -47,7 +47,7 @@
                     highlight: @js($highlight),                      
                     config: @js($tomselect)
                 })"
-                x-on:livewire:navigating.window="destroy()"
+                x-on:livewire:navigating.window="dispose()"
                 wire:ignore
             >
                 @if($type->isEquals(\App\View\Components\Forms\Tomselect\Type::SELECT))

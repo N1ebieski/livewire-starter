@@ -41,7 +41,7 @@ export default function sidebar(data) {
             this.offcanvas.toggle();
         },
 
-        destroy() {
+        dispose() {
             if (this.isSizeDownLg()) {
                 const sidebarWrapper = document.querySelector(".sidebar-wrapper");
 

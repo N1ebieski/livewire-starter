@@ -6,7 +6,7 @@
             config: @js($modal->modal)
         })"
         x-on:hide-modal="hide($event)"
-        x-on:livewire:navigating.window="destroy()"
+        x-on:livewire:navigating.window="dispose()"
         wire:key="{{ $modal->alias }}"
         wire:ignore
     >

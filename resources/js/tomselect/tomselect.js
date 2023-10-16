@@ -205,7 +205,7 @@ export default function tomSelect(data) {
             this.$refs.tomselect.nextElementSibling.classList.add("is-invalid");
         },
 
-        destroy() {
+        dispose() {
             this.tomselect.destroy();
         },
     };

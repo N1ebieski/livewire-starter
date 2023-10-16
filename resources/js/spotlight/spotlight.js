@@ -43,7 +43,7 @@ export default function spotlight(data) {
             });            
         },
 
-        destroy() {
+        dispose() {
             const items = document.querySelectorAll('.spotlight .item');
 
             items.forEach((item) => item.remove());

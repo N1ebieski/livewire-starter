@@ -42,7 +42,7 @@
                     config: @js($tinymce)
                 })"
                 x-on:tinymce:load.window="init()"
-                x-on:livewire:navigating.window="destroy()"
+                x-on:livewire:navigating.window="dispose()"
                 wire:ignore
             >
                 <textarea 
