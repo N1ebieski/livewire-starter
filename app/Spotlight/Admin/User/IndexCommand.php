@@ -12,7 +12,7 @@ use Illuminate\Contracts\Auth\Guard as BaseGuard;
 /**
  * @property-read Guard $guard
  */
-class IndexCommand extends Command
+final class IndexCommand extends Command
 {
     public function __construct(
         protected Gate $gate,
