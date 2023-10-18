@@ -28,6 +28,8 @@ export default function spotlight(data) {
 
             this.$watch("isOpen", function (value) {
                 if (value === false || el.selectedCommand !== null) {
+                    setTimeout(() => el.reset(), 100);
+                    
                     return;
                 }
 
@@ -49,6 +51,18 @@ export default function spotlight(data) {
             items.forEach((item) => item.remove());
 
             this.reset();
+        },
+
+        filteredItems() {
+            if (this.searchEngine === "search" && this.input && this.showResultsWithoutInput) {
+                this.selected = 0;
+
+                return this.dependencySearch.getIndex().docs.map((item, i) => [{ item: item }, i]);
+            }
+
+            const baseFilteredItems = baseSpotlight(data).filteredItems.bind(this);
+
+            return baseFilteredItems();
         },
 
         reset() {
