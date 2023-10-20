@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Livewire\Components;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use App\Livewire\Forms\Form;
 use Livewire\Attributes\Computed;
@@ -98,42 +99,43 @@ trait HasComponent
 
     /**
      * Fix. Livewire has method validateOnly but only accepts one field.
-     *
-     * @param mixed $fields
-     * @param mixed $rules
-     * @param array $messages
-     * @param array $attributes
-     * @param array $dataOverrides
-     * @return array
      */
-    public function validateOnly(
-        $fields,
-        $rules = null,
-        $messages = [],
-        $attributes = [],
-        $dataOverrides = []
+    public function validateSpecific(
+        string|array $fields,
+        array $rules = [],
+        array $messages = [],
+        array $attributes = []
     ): array {
         $fields = is_array($fields) ? $fields : [$fields];
+        $fieldsToValidate = $fields;
 
-        $validated = [];
-
-        $validateOnly = function ($field, $rules, $messages, $attributes, $dataOverrides) use (&$validated, &$validateOnly) {
-            $validatedData = parent::validateOnly($field, $rules, $messages, $attributes);
-
-            $value = data_get($this, $field, false);
-
-            if ($value && is_array($value)) {
-                foreach (array_keys(array_filter($value)) as $key) {
-                    $validateOnly("{$field}.{$key}", $rules, $messages, $attributes, $dataOverrides);
-                }
-            }
-
-            $validated[key($validatedData)] = current($validatedData);
-        };
+        $data = [];
 
         foreach ($fields as $field) {
-            $validateOnly($field, $rules, $messages, $attributes, $dataOverrides);
+            $value = data_get($this, $field);
+            $data[$field] = $value;
+
+            if ($value && is_array($value)) {
+                array_push($fieldsToValidate, "{$field}.*");
+            }
         }
+
+        $data = $this->prepareForValidation(Arr::undot($data));
+
+        foreach (['rules', 'messages', 'attributes'] as $parameter) {
+            if (empty(${$parameter}) && method_exists($this->form, $parameter)) {
+                ${$parameter} = (new Collection($this->form->{$parameter}()))
+                    ->mapWithKeys(function (mixed $value, string $key) {
+                        return ["form.{$key}" => $value];
+                    })
+                    ->filter(function (mixed $value, string $key) use ($fieldsToValidate) {
+                        return in_array($key, $fieldsToValidate);
+                    })
+                    ->toArray();
+            }
+        }
+
+        $validated = $this->validatorFactory->make($data, $rules, $messages, $attributes)->validate();
 
         return $validated;
     }

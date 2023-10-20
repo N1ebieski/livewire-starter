@@ -293,11 +293,11 @@ trait HasDataTable
 
     public function validateWithReset(): void
     {
-        $this->prepareForValidation(
+        $data = $this->prepareForValidation(
             $this->getDataForValidation($this->form->rules())
         );
 
-        $this->validationFactory->make($this->form->all(), $this->form->rules())
+        $this->validationFactory->make($data, $this->form->rules())
             ->after(function (Validator $validator) {
                 if ($validator->errors()->isNotEmpty()) {
                     $this->clear();
