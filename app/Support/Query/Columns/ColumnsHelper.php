@@ -8,16 +8,16 @@ use Illuminate\Support\Collection;
 
 final class ColumnsHelper
 {
-    public static function getColumnsAsString(array $columns): string
+    public function getColumnsAsString(array $columns): string
     {
         return (new Collection($columns))
             ->map(function (string $column) {
-                return self::getColumnWithTicks($column);
+                return $this->getColumnWithTicks($column);
             })
             ->implode(',');
     }
 
-    public static function getColumnWithTicks(string $column): string
+    public function getColumnWithTicks(string $column): string
     {
         $names = explode('.', $column);
 
@@ -28,8 +28,8 @@ final class ColumnsHelper
             ->implode('.');
     }
 
-    public static function getColumnWithSnakes(string $column): string
+    public function getColumnWithSnakes(string $column): string
     {
-        return self::getColumnWithTicks(str_replace('.', '_', $column));
+        return $this->getColumnWithTicks(str_replace('.', '_', $column));
     }
 }

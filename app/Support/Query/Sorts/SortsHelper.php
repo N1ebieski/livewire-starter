@@ -6,7 +6,7 @@ namespace App\Support\Query\Sorts;
 
 final class SortsHelper
 {
-    public static function getAttributesWithOrder(array $sorts): array
+    public function getAttributesWithOrder(array $sorts): array
     {
         $attributesWithOrder = [];
 

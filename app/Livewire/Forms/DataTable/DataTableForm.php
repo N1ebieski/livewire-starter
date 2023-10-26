@@ -30,6 +30,9 @@ abstract class DataTableForm extends Form
 
     public function rules(): array
     {
+        /** @var SortsHelper */
+        $sortsHelper = $this->container->make(SortsHelper::class);
+
         return [
             'search' => [
                 'bail',
@@ -41,7 +44,7 @@ abstract class DataTableForm extends Form
                 'bail',
                 'string',
                 'nullable',
-                $this->rule->in(SortsHelper::getAttributesWithOrder($this->component->sorts))
+                $this->rule->in($sortsHelper->getAttributesWithOrder($this->component->sorts))
             ],
             'columns' => [
                 'bail',
