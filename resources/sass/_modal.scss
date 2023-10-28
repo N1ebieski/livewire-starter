@@ -33,3 +33,7 @@ div {
 
     @include mixinBackdropShow(1);  
 }
+
+.modal-xxl {
+    --bs-modal-width: 1400px;
+}

@@ -6,11 +6,13 @@ namespace App\View\Components\Modal;
 
 enum Size: string
 {
-    case MODAL_SM = 'modal-sm';
+    case MODAL_SM = 'modal-sm modal-fullscreen-sm-down';
 
-    case MODAL_LG = 'modal-lg';
+    case MODAL_LG = 'modal-lg modal-fullscreen-lg-down';
 
-    case MODAL_XL = 'modal-xl';
+    case MODAL_XL = 'modal-xl modal-fullscreen-xl-down';
+
+    case MODAL_XXL = 'modal-xxl modal-fullscreen-xxl-down';
 
     case MODAL_FULLSCREEN = 'modal-fullscreen';
 
