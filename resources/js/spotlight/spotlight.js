@@ -23,6 +23,8 @@ export default function spotlight(data) {
                     return;
                 }
 
+                el.selected = 0;
+
                 el.$refs.input.focus();
             });
 
@@ -55,8 +57,6 @@ export default function spotlight(data) {
 
         filteredItems() {
             if (this.searchEngine === "search" && this.input && this.showResultsWithoutInput) {
-                this.selected = 0;
-
                 return this.dependencySearch.getIndex().docs.map((item, i) => [{ item: item }, i]);
             }
 
