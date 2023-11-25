@@ -56,25 +56,6 @@ trait HasComponent
     }
 
     /**
-     * @param array $attributes
-     * @return array
-     */
-    protected function prepareForValidation($attributes): array
-    {
-        $attributes = $this->unwrapDataForValidation($attributes);
-
-        if (
-            array_key_exists('form', $attributes)
-            && property_exists($this, 'form')
-            && method_exists($this->form, 'prepareForValidation')
-        ) {
-            $attributes['form'] = $this->form->prepareForValidation($attributes['form']);
-        }
-
-        return $attributes;
-    }
-
-    /**
      *
      * @param mixed $name
      * @param mixed $value
@@ -82,6 +63,11 @@ trait HasComponent
      */
     public function updatedHasComponent($name, $value): void
     {
+        /** Temporary fix. Livewire add __rm__ to the array if removing element */
+        if ($value === "__rm__") {
+            return;
+        }
+
         /** @var Pipeline */
         $pipeline = $this->container->make(Pipeline::class);
 
@@ -122,6 +108,10 @@ trait HasComponent
 
         $data = $this->prepareForValidation(Arr::undot($data));
 
+        if (array_key_exists('form', $data)) {
+            $data['form'] = $this->form->prepareForValidation($data['form']);
+        }
+
         foreach (['rules', 'messages', 'attributes'] as $parameter) {
             if (empty(${$parameter}) && method_exists($this->form, $parameter)) {
                 ${$parameter} = (new Collection($this->form->{$parameter}()))
@@ -150,7 +140,17 @@ trait HasComponent
         $ascendantsNames = explode('.', $name);
 
         if (count($ascendantsNames) > 1) {
-            $parentAlias = implode('.', array_slice($ascendantsNames, 0, -1));
+            $parentAlias = '';
+
+            foreach ($ascendantsNames as $name) {
+                if (is_numeric($name)) {
+                    break;
+                }
+
+                $parentAlias .= $name . '.';
+            }
+
+            $parentAlias = mb_substr($parentAlias, 0, -1);
 
             $parent = data_get($this, $parentAlias);
 
