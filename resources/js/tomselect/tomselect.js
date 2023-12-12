@@ -1,6 +1,7 @@
 import axios from "axios";
 import _merge from "lodash/merge";
 import TomSelect from "tom-select";
+import { Commit } from "../livewire/commit";
 
 export default function tomSelect(data) {
     if (!data.config.options.length) {
@@ -148,7 +149,9 @@ export default function tomSelect(data) {
             this.highlight(this.value);
         },
 
-        reset() {
+        async reset() {
+            await Commit.waitForRespond();
+
             this.setValue(null);
 
             this.deactivate();

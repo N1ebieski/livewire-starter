@@ -1,5 +1,5 @@
 <div
-    x-data
+    x-data="{ id: $id('{{ $attributes->get('id') }}') }"
     @if(isset($parent))
     {{ $parent->attributes->filter(fn ($value) => is_string($value)) }}    
     @endif
@@ -13,29 +13,31 @@
             <input 
                 type="checkbox" 
                 role="switch"             
+                :id="id"             
                 {{ $attributes->class([
                     'form-check-input',
                     'is-invalid' => $errors->has($attributes->get('name')),
                     'is-valid' => $errors->isNotEmpty() && !$errors->has($attributes->get('name'))
                 ])->filter(fn ($value) => is_string($value) || $value === true) }}                    
             >
-            <label 
-                for="{{ $attributes->get('id') }}" 
+            <div 
                 @if(is_object($label))
                 {{ $label->attributes->class([
-                    'form-check-label d-flex justify-content-between' => !isset($col),
+                    'd-flex justify-content-between' => !isset($col),
                     'col-form-label' => isset($col)
                 ])->filter(fn ($value) => is_string($value)) }}
                 @endif
                 @if(is_string($label) && !isset($col))
-                class="form-check-label d-flex justify-content-between"
+                class="d-flex justify-content-between"
                 @endif        
             >
-                <span>{{ $label }}</span>
+                <label class="form-check-label" :for="id">
+                    <span>{{ $label }}</span>
+                </label>
                 @if(isset($tooltip))
-                <x-tooltip.tooltip-component title="{{ $tooltip }}" />
+                <x-tooltip.tooltip-component value="{{ $tooltip }}" />
                 @endif
-            </label>
+            </div>
             @error($attributes->get('name')) 
             <span class="invalid-feedback">{{ $message }}</span>
             @enderror

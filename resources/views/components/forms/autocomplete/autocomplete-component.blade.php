@@ -1,5 +1,5 @@
 <div 
-    x-data
+    x-data="{ id: $id('{{ $attributes->get('id') }}') }"
     @if(isset($parent))
     {{ $parent->attributes->filter(fn ($value) => is_string($value)) }}
     @endif
@@ -16,11 +16,11 @@
         class="form-label d-flex justify-content-between"
         @endif
     >     
-        <label for="{{ $attributes->get('id') }}">
+        <label :for="id">
             <span>{{ $label }}:</span>
         </label>
         @if(isset($tooltip))
-        <x-tooltip.tooltip-component title="{{ $tooltip }}" />
+        <x-tooltip.tooltip-component value="{{ $tooltip }}" />
         @endif
     </div>
     @endif
@@ -47,6 +47,7 @@
                     config: @js($autocomplete)
                 })"
                 x-on:livewire:navigating.window="dispose()"
+                :id="id"
                 wire:ignore
             >         
                 <input 
@@ -57,7 +58,7 @@
                         ->filter(fn ($value, $key) => is_string($value) && !str_starts_with($key, 'wire:')) }} 
                 >
                 @if($labelFloating && !is_null($label))
-                <label for="{{ $attributes->get('id') }}">
+                <label :for="id">
                     {{ $label }}:
                 </label>
                 @endif             

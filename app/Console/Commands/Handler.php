@@ -4,33 +4,34 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Console\Forms\Form;
 use Illuminate\Console\Command as BaseCommand;
-use App\Extends\Laravel\Prompts\Contracts\Prompts;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 
-abstract class Command extends BaseCommand
+/**
+ * @property-read Form $form
+ */
+abstract class Handler extends BaseCommand
 {
     public function __construct(
         protected ValidationFactory $validationFactory,
-        protected Prompts $prompts
     ) {
         parent::__construct();
+
+        if (property_exists($this, 'form')) {
+            $this->form->setCommand($this);
+        }        
     }
 
     protected function validateOnly(string $key, mixed $value): string
     {
         $validator = $this->validationFactory->make(
             [$key => $value],
-            [$key => $this->rules()[$key]]
+            [$key => $this->form->rules()[$key]]
         );
 
         $errors = $validator->errors()->getMessages();
 
         return $errors[$key][0] ?? '';
-    }
-
-    protected function rules(): array
-    {
-        return [];
     }
 }

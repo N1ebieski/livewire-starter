@@ -189,7 +189,7 @@ final class DataTableComponent extends Component implements DataTableInterface
         if ($status->isEquals(StatusEmail::VERIFIED)) {
             $this->dispatch(
                 'create-toast',
-                body: $translator->get('user.actions.toggle_status_email.' . $status->value, [
+                body: $translator->get('user.messages.toggle_status_email.' . $status->value, [
                     'email' => $user->email,
                     'name' => $user->name
                 ])

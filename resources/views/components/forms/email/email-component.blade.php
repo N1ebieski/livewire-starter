@@ -1,4 +1,5 @@
 <div 
+    x-data="{ id: $id('{{ $attributes->get('id') }}') }"
     @if(isset($parent))
     {{ $parent->attributes->class([
         'form-floating' => $labelFloating
@@ -19,11 +20,11 @@
         class="form-label d-flex justify-content-between"
         @endif
     >     
-        <label for="{{ $attributes->get('id') }}">
+        <label :for="id">
             <span>{{ $label }}:</span>
         </label>
         @if(isset($tooltip))
-        <x-tooltip.tooltip-component title="{{ $tooltip }}" />
+        <x-tooltip.tooltip-component value="{{ $tooltip }}" />
         @endif
     </div>
     @endif
@@ -34,6 +35,7 @@
     @endif     
         <input 
             type="email" 
+            :id="id"
             {{ $attributes->class([
                 'form-control',
                 'is-invalid' => $errors->has($attributes->get('name')),
@@ -41,7 +43,7 @@
             ])->filter(fn ($value) => is_string($value)) }}
         >
         @if($labelFloating && !is_null($label))
-        <label for="{{ $attributes->get('id') }}">
+        <label :for="id">
             {{ $label }}:
         </label>
         @endif 

@@ -72,7 +72,7 @@ final class ChangeEmailComponent extends Component
 
         $this->dispatch(
             'create-toast',
-            body: $translator->get('account.actions.change_email', ['name' => $user->name])
+            body: $translator->get('account.messages.change_email', ['name' => $user->name])
         );
     }
 

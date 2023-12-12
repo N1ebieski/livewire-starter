@@ -61,7 +61,7 @@ final class DeleteMultiComponent extends Component
 
         $this->dispatch(
             'create-toast',
-            body: $translator->choice('user.actions.delete.multi', $deleted, ['number' => $deleted])
+            body: $translator->choice('user.messages.delete.multi', $deleted, ['number' => $deleted])
         );
     }
 

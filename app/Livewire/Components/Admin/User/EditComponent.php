@@ -92,7 +92,7 @@ final class EditComponent extends Component
 
         $this->dispatch(
             'create-toast',
-            body: $translator->get('user.actions.edit', ['name' => $user->name])
+            body: $translator->get('user.messages.edit', ['name' => $user->name])
         );
 
         $this->dispatch(

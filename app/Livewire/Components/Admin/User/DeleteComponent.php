@@ -40,7 +40,7 @@ final class DeleteComponent extends Component
 
         $this->dispatch(
             'create-toast',
-            body: $translator->get('user.actions.delete.single', ['name' => $this->user->name])
+            body: $translator->get('user.messages.delete.single', ['name' => $this->user->name])
         );
     }
 

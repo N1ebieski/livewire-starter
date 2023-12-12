@@ -6,7 +6,7 @@ use Livewire\Livewire;
 use Illuminate\Support\ServiceProvider;
 use App\Extends\Livewire\Features\SupportWireables\WireableSynth;
 
-class LivewireServiceProvider extends ServiceProvider
+final class LivewireServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.

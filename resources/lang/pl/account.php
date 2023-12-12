@@ -13,7 +13,7 @@ return [
             'title' => 'Zmień adres email'
         ]
     ],
-    'actions' => [
+    'messages' => [
         'account' => 'Pomyślnie edytowano dane użytkownika :name',
         'change_password' => 'Pomyslnie wysłano wiadomość e-mail z linkiem do zmiany hasła',
         'change_email' => 'Pomyslnie edytowano adres email przypisany do użytkownika :name'

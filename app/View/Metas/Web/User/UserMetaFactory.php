@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 use App\View\Metas\MetaInterface;
 use App\View\Metas\OpenGraphInterface;
 use Illuminate\Support\Collection as Collect;
-use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Contracts\Translation\Translator;
+use Illuminate\Contracts\Config\Repository as Config;
 
-class UserMetaFactory
+final class UserMetaFactory
 {
     public function __construct(
         protected Config $config,

@@ -12,7 +12,7 @@ use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Contracts\Validation\ValidationRule;
 
-class PasswordConfirmation implements ValidationRule, Stringable
+final class PasswordConfirmation implements ValidationRule, Stringable
 {
     public function __construct(
         private Guard $guard,

@@ -60,7 +60,7 @@ final class CreateComponent extends Component
 
         $this->dispatch(
             'create-toast',
-            body: $translator->get('role.actions.create', ['name' => $role->name->value])
+            body: $translator->get('role.messages.create', ['name' => $role->name->value])
         );
 
         $this->dispatch('created-role', role: $role->id);

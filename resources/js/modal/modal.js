@@ -31,10 +31,12 @@ export default function modal(data) {
         },
 
         dispose() {
-            const backdrop = document.querySelector(".modal-backdrop");
+            const backdrops = document.querySelectorAll(".modal-backdrop");
 
-            if (backdrop) {
-                backdrop.remove();
+            const lastBackdrop = backdrops[backdrops.length - 1];
+
+            if (lastBackdrop) {
+                lastBackdrop.remove();
             }
         },        
     };

@@ -47,14 +47,6 @@ export default function spotlight(data) {
             });            
         },
 
-        dispose() {
-            const items = document.querySelectorAll('.spotlight .item');
-
-            items.forEach((item) => item.remove());
-
-            this.reset();
-        },
-
         filteredItems() {
             if (this.searchEngine === "search" && this.input && this.showResultsWithoutInput) {
                 return this.dependencySearch.getIndex().docs.map((item, i) => [{ item: item }, i]);
@@ -63,6 +55,14 @@ export default function spotlight(data) {
             const baseFilteredItems = baseSpotlight(data).filteredItems.bind(this);
 
             return baseFilteredItems();
+        },
+
+        dispose() {
+            const items = document.querySelectorAll(".spotlight .item");
+
+            items.forEach((item) => item.remove());
+
+            this.reset();
         },
 
         reset() {

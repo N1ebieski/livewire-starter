@@ -12,7 +12,7 @@
                         :action="\App\View\Components\Alert\Action::SUCCESS"
                         :close="false"
                     >
-                        {{ trans('auth.actions.verify') }}
+                        {{ trans('auth.messages.verify') }}
                     </x-alert.alert-component>
                     @endif
 

@@ -1,5 +1,7 @@
 <?php
 
 return [
-    'page' => 'Strona: :page'
+    'page' => 'Strona: :page',
+    'next'     => 'Następna &raquo;',
+    'previous' => '&laquo; Poprzednia',
 ];

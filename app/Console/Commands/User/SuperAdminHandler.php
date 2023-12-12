@@ -7,14 +7,14 @@ namespace App\Console\Commands\User;
 use App\Models\Role\Role;
 use App\Models\User\User;
 use App\Commands\CommandBus;
-use App\Console\Commands\Command;
+use App\Console\Commands\Handler;
 use App\Console\Forms\User\SuperAdminForm;
 use App\Commands\User\Create\CreateCommand;
 use Illuminate\Contracts\Translation\Translator;
 use App\Extends\Laravel\Prompts\Contracts\Prompts;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 
-final class SuperAdminCommand extends Command
+final class SuperAdminHandler extends Handler
 {
     /**
      * The name and signature of the console command.
@@ -31,25 +31,20 @@ final class SuperAdminCommand extends Command
     protected $description = 'Register super admin first time';
 
     public function __construct(
-        protected ValidationFactory $validationFactory,
+        ValidationFactory $validationFactory,
+private Prompts $prompts,
         private User $user,
         private Role $role,
         private Translator $translator,
-        private SuperAdminForm $superAdminForm,
         private CommandBus $commandBus,
-        private Prompts $prompts
+        protected SuperAdminForm $form,
     ) {
         parent::__construct($validationFactory);
     }
 
-    protected function rules(): array
-    {
-        return $this->superAdminForm->rules();
-    }
-
     public function handle(): void
     {
-        if (!$this->superAdminForm->authorize()) {
+        if (!$this->form->authorize()) {
             $this->prompts->error($this->translator->get('superadmin.exist'));
 
             exit;

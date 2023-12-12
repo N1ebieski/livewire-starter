@@ -22,7 +22,7 @@
                                 </x-slot:label>
                                 <x-slot:parent class="row"></x-slot:parent>
                                 <x-slot:col class="col-md-6"></x-slot:col>
-                            </x-form.email-component>
+                            </x-forms.text.text-component>
                         </div>                            
 
                         <div class="mb-3">
@@ -37,7 +37,7 @@
                                 </x-slot:label>
                                 <x-slot:parent class="row"></x-slot:parent>
                                 <x-slot:col class="col-md-6"></x-slot:col>
-                            </x-form.email-component>
+                            </x-forms.email.email-component>
                         </div>                            
 
                         <div class="mb-3">
@@ -51,7 +51,7 @@
                                 </x-slot:label>
                                 <x-slot:parent class="row"></x-slot:parent>
                                 <x-slot:col class="col-md-6"></x-slot:col>
-                            </x-form.email-component>  
+                            </x-forms.password.password-component>  
                         </div>                                                  
 
                         <div class="mb-3">    
@@ -65,7 +65,7 @@
                                 </x-slot:label>
                                 <x-slot:parent class="row"></x-slot:parent>
                                 <x-slot:col class="col-md-6"></x-slot:col>
-                            </x-form.email-component>
+                            </x-forms.password.password-component>
                         </div>                            
 
                         <div class="mb-3">
@@ -80,7 +80,7 @@
                                 </x-slot:label>
                                 <x-slot:parent class="row"></x-slot:parent>
                                 <x-slot:col class="col-md-6 offset-md-4"></x-slot:col>
-                            </x-form.switch-component>
+                            </x-forms.switch.switch-component>
                         </div>
 
                         <div class="mb-3">
@@ -95,7 +95,7 @@
                                 </x-slot:label>
                                 <x-slot:parent class="row"></x-slot:parent>
                                 <x-slot:col class="col-md-6 offset-md-4"></x-slot:col>
-                            </x-form.switch-component>
+                            </x-forms.switch.switch-component>
                         </div>                            
 
                         <div class="mb-3">
@@ -110,7 +110,7 @@
                                 </x-slot:label>
                                 <x-slot:parent class="row"></x-slot:parent>
                                 <x-slot:col class="col-md-6 offset-md-4"></x-slot:col>
-                            </x-form.switch-component>
+                            </x-forms.switch.switch-component>
                         </div>
 
                         <div class="form-group row mb-0">

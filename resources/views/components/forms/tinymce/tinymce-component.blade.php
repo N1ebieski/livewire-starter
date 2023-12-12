@@ -1,5 +1,5 @@
 <div 
-    x-data
+    x-data="{ id: $id('{{ $attributes->get('id') }}') }"
     @if(isset($parent))
     {{ $parent->attributes->filter(fn ($value) => is_string($value)) }}
     @endif
@@ -16,11 +16,11 @@
         class="form-label d-flex justify-content-between"
         @endif
     >       
-        <label for="{{ $attributes->get('id') }}">
+        <label :for="id">
             <span>{{ $label }}:</span>
         </label>
         @if(isset($tooltip))
-        <x-tooltip.tooltip-component title="{{ $tooltip }}" />
+        <x-tooltip.tooltip-component value="{{ $tooltip }}" />
         @endif
     </div>
     @endif
@@ -43,6 +43,7 @@
                 })"
                 x-on:tinymce:load.window="init()"
                 x-on:livewire:navigating.window="dispose()"
+                :id="id"
                 wire:ignore
             >
                 <textarea 

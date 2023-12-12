@@ -34,6 +34,8 @@ trait HasDataTable
 
     private ColumnsFactory $columnsFactory;
 
+    private Collection $collection;
+
     private Str $str;
 
     /**
@@ -132,11 +134,13 @@ trait HasDataTable
         Translator $translator,
         ValidationFactory $validationFactory,
         ColumnsFactory $columnsFactory,
+        Collection $collection,
         Str $str
     ): void {
         $this->translator = $translator;
         $this->validationFactory = $validationFactory;
         $this->columnsFactory = $columnsFactory;
+        $this->collection = $collection;
         $this->str = $str;
 
         $this->listeners['refresh'] = '$refresh';
@@ -249,6 +253,12 @@ trait HasDataTable
     public function updatedFormColumns(array $value): void
     {
         $this->reset('hidingColumns');
+
+        /** Temporary fix. Livewire add __rm__ to the array if removing element */
+        $value = $this->collection->make($value)
+            ->filter(fn (string $v) => $v !== "__rm__")
+            ->values()
+            ->toArray();
 
         $this->columnsFactory->columnsService->createCookie(
             $this->columnsFactory->columnsHelper->getAlias($this::class),

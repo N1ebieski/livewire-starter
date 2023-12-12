@@ -15,6 +15,7 @@ final class TextComponent extends FormComponent
         public readonly ?string $label = null,
         public readonly ?string $tooltip = null,
         public readonly bool $labelFloating = false,
+        public readonly bool $validation = true,
     ) {
     }
 

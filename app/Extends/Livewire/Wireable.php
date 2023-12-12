@@ -19,7 +19,15 @@ abstract class Wireable implements LivewireWireable
 
     public function toLivewire(): array
     {
-        return get_object_vars($this);
+        $array = get_object_vars($this);
+
+        return array_map(function ($value) {
+            if ($value instanceof Wireable) {
+                return $value->toLivewire();
+            }
+
+            return $value;
+        }, $array);
     }
 
     /**

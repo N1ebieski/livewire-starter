@@ -7,6 +7,7 @@ namespace App\Livewire\Forms;
 use Livewire\Component;
 use Livewire\Form as BaseForm;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Access\Gate;
@@ -32,7 +33,6 @@ abstract class Form extends BaseForm
         protected Component $component,
         protected $propertyName
     ) {
-        /** @var Container */
         $this->container = App::make(Container::class);
         $this->rule = App::make(Rule::class);
         $this->guard = App::make(Guard::class);
@@ -40,8 +40,38 @@ abstract class Form extends BaseForm
         $this->config = App::make(Config::class);
 
         if (method_exists($this, 'mount')) {
-            $this->container->call([$this, 'mount']);
+            App::call([$this, 'mount']);
         }
+    }
+
+    /**
+     * Fix. Livewire has method validateOnly but only accepts one field.
+     */
+    public function validateSpecific(
+        string|array $fields,
+        array $rules = [],
+        array $messages = [],
+        array $attributes = []
+    ): array {
+        $fields = is_string($fields) ? [$fields] : $fields;
+
+        $fields = (new Collection($fields))->map(function (string $value) {
+            return preg_replace('/^form\./', '', $value);
+        })->toArray();
+
+        if (empty($rules)) {
+            $rules = (new Collection($this->rules()))
+                ->filter(function (mixed $value, string $key) use ($fields) {
+                    return (new Collection($fields))->filter(function (string $field) use ($key) {
+                        return $field === $key || str_starts_with($key . '.', $field);
+                    })->count() > 0;
+                })
+                ->toArray();
+        }
+
+        $validated = !empty($rules) ? $this->validate($rules, $messages, $attributes) : [];
+
+        return $validated;
     }
 
     /**
@@ -57,4 +87,6 @@ abstract class Form extends BaseForm
 
         $this->reset($keysToReset);
     }   
+
+    abstract public function rules(): array;
 }

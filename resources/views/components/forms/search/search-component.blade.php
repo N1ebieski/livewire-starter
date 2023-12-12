@@ -1,4 +1,5 @@
 <div 
+    x-data="{ id: $id('{{ $attributes->get('id') }}') }"
     @if(isset($parent))
     {{ $parent->attributes->class([
         'form-floating' => $labelFloating
@@ -19,11 +20,11 @@
         class="form-label d-flex justify-content-between"
         @endif
     >     
-        <label for="{{ $attributes->get('id') }}">
+        <label :for="id">
             <span>{{ $label }}:</span>
         </label>
         @if(isset($tooltip))
-        <x-tooltip.tooltip-component title="{{ $tooltip }}" />
+        <x-tooltip.tooltip-component value="{{ $tooltip }}" />
         @endif
     </div>
     @endif
@@ -34,6 +35,7 @@
     @endif  
         <input 
             type="search" 
+            :id="id"
             {{ $attributes->class([
                 'form-control',
                 'highlight' => $errors->isEmpty() && $highlight,
@@ -72,7 +74,7 @@
         </div>
         @endif
         @if($labelFloating && !is_null($label))
-        <label for="{{ $attributes->get('id') }}">
+        <label :for="id">
             @if($attributes->wire('model')?->hasModifier('live'))
             <span 
                 class="d-none"
