@@ -10,6 +10,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\ValidatedInput;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Config\Repository as Config;
@@ -87,6 +88,19 @@ abstract class Form extends BaseForm
 
         $this->reset($keysToReset);
     }   
+
+    public function safe(array $keys = null): ValidatedInput|array
+    {
+        $keys = $this->collection->make($keys)->map(function (string $value) {
+            return preg_replace('/^form\./', '', $value);
+        })->toArray();
+
+        $validated = $this->validate($keys);
+
+        $validatedInput = new ValidatedInput($validated);
+
+        return is_array($keys) ? $validatedInput->only($keys) : $validatedInput;
+    }
 
     abstract public function rules(): array;
 }

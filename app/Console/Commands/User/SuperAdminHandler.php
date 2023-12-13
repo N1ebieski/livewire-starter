@@ -32,7 +32,7 @@ final class SuperAdminHandler extends Handler
 
     public function __construct(
         ValidationFactory $validationFactory,
-private Prompts $prompts,
+        private Prompts $prompts,
         private User $user,
         private Role $role,
         private Translator $translator,
