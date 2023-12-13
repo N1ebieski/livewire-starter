@@ -31,15 +31,15 @@ final class SuperAdminCommand extends Command
     protected $description = 'Register super admin first time';
 
     public function __construct(
-        protected ValidationFactory $validationFactory,
+        ValidationFactory $validationFactory,
+        Prompts $prompts,
         private User $user,
         private Role $role,
         private Translator $translator,
         private SuperAdminForm $superAdminForm,
-        private CommandBus $commandBus,
-        private Prompts $prompts
+        private CommandBus $commandBus
     ) {
-        parent::__construct($validationFactory);
+        parent::__construct($validationFactory, $prompts);
     }
 
     protected function rules(): array

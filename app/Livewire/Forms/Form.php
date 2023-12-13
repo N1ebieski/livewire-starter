@@ -36,7 +36,7 @@ abstract class Form extends BaseForm
         $this->rule = App::make(Rule::class);
         $this->guard = App::make(Guard::class);
         $this->gate = App::make(Gate::class);
-$this->config = App::make(Config::class);
+        $this->config = App::make(Config::class);
 
         /**
          * Fix. Livewire doesn't have access to the component's mount properties,
