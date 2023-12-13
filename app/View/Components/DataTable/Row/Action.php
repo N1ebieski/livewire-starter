@@ -11,4 +11,6 @@ enum Action: string
     case WARNING = "warning";
 
     case PRIMARY = "primary";
+
+    case DANGER = "danger";
 }

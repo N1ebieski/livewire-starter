@@ -19,7 +19,7 @@ return [
             'title' => 'Szukaj roli'
         ]
     ],
-    'actions' => [
+    'messages' => [
         'delete' => [
             'single' => 'Pomyślnie usunięto rolę :name',
             'multi' => '{1} Pomyślnie usunięto :number rolę|{2,4} Pomyślnie usunięto :number role|{4,*} Pomyślnie usunięto :number ról'

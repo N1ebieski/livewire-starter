@@ -56,11 +56,11 @@ final class CreateComponent extends Component
             )
         );
 
-        $this->dispatch('hide-modal', alias: 'admin.role.create-component');
+        $this->dispatch('hide-modal', alias: $this->alias);
 
         $this->dispatch(
             'create-toast',
-            body: $translator->get('role.actions.create', ['name' => $role->name->value])
+            body: $translator->get('role.messages.create', ['name' => $role->name->value])
         );
 
         $this->dispatch('created-role', role: $role->id);

@@ -69,7 +69,7 @@ final class SearchFactory
         foreach ($matches as $match) {
             if (strlen($match) >= 3) {
                 $match = $this->isContainsSymbol($match) ?
-                    '"' . $match . '"' : $match;
+                    '"' . str_replace('"', '', $match) . '"' : $match;
 
                 if ($match === end($matches)) {
                     $match .= '*';

@@ -29,5 +29,15 @@ export default function modal(data) {
 
             this.modal.hide();
         },
+
+        dispose() {
+            const backdrops = document.querySelectorAll(".modal-backdrop");
+
+            const lastBackdrop = backdrops[backdrops.length - 1];
+
+            if (lastBackdrop) {
+                lastBackdrop.remove();
+            }
+        },        
     };
 }

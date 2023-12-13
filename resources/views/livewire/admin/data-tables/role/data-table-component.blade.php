@@ -9,7 +9,7 @@
             class="flex-fill"
             style="min-width:300px;"
         >    
-            <x-forms.search-component 
+            <x-forms.search.search-component 
                 wire:model.live.debounce.750ms="form.search"
                 :highlight="!is_null($form->search)"
                 :labelFloating="true"
@@ -17,7 +17,7 @@
                 <x-slot:label>
                     {{ trans_choice('filter.filters', 1) }} "{{ trans('filter.search') }}":
                 </x-slot:label> 
-            </x-forms.search-component>
+            </x-forms.search.search-component>
         </x-data-table.filter.filter-component>     
         <x-data-table.filter.filter-component
             name="columns"
@@ -151,7 +151,7 @@
                     <x-data-table.actions.button-component
                         :action="\App\View\Components\Button\Action::PRIMARY"
                         :label="trans('default.edit')"
-                        wire:click.stop="edit('{{ $role->id }}')"
+                        wire:click="edit('{{ $role->id }}')"
                     >
                         <x-slot:icon>
                             <i class="bi bi-pencil-square"></i>
@@ -164,7 +164,7 @@
                     <x-data-table.actions.button-component
                         :action="\App\View\Components\Button\Action::DANGER"
                         :label="trans('default.delete')"
-                        wire:click.stop="delete('{{ $role->id }}')"
+                        wire:click="delete('{{ $role->id }}')"
                     >        
                         <x-slot:icon>
                             <i class="bi bi-trash3"></i>

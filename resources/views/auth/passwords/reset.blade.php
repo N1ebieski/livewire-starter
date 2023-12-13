@@ -13,7 +13,7 @@
                         <input type="hidden" name="token" value="{{ $token }}">
 
                         <div class="mb-3">
-                            <x-forms.email-component
+                            <x-forms.email.email-component
                                 name="email"
                                 id="email"
                                 :label="trans('auth.address.label')"
@@ -24,11 +24,11 @@
                                 </x-slot:label>
                                 <x-slot:parent class="row"></x-slot:parent>
                                 <x-slot:col class="col-md-6"></x-slot:col>
-                            </x-form.email-component>
+                            </x-forms.email.email-component>
                         </div>
 
                         <div class="mb-3">                        
-                            <x-forms.password-component
+                            <x-forms.password.password-component
                                 name="password"
                                 id="password"
                                 :label="trans('auth.password')"
@@ -38,11 +38,11 @@
                                 </x-slot:label>
                                 <x-slot:parent class="row"></x-slot:parent>
                                 <x-slot:col class="col-md-6"></x-slot:col>
-                            </x-form.email-component>
+                            </x-forms.password.password-component>
                         </div>
 
                         <div class="mb-3">
-                            <x-forms.password-component
+                            <x-forms.password.password-component
                                 name="password_confirmation"
                                 id="password_confirmation"
                                 :label="trans('auth.password')"
@@ -52,7 +52,7 @@
                                 </x-slot:label>
                                 <x-slot:parent class="row"></x-slot:parent>
                                 <x-slot:col class="col-md-6"></x-slot:col>
-                            </x-form.email-component>
+                            </x-forms.password.password-component>
                         </div>
 
                         <div class="row mb-0">

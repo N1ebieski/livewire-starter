@@ -20,7 +20,7 @@
                         @csrf
 
                         <div class="mb-3">
-                            <x-forms.email-component
+                            <x-forms.email.email-component
                                 name="email"
                                 id="email"
                                 :label="trans('auth.address.label')"
@@ -30,11 +30,11 @@
                                 </x-slot:label>
                                 <x-slot:parent class="row"></x-slot:parent>
                                 <x-slot:col class="col-md-6"></x-slot:col>
-                            </x-form.email-component>
+                            </x-forms.email.email-component>
                         </div>
 
                         <div class="mb-3">
-                            <x-forms.password-component
+                            <x-forms.password.password-component
                                 name="password"
                                 id="password"
                                 :label="trans('auth.password')"
@@ -44,11 +44,11 @@
                                 </x-slot:label>
                                 <x-slot:parent class="row"></x-slot:parent>
                                 <x-slot:col class="col-md-6"></x-slot:col>
-                            </x-form.email-component>
+                            </x-forms.password.password-component>
                         </div>
 
                         <div class="mb-3">
-                            <x-forms.switch-component
+                            <x-forms.switch.switch-component
                                 name="remember"
                                 id="remember"
                                 :label="trans('auth.remember')"
@@ -56,7 +56,7 @@
                             >
                                 <x-slot:parent class="row"></x-slot:parent>
                                 <x-slot:col class="col-md-6 offset-md-4"></x-slot:col>
-                            </x-form.switch-component>
+                            </x-forms.switch.switch-component>
                         </div>
 
                         <div class="row mb-0">

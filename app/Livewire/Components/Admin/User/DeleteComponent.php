@@ -28,7 +28,7 @@ final class DeleteComponent extends Component
 
     public function submit(
         CommandBus $commandBus,
-        Translator $trans
+        Translator $translator
     ): void {
         $this->gate->authorize('delete', $this->user);
 
@@ -36,11 +36,11 @@ final class DeleteComponent extends Component
 
         $this->dispatch('refresh')->to(DataTableComponent::class);
 
-        $this->dispatch('hide-modal', alias: 'admin.user.delete-component');
+        $this->dispatch('hide-modal', alias: $this->alias);
 
         $this->dispatch(
             'create-toast',
-            body: $trans->get('user.actions.delete.single', ['name' => $this->user->name])
+            body: $translator->get('user.messages.delete.single', ['name' => $this->user->name])
         );
     }
 

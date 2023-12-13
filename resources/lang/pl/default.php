@@ -48,5 +48,7 @@ return [
     'menu' => 'Menu główne',
     'go_to' => 'Idź do',
     'choose' => 'Wybierz',
-    'download' => 'Pobierz'
+    'download' => 'Pobierz',
+    'from' => 'Od',
+    'to' => 'Do'
 ];

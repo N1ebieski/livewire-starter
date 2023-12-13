@@ -7,8 +7,10 @@ namespace App\Livewire\Forms;
 use Livewire\Component;
 use Livewire\Form as BaseForm;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\ValidatedInput;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Config\Repository as Config;
@@ -38,36 +40,39 @@ abstract class Form extends BaseForm
         $this->gate = App::make(Gate::class);
         $this->config = App::make(Config::class);
 
-        /**
-         * Fix. Livewire doesn't have access to the component's mount properties,
-         * so we have to inject the rules manually in the component
-         */
-        if ($this->areComponentTypedPropertiesInitiated()) {
-            parent::__construct($component, $propertyName);
+        if (method_exists($this, 'mount')) {
+            App::call([$this, 'mount']);
         }
     }
 
     /**
-     * Fix. Livewire doesn't have access to the component's mount properties,
-     * so we have to inject the rules manually in the component
+     * Fix. Livewire has method validateOnly but only accepts one field.
      */
-    private function areComponentTypedPropertiesInitiated(): bool
-    {
-        $reflectionClass = new \ReflectionClass($this->component);
+    public function validateSpecific(
+        string|array $fields,
+        array $rules = [],
+        array $messages = [],
+        array $attributes = []
+    ): array {
+        $fields = is_string($fields) ? [$fields] : $fields;
 
-        $properties = $reflectionClass->getProperties(\ReflectionProperty::IS_PUBLIC);
+        $fields = (new Collection($fields))->map(function (string $value) {
+            return preg_replace('/^form\./', '', $value);
+        })->toArray();
 
-        foreach ($properties as $property) {
-            if (
-                !is_null($property->getType())
-                && $property->getName() !== 'form'
-                && !isset($this->component->{$property->getName()})
-            ) {
-                return false;
-            }
+        if (empty($rules)) {
+            $rules = (new Collection($this->rules()))
+                ->filter(function (mixed $value, string $key) use ($fields) {
+                    return (new Collection($fields))->filter(function (string $field) use ($key) {
+                        return $field === $key || str_starts_with($key . '.', $field);
+                    })->count() > 0;
+                })
+                ->toArray();
         }
 
-        return true;
+        $validated = !empty($rules) ? $this->validate($rules, $messages, $attributes) : [];
+
+        return $validated;
     }
 
     /**
@@ -83,4 +88,19 @@ abstract class Form extends BaseForm
 
         $this->reset($keysToReset);
     }
+
+    public function safe(array $keys = null): ValidatedInput|array
+    {
+        $keys = $this->collection->make($keys)->map(function (string $value) {
+            return preg_replace('/^form\./', '', $value);
+        })->toArray();
+
+        $validated = $this->validate($keys);
+
+        $validatedInput = new ValidatedInput($validated);
+
+        return is_array($keys) ? $validatedInput->only($keys) : $validatedInput;
+    }
+
+    abstract public function rules(): array;
 }

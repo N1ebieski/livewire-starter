@@ -10,7 +10,7 @@
     <div class="container-fluid">
         <x-navbar.toggler-component
             class="me-2 d-block"
-            x-on:click.prevent="toggleSidebar('#sidebar')"
+            x-on:click.prevent="toggleSidebar()"
             aria-label="{{ trans('default.sidebar_toggle') }}"
         />
         <a 

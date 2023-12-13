@@ -1,7 +1,7 @@
 <nav 
     aria-label="sidebar"
     x-data="sidebar({ show: @js($sidebar->show) })"
-    x-on:livewire:navigating="destroy()"
+    x-on:livewire:navigating="dispose()"
     class="sidebar-wrapper d-none d-lg-block {{ $sidebar->show ? 'show' : '' }}"
     :class="{ 'show': show, 'd-none': !display, 'd-lg-block': !display }"
     wire:ignore

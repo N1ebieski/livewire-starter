@@ -28,7 +28,7 @@ final class AutocompleteComponent extends FormComponent
      */
     public function render(): View
     {
-        return $this->viewFactory->make('components.forms.autocomplete-component', [
+        return $this->viewFactory->make('components.forms.autocomplete.autocomplete-component', [
             'except' => $this->exceptIds
         ]);
     }

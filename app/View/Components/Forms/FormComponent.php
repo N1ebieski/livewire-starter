@@ -15,10 +15,16 @@ abstract class FormComponent extends Component
         $wire = (new Collection($attributes))
             ->first(fn ($value, string $key) => Str::startsWith($key, 'wire:model'));
 
-        return parent::withAttributes(array_merge([
-            'id' => $wire ? $this->getId($wire) : $attributes['id'],
-            'name' => $wire ? $wire : $attributes['name'],
-        ], $attributes));
+        if ($wire) {
+            $attributes['id'] = $this->getId($wire);
+            $attributes['name'] = $wire;
+        } else {
+            if (!array_key_exists('name', $attributes)) {
+                $attributes['name'] = $attributes['id'];
+            }
+        }
+
+        return parent::withAttributes($attributes);
     }
 
     public function getId(string $name): string

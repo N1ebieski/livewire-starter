@@ -22,7 +22,7 @@ return [
             'title' => 'Szukaj użytkownika'
         ]
     ],
-    'actions' => [
+    'messages' => [
         'delete' => [
             'single' => 'Pomyślnie usunięto użytkownika :name',
             'multi' => '{1} Pomyślnie usunięto :number użytkownika|{2,*} Pomyślnie usunięto :number użytkowników'

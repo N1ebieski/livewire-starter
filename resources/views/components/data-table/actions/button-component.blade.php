@@ -1,17 +1,27 @@
 <div 
+    @if(isset($parent))
+    {{ $parent->attributes->class([
+        'btn-group'
+    ])->filter(fn ($value) => is_string($value)) }}
+    @else
     class="btn-group"
+    @endif
     x-data="{ loading: false }"
     x-on:livewire:commit:respond.window="loading=false"  
 > 
-    <button
-        type="button" 
+    <{{ $type->getElement() }}
+        @if($attributes->has('wire:click') && (
+            !$attributes->has('disabled') || $attributes->get('disabled') !== true
+        ))
         x-bind:disabled="loading"
         x-on:click.stop="loading=true"
+        @endif
         {{ $attributes->class([
-            'btn', "btn-{$action->value}"
-        ])->filter(fn ($value) => is_string($value)) }}
+            'btn', 
+            "btn-{$action?->value}" => !is_null($action)
+        ])->filter(fn ($value) => is_string($value) || $value === true) }}
     >
-        @if($icon)
+        @if(isset($icon))
         <span x-show="!loading">
             {{ $icon }}
         </span>
@@ -24,22 +34,27 @@
             <span class="visually-hidden">{{ trans('default.loading') }}...</span>
         </span>
         @endif
+        @if(isset($label))
         <span class="{{ $responsive ? 'd-none d-md-inline' : '' }}">
             {{ $label }}
-        </span>        
-    </button>
+        </span>
+        @endif       
+      </{{ $type->getElement() }}>
     @if(isset($options))
     <button 
         type="button" 
-        class="btn btn-{{ $action->value }} dropdown-toggle dropdown-toggle-split" 
-        x-bind:disabled="loading"
+        class="btn {{ !is_null($action) ? 'btn-' . $action->value : '' }} dropdown-toggle dropdown-toggle-split" 
         data-bs-toggle="dropdown" 
+        data-bs-reference="parent"
         aria-expanded="false"
+        @if($attributes->has('wire:click'))
+        x-bind:disabled="loading"
+        @endif
     >
         <span class="visually-hidden">{{ trans('default.toggle') }}</span>
     </button>
     <ul class="dropdown-menu">
         {{ $options }}
     </ul>
-    @endif 
+    @endif
 </div>

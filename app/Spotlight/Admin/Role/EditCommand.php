@@ -28,7 +28,7 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 /**
  * @property-read Guard $guard
  */
-class EditCommand extends Command
+final class EditCommand extends Command
 {
     public function __construct(
         protected Gate $gate,

@@ -25,11 +25,7 @@ use Illuminate\Contracts\Validation\Factory as ValidationFactory;
  */
 trait HasDataTable
 {
-    use WithPagination {
-        WithPagination::gotoPage as baseGotoPage;
-        WithPagination::previousPage as basePreviousPage;
-        WithPagination::nextPage as baseNextPage;
-    }
+    use WithPagination;
     use HasDirty;
 
     private Translator $translator;
@@ -37,6 +33,8 @@ trait HasDataTable
     private ValidationFactory $validationFactory;
 
     private ColumnsFactory $columnsFactory;
+
+    private Collection $collection;
 
     private Str $str;
 
@@ -136,11 +134,13 @@ trait HasDataTable
         Translator $translator,
         ValidationFactory $validationFactory,
         ColumnsFactory $columnsFactory,
+        Collection $collection,
         Str $str
     ): void {
         $this->translator = $translator;
         $this->validationFactory = $validationFactory;
         $this->columnsFactory = $columnsFactory;
+        $this->collection = $collection;
         $this->str = $str;
 
         $this->listeners['refresh'] = '$refresh';
@@ -194,7 +194,7 @@ trait HasDataTable
         }
 
         $this->attributes->each(function ($attribute, $key) {
-            if (!$attribute instanceof Url) {
+            if (!$attribute instanceof Locked) {
                 return;
             }
 
@@ -254,6 +254,12 @@ trait HasDataTable
     {
         $this->reset('hidingColumns');
 
+        /** Temporary fix. Livewire add __rm__ to the array if removing element */
+        $value = $this->collection->make($value)
+            ->filter(fn (string $v) => $v !== "__rm__")
+            ->values()
+            ->toArray();
+
         $this->columnsFactory->columnsService->createCookie(
             $this->columnsFactory->columnsHelper->getAlias($this::class),
             new Columns($value)
@@ -297,11 +303,11 @@ trait HasDataTable
 
     public function validateWithReset(): void
     {
-        $this->prepareForValidation(
+        $data = $this->prepareForValidation(
             $this->getDataForValidation($this->form->rules())
         );
 
-        $this->validationFactory->make($this->form->all(), $this->form->rules())
+        $this->validationFactory->make($data, $this->form->rules())
             ->after(function (Validator $validator) {
                 if ($validator->errors()->isNotEmpty()) {
                     $this->clear();
@@ -340,42 +346,6 @@ trait HasDataTable
     private function resetSelects(): void
     {
         $this->dispatch('reset-selects');
-    }
-
-    /**
-     *
-     * @param mixed $page
-     * @param string $pageName
-     * @return void
-     */
-    public function gotoPage($page, $pageName = 'page'): void
-    {
-        $this->baseGotoPage($page, $pageName);
-
-        $this->dispatch('gototop');
-    }
-
-    /**
-     *
-     * @param string $pageName
-     * @return void
-     */
-    public function previousPage($pageName = 'page'): void
-    {
-        $this->basePreviousPage($pageName);
-
-        $this->dispatch('gototop');
-    }
-
-    /**
-     * @param string $pageName
-     * @return void
-     */
-    public function nextPage($pageName = 'page'): void
-    {
-        $this->baseNextPage($pageName);
-
-        $this->dispatch('gototop');
     }
 
     /**

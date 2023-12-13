@@ -6,6 +6,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Livewire\LivewireManager;
 use Illuminate\Support\Facades\App;
 use Mews\Purifier\Facades\Purifier;
 
@@ -19,7 +20,14 @@ final class XSSProtection
 
     private function isLivewireRequest(): bool
     {
-        return class_exists(LivewireManager::class) && App::Make(LivewireManager::class)->isLivewireRequest();
+        if (class_exists(LivewireManager::class)) {
+            /** @var LivewireManager */
+            $livewireManager = App::make(LivewireManager::class);
+
+            return $livewireManager->isLivewireRequest();
+        }
+
+        return false;
     }
 
     /**

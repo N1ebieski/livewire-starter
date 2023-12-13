@@ -33,7 +33,7 @@ final class ChangePasswordComponent extends Component
 
         $this->dispatch('hide-modal', alias: $this->alias);
 
-        $session->flash('resent', $translator->get('account.actions.change_password'));
+        $session->flash('resent', $translator->get('account.messages.change_password'));
 
         $this->guard->logout();
 

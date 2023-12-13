@@ -6,25 +6,25 @@
     <x-slot:body>
         <form wire:submit.prevent="submit">
             <div class="mb-3">
-                <x-forms.text-component
+                <x-forms.text.text-component
                     wire:model="form.name"
                     :label="trans('user.name.label')"
                 />
             </div>
             <div class="mb-3">
-                <x-forms.email-component
+                <x-forms.email.email-component
                     wire:model="form.email"
                     :label="trans('user.email.label')"
                 />
             </div>
             <div class="mb-3">
-                <x-forms.password-component
+                <x-forms.password.password-component
                     wire:model="form.password"
                     :label="trans('user.password.label')"
                 />
             </div>
             <div class="mb-3">
-                <x-forms.password-component
+                <x-forms.password.password-component
                     wire:model="form.password_confirmation"
                     :label="trans('user.password_confirmation.label')"
                 />  

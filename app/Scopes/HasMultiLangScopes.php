@@ -7,8 +7,8 @@ namespace App\Scopes;
 use App\ValueObjects\AutoTranslate;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 /**
  * @mixin Model
@@ -31,6 +31,6 @@ trait HasMultiLangScopes
 
     public function scopeAutoTrans(Builder $query): Builder
     {
-        return $query->where('auto_translate', AutoTranslate::ACTIVE);
+        return $query->where('auto_translate', AutoTranslate::ACTIVE->value);
     }
 }

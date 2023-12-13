@@ -10,13 +10,13 @@ use App\View\Metas\MetaInterface;
 use App\View\Metas\OpenGraphInterface;
 use Illuminate\Support\Collection as Collect;
 use Illuminate\Contracts\Config\Repository as Config;
-use Illuminate\Contracts\Translation\Translator as Trans;
+use Illuminate\Contracts\Translation\Translator;
 
 final class AuthMetaFactory
 {
     public function __construct(
         protected Config $config,
-        protected Trans $trans,
+        protected Translator $translator,
         protected Collect $collect,
         protected Request $request
     ) {
@@ -32,15 +32,15 @@ final class AuthMetaFactory
         return new Meta(
             title: $this->collect->make([
                 $title,
-                $this->trans->get('app.title')
+                $this->translator->get('app.title')
             ])->filter()->implode(' - '),
             description: $this->collect->make([
                 $description,
-                $this->trans->get('app.description')
+                $this->translator->get('app.description')
             ])->filter()->implode('. '),
             keywords: mb_strtolower($this->collect->make([
                 $keywords,
-                $this->trans->get('app.keywords')
+                $this->translator->get('app.keywords')
             ])->filter()->implode(', ')),
             url: $url ?? $this->config->get('app.url') . $this->request->getRequestUri(),
             openGraph: $openGraph

@@ -3,14 +3,16 @@
     {{ $parent->attributes->class([
         'btn-group'
     ])->filter(fn ($value) => is_string($value)) }}
-@else
+    @else
     class="btn-group"
     @endif
     x-data="{ loading: false }"
     x-on:livewire:commit:respond.window="loading=false"      
 > 
     <{{ $type->getElement() }}
-        @if($attributes->has('wire:click'))
+        @if($attributes->has('wire:click') && (
+            !$attributes->has('disabled') || $attributes->get('disabled') !== true
+        ))
         x-bind:disabled="loading"
         x-on:click.stop="loading=true"
         @endif
@@ -21,14 +23,16 @@
     >
         @if(isset($icon))
         <span 
-            @if($attributes->has('wire:click'))
+            {{ $icon->attributes->filter(fn ($value) => is_string($value)) }}
             x-show="!loading"
-            @endif
         >
             {{ $icon }}
         </span>
-        @if($attributes->has('wire:click'))
-        <span x-show="loading" x-cloak>
+        <span 
+            {{ $icon->attributes->filter(fn ($value) => is_string($value)) }}
+            x-show="loading" 
+            x-cloak
+        >
             <span 
                 class="spinner-border spinner-border-sm" 
                 role="status" 
@@ -37,9 +41,14 @@
             <span class="visually-hidden">{{ trans('default.loading') }}...</span>
         </span>
         @endif
-        @endif
         @if(isset($label))
-        <span class="{{ $responsive ? 'd-none d-md-inline' : '' }}">
+        <span 
+            @if(is_object($label))
+            {{ $label->attributes->class([
+                'd-none d-md-inline' => $responsive
+            ])->filter(fn ($value) => is_string($value)) }}
+            @endif
+        >
             {{ $label }}
         </span>
         @endif 

@@ -46,7 +46,7 @@ final class DeleteMultiComponent extends Component
 
     public function submit(
         CommandBus $commandBus,
-        Translator $trans
+        Translator $translator
     ): void {
         $this->gate->authorize('deleteMulti', [User::class, $this->users]);
 
@@ -55,13 +55,13 @@ final class DeleteMultiComponent extends Component
 
         $this->dispatch('refresh')->to(DataTableComponent::class);
 
-        $this->dispatch('hide-modal', alias: 'admin.user.delete-multi-component');
+        $this->dispatch('hide-modal', alias: $this->alias);
 
         $this->dispatch('reset-selects');
 
         $this->dispatch(
             'create-toast',
-            body: $trans->choice('user.actions.delete.multi', $deleted, ['number' => $deleted])
+            body: $translator->choice('user.messages.delete.multi', $deleted, ['number' => $deleted])
         );
     }
 

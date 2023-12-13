@@ -15,7 +15,7 @@ use App\View\Components\Modal\Modal as BootstrapModal;
 /**
  * @property-read Guard $guard
  */
-class CreateCommand extends Command
+final class CreateCommand extends Command
 {
     public function __construct(
         protected Gate $gate,

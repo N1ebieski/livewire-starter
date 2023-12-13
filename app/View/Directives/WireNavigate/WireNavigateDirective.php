@@ -21,9 +21,10 @@ final class WireNavigateDirective
             if ($this->config->get('livewire.wire_navigate')) {
                 $navigate .= "wire:navigate";
 
-                if ($modifier) {
-                    $navigate .= "." . substr($modifier, 1, -1);
-                }
+                // Livewire is currently bugged. I disable this feature for a while
+                // if ($modifier) {
+                    //     $navigate .= "." . substr($modifier, 1, -1);
+                // }
             }
 
             return $navigate;

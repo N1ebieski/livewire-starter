@@ -1,3 +1,15 @@
+@php
+if (! isset($scrollTo)) {
+    $scrollTo = 'body';
+}
+
+$scrollIntoViewJsSnippet = ($scrollTo !== false)
+    ? <<<JS
+       (\$el.closest('{$scrollTo}') || document.querySelector('{$scrollTo}')).scrollIntoView()
+    JS
+    : '';
+@endphp
+
 <div>
     @if ($paginator->hasPages())
         <nav>
@@ -18,6 +30,7 @@
                             dusk="previousPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}" 
                             class="page-link" 
                             wire:click="previousPage('{{ $paginator->getPageName() }}')" 
+                            x-on:click="{{ $scrollIntoViewJsSnippet }}"
                             wire:loading.attr="disabled" 
                             rel="prev" 
                             aria-label="@lang('pagination.previous')"
@@ -77,6 +90,7 @@
                                         type="button" 
                                         class="page-link" 
                                         wire:click="gotoPage({{ $page }}, '{{ $paginator->getPageName() }}')"
+                                        x-on:click="{{ $scrollIntoViewJsSnippet }}"
                                     >
                                         <span 
                                             wire:loading.remove 
@@ -112,6 +126,7 @@
                             dusk="nextPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}" 
                             class="page-link" 
                             wire:click="nextPage('{{ $paginator->getPageName() }}')" 
+                            x-on:click="{{ $scrollIntoViewJsSnippet }}"
                             wire:loading.attr="disabled" 
                             rel="next" 
                             aria-label="@lang('pagination.next')"

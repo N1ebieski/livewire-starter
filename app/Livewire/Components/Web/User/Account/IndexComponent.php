@@ -31,10 +31,10 @@ final class IndexComponent extends Component implements FullPageInterface
 
     public function mount(): void
     {
-        /** @var User */
+        /** @var User|null */
         $user = $this->guard->user();
 
-        $this->form->name = $user->name;
+        $this->form->name = $user?->name;
     }
 
     public function submit(
@@ -53,7 +53,7 @@ final class IndexComponent extends Component implements FullPageInterface
         $user = $commandBus->execute(
             new EditCommand(
                 user: $user,
-                name: $this->form->name,
+                name: $this->form->name, //@phpstan-ignore-line
                 email: $user->email,
                 password: $user->password,
                 roles: $user->roles
@@ -62,7 +62,7 @@ final class IndexComponent extends Component implements FullPageInterface
 
         $this->dispatch(
             'create-toast',
-            body: $translator->get('account.actions.account', ['name' => $user->name])
+            body: $translator->get('account.messages.account', ['name' => $user->name])
         );
 
         $this->redirect($urlGenerator->route('web.user.account.index'), true);

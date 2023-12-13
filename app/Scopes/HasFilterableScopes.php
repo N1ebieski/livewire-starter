@@ -41,22 +41,23 @@ trait HasFilterableScopes
         });
     }
 
-    public function scopeFilterSearch(Builder $builder, ?Search $search = null): Builder
+    public function scopeFilterSearch(Builder $builder, ?Search $search = null, string $boolean = 'and'): Builder
     {
-        return $builder->when(!is_null($search), function (Builder $builder) use ($search) {
+        return $builder->when(!is_null($search), function (Builder $builder) use ($search, $boolean) {
             /** @var Search $search */
-            return $builder->when(!is_null($search->getSearchAsString()), function (Builder $builder) use ($search) {
+            return $builder->when(!is_null($search->getSearchAsString()), function (Builder $builder) use ($search, $boolean) {
                 /** @var ColumnsHelper */
                 $columnsHelper = App::make(ColumnsHelper::class);
 
                 $builder = $builder->whereRaw(
                     "MATCH ({$columnsHelper->getColumnsAsString($this->searchable)}) AGAINST (? IN BOOLEAN MODE)",
-                    [$search->getSearchAsString()]
+                    [$search->getSearchAsString()],
+                    $boolean
                 );
 
                 foreach ($this->searchable as $column) {
                     $builder = $builder->selectRaw(
-                        "MATCH ({$column}) AGAINST (? IN BOOLEAN MODE) AS `{$column}_relevance`",
+                        "MATCH ({$columnsHelper->getColumnWithTicks($column)}) AGAINST (? IN BOOLEAN MODE) AS {$columnsHelper->getColumnWithSnakes($column . '_relevance')}",
                         [$search->getSearchAsString()]
                     );
                 }
@@ -71,8 +72,11 @@ trait HasFilterableScopes
         return $builder->when(!is_null($search), function (Builder $builder) use ($search) {
             /** @var Search $search */
             return $builder->when(!is_null($search->getSearchAsString()), function (Builder $builder) {
+/** @var ColumnsHelper */
+                $columnsHelper = App::make(ColumnsHelper::class);
+
                 foreach ($this->searchable as $column) {
-                    $builder = $builder->orderBy("{$column}_relevance", 'desc');
+                    $builder = $builder->orderByRaw("{$columnsHelper->getColumnWithSnakes($column . '_relevance')} DESC");
                 }
 
                 return $builder;

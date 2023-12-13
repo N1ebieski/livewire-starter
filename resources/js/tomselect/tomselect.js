@@ -1,6 +1,7 @@
 import axios from "axios";
 import _merge from "lodash/merge";
 import TomSelect from "tom-select";
+import { Commit } from "../livewire/commit";
 
 export default function tomSelect(data) {
     if (!data.config.options.length) {
@@ -39,7 +40,7 @@ export default function tomSelect(data) {
                             el.value = [];
                         }
 
-                        el.value = newValue;
+                        el.value = !newValue.length && el.isSelect() ? null : newValue;
 
                         el.highlight(newValue);
                     },
@@ -116,8 +117,15 @@ export default function tomSelect(data) {
             }
         },
 
+        isSelect() {
+            return (
+                this.$refs.tomselect.tagName.toLowerCase() === "select" &&
+                !this.$refs.tomselect.multiple
+            );
+        },
+
         setValue(value) {
-            if (value === null) {
+            if (value === null && this.isSelect()) {
                 value = "";
             } else if (typeof value === "string") {
                 value = value.split(",").map((item) => item.trim());
@@ -139,6 +147,14 @@ export default function tomSelect(data) {
             this.tomselect.addItem(item[data.config.valueField]);
 
             this.highlight(this.value);
+        },
+
+        async reset() {
+            await Commit.waitForRespond();
+
+            this.setValue(null);
+
+            this.deactivate();
         },
 
         highlight(value) {
@@ -192,7 +208,7 @@ export default function tomSelect(data) {
             this.$refs.tomselect.nextElementSibling.classList.add("is-invalid");
         },
 
-        destroy() {
+        dispose() {
             this.tomselect.destroy();
         },
     };

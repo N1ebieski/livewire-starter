@@ -86,12 +86,12 @@ export default function tinyMCE(data) {
 
             if (modal) {
                 modal.addEventListener("hidden.bs.modal", () => {
-                    el.destroy();
+                    el.dispose();
                 });
             }
         },
 
-        destroy() {
+        dispose() {
             /** @type {import("tinymce").TinyMCE} */
             const TinyMCE = window.tinyMCE;
 

@@ -55,27 +55,6 @@ trait HasComponent
     }
 
     /**
-     * Temporary fix. Livewire add __rm__ to the array if removing element
-     *
-     * @param array $attributes
-     * @return array
-     */
-    protected function prepareForValidation($attributes): array
-    {
-        if (property_exists($this, 'form')) {
-            foreach (get_object_vars($attributes['form']) as $key => $value) {
-                if (is_array($value)) {
-                    $attributes['form']->{$key} = array_filter($value, function (mixed $value) {
-                        return $value !== "__rm__";
-                    });
-                }
-            }
-        }
-
-        return $attributes;
-    }
-
-    /**
      *
      * @param mixed $name
      * @param mixed $value
@@ -83,19 +62,24 @@ trait HasComponent
      */
     public function updatedHasComponent($name, $value): void
     {
+        $this->callUpdatedArrayHooks($name);
+
+        /** Temporary fix. Livewire add __rm__ to the array if removing element */
+        if ($value === "__rm__") {
+            return;
+        }
+
         /** @var Pipeline */
         $pipeline = $this->container->make(Pipeline::class);
 
         $property = $pipeline->send(new Property($name, $value))
             ->through([
                 \App\Livewire\Converts\XSSProtection::class,
-                \App\Livewire\Converts\ConvertEmptyStringsToNull::class,
+                \App\Livewire\Converts\ConvertEmptyStringsToNull::class
             ])
             ->thenReturn();
 
         data_set($this, $name, $property->value);
-
-        $this->callUpdatedArrayHooks($name);
     }
 
     /**
@@ -108,7 +92,17 @@ trait HasComponent
         $ascendantsNames = explode('.', $name);
 
         if (count($ascendantsNames) > 1) {
-            $parentAlias = implode('.', array_slice($ascendantsNames, 0, -1));
+            $parentAlias = '';
+
+            foreach ($ascendantsNames as $name) {
+                if (is_numeric($name)) {
+                    break;
+                }
+
+                $parentAlias .= $name . '.';
+            }
+
+            $parentAlias = mb_substr($parentAlias, 0, -1);
 
             $parent = data_get($this, $parentAlias);
 

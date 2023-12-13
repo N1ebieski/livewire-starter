@@ -126,7 +126,7 @@ export default function autoComplete(data) {
             observer.observe(dropdown, { childList: true });
         },
 
-        destroy() {
+        dispose() {
             this.autocomplete.unInit();
 
             this.$refs.autocomplete.nextElementSibling.remove();

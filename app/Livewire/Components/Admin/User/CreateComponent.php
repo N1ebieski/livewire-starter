@@ -88,11 +88,11 @@ final class CreateComponent extends Component
             )
         );
 
-        $this->dispatch('hide-modal', alias: 'admin.user.create-component');
+        $this->dispatch('hide-modal', alias: $this->alias);
 
         $this->dispatch(
             'create-toast',
-            body: $translator->get('user.actions.create', ['name' => $user->name])
+            body: $translator->get('user.messages.create', ['name' => $user->name])
         );
 
         $this->dispatch('created-user', user: $user->id);

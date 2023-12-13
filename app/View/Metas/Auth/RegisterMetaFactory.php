@@ -11,9 +11,9 @@ final class RegisterMetaFactory extends MetaFactory
     public function make(): MetaInterface
     {
         return $this->authMetaFactory->make(
-            title: $this->trans->get('auth.pages.register.title'),
-            description: $this->trans->get('auth.pages.register.description'),
-            keywords: $this->trans->get('auth.pages.register.keywords'),
+            title: $this->translator->get('auth.pages.register.title'),
+            description: $this->translator->get('auth.pages.register.description'),
+            keywords: $this->translator->get('auth.pages.register.keywords'),
         );
     }
 }

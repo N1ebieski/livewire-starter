@@ -10,8 +10,9 @@
             'class' => 'text-reset',
             'data-bs-toggle' => 'tooltip',
             'data-bs-placement' => 'left',
-            'title' => $value,
+            'data-bs-html'=> 'true',
         ])->filter(fn ($value) => is_string($value)) }}      
+        title="{!! $value !!}"
     >         
         <i class="bi bi-question-square"></i>
     </a>

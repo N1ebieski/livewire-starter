@@ -14,7 +14,7 @@ final class GetByFilterHandler extends Handler
 {
     public function handle(GetByFilterQuery $query): LengthAwarePaginator|Collection|Builder
     {
-        /** @var LengthAwarePaginator|Collection */
+        /** @var LengthAwarePaginator|Collection|Builder */
         $users = $query->user->newQuery()
             ->selectRaw("`{$query->user->getTable()}`.*")
             ->when(!is_null($query->filters->search), function (Builder|User $builder) use ($query) {
