@@ -9,6 +9,7 @@ use App\Commands\CommandBus;
 use Illuminate\Contracts\View\View;
 use App\Models\Permission\Permission;
 use App\Livewire\Components\Component;
+use Illuminate\Support\ValidatedInput;
 use App\Livewire\Components\HasComponent;
 use App\Commands\Role\Create\CreateCommand;
 use Illuminate\Database\Eloquent\Collection;
@@ -34,9 +35,9 @@ final class CreateComponent extends Component
         $this->role = $role;
     }
 
-    private function getFormPermissionsAsCollection(): Collection
+    private function getPermissionsAsCollection(array $permissions): Collection
     {
-        return $this->permission->findMany($this->form->permissions);
+        return $this->permission->findMany($permissions);
     }
 
     public function submit(
@@ -45,14 +46,15 @@ final class CreateComponent extends Component
     ): void {
         $this->gate->authorize('create', Role::class);
 
-        $this->validate();
+        /** @var ValidatedInput&CreateForm */
+        $validated = $this->form->safe();
 
         /** @var Role */
         $role = $commandBus->execute(
             new CreateCommand(
                 role: $this->role,
-                name: $this->form->name, //@phpstan-ignore-line
-                permissions: $this->getFormPermissionsAsCollection()
+                name: $validated->name, //@phpstan-ignore-line
+                permissions: $this->getPermissionsAsCollection($validated->permissions)
             )
         );
 

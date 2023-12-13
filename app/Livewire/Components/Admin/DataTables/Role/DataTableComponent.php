@@ -16,6 +16,7 @@ use App\Filters\Role\RoleFilter;
 use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
 use App\Livewire\Components\Component;
+use Illuminate\Support\ValidatedInput;
 use App\Livewire\Components\HasComponent;
 use Illuminate\Database\Eloquent\Collection;
 use App\Livewire\Components\Modal\ModalComponent;
@@ -56,30 +57,33 @@ final class DataTableComponent extends Component implements DataTableInterface
     #[Computed]
     public function roles(): LengthAwarePaginator
     {
+        /** @var ValidatedInput&DataTableForm */
+        $validated = $this->form->safe();
+
         $filters = new RoleFilter(
-            search: $this->getFilterSearch()
+            search: $this->getFilterSearch($validated->search)
         );
 
         /** @var LengthAwarePaginator<Role> */
         $roles = $this->queryBus->execute(new GetByFilterQuery(
             role: $this->role,
             filters: $filters,
-            orderby: $this->getFilterOrderBy(),
-            result: $this->getFilterPaginate()
+            orderby: $this->getFilterOrderBy($validated->orderby),
+            result: $this->getFilterPaginate($validated->paginate)
         ));
 
         return $roles;
     }
 
-    private function getFilterPaginate(): Paginate
+    private function getFilterPaginate(int $paginate): Paginate
     {
-        return new Paginate($this->form->paginate);
+        return new Paginate($paginate);
     }
 
-    private function getFilterOrderBy(): ?OrderBy
+    private function getFilterOrderBy(?string $orderby): ?OrderBy
     {
-        if (is_string($this->form->orderby)) {
-            [$attribute, $order] = explode('|', $this->form->orderby);
+        if (is_string($orderby)) {
+            [$attribute, $order] = explode('|', $orderby);
 
             return new OrderBy(
                 attribute: $attribute,
@@ -90,11 +94,11 @@ final class DataTableComponent extends Component implements DataTableInterface
         return null;
     }
 
-    private function getFilterSearch(): ?Search
+    private function getFilterSearch(?string $search): ?Search
     {
-        return is_string($this->form->search) && mb_strlen($this->form->search) > 2 ?
+        return is_string($search) && mb_strlen($search) > 2 ?
             $this->searchFactory->make(
-                search: $this->form->search,
+                search: $search,
                 model: $this->role
             ) : null;
     }

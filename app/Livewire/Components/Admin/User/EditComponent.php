@@ -11,6 +11,7 @@ use Livewire\Attributes\Locked;
 use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
 use App\Livewire\Components\Component;
+use Illuminate\Support\ValidatedInput;
 use App\Commands\User\Edit\EditCommand;
 use App\Livewire\Components\HasComponent;
 use App\Livewire\Forms\Admin\User\EditForm;
@@ -62,9 +63,9 @@ final class EditComponent extends Component
         return $this->role->all();
     }
 
-    private function getFormRolesAsCollection(): Collection
+    private function getRolesAsCollection(array $roles): Collection
     {
-        return $this->role->findMany($this->form->roles);
+        return $this->role->findMany($roles);
     }
 
     public function submit(
@@ -73,16 +74,17 @@ final class EditComponent extends Component
     ): void {
         $this->gate->authorize('edit', $this->user);
 
-        $this->validate();
+        /** @var ValidatedInput&EditForm */
+        $validated = $this->form->safe();
 
         /** @var User */
         $user = $commandBus->execute(
             new EditCommand(
                 user: $this->user,
-                name: $this->form->name, //@phpstan-ignore-line
-                email: $this->form->email, //@phpstan-ignore-line
-                password: $this->form->password ?? $this->user->password,
-                roles: $this->getFormRolesAsCollection()
+                name: $validated->name, //@phpstan-ignore-line
+                email: $validated->email, //@phpstan-ignore-line
+                password: $validated->password ?? $this->user->password,
+                roles: $this->getRolesAsCollection($validated->roles)
             )
         );
 

@@ -29,6 +29,8 @@ abstract class Form extends BaseForm
 
     protected Config $config;
 
+    protected Collection $collection;
+
     //@phpstan-ignore-next-line
     public function __construct(
         protected Component $component,
@@ -39,6 +41,7 @@ abstract class Form extends BaseForm
         $this->guard = App::make(Guard::class);
         $this->gate = App::make(Gate::class);
         $this->config = App::make(Config::class);
+        $this->collection = App::make(Collection::class);
 
         if (method_exists($this, 'mount')) {
             App::call([$this, 'mount']);
@@ -56,14 +59,14 @@ abstract class Form extends BaseForm
     ): array {
         $fields = is_string($fields) ? [$fields] : $fields;
 
-        $fields = (new Collection($fields))->map(function (string $value) {
+        $fields = $this->collection->make($fields)->map(function (string $value) {
             return preg_replace('/^form\./', '', $value);
         })->toArray();
 
         if (empty($rules)) {
-            $rules = (new Collection($this->rules()))
+            $rules = $this->collection->make($this->rules())
                 ->filter(function (mixed $value, string $key) use ($fields) {
-                    return (new Collection($fields))->filter(function (string $field) use ($key) {
+                    return $this->collection->make($fields)->filter(function (string $field) use ($key) {
                         return $field === $key || str_starts_with($key . '.', $field);
                     })->count() > 0;
                 })
@@ -91,9 +94,11 @@ abstract class Form extends BaseForm
 
     public function safe(array $keys = null): ValidatedInput|array
     {
-        $keys = $this->collection->make($keys)->map(function (string $value) {
-            return preg_replace('/^form\./', '', $value);
-        })->toArray();
+        if (is_array($keys)) {
+            $keys = $this->collection->make($keys)->map(function (string $value) {
+                return preg_replace('/^form\./', '', $value);
+            })->toArray();
+        }
 
         $validated = $this->validate($keys);
 

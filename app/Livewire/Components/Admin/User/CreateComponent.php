@@ -12,6 +12,7 @@ use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
 use App\Livewire\Components\Component;
 use App\ValueObjects\Role\DefaultName;
+use Illuminate\Support\ValidatedInput;
 use App\Livewire\Components\HasComponent;
 use App\Commands\User\Create\CreateCommand;
 use Illuminate\Database\Eloquent\Collection;
@@ -64,9 +65,9 @@ final class CreateComponent extends Component
         return $this->role->all();
     }
 
-    private function getFormRolesAsCollection(): Collection
+    private function getRolesAsCollection(array $roles): Collection
     {
-        return $this->role->findMany($this->form->roles);
+        return $this->role->findMany($roles);
     }
 
     public function submit(
@@ -75,16 +76,17 @@ final class CreateComponent extends Component
     ): void {
         $this->gate->authorize('create', User::class);
 
-        $this->validate();
+        /** @var ValidatedInput&CreateForm */
+        $validated = $this->form->safe();
 
         /** @var User */
         $user = $commandBus->execute(
             new CreateCommand(
                 user: $this->user,
-                name: $this->form->name, //@phpstan-ignore-line
-                email: $this->form->email, //@phpstan-ignore-line
-                password: $this->form->password, //@phpstan-ignore-line
-                roles: $this->getFormRolesAsCollection()
+                name: $validated->name, //@phpstan-ignore-line
+                email: $validated->email, //@phpstan-ignore-line
+                password: $validated->password, //@phpstan-ignore-line
+                roles: $this->getRolesAsCollection($validated->roles)
             )
         );
 

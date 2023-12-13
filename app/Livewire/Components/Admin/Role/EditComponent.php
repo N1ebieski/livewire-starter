@@ -43,9 +43,9 @@ final class EditComponent extends Component
         }
     }
 
-    private function getFormPermissionsAsCollection(): Collection
+    private function getPermissionsAsCollection(array $permissions): Collection
     {
-        return $this->permission->findMany($this->form->permissions);
+        return $this->permission->findMany($permissions);
     }
 
     public function submit(
@@ -54,13 +54,14 @@ final class EditComponent extends Component
     ): void {
         $this->gate->authorize('edit', $this->role);
 
-        $this->validate();
+        /** @var ValidatedInput&EditForm */
+        $validated = $this->form->safe();
 
         /** @var Role */
         $role = $commandBus->execute(new EditCommand(
             role: $this->role,
-            name: $this->form->name, //@phpstan-ignore-line
-            permissions: $this->getFormPermissionsAsCollection()
+            name: $validated->name, //@phpstan-ignore-line
+            permissions: $this->getPermissionsAsCollection($validated->permissions)
         ));
 
         $this->dispatch('refresh')->to(DataTableComponent::class);

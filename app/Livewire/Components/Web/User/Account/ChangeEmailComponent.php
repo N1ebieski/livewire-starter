@@ -8,6 +8,7 @@ use App\Models\User\User;
 use App\Commands\CommandBus;
 use Illuminate\Contracts\View\View;
 use App\Livewire\Components\Component;
+use Illuminate\Support\ValidatedInput;
 use App\Commands\User\Edit\EditCommand;
 use App\Livewire\Components\HasComponent;
 use Illuminate\Contracts\Validation\Validator;
@@ -50,7 +51,8 @@ final class ChangeEmailComponent extends Component
     ): void {
         $this->gate->allowIf(fn () => $this->guard->check());
 
-        $this->validate();
+        /** @var ValidatedInput&ChangeEmailForm */
+        $validated = $this->form->safe();
 
         /** @var User */
         $user = $this->guard->user();
@@ -60,7 +62,7 @@ final class ChangeEmailComponent extends Component
             new EditCommand(
                 user: $user,
                 name: $user->name,
-                email: $this->form->email, //@phpstan-ignore-line
+                email: $validated->email, //@phpstan-ignore-line
                 password: $user->password,
                 roles: $user->roles
             )

@@ -367,7 +367,7 @@ trait HasDataTable
 
     abstract protected function getHidingColumns(): array;
 
-    abstract protected function prepareForValidation($attributes): array;
+    abstract protected function prepareForValidation($attributes);
 
     abstract protected function getDataForValidation($rules);
 

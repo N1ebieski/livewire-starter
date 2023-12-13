@@ -8,6 +8,7 @@ use App\Models\User\User;
 use App\Commands\CommandBus;
 use Illuminate\Contracts\View\View;
 use App\Livewire\Components\Component;
+use Illuminate\Support\ValidatedInput;
 use App\Commands\User\Edit\EditCommand;
 use App\Livewire\Components\HasComponent;
 use App\Livewire\Components\FullPageInterface;
@@ -44,7 +45,8 @@ final class IndexComponent extends Component implements FullPageInterface
     ): void {
         $this->gate->allowIf(fn () => $this->guard->check());
 
-        $this->validate();
+        /** @var ValidatedInput&IndexForm */
+        $validated = $this->form->safe();
 
         /** @var User */
         $user = $this->guard->user();
@@ -53,7 +55,7 @@ final class IndexComponent extends Component implements FullPageInterface
         $user = $commandBus->execute(
             new EditCommand(
                 user: $user,
-                name: $this->form->name, //@phpstan-ignore-line
+                name: $validated->name, //@phpstan-ignore-line
                 email: $user->email,
                 password: $user->password,
                 roles: $user->roles

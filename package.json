@@ -1,5 +1,5 @@
 {
-    "name": "Laravel Starter",
+    "name": "livewire-starter.test",
     "private": true,
     "type": "module",
     "scripts": {
@@ -16,7 +16,6 @@
         "fuse.js": "^6.6.2",
         "lodash": "^4.17.21", 
         "laravel-vite-plugin": "^0.7.5",
-        "lodash": "^4.17.21",
         "sass": "^1.64.2",
         "tinymce": "^6.4.1",
         "tom-select": "^2.2.2",

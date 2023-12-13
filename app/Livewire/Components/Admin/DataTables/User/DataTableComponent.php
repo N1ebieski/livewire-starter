@@ -19,6 +19,7 @@ use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
 use App\Livewire\Components\Component;
 use App\ValueObjects\User\StatusEmail;
+use Illuminate\Support\ValidatedInput;
 use App\Livewire\Components\HasComponent;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Translation\Translator;
@@ -65,18 +66,21 @@ final class DataTableComponent extends Component implements DataTableInterface
     #[Computed]
     public function users(): LengthAwarePaginator
     {
+        /** @var ValidatedInput&DataTableForm */
+        $validated = $this->form->safe();
+
         $filters = new UserFilter(
-            status_email: $this->getFilterStatusEmail(),
-            role: $this->getFilterRole(),
-            search: $this->getFilterSearch()
+            status_email: $this->getFilterStatusEmail($validated->status_email),
+            role: $this->getFilterRole($validated->role),
+            search: $this->getFilterSearch($validated->search)
         );
 
         /** @var LengthAwarePaginator<User> */
         $users = $this->queryBus->execute(new GetByFilterQuery(
             user: $this->user,
             filters: $filters,
-            orderby: $this->getFilterOrderBy(),
-            result: $this->getFilterPaginate()
+            orderby: $this->getFilterOrderBy($validated->orderby),
+            result: $this->getFilterPaginate($validated->paginate)
         ));
 
         return $users;
@@ -88,21 +92,20 @@ final class DataTableComponent extends Component implements DataTableInterface
         return $this->role->all();
     }
 
-    private function getFilterRole(): ?Role
+    private function getFilterRole(?string $role): ?Role
     {
-        return !is_null($this->form->role) ?
-            $this->role->find($this->form->role) : null;
+        return !is_null($role) ? $this->role->find($role) : null;
     }
 
-    private function getFilterPaginate(): Paginate
+    private function getFilterPaginate(int $paginate): Paginate
     {
-        return new Paginate($this->form->paginate);
+        return new Paginate($paginate);
     }
 
-    private function getFilterOrderBy(): ?OrderBy
+    private function getFilterOrderBy(?string $orderby): ?OrderBy
     {
-        if (is_string($this->form->orderby)) {
-            [$attribute, $order] = explode('|', $this->form->orderby);
+        if (is_string($orderby)) {
+            [$attribute, $order] = explode('|', $orderby);
 
             return new OrderBy(
                 attribute: $attribute,
@@ -113,18 +116,18 @@ final class DataTableComponent extends Component implements DataTableInterface
         return null;
     }
 
-    private function getFilterSearch(): ?Search
+    private function getFilterSearch(?string $search): ?Search
     {
-        return is_string($this->form->search) && mb_strlen($this->form->search) > 2 ?
+        return is_string($search) && mb_strlen($search) > 2 ?
             $this->searchFactory->make(
-                search: $this->form->search,
+                search: $search,
                 model: $this->user
             ) : null;
     }
 
-    private function getFilterStatusEmail(): ?bool
+    private function getFilterStatusEmail(?string $statusEmail): ?bool
     {
-        return StatusEmail::tryFrom($this->form->status_email ?? '')?->getAsBool();
+        return StatusEmail::tryFrom($statusEmail ?? '')?->getAsBool();
     }
 
     protected function getSorts(): array
