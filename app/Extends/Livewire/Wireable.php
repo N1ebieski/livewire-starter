@@ -6,7 +6,6 @@ namespace App\Extends\Livewire;
 
 use Livewire\Wireable as LivewireWireable;
 
-//TODO: #10 Move this class to livewire-starter and refactor \App\Livewire\Components\Modal\Modal
 abstract class Wireable implements LivewireWireable
 {
     /**

@@ -45,7 +45,7 @@ final class IndexComponent extends Component implements FullPageInterface
     ): void {
         $this->gate->allowIf(fn () => $this->guard->check());
 
-        /** @var ValidatedInput&IndexForm */
+        /** @var ValidatedInput */
         $validated = $this->form->safe();
 
         /** @var User */
@@ -55,7 +55,7 @@ final class IndexComponent extends Component implements FullPageInterface
         $user = $commandBus->execute(
             new EditCommand(
                 user: $user,
-                name: $validated->name, //@phpstan-ignore-line
+                name: $validated->name,
                 email: $user->email,
                 password: $user->password,
                 roles: $user->roles

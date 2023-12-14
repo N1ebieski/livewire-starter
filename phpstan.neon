@@ -8,11 +8,14 @@ parameters:
 		- ./database
 		- ./routes
 		- ./tests	
+	excludePaths:
+		- ./app/Extends/Livewire/*		
 	noModelMake: false
 	checkMissingIterableValueType: false
 	checkGenericClassInNonGenericObjectType: false
 	universalObjectCratesClasses:
 		- App\Livewire\Components\DataTable\DataTableInterface
+		- Illuminate\Support\ValidatedInput
 
 	ignoreErrors:
 		- '#^Call to an undefined method Illuminate\\Contracts\\View\\View::layout\(\)#'

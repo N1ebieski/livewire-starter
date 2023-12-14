@@ -4,42 +4,57 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
-use Illuminate\Support\Str;
 use Illuminate\Container\Container;
+use App\Support\Handler\HandlerHelper;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Support\Handler\IncorrectNameException;
+use Illuminate\Contracts\Bus\Dispatcher as BusDispatcher;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 final class CommandBus
 {
     public function __construct(
-        private Container $container,
-        private Str $str
+        private readonly Container $container,
+        private readonly BusDispatcher $busDispatcher,
+        private readonly JobFactory $jobFactory,
+        private readonly HandlerHelper $handlerHelper
     ) {
     }
 
-    public function execute(mixed $command): mixed
+    /**
+     * @param Command $command
+     * @return mixed
+     * @throws IncorrectNameException
+     * @throws BindingResolutionException
+     */
+    public function execute(Command $command)
     {
         $handler = $this->resolveHandler($command);
 
-        //@phpstan-ignore-next-line
-        return $handler->handle($command);
+        if (!$handler instanceof ShouldQueue) {
+            //@phpstan-ignore-next-line
+            return $handler->handle($command);
+        }
+
+        $this->dispatch($command);
     }
 
-    private function resolveHandler(mixed $command): Handler
+    public function dispatch(Command $command): void
     {
-        return $this->container->make($this->getHandlerName($command));
+        $job = $this->jobFactory->make($command);
+
+        $this->busDispatcher->dispatch($job);
     }
 
-    private function getHandlerName(mixed $command): string
+    public function dispatchSync(Command $command): void
     {
-        /** @var string */
-        $class = get_class($command);
+        $job = $this->jobFactory->make($command);
 
-        $handlerNamespace = $this->str->beforeLast($class, '\\');
+        $this->busDispatcher->dispatchSync($job);
+    }
 
-        /** @var string */
-        $handlerName = $this->str->replace('Command', 'Handler', class_basename($command));
-
-        $handlerName = $handlerNamespace . '\\' . $handlerName;
-
-        return $handlerName;
+    private function resolveHandler(Command $command): Handler
+    {
+        return $this->container->make($this->handlerHelper->getNamespace($command));
     }
 }

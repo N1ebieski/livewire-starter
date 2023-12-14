@@ -13,9 +13,7 @@ export default function modal(data) {
             });
 
             if (data.config.static) {
-                this.modal._config.backdrop = data.config.static
-                    ? "static"
-                    : true;
+                this.modal._config.backdrop = data.config.static ? "static" : true;
                 this.modal._config.keyboard = !data.config.static;
             }
 
@@ -37,7 +35,11 @@ export default function modal(data) {
 
             if (lastBackdrop) {
                 lastBackdrop.remove();
+
+                const body = document.querySelector("body");
+
+                body.removeAttribute("style");
             }
-        },        
+        },
     };
 }

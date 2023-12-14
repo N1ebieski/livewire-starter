@@ -17,14 +17,14 @@ final class WireableSynth extends BaseWireableSynth
 
     public function set(&$target, $key, $value)
     {
-$setterName = 'set' . ucfirst($key);
+        $setterName = 'set' . ucfirst($key);
 
         if (method_exists($target, $setterName)) {
             call_user_func([$target, $setterName], $value);
         } else {
-        $target->{$key} = $value;
+            $target->{$key} = $value;
+        }
     }
-}
 
     public function unset(&$target, $key)
     {

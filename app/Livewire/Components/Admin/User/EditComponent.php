@@ -74,15 +74,15 @@ final class EditComponent extends Component
     ): void {
         $this->gate->authorize('edit', $this->user);
 
-        /** @var ValidatedInput&EditForm */
+        /** @var ValidatedInput */
         $validated = $this->form->safe();
 
         /** @var User */
         $user = $commandBus->execute(
             new EditCommand(
                 user: $this->user,
-                name: $validated->name, //@phpstan-ignore-line
-                email: $validated->email, //@phpstan-ignore-line
+                name: $validated->name,
+                email: $validated->email,
                 password: $validated->password ?? $this->user->password,
                 roles: $this->getRolesAsCollection($validated->roles)
             )

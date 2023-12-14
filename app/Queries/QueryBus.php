@@ -5,15 +5,17 @@ declare(strict_types=1);
 namespace App\Queries;
 
 use Illuminate\Container\Container;
+use App\Support\Handler\HandlerHelper;
 
 final class QueryBus
 {
     public function __construct(
-        private Container $container
+        private readonly Container $container,
+        private readonly HandlerHelper $handlerHelper
     ) {
     }
 
-    public function execute(mixed $query): mixed
+    public function execute(Query $query): mixed
     {
         $handler = $this->resolveHandler($query);
 
@@ -21,18 +23,8 @@ final class QueryBus
         return $handler->handle($query);
     }
 
-    private function resolveHandler(mixed $query): Handler
+    private function resolveHandler(Query $query): Handler
     {
-        return $this->container->make($this->getHandlerName($query));
-    }
-
-    private function getHandlerName(mixed $query): string
-    {
-        /** @var string */
-        $class = get_class($query);
-
-        $handlerName = str_replace('Query', 'Handler', $class);
-
-        return $handlerName;
+        return $this->container->make($this->handlerHelper->getNamespace($query));
     }
 }

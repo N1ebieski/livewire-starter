@@ -9,6 +9,7 @@ use App\Commands\CommandBus;
 use Livewire\Attributes\Locked;
 use Illuminate\Contracts\View\View;
 use App\Livewire\Components\Component;
+use Illuminate\Support\ValidatedInput;
 use App\Commands\Role\Edit\EditCommand;
 use App\Livewire\Components\HasComponent;
 use App\Livewire\Forms\Admin\Role\EditForm;
@@ -54,13 +55,13 @@ final class EditComponent extends Component
     ): void {
         $this->gate->authorize('edit', $this->role);
 
-        /** @var ValidatedInput&EditForm */
+        /** @var ValidatedInput */
         $validated = $this->form->safe();
 
         /** @var Role */
         $role = $commandBus->execute(new EditCommand(
             role: $this->role,
-            name: $validated->name, //@phpstan-ignore-line
+            name: $validated->name,
             permissions: $this->getPermissionsAsCollection($validated->permissions)
         ));
 

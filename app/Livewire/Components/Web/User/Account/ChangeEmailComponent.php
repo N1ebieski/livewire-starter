@@ -51,7 +51,7 @@ final class ChangeEmailComponent extends Component
     ): void {
         $this->gate->allowIf(fn () => $this->guard->check());
 
-        /** @var ValidatedInput&ChangeEmailForm */
+        /** @var ValidatedInput */
         $validated = $this->form->safe();
 
         /** @var User */
@@ -62,7 +62,7 @@ final class ChangeEmailComponent extends Component
             new EditCommand(
                 user: $user,
                 name: $user->name,
-                email: $validated->email, //@phpstan-ignore-line
+                email: $validated->email,
                 password: $user->password,
                 roles: $user->roles
             )

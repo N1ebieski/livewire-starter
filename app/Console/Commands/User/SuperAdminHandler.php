@@ -39,7 +39,7 @@ final class SuperAdminHandler extends Handler
         private CommandBus $commandBus,
         protected SuperAdminForm $form,
     ) {
-        parent::__construct($validationFactory, $prompts);
+        parent::__construct($validationFactory);
     }
 
     public function handle(): void

@@ -76,16 +76,16 @@ final class CreateComponent extends Component
     ): void {
         $this->gate->authorize('create', User::class);
 
-        /** @var ValidatedInput&CreateForm */
+        /** @var ValidatedInput */
         $validated = $this->form->safe();
 
         /** @var User */
         $user = $commandBus->execute(
             new CreateCommand(
                 user: $this->user,
-                name: $validated->name, //@phpstan-ignore-line
-                email: $validated->email, //@phpstan-ignore-line
-                password: $validated->password, //@phpstan-ignore-line
+                name: $validated->name,
+                email: $validated->email,
+                password: $validated->password,
                 roles: $this->getRolesAsCollection($validated->roles)
             )
         );

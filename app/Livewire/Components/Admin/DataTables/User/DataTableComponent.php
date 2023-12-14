@@ -66,7 +66,7 @@ final class DataTableComponent extends Component implements DataTableInterface
     #[Computed]
     public function users(): LengthAwarePaginator
     {
-        /** @var ValidatedInput&DataTableForm */
+        /** @var ValidatedInput|DataTableForm */
         $validated = $this->form->safe();
 
         $filters = new UserFilter(

@@ -57,7 +57,7 @@ final class DataTableComponent extends Component implements DataTableInterface
     #[Computed]
     public function roles(): LengthAwarePaginator
     {
-        /** @var ValidatedInput&DataTableForm */
+        /** @var ValidatedInput|DataTableForm */
         $validated = $this->form->safe();
 
         $filters = new RoleFilter(
