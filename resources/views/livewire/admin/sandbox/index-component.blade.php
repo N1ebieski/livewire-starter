@@ -6,7 +6,7 @@
             </x-breadcrumb.item-component>
         </x-admin.breadcrumb.breadcrumb-component>    
 
-        <form wire:submit.prevent="submit">
+        <form wire:submit.prevent="submit" id="sandbox">
             <div class="mb-3">
                 <x-forms.autocomplete.autocomplete-component
                     wire:model="autocomplete"

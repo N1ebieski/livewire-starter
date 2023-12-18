@@ -6,7 +6,7 @@
             </x-breadcrumb.item-component>
         </x-web.user.breadcrumb.breadcrumb-component>
 
-        <form wire:submit.prevent="submit">
+        <form wire:submit.prevent="submit" id="edit-account">
             <div class="mb-3">
                 <x-forms.text.text-component
                     wire:model="form.name"
@@ -24,9 +24,10 @@
                 <div class="col-md-6 offset-md-4">
                     <x-button.button-component
                         :action="\App\View\Components\Button\Action::PRIMARY"
+                        :type="\App\View\Components\Button\Type::SUBMIT"
                         :label="trans('default.submit')"
                         :responsive="false"
-                        wire:click="submit"
+                        wire:click
                     >
                         <x-slot:icon>
                             <i class="bi bi-check-circle"></i>

@@ -32,12 +32,12 @@ final class SuperAdminHandler extends Handler
 
     public function __construct(
         ValidationFactory $validationFactory,
-        private Prompts $prompts,
-        private User $user,
-        private Role $role,
-        private Translator $translator,
-        private CommandBus $commandBus,
-        protected SuperAdminForm $form,
+        private readonly Prompts $prompts,
+        private readonly User $user,
+        private readonly Role $role,
+        private readonly Translator $translator,
+        private readonly CommandBus $commandBus,
+        protected readonly SuperAdminForm $form,
     ) {
         parent::__construct($validationFactory);
     }

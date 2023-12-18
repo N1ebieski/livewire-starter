@@ -4,7 +4,7 @@
     </x-slot:title>
 
     <x-slot:body>
-        <form wire:submit.prevent="submit">
+        <form wire:submit.prevent="submit" id="create-role">
             <div class="mb-3">
                 <x-forms.text.text-component
                     wire:model="form.name"
@@ -51,9 +51,11 @@
         </x-button.button-component>
         <x-button.button-component
             :action="\App\View\Components\Button\Action::PRIMARY"
+            :type="\App\View\Components\Button\Type::SUBMIT"
             :label="trans('default.submit')"
             :responsive="false"
-            wire:click="submit"
+            form="create-role"
+            wire:click
         >
             <x-slot:icon>
                 <i class="bi bi-check-circle"></i>

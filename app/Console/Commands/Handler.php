@@ -16,7 +16,7 @@ use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 abstract class Handler extends BaseCommand
 {
     public function __construct(
-        protected ValidationFactory $validationFactory,
+        protected readonly ValidationFactory $validationFactory,
     ) {
         parent::__construct();
 

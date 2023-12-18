@@ -4,7 +4,7 @@
     </x-slot:title>
 
     <x-slot:body>
-        <form wire:submit.prevent="submit">
+        <form wire:submit.prevent="submit" id="change-email">
             <div class="mb-3">
                 <x-forms.email.email-component
                     wire:model="form.email"
@@ -13,10 +13,15 @@
             </div>
             <div class="mb-3">
                 <x-forms.password.password-component
-                    x-data
-                    x-on:focus="$el.removeAttribute('readonly')"
+                    x-data="{ first: true }"
+                    x-on:focus="
+                        if (first) {
+                            $el.removeAttribute('readonly');
+                            first = false;
+                        }
+                    "
                     wire:model="form.password"
-                    :readonly="true"
+                    x-bind:readonly="first"
                     :label="trans('user.password.label')"
                 />
             </div>
@@ -36,9 +41,11 @@
         </x-button.button-component>
         <x-button.button-component
             :action="\App\View\Components\Button\Action::PRIMARY"
+            :type="\App\View\Components\Button\Type::SUBMIT"
             :label="trans('default.submit')"
             :responsive="false"
-            wire:click="submit"
+            form="change-email"
+            wire:click
         >
             <x-slot:icon>
                 <i class="bi bi-check-circle"></i>
